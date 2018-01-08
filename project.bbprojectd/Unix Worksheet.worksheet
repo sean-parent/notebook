@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CurrentWorkingDirectory</key>
+	<string>/Users/sean-parent/Projects/github.com/sean-parent/notebook/2018-01-class</string>
+	<key>WorksheetContents</key>
+	<string>### serve slides
+open -a terminal ~/Projects/github.com/sean-parent/notebook
+
+export PATH="$HOME/miniconda3/bin:$PATH"
+source activate cling
+jupyter nbconvert ./2018-01-class/class-001.ipynb --to slides --post serve
+
+### serve notepad
+open -a terminal ~/Projects/github.com/sean-parent/notebook
+
+export PATH="$HOME/miniconda3/bin:$PATH"
+source activate cling
+jupyter notebook
+
+###
+
+cd ~/Projects/github.com/sean-parent/notebook/2018-01-class
+ln -s ../reveal.js-3.6.0 ./reveal.js</string>
+</dict>
+</plist>

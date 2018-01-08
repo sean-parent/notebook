@@ -1,0 +1,7 @@
+/* Hide the In[###] prompts */
+
+div.prompt {
+  font-size: 0px;
+  width: 0px;
+  height: 0px;
+}
