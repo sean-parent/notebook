@@ -22,6 +22,9 @@ jupyter notebook
 ###
 
 cd ~/Projects/github.com/sean-parent/notebook/2018-01-class
-ln -s ../reveal.js-3.6.0 ./reveal.js</string>
+ln -s ../reveal.js-3.6.0 ./reveal.js
+
+### Check binder (and prebuild)
+open -a "Google Chrome" https://mybinder.org/v2/gh/sean-parent/notebook/master</string>
 </dict>
 </plist>
