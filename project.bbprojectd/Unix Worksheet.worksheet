@@ -22,10 +22,13 @@ jupyter notebook
 ###
 
 cd ~/Projects/github.com/sean-parent/notebook
-ln -s ../reveal.js-3.6.0 ./docs/reveal.js
+ln -s ./reveal.js-3.6.0 ./docs/reveal.js
 
 
 ### Check binder (and prebuild)
-open -a "Google Chrome" https://mybinder.org/v2/gh/sean-parent/notebook/master</string>
+open -a "Google Chrome" \
+    https://mybinder.org/v2/gh/sean-parent/notebook/master?urlpath=tree%2Fbetter-code-class
+
+</string>
 </dict>
 </plist>
