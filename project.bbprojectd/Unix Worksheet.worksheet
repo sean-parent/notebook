@@ -3,14 +3,14 @@
 <plist version="1.0">
 <dict>
 	<key>CurrentWorkingDirectory</key>
-	<string>/Users/sean-parent/Projects/github.com/sean-parent/notebook/2018-01-class</string>
+	<string>/Users/sean-parent/Projects/github.com/sean-parent/notebook</string>
 	<key>WorksheetContents</key>
 	<string>### serve slides
 open -a terminal ~/Projects/github.com/sean-parent/notebook
 
 export PATH="$HOME/miniconda3/bin:$PATH"
 source activate cling
-jupyter nbconvert ./2018-01-class/class-001.ipynb --to slides --post serve
+jupyter nbconvert ./better-code-class/*.ipynb --to=slides --output-dir=./docs
 
 ### serve notepad
 open -a terminal ~/Projects/github.com/sean-parent/notebook
@@ -21,8 +21,9 @@ jupyter notebook
 
 ###
 
-cd ~/Projects/github.com/sean-parent/notebook/2018-01-class
-ln -s ../reveal.js-3.6.0 ./reveal.js
+cd ~/Projects/github.com/sean-parent/notebook
+ln -s ../reveal.js-3.6.0 ./docs/reveal.js
+
 
 ### Check binder (and prebuild)
 open -a "Google Chrome" https://mybinder.org/v2/gh/sean-parent/notebook/master</string>
