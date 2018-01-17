@@ -12,6 +12,9 @@ export PATH="$HOME/miniconda3/bin:$PATH"
 source activate cling
 jupyter nbconvert ./better-code-class/*.ipynb --to=slides --output-dir=./docs
 
+open -a "Google Chrome" ./docs/constexpr.slides.html
+
+
 ### serve notepad
 open -a terminal ~/Projects/github.com/sean-parent/notebook
 
