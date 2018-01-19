@@ -14,6 +14,9 @@ jupyter nbconvert ./better-code-class/*.ipynb --to=slides --output-dir=./docs
 
 open -a "Google Chrome" ./docs/constexpr.slides.html
 
+# update conda
+
+
 
 ### serve notepad
 open -a terminal ~/Projects/github.com/sean-parent/notebook
@@ -31,7 +34,40 @@ ln -s ./reveal.js-3.6.0 ./docs/reveal.js
 ### Check binder (and prebuild)
 open -a "Google Chrome" \
     https://mybinder.org/v2/gh/sean-parent/notebook/master?urlpath=tree%2Fbetter-code-class
+    
 
+### Check published slides
+open -a "Google Chrome" \
+    http://sean-parent.stlab.cc/notebook/constexpr.slides.html
+
+### investigate using fswatch to auto generate slides as notebook changes
+
+brew install fswatch
+fswatch 
+
+
+### Ubuntu
+
+sudo apt-get install gcc
+
+cd ~/Projects/github.com/sean-parent/notebook
+export PATH=/home/sean-parent/miniconda3/bin:$PATH
+
+conda env create -f environment.yml
+
+## running
+
+cd ~/Projects/github.com/sean-parent/notebook
+export PATH=/home/sean-parent/miniconda3/bin:$PATH
+source activate sean-parent-notebookjup
+
+## todo
+# rename this project file
+# rename conda environment?
+# determine if github pages can see root directory (sym links?)
+# add slide index to start page
+# get fswatch going and/or linux equivalent
+# pick a linux editor (Atom?)
 </string>
 </dict>
 </plist>
