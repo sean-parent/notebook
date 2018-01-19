@@ -5,3 +5,14 @@ div.prompt {
   width: 0px;
   height: 0px;
 }
+
+div.highlight {
+  border: 1px solid #cfcfcf;
+  border-radius: 2px;
+  background: #f7f7f7;
+  line-height: 1.21429em;
+}
+
+div.highlight pre {
+  background: #f7f7f7;
+}

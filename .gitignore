@@ -1,2 +1,4 @@
 
 *.bbprojectsettings
+docs/_site/
+docs/.jekyll-metadata

@@ -11913,44 +11913,26 @@ a.anchor-link {
 </div>
 </div>
 </div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">;</span>
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">string</span> <span class="n">str</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">;</span>
 <span class="n">string</span><span class="o">&amp;&amp;</span> <span class="n">ref</span> <span class="o">=</span> <span class="n">str</span><span class="p">;</span>
 </pre></div>
+<hr>
 
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre><span class="ansi-bold">input_line_9:3:10: </span><span class="ansi-red-intense-fg ansi-bold">error: </span><span class="ansi-bold">rvalue reference to type &#39;basic_string&lt;...&gt;&#39; cannot bind to lvalue of type
-      &#39;basic_string&lt;...&gt;&#39;</span>
+<pre><code>input_line_9:3:10: error: rvalue reference to type 'basic_string&lt;...&gt;' cannot bind to lvalue of type
+      'basic_string&lt;...&gt;'
 string&amp;&amp; ref = str;
-<span class="ansi-green-intense-fg ansi-bold">         ^     ~~~
-</span></pre>
-</div>
-</div>
+         ^     ~~~</code></pre>
 
 </div>
 </div>
-
 </div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="n">string</span><span class="o">&amp;&amp;</span> <span class="n">ref</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">;</span>
@@ -11979,7 +11961,7 @@ string&amp;&amp; ref = str;
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">movable</span> <span class="p">{</span>
@@ -12012,7 +11994,7 @@ string&amp;&amp; ref = str;
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="n">annotate</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
@@ -12060,7 +12042,7 @@ string&amp;&amp; ref = str;
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="nf">g</span><span class="p">(</span><span class="n">annotate</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
@@ -12105,7 +12087,7 @@ annotate dtor
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="n">annotate</span> <span class="nf">h</span><span class="p">(</span><span class="n">annotate</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
@@ -12151,11 +12133,222 @@ annotate dtor
 <li>all non-static data members and base classes are movable</li>
 </ul>
 </li>
-<li>To ensure you have then, declare them <code>= default</code></li>
+<li>To ensure you have them, declare them <code>= default</code></li>
 <li>Move constructor and move assignment should be declared <code>noexcept</code></li>
+<li>Post-condition of moved from object is <em>partially formed</em> &amp; can alias rhs for move assignment</li>
+<li>Otherwise can assume no aliasing</li>
 </ul>
 </li>
 </ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Example:</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example_01</span> <span class="p">{</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">_data</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">explicit</span> <span class="n">example_01</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">_data</span><span class="p">(</span><span class="k">new</span> <span class="kt">int</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="o">~</span><span class="n">example_01</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">_data</span><span class="p">;</span> <span class="p">}</span>
+    
+    <span class="n">example_01</span><span class="p">(</span><span class="k">const</span> <span class="n">example_01</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+    <span class="n">example_01</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">example_01</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+    
+    <span class="n">example_01</span><span class="p">(</span><span class="n">example_01</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">_data</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">_data</span><span class="p">)</span> <span class="p">{</span> <span class="n">x</span><span class="p">.</span><span class="n">_data</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">example_01</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">example_01</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
+        <span class="k">delete</span> <span class="n">_data</span><span class="p">;</span>
+        <span class="n">_data</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">_data</span><span class="p">;</span>
+        <span class="n">x</span><span class="p">.</span><span class="n">_data</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+    
+    <span class="k">explicit</span> <span class="k">operator</span> <span class="kt">int</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="n">_data</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example_02</span> <span class="p">{</span>
+    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">_data</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">explicit</span> <span class="n">example_02</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">_data</span><span class="p">(</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="c1">// implicit dtor</span>
+    
+    <span class="c1">// implicit deleted copy-ctor and copy-assignment</span>
+    
+    <span class="cm">/*</span>
+<span class="cm">        move-ctor and move-assignment would be provided by default, but declaring</span>
+<span class="cm">        them ensures they are provided and correct.</span>
+<span class="cm">    */</span>
+    <span class="n">example_02</span><span class="p">(</span><span class="n">example_02</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="n">example_02</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">example_02</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    
+    <span class="k">explicit</span> <span class="k">operator</span> <span class="nf">int</span> <span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="n">_data</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="The-Self-Swap-Problem">The Self Swap Problem<a class="anchor-link" href="#The-Self-Swap-Problem">&#182;</a></h4><p>What is the post condition of:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="n">swap</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">s</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello World!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><code>std::swap()</code> is defined as:</p>
+<div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">swap</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">T</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">);</span> <span class="c1">// if a and b alias, then b has been moved from</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">tmp</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">example_01</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">example_01</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
+        <span class="k">delete</span> <span class="n">_data</span><span class="p">;</span>
+        <span class="n">_data</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">_data</span><span class="p">;</span>
+        <span class="n">x</span><span class="p">.</span><span class="n">_data</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+</pre></div>
+<p>Is this okay?</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">example_01</span> <span class="nf">e1</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<span class="n">swap</span><span class="p">(</span><span class="n">e1</span><span class="p">,</span> <span class="n">e1</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">e1</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>42
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Testing</p>
 
 </div>
 </div>
