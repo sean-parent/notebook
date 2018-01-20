@@ -5,73 +5,66 @@
 	<key>CurrentWorkingDirectory</key>
 	<string>/Users/sean-parent/Projects/github.com/sean-parent/notebook</string>
 	<key>WorksheetContents</key>
-	<string># Install
+	<string>### install (fragments)
 
 brew install npm
+brew install fswatch
 npm install -g browser-sync
 
-# Update
+cd ~/Projects/github.com/sean-parent/notebook
+ln -s ./reveal.js-3.6.0 ./docs/reveal.js
 
+
+### Update
+
+open -a terminal ~/Projects/github.com/sean-parent/notebook
 brew update
 brew upgrade npm
 npm update -g browser-sync
-
-# Jekyl
-
-open -a terminal ~/Projects/github.com/sean-parent/notebook/docs
-bundle exec jekyll build --watch --incremental
-
-# Browser sync
-
-open -a terminal ~/Projects/github.com/sean-parent/notebook
-browser-sync start --config bs-config.js
-
-
-### serve slides
-open -a terminal ~/Projects/github.com/sean-parent/notebook
-
 export PATH="$HOME/miniconda3/bin:$PATH"
-source activate cling
-jupyter nbconvert ./better-code-class/*.ipynb --to=slides --output-dir=./docs
+conda update conda
+# do not update conda environment... try it in a new environment first
+cd ./docs
+bundle update
 
-fswatch ./better-code-class | xargs -0 bash -c 'jupyter nbconvert --to=slides --output-dir=./docs'
+### work
 
-
-fswatch -o ./better-code-class | \
-    xargs -n1 -I{} jupyter nbconvert ./better-code-class/*.ipynb --to=slides --output-dir=./docs
-
-open -a "Google Chrome" ./docs/constexpr.slides.html
-
-# update conda
-
-
-
-### serve notepad
+## serve notepad
 open -a terminal ~/Projects/github.com/sean-parent/notebook
 
 export PATH="$HOME/miniconda3/bin:$PATH"
 source activate cling
 jupyter notebook
 
-###
+## build slides
+open -a terminal ~/Projects/github.com/sean-parent/notebook
 
-cd ~/Projects/github.com/sean-parent/notebook
-ln -s ./reveal.js-3.6.0 ./docs/reveal.js
+export PATH="$HOME/miniconda3/bin:$PATH"
+source activate cling
 
+fswatch -o ./better-code-class | \
+    xargs -n1 -I{} jupyter nbconvert ./better-code-class/*.ipynb --to=slides --output-dir=./docs
+    
+## build site
 
-### Check binder (and prebuild)
+open -a terminal ~/Projects/github.com/sean-parent/notebook/docs
+bundle exec jekyll build --watch --incremental
+
+## serve site
+
+open -a terminal ~/Projects/github.com/sean-parent/notebook
+browser-sync start --config bs-config.js
+
+### verify deployement
+
+## Check binder (and prebuild)
 open -a "Google Chrome" \
     https://mybinder.org/v2/gh/sean-parent/notebook/master?urlpath=tree%2Fbetter-code-class
     
 
-### Check published slides
+## Check published slides
 open -a "Google Chrome" \
     http://sean-parent.stlab.cc/notebook/constexpr.slides.html
-
-### investigate using fswatch to auto generate slides as notebook changes
-
-brew install fswatch
-fswatch 
 
 
 ### Ubuntu
@@ -96,6 +89,14 @@ source activate sean-parent-notebookjup
 # add slide index to start page
 # get fswatch going and/or linux equivalent
 # pick a linux editor (Atom?)
+
+
+### JUNK
+
+jupyter nbconvert ./better-code-class/*.ipynb --to=slides --output-dir=./docs
+fswatch ./better-code-class | xargs -0 bash -c 'jupyter nbconvert --to=slides --output-dir=./docs'
+
+open -a "Google Chrome" ./docs/constexpr.slides.html
 </string>
 </dict>
 </plist>
