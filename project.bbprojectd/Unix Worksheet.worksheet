@@ -20,6 +20,7 @@ ln -s ./reveal.js-3.6.0 ./docs/reveal.js
 open -a terminal ~/Projects/github.com/sean-parent/notebook
 brew update
 brew upgrade npm
+brew upgrade fswatch
 npm update -g browser-sync
 export PATH="$HOME/miniconda3/bin:$PATH"
 conda update conda
@@ -28,6 +29,15 @@ cd ./docs
 bundle update
 
 ### work
+open -a terminal ~/Projects/github.com/sean-parent/notebook
+./start.sh
+
+## experimental
+open -a terminal ~/Projects/github.com/sean-parent/notebook
+export PATH="$HOME/miniconda3/bin:$PATH"
+
+{ source activate cling; jupyter notebook; } &amp; { source activate cling; fswatch -o ./better-code-class | \
+&gt;     xargs -n1 -I{} jupyter nbconvert ./better-code-class/*.ipynb --to=slides --output-dir=./docs; } &amp; { cd ./docs; bundle exec jekyll build --watch --incremental; } &amp; { browser-sync start --config bs-config.js; }
 
 ## serve notepad
 open -a terminal ~/Projects/github.com/sean-parent/notebook
@@ -89,6 +99,12 @@ source activate sean-parent-notebookjup
 # add slide index to start page
 # get fswatch going and/or linux equivalent
 # pick a linux editor (Atom?)
+
+# unify stlab/sean-parent/notebook jekyll theme using a site yml flag to distinguish where needed
+# sync across the repos with rsync
+
+rsync -rtuv /path/to/dir_a/* /path/to/dir_b
+rsync -rtuv /path/to/dir_b/* /path/to/dir_a
 
 
 ### JUNK

@@ -16,3 +16,11 @@ div.highlight {
 div.highlight pre {
   background: #f7f7f7;
 }
+
+div.output_stderr {
+  width: 100%;
+}
+
+div.output_subarea {
+    max-width: 100%;
+}
