@@ -2,7 +2,7 @@
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/sean-parent/notebook/master)
 
-## Mac intallation instructions to run locally
+## Mac installation instructions to run locally
 
 ```
 # download Python 3.6 install script for miniconda from https://conda.io/miniconda.html
