@@ -5,3 +5,4 @@ channels:
 dependencies:
   - xeus-cling
   - notebook
+  - jupyter_nbextensions_configurator

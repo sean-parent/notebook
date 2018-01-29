@@ -1,4 +1,5 @@
 
 *.bbprojectsettings
-docs/_site/
-docs/.jekyll-metadata
+*/_site/
+*/.jekyll-metadata
+*/.ipynb_checkpoints/

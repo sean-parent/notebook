@@ -5,7 +5,12 @@
 	<key>CurrentWorkingDirectory</key>
 	<string>/Users/sean-parent/Projects/github.com/sean-parent/notebook</string>
 	<key>WorksheetContents</key>
-	<string>### install (fragments)
+	<string>### server setup
+
+openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mykey.key -out mycert.pem
+
+
+### install (fragments)
 
 brew install npm
 brew install fswatch
@@ -24,7 +29,7 @@ brew upgrade fswatch
 npm update -g browser-sync
 export PATH="$HOME/miniconda3/bin:$PATH"
 conda update conda
-# do not update conda environment... try it in a new environment first
+conda env update -n sean-parent-notebook
 cd ./docs
 bundle update
 
