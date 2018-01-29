@@ -11,14 +11,12 @@ chmod +x ~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
 ~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
 # when asked to add the path to your .bash_profile, enter "no"
 
-# add conda to you path for this session
-export PATH="$HOME/miniconda3/bin:$PATH"
-
 # cd to the directory you want to store the repo and clone
 cd <wherever you want>
 git clone https://github.com/sean-parent/notebook.git
 
 # create the conda environment and activate it
+export PATH="$HOME/miniconda3/bin:$PATH"
 conda env create
 ```
 
