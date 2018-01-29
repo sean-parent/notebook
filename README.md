@@ -15,7 +15,7 @@ chmod +x ~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
 cd <wherever you want>
 git clone https://github.com/sean-parent/notebook.git
 
-# create the conda environment and activate it
+# create the conda environment
 export PATH="$HOME/miniconda3/bin:$PATH"
 conda env create
 ```
