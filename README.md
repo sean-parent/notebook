@@ -20,19 +20,6 @@ git clone https://github.com/sean-parent/notebook.git
 
 # create the conda environment and activate it
 conda env create
-source activate sean-parent-notebook
-
-# <patch>
-  # Update pyzmq
-  conda install pyzmq=16.0.2 -c conda-forge
-
-  # Necessary step for now to workaround for now.
-  ln -s ~/miniconda3/envs/sean-parent-notebook/lib/libzmq.5.1.3.dylib \
-      ~/miniconda3/envs/sean-parent-notebook/lib/libzmq.5.1.2.dylib
-# </patch>
-
-# exit the environment
-source deactivate
 ```
 
 ## Running the notebook
