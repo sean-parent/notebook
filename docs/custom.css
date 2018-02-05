@@ -24,3 +24,15 @@ div.output_stderr {
 div.output_subarea {
     max-width: 100%;
 }
+
+div.text_cell_render {
+    padding: 0.5em;
+}
+
+div.input {
+    padding: 0.5em;
+}
+
+div.output_stdout {
+    font-weight: bold;
+}

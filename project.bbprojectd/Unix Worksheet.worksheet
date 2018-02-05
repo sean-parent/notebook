@@ -30,6 +30,12 @@ npm update -g browser-sync
 export PATH="$HOME/miniconda3/bin:$PATH"
 conda update conda
 conda env update -n sean-parent-notebook
+
+## Check for diffs in slide template
+diff ./slides-config/slides_template.tpl \
+~/miniconda3/envs/sean-parent-notebook/lib/python3.6/site-packages/nbconvert/templates/html/slides_reveal.tpl &amp;&amp; echo '# files match'
+
+## update jekyll
 cd ./docs
 bundle update
 
@@ -95,7 +101,7 @@ conda env create -f environment.yml
 
 cd ~/Projects/github.com/sean-parent/notebook
 export PATH=/home/sean-parent/miniconda3/bin:$PATH
-source activate sean-parent-notebookjup
+source activate sean-parent-notebook
 
 ## todo
 # rename this project file
