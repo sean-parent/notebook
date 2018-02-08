@@ -16,6 +16,7 @@ trap "source activate sean-parent-notebook; jupyter notebook stop 8888;" EXIT;
         --config=./slides-config/slides_config.py;
 } & {
     cd ./docs;
+    bundle exec jekyll build --baseurl "";
     bundle exec jekyll build --baseurl "" --watch --incremental;
 } & {
     browser-sync start --config bs-config.js;
