@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>preliminaries slides</title>
+<title>lambdas slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11901,176 +11901,14 @@ a.anchor-link {
 <div class="reveal">
 <div class="slides">
 <section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>If you are using connect locally, mute your speaker and mic</li>
-<li>If you are remote, mute your mic</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Class-Information">Class Information<a class="anchor-link" href="#Class-Information">&#182;</a></h2><ul>
-<li><a href="https://git.corp.adobe.com/better-code/class/wiki">https://git.corp.adobe.com/better-code/class/wiki</a></li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Brief-History-of-C++">Brief History of C++<a class="anchor-link" href="#Brief-History-of-C++">&#182;</a></h2><ul>
-<li>1979 Bjarne Stroustrup begins work on C with Classes</li>
-<li>1983 "C with Classes" renamed C++</li>
-<li>1985 <em>The C++ Programming Language</em> is published along with first commercial compiler, Cfront</li>
-<li>1989 C++ 2.0 released with Cfront 2.0</li>
-<li>1998 C++ published as ISO standard (C++98) with the STL from Alex Stepanov and Meng Lee</li>
-<li>2003 C++03 ISO standard, minor revisions to C++98</li>
-<li>2011 C++11 Major language update</li>
-<li>2014 C++14 Revisions, minor additions, corrections to C++11</li>
-<li>2017 C++17 Significant (not quite major) update</li>
-<li>2020 ...</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>With C++11 there were significant process changes to encourage working groups to publish Technical Specifications (TS's) for experimental features, language and library, in advance of them being incorporated into the language. The process replaced the prior Technical Report (TR1) process which was used to vet library extensions prior to C++11.</p>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="C++11,-C++14,-C++17...-C++20,-TSs...">C++11, C++14, C++17... C++20, TSs...<a class="anchor-link" href="#C++11,-C++14,-C++17...-C++20,-TSs...">&#182;</a></h2><h3 id="Clang">Clang<a class="anchor-link" href="#Clang">&#182;</a></h3><ul>
-<li>2000 LLVM project is started at University of Illinois at Urbana-Champaign by Vikram Adve and Chris Lattner<ul>
-<li>later adding ObjC and C support</li>
-</ul>
-</li>
-<li>2005 Apple hires Lattner, initially working on Clang OpenGL compiler</li>
-<li>2009 GCC runtime library moves to GPLv3 license, Apple (and others) move to add C++ support to Clang</li>
-<li>2010 Clang++ able to build Boost libraries and passes nearly all tests</li>
-<li>Clang now actively developed by Apple, Microsoft, Google, ARM, Sony, Intel, AMD and others</li>
-<li>LLVM has spawned numerous other languages, including Swift</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Boost">Boost<a class="anchor-link" href="#Boost">&#182;</a></h3><ul>
-<li>1998 Beman Dawes and Robert Klarer propose the idea for creating a web based library repository</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="The-Free-Lunch-Is-Over">The Free Lunch Is Over<a class="anchor-link" href="#The-Free-Lunch-Is-Over">&#182;</a></h3><ul>
-<li>2005 Herb Sutter publishes <a href="http://www.gotw.ca/publications/concurrency-ddj.htm"><em>The Free Lunch Is Over: A Fundamental Turn Toward Concurrency in Software</em></a></li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Language-Evolution">Language Evolution<a class="anchor-link" href="#Language-Evolution">&#182;</a></h3><ul>
-<li>1987 Need for common functional language identified and work on <a href="http://haskell.cs.yale.edu/wp-content/uploads/2011/02/history.pdf">Haskell begins</a></li>
-<li>2005 Joel Spolsky publishes <a href="https://www.joelonsoftware.com/2005/12/29/the-perils-of-javaschools-2/"><em>The Perils of JavaSchools</em></a></li>
-<li>JavaScript Transpilers: Babel, CoffeeScript, TypeScript, Dart, GWT, <a href="http://elm-lang.org/">Elm</a>, ...</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Online-Resources">Online Resources<a class="anchor-link" href="#Online-Resources">&#182;</a></h2><h3 id="Information:">Information:<a class="anchor-link" href="#Information:">&#182;</a></h3><ul>
-<li><a href="https://www.reddit.com/r/cpp/">r/cpp</a>: Reddit forum to find news and blogs</li>
-<li><a href="https://cpplang.now.sh/">Cpplang Slack</a>: Get your questions answered fast</li>
-<li><a href="http://cppcast.com/">CppCast</a>: The only podcast dedicated to C++</li>
-<li><a href="https://isocpp.org/">isocpp</a>: The standard committee and recent news</li>
-<li><a href="https://stackoverflow.com/questions/tagged/c%2B%2B">stackoverflow</a>: Get your questions answered well</li>
-</ul>
-<h3 id="Reference:">Reference:<a class="anchor-link" href="#Reference:">&#182;</a></h3><ul>
-<li><a href="http://en.cppreference.com/w/">cppreference</a>: The best online reference for C++</li>
-<li><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/n4700.pdf">working draft</a>: The definitive answer</li>
-</ul>
-<h3 id="Tools:">Tools:<a class="anchor-link" href="#Tools:">&#182;</a></h3><ul>
-<li><a href="https://godbolt.org/">Compiler Explorer (godbolt)</a>: See what the code generates</li>
-<li><a href="http://coliru.stacked-crooked.com/">Coliru</a>: Just run some code</li>
-<li><a href="https://tbfleming.github.io/cib/">Clang in Browser</a>: Demo of Clang to wasm in the browser</li>
-<li><a href="http://quick-bench.com/">Quick C++ Benchmarks</a>: Handy way to run small benchmarks and generate graphs</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Other-Tools">Other Tools<a class="anchor-link" href="#Other-Tools">&#182;</a></h2><ul>
-<li><a href="http://clang.llvm.org/extra/clang-tidy/">clang-tidy</a>: Diagnose and fix your code</li>
-<li><a href="https://include-what-you-use.org/">include-what-you-use</a>: Help to prune the include lists and add direct dependencies</li>
-<li><a href="https://root.cern.ch/cling">cling</a>: Interpreted C++</li>
-<li><a href="https://jupyter.org/">jupyter</a>: Data science notebook, can work with cling</li>
-<li>Xcode includes clang static analyzer and sanitizers</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Moving to <code>cmake</code> would simplify the process of using many tools.</p>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Demo">Demo<a class="anchor-link" href="#Demo">&#182;</a></h1>
-</div>
-</div>
-</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">};</span>
-<span class="n">sort</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -12078,12 +11916,53 @@ a.anchor-link {
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="lambdas">lambdas<a class="anchor-link" href="#lambdas">&#182;</a></h1><p>Lambda are a syntax to construct a <em>function object</em>.</p>
+<h2 id="review---function-objects">review - function objects<a class="anchor-link" href="#review---function-objects">&#182;</a></h2><ul>
+<li>Consider a simple <code>struct</code> or <code>class</code> with an <code>invoke</code> member function</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">add_n_simple</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_n</span><span class="p">;</span>
+    
+    <span class="kt">int</span> <span class="nf">invoke</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>add_n_simple</code> can be used as a function which adds <code>n</code> to any value passed to invoke</li>
+</ul>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">add_n_simple</span> <span class="n">add_s</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add_s</span><span class="p">.</span><span class="n">invoke</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -12100,10 +11979,7 @@ a.anchor-link {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>10
-20
-30
-40
+<pre>15
 </pre>
 </div>
 </div>
@@ -12111,6 +11987,169 @@ a.anchor-link {
 </div>
 </div>
 
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>We can make invocation more natural by providing a user-defined function call operator, <code>operator()</code>, instead of <code>invoke</code></li>
+<li>This is known as a <em>function object type</em></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">add_n_function</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_n</span><span class="p">;</span>
+        
+    <span class="kt">int</span> <span class="nf">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Invocation now uses function calling syntax</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">add_n_function</span> <span class="n">add_f</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add_f</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="anatomy-of-a-function-object">anatomy of a function object<a class="anchor-link" href="#anatomy-of-a-function-object">&#182;</a></h3><ul>
+<li><em>closure type</em><div class="highlight"><pre><span></span><span class="k">struct</span> <span class="n">add_n_function</span> <span class="p">{</span>
+</pre></div>
+</li>
+<li><em>captures</em><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">_n</span><span class="p">;</span>
+</pre></div>
+</li>
+<li><em>function call operator</em><div class="highlight"><pre><span></span><span class="kt">int</span> <span class="nf">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</li>
+<li><em>closure</em><div class="highlight"><pre><span></span><span class="n">add_n_function</span> <span class="n">add_f</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span>
+</pre></div>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="lambda-expression">lambda expression<a class="anchor-link" href="#lambda-expression">&#182;</a></h2><ul>
+<li>A lambda expression is a prvalue of a unique unnamed class type, the <em>closure type</em></li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    
+<span class="k">auto</span> <span class="n">add_n_lambda</span> <span class="o">=</span> <span class="p">[</span><span class="n">_n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">](</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">};</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add_n_lambda</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="anatomy-of-a-lambda-expression">anatomy of a lambda expression<a class="anchor-link" href="#anatomy-of-a-lambda-expression">&#182;</a></h3><ul>
+<li><em>closure type</em><div class="highlight"><pre><span></span><span class="k">decltype</span><span class="p">(</span><span class="n">add_n_lambda</span><span class="p">)</span>
+</pre></div>
+</li>
+<li><em>captures</em><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">_n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</li>
+<li><em>function call operator</em><div class="highlight"><pre><span></span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</li>
+<li><em>closure</em><div class="highlight"><pre><span></span><span class="n">add_n_lambda</span>
+</pre></div>
+</li>
+</ul>
+
+</div>
+</div>
 </div>
 </div>
 </div>
