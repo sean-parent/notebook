@@ -11901,21 +11901,6 @@ a.anchor-link {
 <div class="reveal">
 <div class="slides">
 <section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11927,7 +11912,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
@@ -11944,7 +11929,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11955,7 +11940,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
@@ -11987,7 +11972,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11999,7 +11984,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
@@ -12016,7 +12001,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12027,7 +12012,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
@@ -12059,7 +12044,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12081,18 +12066,18 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="lambda-expression">lambda expression<a class="anchor-link" href="#lambda-expression">&#182;</a></h2><ul>
-<li>A lambda expression is a prvalue of a unique unnamed class type, the <em>closure type</em></li>
+<li>A lambda expression is a prvalue, <em>closure</em>, of a unique unnamed class type, the <em>closure type</em></li>
 </ul>
 
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
@@ -12128,7 +12113,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12150,7 +12135,775 @@ a.anchor-link {
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The argument list and result type are optional<ul>
+<li>missing return type is <code>auto</code> (not <code>void</code>)</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+
+<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">return_n</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]{</span> <span class="k">return</span> <span class="n">n</span><span class="p">;</span> <span class="p">};</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">return_n</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>42
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="captures">captures<a class="anchor-link" href="#captures">&#182;</a></h3><ul>
+<li>capture types are deduced</li>
+<li><code>[]</code> no capture, convertible to function pointer</li>
+<li><code>[=]</code> capture-default any referenced local variable by value (copy)</li>
+<li><code>[&amp;]</code> capture-default any referenced local variable by reference</li>
+<li><code>[x]</code> captures x by value</li>
+<li><code>[&amp;x]</code> captures x by referece</li>
+<li><code>[_x = expression]</code> capture <code>_x</code> as the value of expression</li>
+<li><code>[=, &amp;x, _x = expression]</code> defaults can be miexed with other captures</li>
+</ul>
+<ul>
+<li>captured values are fixed when lambda is created, not at invocation</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+    
+<span class="k">auto</span> <span class="n">ex1</span> <span class="o">=</span> <span class="p">[</span><span class="o">=</span><span class="p">]{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
+<span class="k">auto</span> <span class="n">ex2</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]{</span> <span class="n">x</span> <span class="o">*=</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
+<span class="k">auto</span> <span class="n">ex3</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
+<span class="k">auto</span> <span class="n">ex4</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">]{</span> <span class="n">y</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span> <span class="p">};</span>
+<span class="k">auto</span> <span class="n">ex5</span> <span class="o">=</span> <span class="p">[</span><span class="n">_x</span> <span class="o">=</span> <span class="n">ex1</span><span class="p">()]{</span> <span class="k">return</span> <span class="n">_x</span><span class="p">;</span> <span class="p">};</span>
+    
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ex1</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">ex2</span><span class="p">();</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ex3</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">ex4</span><span class="p">();</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ex5</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+    
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;x:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;y:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+    
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>30
+30
+30
+x:200
+y:30
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>[this]</code> captures current object by reference</li>
+<li><code>[*this]</code> captures current object by-value (C++17)</li>
+<li><code>[args...]</code> capture pack expansion by value</li>
+<li><code>[&amp;args...]</code> capture pack expansion by reference</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="function-call-operator">function call operator<a class="anchor-link" href="#function-call-operator">&#182;</a></h3><ul>
+<li>Arguments can be declared <code>auto</code> to create a <em>generic lambda</em></li>
+<li>Function can be declared mutable (default is const)</li>
+<li>Functions can be <em>variadic</em> using <code>auto...</code></li>
+<li>Function can be declared noexcept</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>- Generic function object<div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">add_t</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
+    <span class="k">auto</span> <span class="k">operator</span><span class="p">()(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="n">U</span> <span class="n">y</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="n">add_t</span> <span class="n">add</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15.3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Generic lambda</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">auto</span> <span class="n">add</span> <span class="o">=</span> <span class="p">[](</span><span class="k">auto</span> <span class="n">x</span><span class="p">,</span> <span class="k">auto</span> <span class="n">y</span><span class="p">){</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15.3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>auto&amp;&amp;</code> is a forwarding-reference</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>mutable function object</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">accumulate_t</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_value</span><span class="p">;</span>
+    
+    <span class="kt">int</span> <span class="nf">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_value</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">_value</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    
+<span class="n">accumulate_t</span> <span class="n">accumulate</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+    
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15
+18
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>mutable lambda</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+
+<span class="k">auto</span> <span class="n">accumulate</span> <span class="o">=</span> <span class="p">[</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">5</span><span class="p">](</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="k">mutable</span> <span class="p">{</span>
+    <span class="n">_value</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">_value</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+    
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15
+18
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>variadic function object</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">print_all_t</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Args</span><span class="o">&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{((</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">),</span><span class="mi">0</span><span class="p">)...};</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">print_all_t</span> <span class="n">print_all</span><span class="p">;</span>
+
+<span class="n">print_all</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="s">&quot;Hello!&quot;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+10.5
+Hello!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>variadic lambda</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">auto</span> <span class="n">print_all</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{((</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">),</span><span class="mi">0</span><span class="p">)...};</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">print_all</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="s">&quot;Hello!&quot;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>1
+10.5
+Hello!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="storing-lambdas">storing lambdas<a class="anchor-link" href="#storing-lambdas">&#182;</a></h3><ul>
+<li><code>std::function&lt;&gt;</code> can hold any callable object with a matching signature</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">lambda_member</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">_lambda</span> <span class="o">=</span> <span class="p">[</span><span class="n">_n</span> <span class="o">=</span> <span class="n">_count</span><span class="p">](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="n">_n</span><span class="p">;</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">n</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">lambda_member</span> <span class="n">object</span><span class="p">{</span><span class="mi">4</span><span class="p">};</span>
+
+<span class="n">object</span><span class="p">.</span><span class="n">_lambda</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello
+Hello
+Hello
+Hello
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>you can a new lambda to a <code>function</code></li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">object</span><span class="p">.</span><span class="n">_lambda</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;I heard you the first time, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">object</span><span class="p">.</span><span class="n">_lambda</span><span class="p">(</span><span class="s">&quot;World!&quot;</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>I heard you the first time, World!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="limitations-of-std::function">limitations of std::function<a class="anchor-link" href="#limitations-of-std::function">&#182;</a></h4><ul>
+<li>incurs virtual function call overhead and heap allocation for larger objects</li>
+<li>does not maintain generic or variatic lambdas</li>
+<li>does not support mutable lambdas<ul>
+<li>we will develop a solution for this later in the course</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="limitations-of-lambdas">limitations of lambdas<a class="anchor-link" href="#limitations-of-lambdas">&#182;</a></h4><ul>
+<li>lambdas in C++14 can replace all use cases of std::bind(), except moving or forwarding a pack expansion</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">bind_once</span><span class="p">(</span><span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">bind</span><span class="p">([</span><span class="n">_f</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)](</span><span class="k">auto</span><span class="o">&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="k">mutable</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">move</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+    <span class="p">},</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+<span class="p">}</span>
+
+<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sink</span><span class="p">(</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">auto</span> <span class="n">bound</span> <span class="o">=</span> <span class="n">bind_once</span><span class="p">(</span><span class="n">sink</span><span class="p">,</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">bound</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>42
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>There is a proposal to <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/p0780r1.html">allow pack expansion in lambda init-capture</a></li>
+<li>This would allow <code>bind_once()</code> to be expressed as:<div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">bind_once</span><span class="p">(</span><span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+  <span class="k">return</span> <span class="p">[</span><span class="n">_f</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">_args</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...]</span> <span class="p">()</span> <span class="k">mutable</span> <span class="p">{</span>
+      <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">move</span><span class="p">(</span><span class="n">_args</span><span class="p">)...);</span>
+  <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="recommendations">recommendations<a class="anchor-link" href="#recommendations">&#182;</a></h2><ul>
+<li>Lambda expressions are syntactic sugar - don't let them frighten you</li>
+<li>Naming things, in general, is good. Don't start turning everything into an unnamed type</li>
+<li>Lambdas are useful when<ul>
+<li>the function object would not be reused elsewhere</li>
+<li>the lambda expression is short</li>
+<li>the lambda expression is bound to, and executed within, the current context (reference captures)</li>
+<li>the lambda expression represents a <em>continuation</em> of the current function in a different execution context</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="homework">homework<a class="anchor-link" href="#homework">&#182;</a></h2><ul>
+<li>Find a place in your current project for a function is passed to and standard algorithm or container<ul>
+<li>If your current project doesn't use standard algorithms, find a place to use one!</li>
+</ul>
+</li>
+<li>Replace it with a lambda expression</li>
+<li><p>Report the example and your thoughts on the <a href="git.corp.adobe.com/better-code/class/wiki">wiki</a></p>
+</li>
+<li><p>An example...</p>
+<div class="highlight"><pre><span></span><span class="c1">// Find first position, p, in v, where *p &lt; x</span>
+<span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">find_if</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">v</span><span class="p">),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">){</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">;</span> <span class="p">});</span>
+</pre></div>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section>
 </div>
 </div>
 
@@ -12173,7 +12926,7 @@ require(
         Reveal.initialize({
             controls: true,
             progress: true,
-            history: true,
+            slideNumber: 'c',
 
             transition: "slide",
 

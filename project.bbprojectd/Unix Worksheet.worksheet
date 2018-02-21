@@ -19,6 +19,10 @@ npm install -g browser-sync
 cd ~/Projects/github.com/sean-parent/notebook
 ln -s ./reveal.js-3.6.0 ./docs/reveal.js
 
+cd ~/Projects/github.com/sean-parent/notebook
+ln -s ../docs/img ./better-code-class/img
+
+
 
 ### Update
 

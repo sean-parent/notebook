@@ -11,7 +11,7 @@ trap "source activate sean-parent-notebook; jupyter notebook stop 8888;" EXIT;
     source activate sean-parent-notebook;
     jupyter nbconvert ./better-code-class/*.ipynb --to=slides --execute --output-dir=./docs \
         --config=./slides-config/slides_config.py;
-    fswatch --print0 --exclude=".*/\..*"  ./better-code-class | xargs -0 -I % \
+    fswatch --print0 --exclude=".*/\..*" ./better-code-class | xargs -0 -I % \
     jupyter nbconvert % --to=slides --execute --output-dir=./docs \
         --config=./slides-config/slides_config.py;
 } & {

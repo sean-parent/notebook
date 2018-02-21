@@ -235,7 +235,7 @@ require(
         Reveal.initialize({
             controls: true,
             progress: true,
-            history: true,
+            slideNumber: 'c',
 
             transition: "{{resources.reveal.transition}}",
 
