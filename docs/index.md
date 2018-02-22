@@ -9,4 +9,4 @@ title: notebook
 - [forwarding-references](forwarding-references.slides.html)
 - [rvalue-followup](rvalue-followup.slides.html)
 - [auto](auto.slides.html)
-- [lamdas](lambdas.slides.html)
+- [lambdas](lambdas.slides.html)
