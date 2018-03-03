@@ -4,45 +4,63 @@
 
 ## Mac installation instructions to run locally
 
+- clone this repo and cd to the directory
+- if you don't already have the xcode command line tools installed, install them
 ```
-# download Python 3.6 install script for miniconda from https://conda.io/miniconda.html
-# make the script executable and invoke it:
+xcode-select --install
+```
+- install miniconda for Python 3.6
+	- download the install script [here](https://conda.io/miniconda.html)
+	- execute the downloaded script
+	- when prompted `Do you wish the installer to prepend the Miniconda3 install location to PATH in your /Users/<name>/.bash_profile ? [yes|no]` answer no
+```
 chmod +x ~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
 ~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
-# when asked to add the path to your .bash_profile, enter "no"
-
-# cd to the directory you want to store the repo and clone
-cd <wherever you want>
-git clone https://github.com/sean-parent/notebook.git
-
-# create the conda environment
+```
+- Create the conda environment
+```
 export PATH="$HOME/miniconda3/bin:$PATH"
 conda env create
 ```
 
-## Running the notebook
-
+## To run the notebook
 ```
-# from the repo directory
-
-# add conda to you path for this session
 export PATH="$HOME/miniconda3/bin:$PATH"
-
-# activate the environement
 source activate sean-parent-notebook
-
-# run notebook
 jupyter notebook
+```
+- use control-c and `source deactivate` to exit
 
-# to exit Control-C and the deactivate
-source deactivate
+## To setup complete environment with interactive slide editing and jekyl pages
 
+- install [homebrew](https://brew.sh/)
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+- install utilities
+```
+brew install npm
+brew install fswatch
+brew install ruby
+npm install -g browser-sync
 ```
 
-## Running the environment
-
-_Note: The setup instructions currently omit install brew, npm, browser-sync, fswatch... needed for ./start.sh, however the installation instructions are sufficient to get jupyter notebook running._
-
+## Run update to complete installation
 ```
-./start.sh
+./tools/update.sh
+```
+
+## To run complete environment
+```
+./tools/start.sh
+```
+- use control-c to exit
+
+## To update environment
+```
+./tools/update.sh
+```
+## To prepare all slides before pushing to github
+```
+./tools/prepare.sh
 ```
