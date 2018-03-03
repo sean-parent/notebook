@@ -5,7 +5,35 @@
 	<key>CurrentWorkingDirectory</key>
 	<string>/Users/sean-parent/Projects/github.com/sean-parent/notebook</string>
 	<key>WorksheetContents</key>
-	<string>### server setup
+	<string># Setup
+
+## install xcode command line tools
+### install xcode from apple store and launch
+open -a terminal ~/Projects/github.com/sean-parent/notebook
+xcode-select --install
+
+## install [homebrew](https://brew.sh/)
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+## install miniconda for Python 3.6
+### download install script [here](https://conda.io/miniconda.html)
+### when prompted "Do you wish the installer to prepend the Miniconda3 install location
+### to PATH in your /Users/sean-parent/.bash_profile ? [yes|no]" answer no
+chmod +x ~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
+~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
+
+## install npm and fswatch &amp; browser-sync
+brew install npm
+brew install fswatch
+npm install -g browser-sync
+
+brew install ruby
+
+## create conda environment
+export PATH="$HOME/miniconda3/bin:$PATH"
+conda env create
+
+### server setup
 
 openssl req -x509 -nodes -days 365 -newkey rsa:2048 -keyout mykey.key -out mycert.pem
 
