@@ -10,3 +10,4 @@ title: notebook
 - [rvalue-followup](rvalue-followup.slides.html)
 - [auto](auto.slides.html)
 - [lambdas](lambdas.slides.html)
+- [memory-model](memory-model.slides.html)
