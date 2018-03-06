@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>Untitled slides</title>
+<title>memory-model slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11901,44 +11901,151 @@ a.anchor-link {
 <div class="reveal">
 <div class="slides">
 <section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp"></span>
-
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-    
-<span class="k">auto</span> <span class="n">f</span> <span class="o">=</span> <span class="p">[](</span><span class="n">string</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span> <span class="p">};</span>
-
-<span class="n">f</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
-</pre></div>
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="The-C++-Memory-Model">The C++ Memory Model<a class="anchor-link" href="#The-C++-Memory-Model">&#182;</a></h1><h2 id="Basics">Basics<a class="anchor-link" href="#Basics">&#182;</a></h2><ul>
+<li>Memory consists of one or more contiguous sequence of bytes</li>
+<li>Every byte has a unique address.<ul>
+<li>Bytes are &gt;= 8 bits</li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Hello World!
-</pre>
-</div>
-</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Processor-Memory-Hierarchy">Processor Memory Hierarchy<a class="anchor-link" href="#Processor-Memory-Hierarchy">&#182;</a></h2><p><img src="img/memory-hierarchy.svg" alt="Memory Hierarchy"></p>
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Threads-and-Data-Races">Threads and Data Races<a class="anchor-link" href="#Threads-and-Data-Races">&#182;</a></h2><ul>
+<li>All objects are accessible to all threads</li>
+<li>When an evaluation of an expression write to a memory location<ul>
+<li>and another evaluation reads or modifies the same memory location</li>
+<li>the expressions <em>conflict</em> and there is a <em>data race</em> unless<ul>
+<li>both evaluations are on the same thread or same signal handler</li>
+<li>both are atomic operations</li>
+<li>one <em>happens-before</em> another</li>
+</ul>
+</li>
+<li>if a data race occurs the behavior of the program is undefined</li>
+</ul>
+</li>
+</ul>
 
 </div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Memory-Order">Memory Order<a class="anchor-link" href="#Memory-Order">&#182;</a></h2><ul>
+<li>Memory order specifies how regular, non-atomic, memory accesses are to be ordered <strong>around an atomic operation</strong></li>
+<li>Absent any constraints, one thread can observe the values changed by another thread in any order</li>
+<li>The default order for any standard library atomic operation is <em>sequentially-consistent</em> (seq_cst)</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Other-Supported-Memory-Orders">Other Supported Memory Orders<a class="anchor-link" href="#Other-Supported-Memory-Orders">&#182;</a></h2><ul>
+<li>Relaxed: there is no synchronization or ordering constraints imposed on <em>other</em> reads or writes, only the operation's atomicity is guaranteed</li>
+<li>Consume: applies to a load operation<ul>
+<li>no reads or writes dependent on the load operation may happen before the load</li>
+<li>for most processors, this only effects compiler optimizations</li>
+</ul>
+</li>
+<li>Acquire: applies to a load operation<ul>
+<li>no reads or writes in the current thread can be reordered before the load</li>
+</ul>
+</li>
+<li>Release: applies to a store operation<ul>
+<li>no reads or writes can be reordered after this store</li>
+<li>all writes are visible in other threads that acquire the same atomic</li>
+<li>all writes with a data dependency are visible in other threads that consume the same atomic</li>
+</ul>
+</li>
+<li>Acquire-Release: applies to read-modify-write operations<ul>
+<li>Same guarantees as acquire and release for a single atomic operation</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Sequentially-Consistent-Ordering">Sequentially Consistent Ordering<a class="anchor-link" href="#Sequentially-Consistent-Ordering">&#182;</a></h2><ul>
+<li>load operations are acquire</li>
+<li>store operations are a release</li>
+<li>read-modify-write are acquire and release</li>
+<li><strong>a single total order exists in which all threads observe all modifications in the same order</strong></li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Important">Important<a class="anchor-link" href="#Important">&#182;</a></h2><ul>
+<li><p>Intel hardware has a <em>strong</em> memory model</p>
+<ul>
+<li>Every machine instruction has an implied acquire-release semantics</li>
+<li>That <em>does not</em> imply that every operation is atomic</li>
+<li>And without specifying a memory order, the compiler is free to reorder operations</li>
+</ul>
+</li>
+<li><p>ARM has a <em>weak</em> memory model</p>
+<ul>
+<li>Every operation is a consume or release</li>
+<li>But without specifying a memory order, the compiler is free to reorder operations</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Recommendations">Recommendations<a class="anchor-link" href="#Recommendations">&#182;</a></h2><ul>
+<li>Avoid using primitive synchronization mechanisms at all</li>
+<li>If you must, only use <strong>sequentially consistent</strong> ordering unless<ul>
+<li>You can demonstrate a performance gain</li>
+<li>You can <em>prove</em> it is correct</li>
+<li>You have at least one other expert review your proof</li>
+<li>You write a complete description along with your proof and include it in the code</li>
+<li>You include a unit test to demonstrate both correctness and gain</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section>
 </div>
 </div>
 
@@ -11961,7 +12068,7 @@ require(
         Reveal.initialize({
             controls: true,
             progress: true,
-            history: true,
+            slideNumber: 'c',
 
             transition: "slide",
 

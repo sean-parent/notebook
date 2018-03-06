@@ -21,6 +21,9 @@ highlighter: rouge
 exclude: ["sean-parent.bbprojectd/", "exclude/", "bs-config.js", "reveal.js-3.6.0/"]
 exclude-tags: []
 
+# github
+github: [metadata]
+
 #wire this up
 comments :
   provider : disqus
