@@ -43,11 +43,7 @@ brew install npm
 brew install fswatch
 brew install ruby
 npm install -g browser-sync
-```
-
-## Run update to complete installation
-```
-./tools/update.sh
+gem install bundler
 ```
 
 ## To run complete environment

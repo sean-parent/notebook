@@ -11966,23 +11966,60 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Other-Supported-Memory-Orders">Other Supported Memory Orders<a class="anchor-link" href="#Other-Supported-Memory-Orders">&#182;</a></h2><ul>
 <li>Relaxed: there is no synchronization or ordering constraints imposed on <em>other</em> reads or writes, only the operation's atomicity is guaranteed</li>
-<li>Consume: applies to a load operation<ul>
-<li>no reads or writes dependent on the load operation may happen before the load</li>
-<li>for most processors, this only effects compiler optimizations</li>
 </ul>
-</li>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="img/memory-relaxed.svg" alt="performance-move"></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
 <li>Acquire: applies to a load operation<ul>
 <li>no reads or writes in the current thread can be reordered before the load</li>
 </ul>
 </li>
 <li>Release: applies to a store operation<ul>
-<li>no reads or writes can be reordered after this store</li>
+<li>no reads or writes in the current thread can be reordered after the store</li>
 <li>all writes are visible in other threads that acquire the same atomic</li>
 <li>all writes with a data dependency are visible in other threads that consume the same atomic</li>
 </ul>
 </li>
 <li>Acquire-Release: applies to read-modify-write operations<ul>
 <li>Same guarantees as acquire and release for a single atomic operation</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="img/memory-aquire-release.svg" alt="performance-move"></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Consume: (discouraged as of C++17) similar to aquire but only applies to dependent operations<ul>
+<li>no known production compiler tracks dependency chains - consume becomes aquire</li>
 </ul>
 </li>
 </ul>
@@ -12009,15 +12046,35 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Important">Important<a class="anchor-link" href="#Important">&#182;</a></h2><ul>
-<li><p>Intel hardware has a <em>strong</em> memory model</p>
-<ul>
+<li>Intel hardware has a <em>strong</em> memory model<ul>
 <li>Every machine instruction has an implied acquire-release semantics</li>
 <li>That <em>does not</em> imply that every operation is atomic</li>
 <li>And without specifying a memory order, the compiler is free to reorder operations</li>
+<li>Peformance of memory-order relaxed and sequentially-consistent has no <em>hardware</em> implications</li>
 </ul>
 </li>
-<li><p>ARM has a <em>weak</em> memory model</p>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="img/performance-move.png" alt="performance-move"></p>
+<div style="text-align:center">
+    <a style="text-align:center" href="http://quick-bench.com/p13s_cSQ0JTeMUGcttdS1EFHVcE">Cost of Copy</a>
+</div>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
+<li>ARM has a <em>weak</em> memory model<ul>
 <li>Every operation is a consume or release</li>
 <li>But without specifying a memory order, the compiler is free to reorder operations</li>
 </ul>
