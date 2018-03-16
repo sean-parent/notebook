@@ -11,3 +11,4 @@ title: notebook
 - [auto](auto.slides.html)
 - [lambdas](lambdas.slides.html)
 - [memory-model](memory-model.slides.html)
+- [lambda-and-memory-order-followup](lambda-and-memory-order-followup.slides.html)
