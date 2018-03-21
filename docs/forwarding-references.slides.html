@@ -12025,7 +12025,7 @@ annotate dtor
 
 </div>
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
@@ -12070,7 +12070,7 @@ annotate dtor
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
@@ -12290,17 +12290,33 @@ annotate dtor
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="c1">// auto&amp;&amp; is a forwarding reference, not an rvalue reference</span>
-<span class="k">auto</span> <span class="n">wrapper_04</span> <span class="o">=</span> <span class="p">[](</span><span class="k">auto</span> <span class="n">f</span><span class="p">,</span> <span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">f</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">));</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+    
+<span class="c1">// auto&amp;&amp; is a forwarding reference, not an rvalue reference</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Arg</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">wrapper_04</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">Arg</span><span class="o">&amp;&amp;</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">f</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Arg</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">));</span>
 <span class="p">};</span>
 
-<span class="k">auto</span> <span class="n">f_01</span> <span class="o">=</span> <span class="p">[](</span><span class="n">annotate</span><span class="p">){</span> <span class="p">};</span>         <span class="c1">// pass by value</span>
-<span class="k">auto</span> <span class="n">f_02</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span> <span class="c1">// pass by const lvalue reference</span>
-<span class="k">auto</span> <span class="n">f_03</span> <span class="o">=</span> <span class="p">[](</span><span class="n">annotate</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>       <span class="c1">// pass by lvalue reference</span>
-<span class="k">auto</span> <span class="n">f_04</span> <span class="o">=</span> <span class="p">[](</span><span class="n">annotate</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>      <span class="c1">// pass by rvalue reference</span>
+<span class="kt">void</span> <span class="nf">f_01</span><span class="p">(</span><span class="n">annotate</span><span class="p">){</span> <span class="p">};</span>         <span class="c1">// pass by value</span>
+<span class="kt">void</span> <span class="nf">f_02</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span> <span class="c1">// pass by const lvalue reference</span>
+<span class="kt">void</span> <span class="nf">f_03</span><span class="p">(</span><span class="n">annotate</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>       <span class="c1">// pass by lvalue reference</span>
+<span class="kt">void</span> <span class="nf">f_04</span><span class="p">(</span><span class="n">annotate</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>      <span class="c1">// pass by rvalue reference</span>
 
-<span class="n">annotate</span> <span class="n">v_03</span><span class="p">;</span> <span class="c1">// lvalue</span>
+<span class="p">}</span> <span class="c1">// namespace</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">annotate</span> <span class="n">v_03</span><span class="p">;</span> <span class="c1">// lvalue</span>
 
 <span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_01</span><span class="p">,</span> <span class="n">v_03</span><span class="p">);</span>          <span class="c1">// call with lvalue - copy</span>
 <span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_01</span><span class="p">,</span> <span class="n">annotate</span><span class="p">());</span>    <span class="c1">// call with rvalue - move</span>
@@ -12356,7 +12372,7 @@ annotate dtor
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
@@ -12388,7 +12404,7 @@ annotate dtor
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
@@ -12426,7 +12442,7 @@ annotate dtor
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="n">string</span> <span class="n">v_0</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
@@ -12440,7 +12456,7 @@ annotate dtor
 </div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">is_lvalue_reference</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">v_1</span><span class="p">)</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
@@ -12514,7 +12530,7 @@ annotate dtor
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">c_5</span> <span class="p">{</span>
@@ -12551,15 +12567,23 @@ annotate dtor
 </div>
 </div>
 
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="n">c_5</span> <span class="n">v_8</span><span class="p">{</span><span class="n">v_7</span><span class="p">};</span>
 </pre></div>
-<hr>
-<p><strong><code>input_line_21:5:18: error: no matching constructor for initialization of 'annotate'
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>input_line_21:5:18: error: no matching constructor for initialization of 'annotate'
     c_5(T&amp;&amp; a) : _a(forward&lt;T&gt;(a)) { }
                  ^  ~~~~~~~~~~~~~
 input_line_22:2:6: note: in instantiation of function template specialization 'c_5::c_5&lt;c_5 &amp;&gt;' requested
@@ -12575,14 +12599,14 @@ input_line_22:2:6: note: in instantiation of function template specialization 'c
     annotate(annotate&amp;&amp;) noexcept { std::cout &lt;&lt; "annotate move-ctor" &lt;...
     ^
 ./../common.hpp:4:5: note: candidate constructor not viable: requires 0 arguments, but 1 was provided
-    annotate() { std::cout &lt;&lt; "annotate ctor" &lt;&lt; std::endl; }</code></strong></p>
+    annotate() { std::cout &lt;&lt; "annotate ctor" &lt;&lt; std::endl; }</code></pre>
 
 </div>
 </div>
 </div></div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">c_6</span> <span class="p">{</span>
@@ -12637,12 +12661,12 @@ annotate copy-ctor
 
 </div>
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h3><ul>
+<h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
 <li>Apply one or more of the recommendations to code in your product</li>
 <li>Measure the results:<ul>
 <li>Runtime performance of an optimized build</li>
