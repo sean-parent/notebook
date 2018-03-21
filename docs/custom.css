@@ -36,3 +36,20 @@ div.input {
 div.output_stdout {
     font-weight: bold;
 }
+
+.reveal section img {
+	max-width: 95%;
+	max-height: 95%;
+	/* center images */
+	display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.reveal {
+	font-size: 45px;
+}
+
+.rendered_html blockquote {
+    margin: 20px auto; /* center */
+}
