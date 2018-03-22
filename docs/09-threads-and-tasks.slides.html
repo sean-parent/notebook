@@ -12070,7 +12070,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12085,7 +12085,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12499,9 +12499,9 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="n">sequential_process</span> <span class="n">printer</span><span class="p">;</span>
 <span class="n">sequential_process</span> <span class="n">p1</span><span class="p">;</span>
 <span class="n">sequential_process</span> <span class="n">p2</span><span class="p">;</span>
-<span class="n">sequential_process</span> <span class="n">printer</span><span class="p">;</span>
 <span class="n">p1</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;p1-begin</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
 <span class="n">p1</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;p1-step_1</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
 <span class="n">p1</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;p1-step_2</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
@@ -12529,13 +12529,13 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="output_subarea output_stream output_stdout output_text">
 <pre>p1-begin
-p1-step_1
-p1-step_2
   p2-begin
-p1-end
   p2-step_1
+p1-step_1
   p2-step_2
+p1-step_2
   p2-end
+p1-end
 </pre>
 </div>
 </div>
@@ -12543,7 +12543,18 @@ p1-end
 </div>
 </div>
 
-</div></section></section><section><section>
+</div><aside class="notes">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Comment that it is important for printer to be destructed last.</p>
+
+</div>
+</div>
+</div>
+</aside></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
