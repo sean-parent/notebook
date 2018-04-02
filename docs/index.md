@@ -13,3 +13,4 @@ title: notebook
 - [memory-model](memory-model.slides.html)
 - [lambda-and-memory-order-followup](lambda-and-memory-order-followup.slides.html)
 - [09-threads-and-tasks](09-threads-and-tasks.slides.html)
+- [10-futures](10-futures.slides.html)

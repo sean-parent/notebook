@@ -238,6 +238,7 @@ require(
             controls: true,
             progress: true,
             slideNumber: 'c',
+            hashOneBasedIndex: true,
 
             transition: "{{resources.reveal.transition}}",
 

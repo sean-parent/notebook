@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>lambda-and-memory-order-followup slides</title>
+<title>11-futures-pt2 slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,73 +11905,166 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Lambda-Expression-Follow-up">Lambda Expression Follow-up<a class="anchor-link" href="#Lambda-Expression-Follow-up">&#182;</a></h1><ul>
-<li>Homework to use a lambda expression with a standard algorithm or container<div class="highlight"><pre><span></span><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="o">???&gt;</span> <span class="n">s</span><span class="p">;</span> <span class="c1">// How do you use a lambda for a comparison type?</span>
-</pre></div>
-</li>
-</ul>
-
+<h1 id="Futures-(pt2)">Futures (pt2)<a class="anchor-link" href="#Futures-(pt2)">&#182;</a></h1>
 </div>
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>You cannot<ul>
-<li>Best you can do is use a pointer to function or std::function and pass the lambda to the constructor as comparison</li>
+<h2 id="std::future&lt;&gt;"><code>std::future&lt;&gt;</code><a class="anchor-link" href="#std::future&lt;&gt;">&#182;</a></h2><ul>
+<li><code>std::future&lt;&gt;</code> is a mechanism to separate a task result, from a task<ul>
+<li>After the task is executed, the task result is available from the <code>future</code></li>
+<li>If the task throws an exception, the exception is available from the <code>future</code></li>
+</ul>
+</li>
+<li>Most other languages call these "promises"<ul>
+<li>C++ uses <code>promise</code> for the sending side of a <code>future</code> which is associated with some task</li>
 </ul>
 </li>
 </ul>
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="kt">bool</span><span class="p">(</span><span class="o">*</span><span class="p">)(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">s</span><span class="p">{[](</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="kt">int</span> <span class="n">b</span><span class="p">){</span> <span class="k">return</span> <span class="n">a</span> <span class="o">&gt;</span> <span class="n">b</span><span class="p">;</span> <span class="p">}};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="n">packaged_task</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">task</span><span class="p">([]{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;executing...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">42</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="n">future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">task</span><span class="p">.</span><span class="n">get_future</span><span class="p">();</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;begin</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="n">task</span><span class="p">();</span> <span class="c1">// execute the task</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;answer: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>begin
+executing...
+answer: 42
+</pre>
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Disadvantage is the expression cannot be inlined</li>
-<li>Recommendation - continue to use function objects</li>
-</ul>
+</div>
 
 </div>
 </div>
-</div></div><div class="fragment">
+
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">set</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">greater</span><span class="o">&lt;&gt;&gt;</span> <span class="n">s</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="n">packaged_task</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">task</span><span class="p">([]{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;executing...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="k">throw</span> <span class="s">&quot;failure&quot;</span><span class="n">s</span><span class="p">;</span>
+    <span class="k">return</span> <span class="mi">42</span><span class="p">;</span>
+<span class="p">});</span>
+
+<span class="n">future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="n">task</span><span class="p">.</span><span class="n">get_future</span><span class="p">();</span>
+
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;begin</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+
+<span class="n">task</span><span class="p">();</span> <span class="c1">// execute the task</span>
+
+<span class="k">try</span> <span class="p">{</span>
+   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;answer: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">result</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">error</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;error: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">error</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></div></section></section><section><section>
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>begin
+executing...
+answer: error: failure
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Memory-Order-Follow-up">Memory Order Follow-up<a class="anchor-link" href="#Memory-Order-Follow-up">&#182;</a></h1><ul>
-<li>It wasn't clear in my slides that C++11 allows you to specify the memory order on many operations</li>
+<ul>
+<li>In C++14 there are 3 ways to optain a <code>future</code><ul>
+<li>from <code>std::promise</code></li>
+<li>from <code>std::packaged_task</code></li>
+<li>from <code>std::async</code></li>
+</ul>
+</li>
+<li><code>std::async</code> allows for a <em>launch policy</em> which can be async, deferred, or either<ul>
+<li><code>future</code> from <code>std::async</code> with <code>std::launch::async</code><ul>
+<li><em>wait</em> on destruction until the future is ready</li>
+</ul>
+</li>
+<li><code>future</code> from <code>std::async</code> with <code>std::launch::deferred</code><ul>
+<li><em>execute</em> the task on a call to <code>future::get()</code></li>
+<li><em>cancel</em> the associated task, and free the resources on destruction</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Otherwise futures will<ul>
+<li><em>wait</em> on get</li>
+<li><em>detach</em> on destruction</li>
+</ul>
+</li>
+<li>There is no way to achieve the behaviors of a <code>future</code> returned from <code>async()</code> using a <code>promise</code></li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Recall the <code>sequential_process::async()</code></li>
 </ul>
 
 </div>
@@ -11982,42 +12075,139 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">atomic</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">;</span>
-<span class="n">x</span><span class="p">.</span><span class="n">store</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="n">memory_order_relaxed</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">{</span>
+        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+        <span class="n">_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+    <span class="p">}</span>
+    <span class="n">_condition</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>You can specify the memory order for<ul>
-<li>operations on atomics</li>
-<li>explicitly with <code>std::atomic_thread_fence</code>, <code>std::atomic_signal_fence</code></li>
-<li>and can explicitly control dependencies with <code>std::kill_dependency</code></li>
-</ul>
-</li>
-</ul>
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="c1">// F models R()</span>
+<span class="k">auto</span> <span class="n">async_packaged</span><span class="p">(</span><span class="n">sequential_process</span><span class="o">&amp;</span> <span class="n">process</span><span class="p">,</span> <span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">result_t</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">result_of_t</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">decay_t</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">()</span><span class="o">&gt;</span><span class="p">;</span>
+    
+    <span class="n">packaged_task</span><span class="o">&lt;</span><span class="n">result_t</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">task</span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)};</span>
+    <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">task</span><span class="p">.</span><span class="n">get_future</span><span class="p">();</span>
+    
+    <span class="n">process</span><span class="p">.</span><span class="n">async</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">task</span><span class="p">));</span>
+    
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
+
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>The memory order controls<ul>
-<li>How the compiler can reorder operations on possibly shared memory around the atomic operations</li>
-<li>Which instructions the compiler emits to control processor memory ordering around the atomic operations</li>
-</ul>
-</li>
-</ul>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+<span class="n">sequential_process</span> <span class="n">process</span><span class="p">;</span>
+
+<span class="k">auto</span> <span class="n">future</span> <span class="o">=</span> <span class="n">async_packaged</span><span class="p">(</span><span class="n">process</span><span class="p">,</span> <span class="p">[]{</span> <span class="k">return</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">;</span> <span class="p">});</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>In file included from input_line_5:1:
+In file included from /Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/xeus/xinterpreter.hpp:12:
+In file included from /Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:487:
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/memory:2056:9: error: call to deleted constructor of 'std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;'
+      : __value_(_VSTD::forward&lt;_Args&gt;(_VSTD::get&lt;_Indexes&gt;(__args))...) {}
+        ^        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/memory:2151:9: note: in instantiation of function template specialization 'std::__1::__compressed_pair_elem&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt;
+      ()&gt;, 0, false&gt;::__compressed_pair_elem&lt;const std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &amp;, 0&gt;' requested here
+      : _Base1(__pc, _VSTD::move(__first_args),
+        ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:1501:11: note: in instantiation of function template specialization 'std::__1::__compressed_pair&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;,
+      std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &gt; &gt;::__compressed_pair&lt;const
+      std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &amp;, std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;
+      &gt; &amp;&amp;&gt;' requested here
+        : __f_(piecewise_construct, _VSTD::forward_as_tuple(__f),
+          ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:1528:26: note: in instantiation of member function 'std::__1::__function::__func&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;,
+      std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &gt;, void ()&gt;::__func' requested here
+    ::new (__hold.get()) __func(__f_.first(), _Alloc(__a));
+                         ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:1491:14: note: in instantiation of member function 'std::__1::__function::__func&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;,
+      std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &gt;, void ()&gt;::__clone' requested here
+    explicit __func(_Fp&amp;&amp; __f)
+             ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:1770:42: note: in instantiation of member function 'std::__1::__function::__func&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;,
+      std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &gt;, void ()&gt;::__func' requested here
+            __f_ = ::new((void*)&amp;__buf_) _FF(_VSTD::move(__f));
+                                         ^
+input_line_13:8:19: note: in instantiation of function template specialization 'std::__1::function&lt;void
+      ()&gt;::function&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;, void&gt;' requested here
+    process.async(move(task));
+                  ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/future:2047:5: note: 'packaged_task' has been explicitly marked deleted here
+    packaged_task(const packaged_task&amp;) = delete;
+    ^
+In file included from input_line_5:1:
+In file included from /Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/xeus/xinterpreter.hpp:12:
+In file included from /Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:487:
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/memory:2151:9: error: no matching constructor for initialization of '__compressed_pair_elem&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;, 0&gt;'
+      : _Base1(__pc, _VSTD::move(__first_args),
+        ^      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:1496:11: note: in instantiation of function template specialization 'std::__1::__compressed_pair&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;,
+      std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &gt; &gt;::__compressed_pair&lt;const
+      std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &amp;, const
+      std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &gt; &amp;&gt;' requested here
+        : __f_(piecewise_construct, _VSTD::forward_as_tuple(__f),
+          ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:1536:17: note: in instantiation of member function 'std::__1::__function::__func&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;,
+      std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &gt;, void ()&gt;::__func' requested here
+    ::new (__p) __func(__f_.first(), __f_.second());
+                ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:1491:14: note: in instantiation of member function 'std::__1::__function::__func&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;,
+      std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &gt;, void ()&gt;::__clone' requested here
+    explicit __func(_Fp&amp;&amp; __f)
+             ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/functional:1770:42: note: in instantiation of member function 'std::__1::__function::__func&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;,
+      std::__1::allocator&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &gt;, void ()&gt;::__func' requested here
+            __f_ = ::new((void*)&amp;__buf_) _FF(_VSTD::move(__f));
+                                         ^
+input_line_13:8:19: note: in instantiation of function template specialization 'std::__1::function&lt;void
+      ()&gt;::function&lt;std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt;, void&gt;' requested here
+    process.async(move(task));
+                  ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/memory:2054:3: note: candidate template ignored: substitution failure [with _Args = &lt;const std::__1::packaged_task&lt;std::__1::basic_string&lt;char&gt; ()&gt; &amp;&gt;, _Indexes =
+      &lt;0&gt;]
+  __compressed_pair_elem(piecewise_construct_t, tuple&lt;_Args...&gt; __args,
+  ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/memory:2049:3: note: candidate constructor template not viable: requires single argument '__u', but 3 arguments were provided
+  __compressed_pair_elem(_Up&amp;&amp; __u)
+  ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/memory:2037:8: note: candidate constructor (the implicit copy constructor) not viable: requires 1 argument, but 3 were provided
+struct __compressed_pair_elem {
+       ^
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/memory:2037:8: note: candidate constructor (the implicit move constructor) not viable: requires 1 argument, but 3 were provided
+/Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/c++/v1/memory:2043:13: note: candidate constructor not viable: requires 0 arguments, but 3 were provided
+  constexpr __compressed_pair_elem() : __value_() {}
+            ^</code></pre>
 
 </div>
 </div>
