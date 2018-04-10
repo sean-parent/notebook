@@ -12142,7 +12142,9 @@ require(
                   condition: function() { return !document.body.classList; } },
                 { src: "reveal.js/plugin/notes/notes.js",
                   async: true,
-                  condition: function() { return !!document.body.classList; } }
+                  condition: function() { return !!document.body.classList; } },
+                { src: "reveal.js/plugin/search/search.js",
+                  async: true }
             ]
         });
 

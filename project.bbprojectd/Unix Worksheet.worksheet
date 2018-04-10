@@ -12,6 +12,18 @@
 open -a terminal ~/Projects/github.com/sean-parent/notebook
 xcode-select --install
 
+
+# install for jupyter lab extensions
+brew install pkg-config cairo libpng jpeg giflib
+npm install
+export PATH="$HOME/miniconda3/bin:$PATH"
+source activate sean-parent-notebook
+jupyter labextension install @ijmbarr/jupyterlab_spellchecker
+jupyter labextension install jupyterlab-toc
+
+
+https://github.com/topics/jupyterlab-extension
+
 ## install [homebrew](https://brew.sh/)
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 

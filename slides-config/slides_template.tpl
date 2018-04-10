@@ -248,7 +248,9 @@ require(
                   condition: function() { return !document.body.classList; } },
                 { src: "{{resources.reveal.url_prefix}}/plugin/notes/notes.js",
                   async: true,
-                  condition: function() { return !!document.body.classList; } }
+                  condition: function() { return !!document.body.classList; } },
+                { src: "{{resources.reveal.url_prefix}}/plugin/search/search.js",
+                  async: true }
             ]
         });
 
