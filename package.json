@@ -1,0 +1,19 @@
+{
+  "name": "notebook",
+  "version": "1.0.0",
+  "dependencies": {
+    "canvas": "^1.6.10",
+    "node-gyp": "^3.6.2",
+    "npm": "^5.8.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sean-parent/notebook.git"
+  },
+  "keywords": [],
+  "author": "Sean Parent",
+  "bugs": {
+    "url": "https://github.com/sean-parent/notebook/issues"
+  },
+  "homepage": "https://github.com/sean-parent/notebook#readme"
+}
