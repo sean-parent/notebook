@@ -1,0 +1,9 @@
+name: sean-parent-notebook
+channels:
+  - QuantStack
+  - conda-forge
+dependencies:
+  - xeus-cling
+  - notebook
+  - jupyter_nbextensions_configurator
+  - jupyterlab

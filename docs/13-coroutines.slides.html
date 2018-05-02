@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>auto slides</title>
+<title>13-coroutines slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,9 +11905,102 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="auto">auto<a class="anchor-link" href="#auto">&#182;</a></h1><ul>
-<li>Prior to C++11, the keyword <code>auto</code> was a storage class specifier<ul>
-<li>But rarely used</li>
+<h1 id="Coroutines">Coroutines<a class="anchor-link" href="#Coroutines">&#182;</a></h1>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>A <em>coroutine</em> in C++ refers to a stackless coroutine<ul>
+<li>Sometimes called a <em>resumable function</em></li>
+<li>Defined in the <a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/n4736.pdf"><em>C++ Extensions for Coroutines</em></a> Technical Specification</li>
+<li>Approved for C++20</li>
+</ul>
+</li>
+<li>Coroutines can halt execution<ul>
+<li><em>yielding</em> a value (or void)</li>
+<li>or <em>awaiting</em> a value (or event)</li>
+</ul>
+</li>
+<li>Once halted, a coroutine can be resumed, or destructed</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Coroutine is any function which<ul>
+<li>is not <code>main()</code></li>
+<li>is not a constructor</li>
+<li>is not destructor</li>
+<li>result type is not <code>auto</code></li>
+<li>contains a <code>co_return</code> statement</li>
+<li>a <code>co_await</code> expression</li>
+<li>a range based for loop with <code>co_await</code></li>
+<li>a <code>co_yield</code> expression</li>
+<li>does not contain variable arguments (parameter packs are allowed)<ul>
+<li>i.e. <code>printf(const char*, ...);</code> // not allowed</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Anatomy-of-a-Coroutine">Anatomy of a Coroutine<a class="anchor-link" href="#Anatomy-of-a-Coroutine">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>A simple example</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">generator</span> <span class="nf">my_coroutine</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">co_yield</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">generator</span> <span class="n">x</span> <span class="o">=</span> <span class="n">my_coroutine</span><span class="p">();</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+<pre><code>0
+1
+2
+Program ended with exit code: 0</code></pre>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>A coroutine is a function object with multiple entry points<ul>
+<li>Manually written:</li>
 </ul>
 </li>
 </ul>
@@ -11920,81 +12013,12 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre><span class="ansi-bold">input_line_9:2:5: </span><span class="ansi-magenta-intense-fg ansi-bold">warning: </span><span class="ansi-bold">&#39;auto&#39; storage class specifier is not permitted in C++11, and will not be
-      supported in future releases [-Wauto-storage-class]</span>
-    auto int i = 42;
-<span class="ansi-green-intense-fg ansi-bold">    ^~~~~
-</span></pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="auto-variable-declarations">auto variable declarations<a class="anchor-link" href="#auto-variable-declarations">&#182;</a></h2><p><code>auto</code> can be used in a variable declaration.</p>
-<ul>
-<li><code>auto</code> alone will always deduce to an object type (not a reference, or const type)</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="k">auto</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
-    
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>int const&amp;
-int
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -12004,7 +12028,7 @@ int
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>cv-qualifiers and reference modifiers can be combined with auto</li>
+<li>Local variables and arguments are captured within the coroutine</li>
 </ul>
 
 </div>
@@ -12015,33 +12039,13 @@ int
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">const</span> <span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
-<span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
-
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>int const
-int const&amp;
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -12051,52 +12055,10 @@ int const&amp;
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><code>decltype(auto)</code> can be used to declare a variable which matches the expression type</li>
+<li>On construction, a coroutine may either be suspended or start executing<ul>
+<li>suspension is handled by setting a resume point and returning</li>
 </ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span> <span class="n">e</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
-
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>int const&amp;
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>auto&amp;&amp;</code> is a forwarding reference</li>
-<li><code>decltype</code> is used with the <code>std::forward</code> template argument</li>
+</li>
 </ul>
 
 </div>
@@ -12107,78 +12069,17 @@ int const&amp;
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
-
-<span class="n">annotate</span> <span class="n">some_function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">annotate</span><span class="p">();</span> <span class="p">}</span>
-<span class="kt">void</span> <span class="n">some_sink</span><span class="p">(</span><span class="n">annotate</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     
-<span class="p">}</span> <span class="c1">// namespace</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">q</span> <span class="o">=</span> <span class="n">some_function</span><span class="p">();</span>
-<span class="n">some_sink</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="n">q</span><span class="p">));</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>annotate ctor
-annotate move-ctor
-annotate dtor
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="auto-function-results">auto function results<a class="anchor-link" href="#auto-function-results">&#182;</a></h2><p>C++11 added trailing return types. This allows a return type which is dependent on an argument type.</p>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="p">(</span><span class="n">my_coroutine_t</span><span class="o">::*</span> <span class="n">_resume</span><span class="p">)();</span>
     
-<span class="kt">int</span> <span class="n">function_a</span><span class="p">();</span>
-<span class="k">auto</span> <span class="nf">function_b</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="p">;</span> <span class="c1">// same signature as function_a</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
-<span class="k">auto</span> <span class="n">add</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="n">U</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">decltype</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
-<span class="p">}</span>
+    <span class="n">my_coroutine_t</span><span class="p">()</span> <span class="o">:</span> <span class="n">_resume</span><span class="p">{</span><span class="o">&amp;</span><span class="n">my_coroutine_t</span><span class="o">::</span><span class="n">state_01</span><span class="p">}</span> <span class="p">{</span> <span class="p">}</span>
     
-<span class="p">}</span> <span class="c1">// namespace</span>
+    <span class="kt">void</span> <span class="n">resume</span><span class="p">()</span> <span class="p">{</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;*</span><span class="n">_resume</span><span class="p">)();</span> <span class="p">}</span>
+    
+    <span class="kt">void</span> <span class="n">state_01</span><span class="p">();</span> <span class="c1">//...</span>
+<span class="p">};</span>
 </pre></div>
 
 </div>
@@ -12191,7 +12092,48 @@ annotate dtor
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>C++14 allows the return type to be omitted for <code>template</code> and <code>inline</code> functions.</li>
+<li>The resume location will execute to the first yield or await and then return<ul>
+<li>yielding is handled by setting a <em>promise</em></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    
+    <span class="kt">void</span> <span class="p">(</span><span class="n">my_coroutine_t</span><span class="o">::*</span> <span class="n">_resume</span><span class="p">)();</span>
+    <span class="kt">int</span> <span class="n">_promise</span><span class="p">;</span>
+    
+    <span class="n">my_coroutine_t</span><span class="p">()</span> <span class="o">:</span> <span class="n">_resume</span><span class="p">{</span><span class="o">&amp;</span><span class="n">my_coroutine_t</span><span class="o">::</span><span class="n">state_01</span><span class="p">}</span> <span class="p">{</span> <span class="p">}</span>
+    
+    <span class="kt">void</span> <span class="n">resume</span><span class="p">()</span> <span class="p">{</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;*</span><span class="n">_resume</span><span class="p">)();</span> <span class="p">}</span>
+    
+    <span class="kt">void</span> <span class="n">state_01</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">_promise</span> <span class="o">=</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span> <span class="c1">// co_yield n++</span>
+        <span class="n">_resume</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">my_coroutine_t</span><span class="o">::</span><span class="n">state_01</span><span class="p">;</span> <span class="c1">// on resume, loop</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Calling a coroutine allocates and constructs the coroutine and returns an object constructed with the <em>coroutine handle</em></li>
 </ul>
 
 </div>
@@ -12202,47 +12144,24 @@ annotate dtor
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kr">inline</span> <span class="k">auto</span> <span class="nf">mixed_add</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">a</span><span class="p">,</span> <span class="kt">signed</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+
+<span class="k">using</span> <span class="n">coroutine_handle</span> <span class="o">=</span> <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">my_coroutine_t</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="k">struct</span> <span class="n">generator</span> <span class="p">{</span>
+    <span class="n">coroutine_handle</span> <span class="n">_handle</span><span class="p">;</span>
+    <span class="n">generator</span><span class="p">(</span><span class="n">coroutine_handle</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_handle</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">h</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="c1">// ...</span>
+<span class="p">};</span>
+
+<span class="n">generator</span> <span class="nf">my_coroutine</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">generator</span><span class="p">(</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">my_coroutine_t</span><span class="o">&gt;</span><span class="p">());</span>
 <span class="p">}</span>
 
-<span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">mixed_add</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">r</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>unsigned int
-41
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -12252,281 +12171,57 @@ annotate dtor
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Using <code>decltype(auto)</code> for the return type preserves references and cv-qualifiers</li>
+<li>The coroutine result type can be used to drive the coroutine</li>
 </ul>
 
 </div>
 </div>
 </div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
-    
-<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
-
-<span class="kr">inline</span> <span class="nf">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span> <span class="n">back</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">v</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
-<span class="p">}</span>
-    
-<span class="p">}</span> <span class="c1">// namespace</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">back</span><span class="p">())</span><span class="o">&gt;</span><span class="p">();</span>
-</pre></div>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>int&amp;
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="auto-template-parameters-(C++17)">auto template parameters (C++17)<a class="anchor-link" href="#auto-template-parameters-(C++17)">&#182;</a></h2><ul>
-<li>C++17 adds auto template parameters.</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">cpp14</span> <span class="p">{</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="n">T</span> <span class="n">N</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">integral_constant</span> <span class="p">{</span>
-      <span class="k">static</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">value</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
-<span class="p">};</span>
+<span class="k">struct</span> <span class="n">generator</span> <span class="p">{</span>
+    <span class="n">coroutine_handle</span> <span class="n">_handle</span><span class="p">;</span>
+    <span class="n">generator</span><span class="p">(</span><span class="n">coroutine_handle</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_handle</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">h</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
     
-<span class="k">using</span> <span class="n">true_type</span> <span class="o">=</span> <span class="n">integral_constant</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span> <span class="nb">true</span><span class="o">&gt;</span><span class="p">;</span>
-
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>In C++17 this can be implemented without specifying the type.</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">auto</span> <span class="n">N</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">integral_constant</span> <span class="p">{</span>
-      <span class="k">static</span> <span class="k">constexpr</span> <span class="k">decltype</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="n">value</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
+        <span class="n">_handle</span><span class="o">-&gt;</span><span class="n">resume</span><span class="p">();</span>
+        <span class="k">return</span> <span class="n">_handle</span><span class="o">-&gt;</span><span class="n">_promise</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="k">using</span> <span class="n">true_type</span> <span class="o">=</span> <span class="n">integral_constant</span><span class="o">&lt;</span><span class="nb">true</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
 </pre></div>
 
 </div>
 </div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="structured-bindings-(C++17)">structured bindings (C++17)<a class="anchor-link" href="#structured-bindings-(C++17)">&#182;</a></h2><ul>
-<li><em>structured bindings</em> allow you to construct a set of objects from an array, tuple, <em>type like</em>, or class/struct public members</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">auto</span> <span class="p">[</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;Jane&quot;</span><span class="n">s</span><span class="p">,</span> <span class="s">&quot;Smith&quot;</span><span class="n">s</span><span class="p">);</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">last_name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">first_name</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-</pre></div>
-<hr>
 
-<pre><code>Smith, Jane</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>simple handling of functions returning structures</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span> <span class="p">};</span>
-
-<span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">equal_range</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="mi">5</span><span class="p">);</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">l</span><span class="p">;</span> <span class="o">++</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-<hr>
-
-<pre><code>5
-5
-5</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>deduction rules are different from other uses of <code>auto</code><ul>
-<li>each element is deduced to <code>decltype(e)</code> where is the corresponding member</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">tie</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</pre></div>
-<hr>
-
-<pre><code>42</code></pre>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-</pre></div>
-<hr>
-
-<pre><code>int&amp;</code></pre>
-
-</div>
-</div>
 </div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>can use const and reference qualifiers with structured bindings</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">tie</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</pre></div>
-<hr>
-
-<pre><code>42</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="limitations-of-structured-bindings">limitations of structured bindings<a class="anchor-link" href="#limitations-of-structured-bindings">&#182;</a></h3><ul>
-<li>no way to ignore an element</li>
-<li>no way to reorder, or bind by name</li>
+<li>Now we can use our coroutine</li>
 </ul>
 
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="auto-lambda-arguments-(covered-in-lambda-section)">auto lambda arguments (covered in lambda section)<a class="anchor-link" href="#auto-lambda-arguments-(covered-in-lambda-section)">&#182;</a></h2>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Issue">Issue<a class="anchor-link" href="#Issue">&#182;</a></h2><h3 id="Qualify-with-references-appropriately">Qualify with references appropriately<a class="anchor-link" href="#Qualify-with-references-appropriately">&#182;</a></h3>
 </div>
 </div>
 </div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="n">annotate</span><span class="o">&gt;</span> <span class="n">w</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>annotate ctor
-annotate ctor
-annotate ctor
-annotate ctor
-annotate ctor
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// do something</span>
-<span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">generator</span> <span class="n">x</span> <span class="o">=</span> <span class="n">my_coroutine</span><span class="p">();</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -12543,16 +12238,9 @@ annotate ctor
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>annotate copy-ctor
-annotate dtor
-annotate copy-ctor
-annotate dtor
-annotate copy-ctor
-annotate dtor
-annotate copy-ctor
-annotate dtor
-annotate copy-ctor
-annotate dtor
+<pre>0
+1
+2
 </pre>
 </div>
 </div>
@@ -12560,40 +12248,100 @@ annotate dtor
 </div>
 </div>
 
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// do something</span>
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The <code>generator</code> type used for the C++TS version is declared as:</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+<pre><code>struct generator {
+    struct promise_type;
+    using handle = coroutine_handle&lt;promise_type&gt;;
+
+    struct promise_type {
+        int current_value;
+
+        auto initial_suspend() { return suspend_always{}; }
+        auto final_suspend() { return suspend_always{}; }
+
+        void unhandled_exception() { terminate(); }
+        void return_void() {}
+        auto yield_value(int value) {
+            current_value = value;
+            return suspend_always{};
+        }
+        generator get_return_object() {
+            return generator{handle::from_promise(*this)};
+        }
+    };
+    handle _coro;
+
+    generator(handle h) : _coro(h) {}
+    generator(generator const&amp;) = delete;
+    generator(generator&amp;&amp; rhs) : _coro(rhs._coro) { rhs._coro = nullptr; }
+    ~generator() {
+        if (_coro) _coro.destroy();
+    }
+
+    int get() {
+        _coro.resume();
+        return _coro.promise().current_value;
+    }
+};</code></pre>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Await">Await<a class="anchor-link" href="#Await">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Besides <em>yielding</em> values a coroutine can also <em>await</em> a value<ul>
+<li>a <code>co_await</code> expression will suspend the coroutine until resume is called after a value is available</li>
+<li>phrased another way, an awaiting coroutine is a <em>continuation</em></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="n">future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">do_it</span><span class="p">(</span><span class="n">future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">co_await</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">co_return</span><span class="p">;</span>
 <span class="p">}</span>
+
+<span class="k">auto</span> <span class="n">done</span> <span class="o">=</span> <span class="n">do_it</span><span class="p">(</span><span class="n">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]{</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">}));</span>
+<span class="n">done</span><span class="p">.</span><span class="n">then</span><span class="p">([]{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;done&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
 </pre></div>
 
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="recommendations-for-auto-variables">recommendations for auto variables<a class="anchor-link" href="#recommendations-for-auto-variables">&#182;</a></h2><ul>
-<li>Use auto where required</li>
-<li>Use auto where complex names do not add clarity<div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">typename</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">my_class</span><span class="o">&gt;::</span><span class="n">const_iterator</span> <span class="n">f</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">l</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">;</span>
-   <span class="n">f</span> <span class="o">!=</span> <span class="n">l</span><span class="p">;</span> <span class="o">++</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-</pre></div>
-<div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">f</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">l</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">l</span><span class="p">;</span> <span class="o">++</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-</pre></div>
-</li>
-<li><code>auto</code> can make code less brittle to small changes (like size of integral result)</li>
-<li>Use for structured binding (better than any alternative)</li>
-</ul>
-<ul>
-<li>Otherwise it becomes a matter of taste. Some people recommend using <code>auto</code> almost never, some people recommend using <code>auto</code> always. If it makes your code more clear, use it, otherwise do not, but avoid bikeshedding.</li>
-</ul>
+<pre><code>42
+done</code></pre>
 
 </div>
 </div>
@@ -12602,23 +12350,18 @@ annotate dtor
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="recommendations-for-auto-function-results">recommendations for auto function results<a class="anchor-link" href="#recommendations-for-auto-function-results">&#182;</a></h2><ul>
-<li>Use trailing result types except for <code>bool</code> and <code>void</code><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="nf">some_function</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">some_type</span><span class="p">;</span>
-<span class="kt">bool</span> <span class="nf">is_something</span><span class="p">();</span>
-<span class="kt">void</span> <span class="nf">got_nothin</span><span class="p">();</span>
-</pre></div>
 <ul>
-<li>code aligns better, and it is easier to read</li>
-<li>avoids having trailing result types breaking the style when required</li>
+<li>Using C++ coroutines without a library is cumbersome<ul>
+<li>They provide a tremendous amount of power for library writers</li>
+<li>Coroutines have many applications<ul>
+<li>range algorithms</li>
+<li>concurrency and tasking</li>
+<li>generators and consumers</li>
+<li>state machines</li>
 </ul>
 </li>
-<li>Don't use auto results unless required, or naming the type adds nothing<div class="highlight"><pre><span></span><span class="k">auto</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c1">//...</span>
-  <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">y</span><span class="p">));</span> <span class="c1">// don&#39;t make me figure out this type!</span>
-<span class="p">}</span>
-</pre></div>
-<ul>
-<li>Nearly every time I've omitted the result, I've regretted it </li>
+<li>Lambdas can also be coroutines</li>
+<li>The hope is that we have some good, basic, library constructs for C++20</li>
 </ul>
 </li>
 </ul>
@@ -12630,16 +12373,23 @@ annotate dtor
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="homework">homework<a class="anchor-link" href="#homework">&#182;</a></h2><ul>
-<li>Experiment with <code>auto</code> variables and trailing return types in your project</li>
-<li>Find some cases where you think it improves the code readability</li>
-<li>Find some cases where you think it hinders the code readability</li>
-<li>Write up examples of both on the <a href="git.corp.adobe.com/better-code/class/wiki">wiki</a></li>
+<h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
+<li>Rewrite _sequential<em>process</em> as a coroutine<ul>
+<li>You may use C++TS coroutines</li>
+<li>But it is probably simpler to code the coroutine by hand</li>
+<li>Assume a single threaded system<ul>
+<li>Don't worry about syncronization</li>
+<li>Bonus points for trying</li>
+</ul>
+</li>
+<li>Use std::future&lt;&gt; for task results</li>
+</ul>
+</li>
 </ul>
 
 </div>
 </div>
-</div></section></section>
+</div>
 </div>
 </div>
 

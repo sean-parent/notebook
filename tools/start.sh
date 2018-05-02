@@ -9,10 +9,10 @@ trap "source activate notebook; jupyter notebook stop 8888;" EXIT;
     jupyter lab;
 } & {
     source activate notebook;
-    jupyter nbconvert ./notes/*.ipynb --to=slides --execute --output-dir=./docs \
+    jupyter nbconvert ./better-code-class/*.ipynb --to=slides --execute --output-dir=./docs \
         --config=./slides-config/slides_config.py;
     {
-		fswatch --print0 --exclude=".*/\..*" ./notes | xargs -0 -I % \
+		fswatch --print0 --exclude=".*/\..*" ./better-code-class | xargs -0 -I % \
 		jupyter nbconvert % --to=slides --execute --output-dir=./docs \
 			--config=./slides-config/slides_config.py;
 	} & {

@@ -37,6 +37,13 @@ div.output_stdout {
     font-weight: bold;
 }
 
+.reveal sup {
+    vertical-align: baseline;
+    position: relative;
+    top: -0.4em;
+    font-size: smaller;
+}
+
 .reveal section img {
 	max-width: 95%;
 	max-height: 95%;

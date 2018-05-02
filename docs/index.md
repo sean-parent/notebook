@@ -14,3 +14,8 @@ title: notebook
 - [lambda-and-memory-order-followup](lambda-and-memory-order-followup.slides.html)
 - [09-threads-and-tasks](09-threads-and-tasks.slides.html)
 - [10-futures](10-futures.slides.html)
+- [12-continutations](12-continuations.slides.html)
+- [13-coroutines](13-coroutines.slides.html)
+- [14-coroutines-by-hand](14-coroutines-by-hand.slides.html)
+- [15-concurrent-code-object-lifetimes](15-concurrent-code-object-lifetimes.slides.html)
+- [16-iso-trip-report](16-iso-trip-report.slides.html)
