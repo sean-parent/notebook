@@ -4,7 +4,8 @@
   "dependencies": {
     "canvas": "^1.6.10",
     "node-gyp": "^3.6.2",
-    "npm": "^5.8.0"
+    "npm": "^5.8.0",
+    "yarn": "^1.6.0"
   },
   "repository": {
     "type": "git",
