@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>constexpr slides</title>
+<title>18-constexpr slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,7 +11905,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="constexpr"><code>constexpr</code><a class="anchor-link" href="#constexpr">&#182;</a></h2><p><code>constexpr</code> specifier declares that it is possible to evaluate a function or variable at compile time. Such variables and functions can then be used inside a <a href="http://en.cppreference.com/w/cpp/language/constant_expression">constant expression</a>.</p>
+<h1 id="constexpr"><code>constexpr</code><a class="anchor-link" href="#constexpr">&#182;</a></h1><p><code>constexpr</code> specifier declares that it is possible to evaluate a function or variable at compile time. Such variables and functions can then be used inside a <a href="http://en.cppreference.com/w/cpp/language/constant_expression">constant expression</a>.</p>
 
 </div>
 </div>
@@ -11914,7 +11914,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="constexpr-variables"><code>constexpr</code> variables<a class="anchor-link" href="#constexpr-variables">&#182;</a></h3><p>A variable declared <code>constexpr</code> is <code>const</code> (implied) and must be evaluated at compile time.</p>
+<h2 id="constexpr-variables"><code>constexpr</code> variables<a class="anchor-link" href="#constexpr-variables">&#182;</a></h2><p>A variable declared <code>constexpr</code> is <code>const</code> (implied) and must be evaluated at compile time.</p>
 
 </div>
 </div>
@@ -11956,7 +11956,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 </div>
 </div>
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11965,7 +11965,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -11984,9 +11984,6 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 <hr>
 <div class="highlight"><pre><span></span><span class="c1">// main.cpp</span>
 <span class="cp">#include</span> <span class="cpf">&quot;header.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
 <span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">local_address</span><span class="p">();</span>
 
@@ -12037,9 +12034,6 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 <hr>
 <div class="highlight"><pre><span></span><span class="c1">// main.cpp</span>
 <span class="cp">#include</span> <span class="cpf">&quot;header.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
 
 <span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">local_address</span><span class="p">();</span>
 
@@ -12067,13 +12061,23 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="constexpr-functions"><code>constexpr</code> functions<a class="anchor-link" href="#constexpr-functions">&#182;</a></h3><p>A <code>constexpr</code> function is a function for which it is <em>possible</em> to evaluate it at compile time provided appropriate function argument are provided.</p>
+<h2 id="constexpr-functions"><code>constexpr</code> functions<a class="anchor-link" href="#constexpr-functions">&#182;</a></h2><p>A <code>constexpr</code> function is a function for which it is <em>possible</em> to evaluate it at compile time provided appropriate function argument are provided.</p>
 <p>A <code>constexpr</code> function must satisfy the following requirements:</p>
 <ul>
 <li>Not virtual</li>
 <li><a href="http://en.cppreference.com/w/cpp/concept/LiteralType">Literal</a> return type</li>
 <li>All arguments are literal types</li>
 <li>$\exists$ a set of arguments such that the function can be evaluated as a <a href="http://en.cppreference.com/w/cpp/language/constant_expression#Core_constant_expressions">core constant expression</a>.</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
 <li>Function body contains <strong>any statement except</strong><ul>
 <li><code>asm</code></li>
 <li><code>goto</code></li>
@@ -12167,7 +12171,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="constexpr-constructor"><code>constexpr</code> constructor<a class="anchor-link" href="#constexpr-constructor">&#182;</a></h3><p>The definition of a literal type has been extended to include types with a <code>constexpr</code> constructor (though not all classes with a constexpr constructor are a literal type).</p>
+<h2 id="constexpr-constructor"><code>constexpr</code> constructor<a class="anchor-link" href="#constexpr-constructor">&#182;</a></h2><p>The definition of a literal type has been extended to include types with a <code>constexpr</code> constructor (though not all classes with a constexpr constructor are a literal type).</p>
 <p>A <code>constexpr</code> constructor must satisfy the requirements of a <code>constexpr</code> function and:</p>
 <ul>
 <li>No virtual base classes</li>
@@ -12192,20 +12196,16 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
-
-<span class="k">struct</span> <span class="n">point</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">point</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_width</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">_height</span><span class="p">;</span>
 
     <span class="k">constexpr</span> <span class="nf">point</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_width</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">_height</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="k">constexpr</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_width</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_width</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_height</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_height</span><span class="p">);</span>
-<span class="p">}</span>
     
-<span class="p">}</span> <span class="c1">// namespace</span>
+    <span class="k">friend</span> <span class="k">constexpr</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_width</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_width</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_height</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_height</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
 </pre></div>
 
 </div>
@@ -12250,25 +12250,27 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">carray</span> <span class="p">{</span>
-    <span class="n">T</span> <span class="n">_data</span><span class="p">[</span><span class="n">N</span><span class="p">];</span>
-
-    <span class="k">constexpr</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_data</span><span class="p">[</span><span class="n">n</span><span class="p">];</span> <span class="p">}</span>
-    <span class="k">constexpr</span> <span class="n">T</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_data</span><span class="p">[</span><span class="n">n</span><span class="p">];</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="o">&gt;</span>
-<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">begin</span><span class="p">(</span><span class="k">const</span> <span class="n">carray</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-<span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="o">&gt;</span>
-<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">end</span><span class="p">(</span><span class="k">const</span> <span class="n">carray</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">.</span><span class="n">_data</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">N</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">M</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge</span><span class="p">(</span><span class="k">const</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">M</span><span class="o">&gt;&amp;</span> <span class="n">b</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">array</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="n">M</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">!=</span> <span class="n">N</span> <span class="o">&amp;&amp;</span> <span class="n">k</span> <span class="o">!=</span> <span class="n">M</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">comp</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span> <span class="p">{</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">];</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">!=</span> <span class="n">N</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">k</span> <span class="o">!=</span> <span class="n">M</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="o">++</span><span class="p">];</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12279,7 +12281,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="kt">bool</span> <span class="nf">strless</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
@@ -12298,54 +12300,16 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">M</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
-<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge</span><span class="p">(</span><span class="k">const</span> <span class="n">carray</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">carray</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">M</span><span class="o">&gt;&amp;</span> <span class="n">b</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">carray</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="n">M</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-    <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">!=</span> <span class="n">N</span> <span class="o">&amp;&amp;</span> <span class="n">k</span> <span class="o">!=</span> <span class="n">M</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">comp</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span> <span class="p">{</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-            <span class="o">++</span><span class="n">j</span><span class="p">;</span>
-        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-            <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-            <span class="o">++</span><span class="n">k</span><span class="p">;</span>
-        <span class="p">}</span>
-        <span class="o">++</span><span class="n">i</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">!=</span> <span class="n">N</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-        <span class="o">++</span><span class="n">j</span><span class="p">;</span>
-        <span class="o">++</span><span class="n">i</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">while</span> <span class="p">(</span><span class="n">k</span> <span class="o">!=</span> <span class="n">M</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">];</span>
-        <span class="o">++</span><span class="n">k</span><span class="p">;</span>
-        <span class="o">++</span><span class="n">i</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="n">carray</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">a1</span> <span class="o">=</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">a1</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&quot;Dave&quot;</span><span class="p">,</span>
     <span class="s">&quot;Nick&quot;</span><span class="p">,</span>
     <span class="s">&quot;Sean&quot;</span>
 <span class="p">};</span>
 
-<span class="k">constexpr</span> <span class="n">carray</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span> <span class="n">a2</span> <span class="o">=</span> <span class="p">{</span>
+<span class="k">constexpr</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span> <span class="n">a2</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s">&quot;Emily&quot;</span><span class="p">,</span>
     <span class="s">&quot;Olivia&quot;</span><span class="p">,</span>
     <span class="s">&quot;Ryan&quot;</span><span class="p">,</span>
@@ -12357,7 +12321,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 </div>
 
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
@@ -12370,7 +12334,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 </div>
 
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
@@ -12412,7 +12376,7 @@ Seetha
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="if-constexpr-(C++17)"><code>if constexpr</code> (C++17)<a class="anchor-link" href="#if-constexpr-(C++17)">&#182;</a></h3><p>A conditional of the form <code>if constexpr</code> is known as a <em>constexpr if</em> statement. The predicate must be a constant expression. An unexecuted statement is discarded. If used in a template, the discarded path is not instanciated and <em>constexpr if</em> is an alternative to <a href="http://en.cppreference.com/w/cpp/language/sfinae">SFINAE</a> for some use cases.</p>
+<h2 id="if-constexpr-(C++17)"><code>if constexpr</code> (C++17)<a class="anchor-link" href="#if-constexpr-(C++17)">&#182;</a></h2><p>A conditional of the form <code>if constexpr</code> is known as a <em>constexpr if</em> statement. The predicate must be a constant expression. An unexecuted statement is discarded. If used in a template, the discarded path is not instanciated and <em>constexpr if</em> is an alternative to <a href="http://en.cppreference.com/w/cpp/language/sfinae">SFINAE</a> for some use cases.</p>
 
 </div>
 </div>
@@ -12426,7 +12390,7 @@ Seetha
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
 <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="k">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">carray</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">iterator_traits</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="o">*</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span>
+    <span class="k">return</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">iterator_traits</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="o">*</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span>
 <span class="p">}</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
@@ -12441,16 +12405,17 @@ Seetha
 </div>
 
 </div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="c1">// C++17 example</span>
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="c1">// C++17 example</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
 <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="k">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">if</span> <span class="k">constexpr</span> <span class="p">(</span><span class="n">N</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">carray</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">iterator_traits</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span>
+        <span class="k">return</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">typename</span> <span class="n">iterator_traits</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span>
             <span class="o">*</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="p">};</span>
     <span class="k">else</span>
@@ -12461,16 +12426,18 @@ Seetha
 
 </div>
 </div>
+</div>
+
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">names</span><span class="p">[]{</span><span class="s">&quot;Carole&quot;</span><span class="p">,</span>    <span class="s">&quot;Cherelle&quot;</span><span class="p">,</span> <span class="s">&quot;Elene&quot;</span><span class="p">,</span>    <span class="s">&quot;Ahmad&quot;</span><span class="p">,</span>  <span class="s">&quot;Janae&quot;</span><span class="p">,</span>
-                              <span class="s">&quot;Stephenie&quot;</span><span class="p">,</span> <span class="s">&quot;Bill&quot;</span><span class="p">,</span>     <span class="s">&quot;Joannie&quot;</span><span class="p">,</span>  <span class="s">&quot;Taylor&quot;</span><span class="p">,</span> <span class="s">&quot;Sharice&quot;</span><span class="p">,</span>
-                              <span class="s">&quot;Myrtle&quot;</span><span class="p">,</span>    <span class="s">&quot;Dara&quot;</span><span class="p">,</span>     <span class="s">&quot;Manuel&quot;</span><span class="p">,</span>   <span class="s">&quot;Hayley&quot;</span><span class="p">,</span> <span class="s">&quot;Odis&quot;</span><span class="p">,</span>
-                              <span class="s">&quot;Otto&quot;</span><span class="p">,</span>      <span class="s">&quot;Goldie&quot;</span><span class="p">,</span>   <span class="s">&quot;Stepanie&quot;</span><span class="p">,</span> <span class="s">&quot;Nicky&quot;</span><span class="p">,</span>  <span class="s">&quot;Ashley&quot;</span><span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">names</span><span class="p">[]{</span>
+    <span class="s">&quot;Carole&quot;</span><span class="p">,</span>  <span class="s">&quot;Cherelle&quot;</span><span class="p">,</span> <span class="s">&quot;Elene&quot;</span><span class="p">,</span>   <span class="s">&quot;Ahmad&quot;</span><span class="p">,</span>    <span class="s">&quot;Janae&quot;</span><span class="p">,</span> <span class="s">&quot;Stephenie&quot;</span><span class="p">,</span> <span class="s">&quot;Bill&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Joannie&quot;</span><span class="p">,</span> <span class="s">&quot;Taylor&quot;</span><span class="p">,</span>   <span class="s">&quot;Sharice&quot;</span><span class="p">,</span> <span class="s">&quot;Myrtle&quot;</span><span class="p">,</span>   <span class="s">&quot;Dara&quot;</span><span class="p">,</span>  <span class="s">&quot;Manuel&quot;</span><span class="p">,</span>    <span class="s">&quot;Hayley&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Odis&quot;</span><span class="p">,</span>    <span class="s">&quot;Otto&quot;</span><span class="p">,</span>     <span class="s">&quot;Goldie&quot;</span><span class="p">,</span>  <span class="s">&quot;Stepanie&quot;</span><span class="p">,</span> <span class="s">&quot;Nicky&quot;</span><span class="p">,</span> <span class="s">&quot;Ashley&quot;</span><span class="p">};</span>
 
 <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">sorted</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">make_span</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="n">strless</span><span class="p">);</span>
 </pre></div>
@@ -12482,10 +12449,10 @@ Seetha
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">sorted</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">sorted</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -12502,27 +12469,7 @@ Seetha
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Ahmad
-Ashley
-Bill
-Carole
-Cherelle
-Dara
-Elene
-Goldie
-Hayley
-Janae
-Joannie
-Manuel
-Myrtle
-Nicky
-Odis
-Otto
-Sharice
-Stepanie
-Stephenie
-Taylor
-</pre>
+<pre>Ahmad Ashley Bill Carole Cherelle Dara Elene Goldie Hayley Janae Joannie Manuel Myrtle Nicky Odis Otto Sharice Stepanie Stephenie Taylor </pre>
 </div>
 </div>
 
@@ -12534,7 +12481,59 @@ Taylor
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="What-should-be-declared-constexpr?">What should be declared <code>constexpr</code>?<a class="anchor-link" href="#What-should-be-declared-constexpr?">&#182;</a></h3><p>The short answer is "<a href="https://www.youtube.com/watch?v=PJwd4JLYJJY">all the things</a>."</p>
+<h2 id="constexpr-lambda-expressions-(C++17)"><code>constexpr</code> lambda expressions (C++17)<a class="anchor-link" href="#constexpr-lambda-expressions-(C++17)">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">auto</span> <span class="n">rsorted</span> <span class="o">=</span>
+    <span class="n">merge_sort</span><span class="p">(</span><span class="n">make_span</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="p">[](</span><span class="k">auto</span> <span class="n">a</span><span class="p">,</span> <span class="k">auto</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">strless</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="p">});</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">rsorted</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Taylor Stephenie Stepanie Sharice Otto Odis Nicky Myrtle Manuel Joannie Janae Hayley Goldie Elene Dara Cherelle Carole Bill Ashley Ahmad </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="What-should-be-declared-constexpr?">What should be declared <code>constexpr</code>?<a class="anchor-link" href="#What-should-be-declared-constexpr?">&#182;</a></h2><p>The short answer is "<a href="https://www.youtube.com/watch?v=PJwd4JLYJJY">all the things</a>."</p>
 
 </div>
 </div>

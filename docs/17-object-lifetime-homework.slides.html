@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>14-coroutines-by-hand slides</title>
+<title>17-object-lifetime-homework slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,206 +11905,30 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Coroutines-By-Hand">Coroutines By Hand<a class="anchor-link" href="#Coroutines-By-Hand">&#182;</a></h1><ul>
-<li>Implement sequential process as a coroutine</li>
-</ul>
-
+<h1 id="Object-Lifetime-Homework">Object Lifetime Homework<a class="anchor-link" href="#Object-Lifetime-Homework">&#182;</a></h1>
 </div>
 </div>
-</div></section></section><section><section>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Recall-sequential_process-implementation">Recall <code>sequential_process</code> implementation<a class="anchor-link" href="#Recall-sequential_process-implementation">&#182;</a></h2>
+<ul>
+<li><strong>Problem:</strong> The transformation to call <code>resume()</code> on a thread pool causes on object life time problem.<ul>
+<li>The <code>sequential_process</code> may destruct before <code>resume()</code> is invoked.</li>
+</ul>
+</li>
+</ul>
+
 </div>
 </div>
-</div><div class="fragment">
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
-    <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
-    <span class="n">condition_variable</span> <span class="n">_condition</span><span class="p">;</span>
-    <span class="n">deque</span><span class="o">&lt;</span><span class="n">task</span><span class="o">&gt;</span> <span class="n">_queue</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_done</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-
-    <span class="kt">void</span> <span class="nf">run_loop</span><span class="p">();</span>
-
-    <span class="kr">thread</span> <span class="n">_thread</span><span class="p">{[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span> <span class="n">run_loop</span><span class="p">();</span> <span class="p">}};</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="o">~</span><span class="n">sequential_process</span><span class="p">();</span>
-    <span class="kt">void</span> <span class="nf">async</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>The logical structure of our coroutine will be:</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
-    <span class="n">awaitable_queue</span><span class="o">&lt;</span><span class="n">task</span><span class="o">&gt;</span> <span class="n">_queue</span><span class="p">;</span>
-    <span class="n">co_task</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">_running</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">sequential_process</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">_running</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]()</span> <span class="p">{</span>
-            <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-                <span class="p">(</span><span class="n">co_await</span> <span class="n">_queue</span><span class="p">.</span><span class="n">pop</span><span class="p">())();</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-    <span class="kt">void</span> <span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span> <span class="n">_queue</span><span class="p">.</span><span class="n">push</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span> <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><strong>Tip: When desinging code, sketch the code in an ideal form</strong></li>
-<li>Without building the infrustructure for <code>awaitable_queue&lt;&gt;</code> and <code>co_task&lt;&gt;</code><ul>
-<li>We can build the same logical structure directly in <code>seqential_process</code></li>
-</ul>
-</li>
-<li>Build concrete solutions before complex abstractions</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>As a coroutine we no longer need:<ul>
-<li><code>_thread</code></li>
-<li><code>_condition</code></li>
-<li><code>_done</code> flag</li>
-<li><code>run_loop()</code></li>
-<li><code>join()</code> on destuction</li>
-</ul>
-</li>
-<li>We will need<ul>
-<li><code>_running</code> flag</li>
-<li><code>resume()</code></li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
-    <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_running</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">deque</span><span class="o">&lt;</span><span class="n">task</span><span class="o">&gt;</span> <span class="n">_queue</span><span class="p">;</span>
-
-    <span class="kt">void</span> <span class="nf">resume</span><span class="p">();</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">async</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc2</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>resume()</code> is the body of our coroutine:<div class="highlight"><pre><span></span><span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-  <span class="p">(</span><span class="n">co_await</span> <span class="n">_queue</span><span class="p">.</span><span class="n">pop</span><span class="p">())();</span>
-<span class="p">}</span>
-</pre></div>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
-
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">resume</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">task</span> <span class="n">work</span><span class="p">;</span>
-    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-        <span class="p">{</span>
-            <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
-                <span class="n">_running</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-                <span class="k">return</span><span class="p">;</span>
-            <span class="p">}</span>
-            <span class="n">work</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
-            <span class="n">_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="n">work</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc2</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>async()</code> does a push and <code>resume()</code> if not running</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
 
 <span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">running</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
@@ -12113,10 +11937,10 @@ a.anchor-link {
         <span class="n">_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
         <span class="n">swap</span><span class="p">(</span><span class="n">running</span><span class="p">,</span> <span class="n">_running</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">running</span><span class="p">)</span> <span class="n">resume</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">running</span><span class="p">)</span> <span class="n">pool_async</span><span class="p">([</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span> <span class="n">resume</span><span class="p">();</span> <span class="p">});</span> <span class="c1">// &lt;--- FIX ME !!!</span>
 <span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace bcc2</span>
+<span class="p">}</span> <span class="c1">// namespace</span>
 </pre></div>
 
 </div>
@@ -12129,107 +11953,111 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><code>async_packaged()</code>, <code>shared_pool</code>, and <code>interned_string</code> are unmodified</li>
+<li>As is, this code has <em>undefined behavior</em> because <code>process</code> may destruct before the lambda executes, causing a data race</li>
 </ul>
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="n">sequential_process</span> <span class="n">process</span><span class="p">;</span>
 
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="c1">// F models R()</span>
-<span class="k">auto</span> <span class="n">async_packaged</span><span class="p">(</span><span class="n">sequential_process</span><span class="o">&amp;</span> <span class="n">process</span><span class="p">,</span> <span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="n">result_t</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">result_of_t</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">decay_t</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">()</span><span class="o">&gt;</span><span class="p">;</span>
-
-    <span class="k">auto</span> <span class="n">task_future</span> <span class="o">=</span> <span class="n">stlab</span><span class="o">::</span><span class="n">package</span><span class="o">&lt;</span><span class="n">result_t</span><span class="p">()</span><span class="o">&gt;</span><span class="p">(</span><span class="n">stlab</span><span class="o">::</span><span class="n">immediate_executor</span><span class="p">,</span>
-                                                  <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
-
-    <span class="n">process</span><span class="p">.</span><span class="n">async</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">task_future</span><span class="p">.</span><span class="n">first</span><span class="p">));</span>
-
-    <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">task_future</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+    <span class="n">process</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span>
+        <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Made it!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">});</span>
 <span class="p">}</span>
 </pre></div>
 
 </div>
 </div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 
+<pre><code>==================
+WARNING: ThreadSanitizer: data race (pid=7699)
+  Read of size 8 at 0x7ffeefbff498 by main thread:
+    #0 std::__1::__deque_base&lt;(anonymous namespace)::task, std::__1::allocator&lt;(anonymous namespace)::task&gt; &gt;::begin() deque:1061 (scratch:x86_64+0x1000154e5)
+    #1 std::__1::__deque_base&lt;(anonymous namespace)::task, std::__1::allocator&lt;(anonymous namespace)::task&gt; &gt;::clear() deque:1167 (scratch:x86_64+0x100014ce0)
+    #2 std::__1::__deque_base&lt;(anonymous namespace)::task, std::__1::allocator&lt;(anonymous namespace)::task&gt; &gt;::~__deque_base() deque:1105 (scratch:x86_64+0x100014a3a)
+    #3 std::__1::deque&lt;(anonymous namespace)::task, std::__1::allocator&lt;(anonymous namespace)::task&gt; &gt;::~deque() deque:1187 (scratch:x86_64+0x1000149d8)
+    #4 std::__1::deque&lt;(anonymous namespace)::task, std::__1::allocator&lt;(anonymous namespace)::task&gt; &gt;::~deque() deque:1187 (scratch:x86_64+0x100014998)
+    #5 (anonymous namespace)::sequential_process::~sequential_process() main.cpp:182 (scratch:x86_64+0x100024956)
+    #6 (anonymous namespace)::sequential_process::~sequential_process() main.cpp:182 (scratch:x86_64+0x100005878)
+    #7 main main.cpp:290 (scratch:x86_64+0x1000045d6)
+
+  Previous write of size 8 at 0x7ffeefbff498 by thread T4 (mutexes: write M272):
+    #0 std::__1::deque&lt;(anonymous namespace)::task, std::__1::allocator&lt;(anonymous namespace)::task&gt; &gt;::pop_front() deque:2568 (scratch:x86_64+0x10001ac75)
+    #1 (anonymous namespace)::sequential_process::resume() main.cpp:214 (scratch:x86_64+0x1000244e1)
+    #2 (anonymous namespace)::sequential_process::async((anonymous namespace)::task)::'lambda'()::operator()() const main.cpp:247 (scratch:x86_64+0x100024149)
+    #3 (anonymous namespace)::task::model&lt;(anonymous namespace)::sequential_process::async((anonymous namespace)::task)::'lambda'()&gt;::invoke() main.cpp:36 (scratch:x86_64+0x100023fed)
+    #4 (anonymous namespace)::task::operator()() main.cpp:46 (scratch:x86_64+0x10001a3ce)
+    #5 (anonymous namespace)::task_system::run(unsigned int) main.cpp:123 (scratch:x86_64+0x1000196b0)
+    #6 (anonymous namespace)::task_system::task_system()::'lambda'()::operator()() const main.cpp:130 (scratch:x86_64+0x10001940a)
+    #7 std::__1::__thread_proxy&lt;std::__1::tuple&lt;std::__1::unique_ptr&lt;std::__1::__thread_struct, std::__1::default_delete&lt;std::__1::__thread_struct&gt; &gt;, (anonymous namespace)::task_system::task_system()::'lambda'()&gt; &gt;(void*, void*) type_traits:4323 (scratch:x86_64+0x100017d54)
+
+  As if synchronized via sleep:
+    #0 nanosleep &lt;null&gt; (libclang_rt.tsan_osx_dynamic.dylib:x86_64h+0x270e3)
+    #1 std::__1::this_thread::sleep_for(std::__1::chrono::duration&lt;long long, std::__1::ratio&lt;1l, 1000000000l&gt; &gt; const&amp;) &lt;null&gt; (libc++.1.dylib:x86_64+0x47933)
+    #2 main main.cpp:288 (scratch:x86_64+0x1000045c5)
+
+  Location is stack of main thread.
+
+  Mutex M272 (0x7ffeefbff430) created at:
+    #0 pthread_mutex_lock &lt;null&gt; (libclang_rt.tsan_osx_dynamic.dylib:x86_64h+0x37aae)
+    #1 std::__1::mutex::lock() &lt;null&gt; (libc++.1.dylib:x86_64+0x39c7e)
+    #2 main main.cpp:283 (scratch:x86_64+0x100004582)
+
+  Thread T4 (tid=440231, running) created by main thread at:
+    #0 pthread_create &lt;null&gt; (libclang_rt.tsan_osx_dynamic.dylib:x86_64h+0x283ed)
+    #1 std::__1::thread::thread&lt;(anonymous namespace)::task_system::task_system()::'lambda'(), void&gt;((anonymous namespace)::task_system::task_system()::'lambda'()&amp;&amp;) __threading_support:327 (scratch:x86_64+0x100016e18)
+    #2 std::__1::thread::thread&lt;(anonymous namespace)::task_system::task_system()::'lambda'(), void&gt;((anonymous namespace)::task_system::task_system()::'lambda'()&amp;&amp;) thread:360 (scratch:x86_64+0x100016318)
+    #3 _ZNSt3__16vectorINS_6threadENS_9allocatorIS1_EEE24__emplace_back_slow_pathIJZN12_GLOBAL__N_111task_systemC1EvEUlvE_EEEvDpOT_ memory:1759 (scratch:x86_64+0x100016087)
+    #4 (anonymous namespace)::task_system::task_system() vector:1644 (scratch:x86_64+0x100012499)
+    #5 (anonymous namespace)::task_system::task_system() main.cpp:128 (scratch:x86_64+0x100011938)
+    #6 void (anonymous namespace)::pool_async&lt;(anonymous namespace)::sequential_process::async((anonymous namespace)::task)::'lambda'()&gt;((anonymous namespace)::sequential_process::async((anonymous namespace)::task)::'lambda'()&amp;&amp;) main.cpp:157 (scratch:x86_64+0x100006b93)
+    #7 (anonymous namespace)::sequential_process::async((anonymous namespace)::task) main.cpp:247 (scratch:x86_64+0x100004986)
+    #8 main main.cpp:283 (scratch:x86_64+0x100004582)
+
+SUMMARY: ThreadSanitizer: data race deque:1061 in std::__1::__deque_base&lt;(anonymous namespace)::task, std::__1::allocator&lt;(anonymous namespace)::task&gt; &gt;::begin()
+==================
+ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended information about the report.</code></pre>
+
+</div>
+</div>
 </div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
 <div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">shared_pool</span> <span class="p">{</span>
-    <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_pool</span><span class="p">;</span>
-    <span class="n">sequential_process</span> <span class="n">_process</span><span class="p">;</span>
-
-    <span class="k">auto</span> <span class="nf">insert</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">*&gt;</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">async_packaged</span><span class="p">(</span>
-            <span class="n">_process</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">,</span> <span class="n">_a</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span>
-                <span class="k">return</span> <span class="o">&amp;*</span><span class="n">_pool</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">_a</span><span class="p">)).</span><span class="n">first</span><span class="p">;</span>
-            <span class="p">});</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="A-Cheasy-Fix">A <strike>Ch</strike>easy Fix<a class="anchor-link" href="#A-Cheasy-Fix">&#182;</a></h2>
 </div>
 </div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="k">auto</span> <span class="n">pool</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">shared_pool</span><span class="o">&amp;</span> <span class="p">{</span>
-        <span class="k">static</span> <span class="n">shared_pool</span> <span class="n">result</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="n">stlab</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*&gt;</span> <span class="n">_string</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">interned_string</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_string</span><span class="p">(</span><span class="n">pool</span><span class="p">().</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="p">{}</span>
-
-    <span class="k">auto</span> <span class="n">str</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">_string</span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">cref</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">);</span> <span class="p">});</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>And is used exactly the same way</li>
+<li>Extend the lifetime of <code>process</code> to <em>fix</em> the invocation</li>
 </ul>
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">interned_string</span> <span class="n">s</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">process</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">sequential_process</span><span class="o">&gt;</span><span class="p">();</span>
 
-    <span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">().</span><span class="n">then</span><span class="p">([](</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span> <span class="p">});</span>
-
-    <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span>
+    <span class="n">process</span><span class="o">-&gt;</span><span class="n">async</span><span class="p">([</span><span class="n">process</span><span class="p">]</span> <span class="p">{</span>
+        <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Made it!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">});</span>
+    
+    <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">2</span><span class="n">s</span><span class="p">);</span> <span class="c1">// This line is here for my slides</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12247,7 +12075,7 @@ a.anchor-link {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Hello World!
+<pre>Made it!
 </pre>
 </div>
 </div>
@@ -12261,16 +12089,166 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Advantages to the coroutine implementation<ul>
-<li>No seperate thread overhead</li>
-<li>No overhead for waiting on condition variable</li>
-<li>No blocking</li>
-<li>Possible to implement with lock-free queue</li>
-<li><code>resume()</code> need not be executed <em>inline</em><ul>
-<li>It could be queued to a <em>thread pool</em></li>
-<li>Requires some managment of <em>object liftimes</em></li>
+<li>We can no longer rely on when all tasks in our <code>sequential_process</code> are done<ul>
+<li>Our tasks must be constructed to be independent of process destruction</li>
 </ul>
 </li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Blocking">Blocking<a class="anchor-link" href="#Blocking">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>To keep the original semantics we could block on destruction of <code>sequential_process</code></li>
+<li>To do this we again need:<ul>
+<li>A <code>_done</code> flag </li>
+<li>A <code>_condition</code> variable</li>
+<li>A destructor that signals done</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
+    <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">task</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">_executor</span><span class="p">;</span>
+
+    <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">_running</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">deque</span><span class="o">&lt;</span><span class="n">task</span><span class="o">&gt;</span> <span class="n">_queue</span><span class="p">;</span>
+
+    <span class="n">condition_variable</span> <span class="n">_condition</span><span class="p">;</span> <span class="c1">// &lt;---</span>
+    <span class="kt">bool</span> <span class="n">_done</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>            <span class="c1">// &lt;---</span>
+
+    <span class="kt">void</span> <span class="nf">resume</span><span class="p">();</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="o">~</span><span class="n">sequential_process</span><span class="p">();</span> <span class="c1">// &lt;---</span>
+    <span class="kt">void</span> <span class="nf">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc2</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>In the destructor if we are are still running<ul>
+<li>signal that we are done and want a notification</li>
+<li>wait until we are no longer running</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+
+<span class="n">sequential_process</span><span class="o">::~</span><span class="n">sequential_process</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">_running</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="n">_done</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">_running</span><span class="p">)</span>
+        <span class="n">_condition</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Finally in <code>resume()</code> if we are done then notify when we stop running</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+
+<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">resume</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">task</span> <span class="n">work</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">{</span>
+            <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+                <span class="n">_running</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">_done</span><span class="p">)</span> <span class="n">_condition</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span> <span class="c1">// &lt;---</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+            <span class="n">work</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+            <span class="n">_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">move</span><span class="p">(</span><span class="n">work</span><span class="p">)();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>It works in our example<ul>
+<li>But only so long as we have <em>enough</em> threads</li>
+</ul>
+</li>
+<li>If the task is scheduled on the same as the one destructing <code>process</code><ul>
+<li>And there is no thread available to steal the task</li>
+<li>Deadlock!</li>
 </ul>
 </li>
 </ul>
@@ -12283,8 +12261,33 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Disadvantages<ul>
-<li><em>inline</em> execution may <em>live lock</em></li>
+<li>But how many threads are enough?<ul>
+<li>On a system with <code>N</code> processes we need <code>N+1</code> threads available in the pool to gauarantee no deadlocks</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>In a single threaded environement, like wasm, this will deadlock <em>often</em></li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Probability of failure is a function of number of threads, number of processes, frequency of dispatched tasks, and frequency of joins<ul>
+<li>I have no idea how to calculate it...</li>
 </ul>
 </li>
 </ul>
@@ -12296,16 +12299,629 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+<h2 id="Handle-/-Body">Handle / Body<a class="anchor-link" href="#Handle-/-Body">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Same as the easy approach, but we push the <code>shared_ptr</code> into the implementation</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc3</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">implementation</span><span class="p">;</span>
+
+    <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="o">&gt;</span> <span class="n">_self</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">sequential_process</span><span class="p">();</span>
+
+    <span class="kt">void</span> <span class="nf">async</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc3</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Our prior <code>sequential_process</code> class becomes the implementation</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc3</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="n">sequential_process</span><span class="o">::</span><span class="nl">implementation</span>
+    <span class="p">:</span> <span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">implementation</span><span class="o">&gt;</span> <span class="p">{</span> <span class="c1">// &lt;---</span>
+    <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
+    <span class="n">deque</span><span class="o">&lt;</span><span class="n">task</span><span class="o">&gt;</span> <span class="n">_queue</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">_running</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+
+    <span class="kt">void</span> <span class="nf">resume</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">async</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc3</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>implementation::async()</code> can then attach a shared pointer from this to <code>resume()</code></li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc3</span> <span class="p">{</span>
+
+<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">running</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">{</span>
         <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
         <span class="n">_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
         <span class="n">swap</span><span class="p">(</span><span class="n">running</span><span class="p">,</span> <span class="n">_running</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">running</span><span class="p">)</span> <span class="n">async</span><span class="p">([</span><span class="k">this</span><span class="p">]{</span> <span class="n">resume</span><span class="p">();</span> <span class="p">});</span> <span class="c1">// WHAAATTT this???</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">running</span><span class="p">)</span>
+        <span class="n">pool_async</span><span class="p">([</span><span class="n">_self</span> <span class="o">=</span> <span class="n">shared_from_this</span><span class="p">()]</span> <span class="p">{</span> <span class="n">_self</span><span class="o">-&gt;</span><span class="n">resume</span><span class="p">();</span> <span class="p">});</span> <span class="c1">// &lt;---</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc3</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The approach suffers the same problem as the easy approach</li>
+<li>We can no longer rely on when all tasks in our sequential_process are done<ul>
+<li>Our tasks must be constructed to be independent of process destruction</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>A similar approach, capturing <code>weak_from_this()</code> in the lambda has the effect of canceling any operations that haven't started before destruction<ul>
+<li>But does not provide any stronger guarantees</li>
+<li>And may result in unexpected task cancelation</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Completion-Task">Completion Task<a class="anchor-link" href="#Completion-Task">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>To solve the handle/body issue of not knowning when the process completes we can add a completion task</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc4</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">implementation</span><span class="p">;</span>
+
+    <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="o">&gt;</span> <span class="n">_self</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">explicit</span> <span class="n">sequential_process</span><span class="p">(</span><span class="n">task</span><span class="p">);</span> <span class="c1">// &lt;---</span>
+
+    <span class="kt">void</span> <span class="nf">async</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc4</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The task is stored in the implementation<ul>
+<li>And invoked on destruction</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc4</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="n">sequential_process</span><span class="o">::</span><span class="nl">implementation</span>
+    <span class="p">:</span> <span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">implementation</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
+    <span class="n">deque</span><span class="o">&lt;</span><span class="n">task</span><span class="o">&gt;</span> <span class="n">_queue</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">_running</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="n">task</span> <span class="n">_completion</span><span class="p">;</span> <span class="c1">// &lt;---</span>
+
+    <span class="kt">void</span> <span class="nf">resume</span><span class="p">();</span>
+
+    <span class="n">implementation</span><span class="p">(</span><span class="n">task</span> <span class="n">completion</span><span class="p">)</span> <span class="o">:</span> <span class="n">_completion</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">completion</span><span class="p">))</span> <span class="p">{}</span> <span class="c1">// &lt;---</span>
+    <span class="o">~</span><span class="n">implementation</span><span class="p">()</span> <span class="p">{</span> <span class="n">move</span><span class="p">(</span><span class="n">_completion</span><span class="p">)();</span> <span class="p">}</span>                         <span class="c1">// &lt;---</span>
+
+    <span class="kt">void</span> <span class="n">async</span><span class="p">(</span><span class="n">task</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc4</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">bcc4</span><span class="o">::</span><span class="n">sequential_process</span> <span class="n">process</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;End&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
+
+    <span class="n">process</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span>
+        <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Made it!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+<span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">2</span><span class="n">s</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Made it!
+End
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>A completation handler can also be adapted to a future with continuations</li>
+<li>This is likely the approach I would take in a library<ul>
+<li>Make it the clients problem</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Safe-Blocking">Safe Blocking<a class="anchor-link" href="#Safe-Blocking">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>To safely block on destruction<ul>
+<li>If the process is already running (not just queued) then wait</li>
+<li>Otherwise run the process in the current context</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Because we could be in a queued state<ul>
+<li>The queued task may end up running after destruction we need a shared implementation</li>
+</ul>
+</li>
+<li>Our sequential process is movable, but not copyable, so we have a single point of destruction</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc5</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">implementation</span><span class="p">;</span>
+    <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="o">&gt;</span> <span class="n">_self</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">sequential_process</span><span class="p">();</span>
+
+    <span class="n">sequential_process</span><span class="p">(</span><span class="k">const</span> <span class="n">sequential_process</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+    <span class="n">sequential_process</span><span class="p">(</span><span class="n">sequential_process</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="n">sequential_process</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">sequential_process</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+    <span class="n">sequential_process</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">sequential_process</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="o">~</span><span class="n">sequential_process</span><span class="p">();</span>
+
+    <span class="kt">void</span> <span class="nf">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc5</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>In our blocking case we had <code>_running</code> and <code>_done</code> flags<ul>
+<li>Instead of adding more flags, we replace the flags with an enum for the state</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc5</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="n">sequential_process</span><span class="o">::</span><span class="nl">implementation</span> <span class="p">:</span> <span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">implementation</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">task</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">_executor</span><span class="p">;</span>
+
+    <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
+    <span class="n">deque</span><span class="o">&lt;</span><span class="n">task</span><span class="o">&gt;</span> <span class="n">_queue</span><span class="p">;</span>
+
+    <span class="n">condition_variable</span> <span class="n">_condition</span><span class="p">;</span>
+    <span class="k">enum</span> <span class="p">{</span> <span class="n">idle</span><span class="p">,</span> <span class="n">queued</span><span class="p">,</span> <span class="n">running</span><span class="p">,</span> <span class="n">done</span> <span class="p">}</span> <span class="n">_state</span> <span class="o">=</span> <span class="n">idle</span><span class="p">;</span> <span class="c1">// &lt;---</span>
+
+    <span class="kt">void</span> <span class="nf">resume</span><span class="p">();</span>
+    <span class="kt">void</span> <span class="nf">wait</span><span class="p">();</span> <span class="c1">// &lt;---</span>
+    <span class="kt">void</span> <span class="nf">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc5</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>When we enqueue the task, we change the state to <code>queued</code> if we were <code>idle</code></li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc5</span> <span class="p">{</span>
+
+<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">bool</span> <span class="n">was_idle</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">{</span>
+        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+        <span class="n">_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
+        <span class="n">was_idle</span> <span class="o">=</span> <span class="n">_state</span> <span class="o">==</span> <span class="n">idle</span><span class="p">;</span>     <span class="c1">// &lt;---</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">was_idle</span><span class="p">)</span> <span class="n">_state</span> <span class="o">=</span> <span class="n">queued</span><span class="p">;</span> <span class="c1">// &lt;---</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">was_idle</span><span class="p">)</span> <span class="n">pool_async</span><span class="p">([</span><span class="n">_self</span> <span class="o">=</span> <span class="n">shared_from_this</span><span class="p">()]</span> <span class="p">{</span> <span class="n">_self</span><span class="o">-&gt;</span><span class="n">resume</span><span class="p">();</span> <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc5</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>resume()</code> handles the various states<ul>
+<li><code>idle</code> -&gt; <code>idle</code> (canceled)</li>
+<li><code>queued</code> -&gt; <code>running</code></li>
+<li><code>_queue.empty()</code> -&gt; idle (notify if was <code>done</code>)</li>
+</ul>
+</li>
+<li>Because the shared state won't fall out from under <code>resume()</code> we can safely call <code>notify_one()</code> outside the lock</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">bcc5</span><span class="o">::</span><span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">resume</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">task</span> <span class="n">work</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">{</span>
+            <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">_state</span> <span class="o">==</span> <span class="n">idle</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>             <span class="c1">// &lt;---</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">_state</span> <span class="o">==</span> <span class="n">queued</span><span class="p">)</span> <span class="n">_state</span> <span class="o">=</span> <span class="n">running</span><span class="p">;</span> <span class="c1">// &lt;---</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+                <span class="k">auto</span> <span class="n">last_state</span> <span class="o">=</span> <span class="n">_state</span><span class="p">;</span>
+                <span class="n">_state</span> <span class="o">=</span> <span class="n">idle</span><span class="p">;</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">last_state</span> <span class="o">==</span> <span class="n">done</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span> <span class="c1">// &lt;---</span>
+                <span class="k">return</span><span class="p">;</span>
+            <span class="p">}</span>
+
+            <span class="n">work</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
+            <span class="n">_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+        <span class="p">}</span>
+        <span class="n">move</span><span class="p">(</span><span class="n">work</span><span class="p">)();</span>
+    <span class="p">}</span>
+    <span class="n">_condition</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span> <span class="c1">// &lt;---</span>
 <span class="p">}</span>
 </pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Finally, we provide the <code>wait()</code> operation, called from <code>~sequential_process()</code><ul>
+<li>If <code>idle</code> we are done and destruct</li>
+<li>If work is <code>queued</code> we take ownership of execution</li>
+<li>If <code>running</code> we signal <code>done</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">bcc5</span><span class="o">::</span><span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">wait</span><span class="p">()</span> <span class="p">{</span>
+    <span class="kt">bool</span> <span class="n">was_queued</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">{</span>
+        <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">_state</span> <span class="o">==</span> <span class="n">idle</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+        <span class="k">if</span> <span class="p">(</span><span class="n">_state</span> <span class="o">==</span> <span class="n">queued</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">_state</span> <span class="o">=</span> <span class="n">idle</span><span class="p">;</span>
+            <span class="n">was_queued</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">_state</span> <span class="o">=</span> <span class="n">done</span><span class="p">;</span>
+            <span class="k">while</span> <span class="p">(</span><span class="n">_state</span> <span class="o">==</span> <span class="n">done</span><span class="p">)</span>
+                <span class="n">_condition</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">was_queued</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="p">{</span>
+        <span class="n">move</span><span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">front</span><span class="p">())();</span>
+        <span class="n">_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Our process will now join cleanly without risk of a dead lock</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">bcc5</span><span class="o">::</span><span class="n">sequential_process</span> <span class="n">process</span><span class="p">;</span>
+
+    <span class="n">process</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span>
+        <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;Made it!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">});</span>
+<span class="p">}</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;process destructed&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Made it!
+process destructed
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Concluding-remarks">Concluding remarks<a class="anchor-link" href="#Concluding-remarks">&#182;</a></h2><ul>
+<li>One of the more challenging problems in an async environment is to shut things down<ul>
+<li>Supply a completion handler and make it the client problem<ul>
+<li>Either blocking if client <em>knows</em> they have <em>enough</em> conurrency</li>
+<li>Not blocking, usually by queueing the completion signal to the main queue until everything is complete</li>
+</ul>
+</li>
+<li>Blocking join, but take care not to dead-lock</li>
+<li>Cancelation, but this is challenging as it may also require a block to ensure currenly executing item is complete</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Apple's GCD uses completion handlers to solve this problem<ul>
+<li>Which is to say, they don't solve it</li>
+</ul>
+</li>
+</ul>
 
 </div>
 </div>

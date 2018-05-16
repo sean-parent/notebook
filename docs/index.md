@@ -19,3 +19,5 @@ title: notebook
 - [14-coroutines-by-hand](14-coroutines-by-hand.slides.html)
 - [15-concurrent-code-object-lifetimes](15-concurrent-code-object-lifetimes.slides.html)
 - [16-iso-trip-report](16-iso-trip-report.slides.html)
+- [17-object-lifetime-homework](17-object-lifetime-homework.slides.html)
+- [18-constexpr](18-constexpr.slides.html)
