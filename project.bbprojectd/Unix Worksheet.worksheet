@@ -17,7 +17,8 @@ xcode-select --install
 brew install pkg-config cairo libpng jpeg giflib
 npm install
 export PATH="$HOME/miniconda3/bin:$PATH"
-source activate sean-parent-notebook
+source activate notebook
+export PATH="/usr/local/opt/node@8/bin:$PATH"
 jupyter labextension install @ijmbarr/jupyterlab_spellchecker
 jupyter labextension install jupyterlab-toc
 

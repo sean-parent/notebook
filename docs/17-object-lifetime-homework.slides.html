@@ -12262,7 +12262,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>But how many threads are enough?<ul>
-<li>On a system with <code>N</code> processes we need <code>N+1</code> threads available in the pool to gauarantee no deadlocks</li>
+<li>On a system with <code>N</code> processes we need <code>N+1</code> threads available in the pool to guarantee no deadlocks</li>
 </ul>
 </li>
 </ul>
@@ -12275,7 +12275,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>In a single threaded environement, like wasm, this will deadlock <em>often</em></li>
+<li>In a single threaded environment, like wasm, this will deadlock <em>often</em></li>
 </ul>
 
 </div>
@@ -12435,7 +12435,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 <ul>
 <li>A similar approach, capturing <code>weak_from_this()</code> in the lambda has the effect of canceling any operations that haven't started before destruction<ul>
 <li>But does not provide any stronger guarantees</li>
-<li>And may result in unexpected task cancelation</li>
+<li>And may result in unexpected task cancellation</li>
 </ul>
 </li>
 </ul>
@@ -12456,7 +12456,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>To solve the handle/body issue of not knowning when the process completes we can add a completion task</li>
+<li>To solve the handle/body issue of not knowing when the process completes we can add a completion task</li>
 </ul>
 
 </div>
@@ -12577,7 +12577,7 @@ End
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>A completation handler can also be adapted to a future with continuations</li>
+<li>A completion handler can also be adapted to a future with continuations</li>
 <li>This is likely the approach I would take in a library<ul>
 <li>Make it the clients problem</li>
 </ul>
@@ -12664,7 +12664,7 @@ End
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>In our blocking case we had <code>_running</code> and <code>_done</code> flags<ul>
-<li>Instead of adding more flags, we replace the flags with an enum for the state</li>
+<li>Instead of adding more flags, we replace the flags with an <code>enum</code> for the state</li>
 </ul>
 </li>
 </ul>
@@ -12899,12 +12899,12 @@ process destructed
 <h2 id="Concluding-remarks">Concluding remarks<a class="anchor-link" href="#Concluding-remarks">&#182;</a></h2><ul>
 <li>One of the more challenging problems in an async environment is to shut things down<ul>
 <li>Supply a completion handler and make it the client problem<ul>
-<li>Either blocking if client <em>knows</em> they have <em>enough</em> conurrency</li>
-<li>Not blocking, usually by queueing the completion signal to the main queue until everything is complete</li>
+<li>Either blocking if client <em>knows</em> they have <em>enough</em> concurrency</li>
+<li>Not blocking, usually by queuing the completion signal to the main queue until everything is complete</li>
 </ul>
 </li>
 <li>Blocking join, but take care not to dead-lock</li>
-<li>Cancelation, but this is challenging as it may also require a block to ensure currenly executing item is complete</li>
+<li>Cancellation, but this is challenging as it may also require a block to ensure currently executing item is complete</li>
 </ul>
 </li>
 </ul>
