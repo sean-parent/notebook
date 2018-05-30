@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>auto slides</title>
+<title>20-literals slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,9 +11905,97 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="auto">auto<a class="anchor-link" href="#auto">&#182;</a></h1><ul>
-<li>Prior to C++11, the keyword <code>auto</code> was a storage class specifier<ul>
-<li>But rarely used</li>
+<h1 id="Literals">Literals<a class="anchor-link" href="#Literals">&#182;</a></h1>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Review-of-C++-Literals">Review of C++ Literals<a class="anchor-link" href="#Review-of-C++-Literals">&#182;</a></h2><ul>
+<li>integer literals<ul>
+<li>decimal (<code>1..9</code> prefix)</li>
+<li>octal (<code>0</code> prefix)</li>
+<li>hexadecimal (<code>0x</code> or <code>0X</code> prefix)</li>
+<li>maybe unsigned or long (<code>u</code> or <code>U</code> and/or <code>l</code> or <code>L</code> suffix respectively)</li>
+</ul>
+</li>
+<li>floating point literals<ul>
+<li>digits with decimal (<code>.</code>) and/or exponent (<code>e</code> or <code>E</code>)</li>
+<li>maybe double (no suffix), float (<code>f</code> or <code>F</code> suffix), or long double (<code>l</code> or <code>L</code> suffix)</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>character literals<ul>
+<li><code>'c'</code> with <code>\</code> <a href="http://en.cppreference.com/w/cpp/language/escape">escape sequences</a> </li>
+<li><code>L</code> prefix for <code>wchar_t</code></li>
+<li><code>'many'</code> type int, implementation defined</li>
+<li>Encoding is implementation defined</li>
+</ul>
+</li>
+<li>string literals<ul>
+<li><code>"string"</code> with <code>\</code> <a href="http://en.cppreference.com/w/cpp/language/escape">escape sequences</a></li>
+<li><code>L</code> prefix for <code>const wchar_t[]</code> (otherwise <code>const char[]</code>)</li>
+<li>Encoding is implementation defined</li>
+<li><code>\0</code> terminated (but may contain <code>\0</code> characters)</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Recent-Additions">Recent Additions<a class="anchor-link" href="#Recent-Additions">&#182;</a></h2><ul>
+<li>integer literals<ul>
+<li>binary (<code>0b</code> prefix)</li>
+<li>long long ('ll' or 'LL' suffix)</li>
+<li>digit separator (<code>'</code> inserted between any digits; i.e. <code>1'000'000</code>)</li>
+</ul>
+</li>
+<li>floating point literals<ul>
+<li>hexadecimal (<code>0x</code> or <code>0X</code> prefix, requires exponent after <code>p</code> or <code>P</code>)</li>
+<li>digit separator (<code>'</code> inserted between any digits; i.e. <code>1'000'000</code>)</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>character literals<ul>
+<li>UTF-8 code point (<code>u8</code> prefix, must be Basic Latin code point)</li>
+<li>UCS-2 character (<code>u</code> prefix, <code>char16_t</code>)</li>
+<li>UCS-4 character (<code>U</code> prefix, <code>char32_t</code>)</li>
+<li><code>char16_t</code> and <code>char32_t</code> are keywords (not typedefs) and name unique types</li>
+</ul>
+</li>
+<li>string literals<ul>
+<li>UTF-8, UCS-2, and UCS-4 string literals</li>
+<li>Raw string literals (<code>R"&lt;delimiter&gt;(</code> <code>&lt;anything&gt;</code> <code>)&lt;delimiter&gt;"</code>)</li>
+</ul>
+</li>
+<li>escape sequences<ul>
+<li><code>\u</code> arbitrary Unicode 4 digit hex value</li>
+<li><code>\U</code> arbitrary Unicode 8 digit hex value</li>
 </ul>
 </li>
 </ul>
@@ -11920,8 +12008,42 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="sa">u8</span><span class="s">&quot;</span><span class="se">\U0001F680</span><span class="s">&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>🚀
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">ostream</span> <span class="nf">out</span><span class="p">(</span><span class="n">cout</span><span class="p">.</span><span class="n">rdbuf</span><span class="p">());</span>
+<span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">setfill</span><span class="p">(</span><span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">hex</span><span class="p">;</span>
+
+<span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">c</span> <span class="p">:</span> <span class="sa">u8</span><span class="s">&quot;</span><span class="se">\U0001F680</span><span class="s">&quot;</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">setw</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">&lt;&lt;</span>  <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">uint8_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39; &#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -11938,88 +12060,30 @@ a.anchor-link {
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre><span class="ansi-bold">input_line_9:2:5: </span><span class="ansi-magenta-intense-fg ansi-bold">warning: </span><span class="ansi-bold">&#39;auto&#39; storage class specifier is not permitted in C++11, and will not be supported in future releases
-      [-Wauto-storage-class]</span>
-    auto int i = 42;
-<span class="ansi-green-intense-fg ansi-bold">    ^~~~~
-</span></pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="auto-variable-declarations">auto variable declarations<a class="anchor-link" href="#auto-variable-declarations">&#182;</a></h2><p><code>auto</code> can be used in a variable declaration.</p>
-<ul>
-<li><code>auto</code> alone will always deduce to an object type (not a reference, or const type)</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="k">auto</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
-    
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>int const&amp;
-int
-</pre>
+<pre>f0 9f 9a 80 00 </pre>
 </div>
 </div>
 
 </div>
 </div>
 
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>cv-qualifiers and reference modifiers can be combined with auto</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">const</span> <span class="k">auto</span> <span class="n">c</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
-<span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">d</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">u8R</span><span class="s">&quot;json(</span>
 
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">c</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">d</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="p">{</span>
+    <span class="s">&quot;menu&quot;</span><span class="o">:</span> <span class="p">{</span>
+        <span class="s">&quot;id&quot;</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span>
+        <span class="s">&quot;value&quot;</span><span class="o">:</span> <span class="s">&quot;🚀&quot;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">)</span><span class="n">json</span><span class="s">&quot;;</span>
 </pre></div>
 
 </div>
@@ -12036,8 +12100,13 @@ int
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>int const
-int const&amp;
+<pre>
+{
+    &#34;menu&#34;: {
+        &#34;id&#34;: 1,
+        &#34;value&#34;: &#34;🚀&#34;
+    }
+}
 </pre>
 </div>
 </div>
@@ -12045,13 +12114,14 @@ int const&amp;
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>decltype(auto)</code> can be used to declare a variable which matches the expression type</li>
+<h2 id="User-defined-Literals">User-defined Literals<a class="anchor-link" href="#User-defined-Literals">&#182;</a></h2><ul>
+<li>Define a literal suffix operator (which must begin with <code>_</code> (others reserved by the standard library).</li>
+<li>Supports integer, floating point, character, and string literals</li>
 </ul>
 
 </div>
@@ -12062,71 +12132,40 @@ int const&amp;
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span> <span class="n">e</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+    
+<span class="k">struct</span> <span class="n">zstring</span> <span class="p">{</span>
+    <span class="n">string_view</span> <span class="n">_path</span><span class="p">;</span>
+    <span class="n">string_view</span> <span class="n">_value</span><span class="p">;</span>
+<span class="p">};</span>
 
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">e</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
+<span class="k">constexpr</span> <span class="n">zstring</span> <span class="k">operator</span><span class="s">&quot;&quot;</span><span class="n">_z</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">string_view</span> <span class="n">view</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="k">auto</span> <span class="n">pos</span> <span class="o">=</span> <span class="n">view</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="sc">&#39;=&#39;</span><span class="p">);</span>
+    <span class="k">return</span> <span class="p">{</span> <span class="n">view</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">pos</span><span class="p">),</span> <span class="n">view</span><span class="p">.</span><span class="n">substr</span><span class="p">(</span><span class="n">pos</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">};</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>int const&amp;
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>auto&amp;&amp;</code> is a forwarding reference</li>
-<li><code>decltype</code> is used with the <code>std::forward</code> template argument</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
 
-<span class="n">annotate</span> <span class="n">some_function</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">annotate</span><span class="p">();</span> <span class="p">}</span>
-<span class="kt">void</span> <span class="n">some_sink</span><span class="p">(</span><span class="n">annotate</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    
-<span class="p">}</span> <span class="c1">// namespace</span>
-</pre></div>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">zstr</span> <span class="o">=</span> <span class="s">&quot;bcc/greeting=Hello World!&quot;</span><span class="n">_z</span><span class="p">;</span>
 
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">auto</span><span class="o">&amp;&amp;</span> <span class="n">q</span> <span class="o">=</span> <span class="n">some_function</span><span class="p">();</span>
-<span class="n">some_sink</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">q</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="n">q</span><span class="p">));</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">zstr</span><span class="p">.</span><span class="n">_path</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">zstr</span><span class="p">.</span><span class="n">_value</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
@@ -12143,9 +12182,8 @@ int const&amp;
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>annotate ctor
-annotate move-ctor
-annotate dtor
+<pre>bcc/greeting
+Hello World!
 </pre>
 </div>
 </div>
@@ -12153,32 +12191,38 @@ annotate dtor
 </div>
 </div>
 
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="auto-function-results">auto function results<a class="anchor-link" href="#auto-function-results">&#182;</a></h2><p>C++11 added trailing return types. This allows a return type which is dependent on an argument type.</p>
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">layer_index</span><span class="o">:</span> <span class="kt">size_t</span> <span class="p">{};</span>
+
+<span class="k">constexpr</span> <span class="n">layer_index</span> <span class="k">operator</span><span class="s">&quot;&quot;</span><span class="n">_li</span><span class="p">(</span><span class="kt">unsigned</span> <span class="kt">long</span> <span class="kt">long</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">layer_index</span><span class="o">&gt;</span><span class="p">(</span><span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
+</pre></div>
 
 </div>
 </div>
+</div>
+
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
-    
-<span class="kt">int</span> <span class="n">function_a</span><span class="p">();</span>
-<span class="k">auto</span> <span class="nf">function_b</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="p">;</span> <span class="c1">// same signature as function_a</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
-<span class="k">auto</span> <span class="n">add</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="n">U</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">decltype</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+    <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">id</span> <span class="o">=</span> <span class="mi">4</span><span class="n">_li</span><span class="p">;</span>
 <span class="p">}</span>
-    
-<span class="p">}</span> <span class="c1">// namespace</span>
 </pre></div>
 
 </div>
@@ -12191,341 +12235,59 @@ annotate dtor
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>C++14 allows the return type to be omitted for <code>template</code> and <code>inline</code> functions.</li>
+<li>The following argument lists are allowed:<ul>
+<li><code>(unsigned long long int)</code> - integer literal (can be in any integer format)</li>
+<li><code>(long double)</code> - floating point literal</li>
+<li><code>(char)</code>, <code>(wchar_t)</code>, <code>(char16_t)</code>, or <code>(char32_t)</code> - character literals</li>
+<li><code>(const char*, size_t)</code> - string literal (<code>char</code> can be any character type)</li>
+</ul>
+</li>
 </ul>
 
 </div>
 </div>
 </div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Plus one odd signature<ul>
+<li><code>(const char*)</code> - NTBS for source integer or floating point literal</li>
+<li>Useful for values exceeding the limits of the floating point or integer types</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kr">inline</span> <span class="k">auto</span> <span class="nf">mixed_add</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">a</span><span class="p">,</span> <span class="kt">signed</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="k">operator</span><span class="s">&quot;&quot;</span><span class="n">_print</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">}</span>
 <span class="p">}</span>
-
-<span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">mixed_add</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">);</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">r</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">r</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>unsigned int
-41
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Using <code>decltype(auto)</code> for the return type preserves references and cv-qualifiers</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
     
-<span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
-
-<span class="kr">inline</span> <span class="nf">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span> <span class="n">back</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">v</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
-<span class="p">}</span>
-    
-<span class="p">}</span> <span class="c1">// namespace</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">back</span><span class="p">())</span><span class="o">&gt;</span><span class="p">();</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>int&amp;
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="auto-template-parameters-(C++17)">auto template parameters (C++17)<a class="anchor-link" href="#auto-template-parameters-(C++17)">&#182;</a></h2><ul>
-<li>C++17 adds auto template parameters.</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">cpp14</span> <span class="p">{</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="n">T</span> <span class="n">N</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">integral_constant</span> <span class="p">{</span>
-      <span class="k">static</span> <span class="k">constexpr</span> <span class="n">T</span> <span class="n">value</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
-<span class="p">};</span>
-    
-<span class="k">using</span> <span class="n">true_type</span> <span class="o">=</span> <span class="n">integral_constant</span><span class="o">&lt;</span><span class="kt">bool</span><span class="p">,</span> <span class="nb">true</span><span class="o">&gt;</span><span class="p">;</span>
-
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>In C++17 this can be implemented without specifying the type.</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">auto</span> <span class="n">N</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">integral_constant</span> <span class="p">{</span>
-      <span class="k">static</span> <span class="k">constexpr</span> <span class="k">decltype</span><span class="p">(</span><span class="n">N</span><span class="p">)</span> <span class="n">value</span> <span class="o">=</span> <span class="n">N</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="k">using</span> <span class="n">true_type</span> <span class="o">=</span> <span class="n">integral_constant</span><span class="o">&lt;</span><span class="nb">true</span><span class="o">&gt;</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="structured-bindings-(C++17)">structured bindings (C++17)<a class="anchor-link" href="#structured-bindings-(C++17)">&#182;</a></h2><ul>
-<li><em>structured bindings</em> allow you to construct a set of objects from an array, tuple, <em>type like</em>, or class/struct public members</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="k">auto</span> <span class="p">[</span><span class="n">first_name</span><span class="p">,</span> <span class="n">last_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_pair</span><span class="p">(</span><span class="s">&quot;Jane&quot;</span><span class="n">s</span><span class="p">,</span> <span class="s">&quot;Smith&quot;</span><span class="n">s</span><span class="p">);</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">last_name</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">first_name</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-</pre></div>
-<hr>
-
-<pre><code>Smith, Jane</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>simple handling of functions returning structures</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span> <span class="p">};</span>
-
-<span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">equal_range</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="mi">5</span><span class="p">);</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">l</span><span class="p">;</span> <span class="o">++</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">f</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-<hr>
-
-<pre><code>5
-5
-5</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>deduction rules are different from other uses of <code>auto</code><ul>
-<li>each element is deduced to <code>decltype(e)</code> where is the corresponding member</li>
-</ul>
-</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="k">auto</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">tie</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-
-<span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</pre></div>
-<hr>
-
-<pre><code>42</code></pre>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
-</pre></div>
-<hr>
-
-<pre><code>int&amp;</code></pre>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>can use const and reference qualifiers with structured bindings</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
-<span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">tie</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">);</span>
-
-<span class="n">a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-</pre></div>
-<hr>
-
-<pre><code>42</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="limitations-of-structured-bindings">limitations of structured bindings<a class="anchor-link" href="#limitations-of-structured-bindings">&#182;</a></h3><ul>
-<li>no way to ignore an element</li>
-<li>no way to reorder, or bind by name</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="auto-lambda-arguments-(covered-in-lambda-section)">auto lambda arguments (covered in lambda section)<a class="anchor-link" href="#auto-lambda-arguments-(covered-in-lambda-section)">&#182;</a></h2>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Issue">Issue<a class="anchor-link" href="#Issue">&#182;</a></h2><h3 id="Qualify-with-references-appropriately">Qualify with references appropriately<a class="anchor-link" href="#Qualify-with-references-appropriately">&#182;</a></h3>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="n">annotate</span><span class="o">&gt;</span> <span class="n">w</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>annotate ctor
-annotate ctor
-annotate ctor
-annotate ctor
-annotate ctor
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// do something</span>
+    <span class="mf">3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196</span><span class="n">_print</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12543,16 +12305,7 @@ annotate ctor
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>annotate copy-ctor
-annotate dtor
-annotate copy-ctor
-annotate dtor
-annotate copy-ctor
-annotate dtor
-annotate copy-ctor
-annotate dtor
-annotate copy-ctor
-annotate dtor
+<pre>3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196
 </pre>
 </div>
 </div>
@@ -12560,65 +12313,14 @@ annotate dtor
 </div>
 </div>
 
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">w</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// do something</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="recommendations-for-auto-variables">recommendations for auto variables<a class="anchor-link" href="#recommendations-for-auto-variables">&#182;</a></h2><ul>
-<li>Use auto where required</li>
-<li>Use auto where complex names do not add clarity<div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">typename</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">my_class</span><span class="o">&gt;::</span><span class="n">const_iterator</span> <span class="n">f</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">l</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">;</span>
-   <span class="n">f</span> <span class="o">!=</span> <span class="n">l</span><span class="p">;</span> <span class="o">++</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-</pre></div>
-<div class="highlight"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">auto</span> <span class="n">f</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">l</span> <span class="o">=</span> <span class="n">v</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="n">f</span> <span class="o">!=</span> <span class="n">l</span><span class="p">;</span> <span class="o">++</span><span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-</pre></div>
-</li>
-<li><code>auto</code> can make code less brittle to small changes (like size of integral result)</li>
-<li>Use for structured binding (better than any alternative)</li>
-</ul>
 <ul>
-<li>Otherwise it becomes a matter of taste. Some people recommend using <code>auto</code> almost never, some people recommend using <code>auto</code> always. If it makes your code more clear, use it, otherwise do not, but avoid bikeshedding.</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="recommendations-for-auto-function-results">recommendations for auto function results<a class="anchor-link" href="#recommendations-for-auto-function-results">&#182;</a></h2><ul>
-<li>Use trailing result types except for <code>bool</code> and <code>void</code><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="nf">some_function</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">some_type</span><span class="p">;</span>
-<span class="kt">bool</span> <span class="nf">is_something</span><span class="p">();</span>
-<span class="kt">void</span> <span class="nf">got_nothin</span><span class="p">();</span>
-</pre></div>
-<ul>
-<li>code aligns better, and it is easier to read</li>
-<li>avoids having trailing result types breaking the style when required</li>
-</ul>
-</li>
-<li>Don't use auto results unless required, or naming the type adds nothing<div class="highlight"><pre><span></span><span class="k">auto</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
-  <span class="c1">//...</span>
-  <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">y</span><span class="p">));</span> <span class="c1">// don&#39;t make me figure out this type!</span>
-<span class="p">}</span>
-</pre></div>
-<ul>
-<li>Nearly every time I've omitted the result, I've regretted it </li>
+<li>A user-defined literal does not need to be <code>constexpr</code><ul>
+<li>But the arguments are guaranteed to be core constant expressions</li>
 </ul>
 </li>
 </ul>
@@ -12630,16 +12332,108 @@ annotate dtor
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="homework">homework<a class="anchor-link" href="#homework">&#182;</a></h2><ul>
-<li>Experiment with <code>auto</code> variables and trailing return types in your project</li>
-<li>Find some cases where you think it improves the code readability</li>
-<li>Find some cases where you think it hinders the code readability</li>
-<li>Write up examples of both on the <a href="git.corp.adobe.com/better-code/class/wiki">wiki</a></li>
+<ul>
+<li>The following literals are defined by the standard:<table>
+  <tr>
+      <td><p align="left">
+          <code>if</code><br>
+          <code>i</code><br>
+          <code>il</code>
+      </p></td>
+      <td><p align="left">
+          A <code>std::complex</code> literal representing pure imaginary number
+      </p></td>
+  </tr>
+  <tr>
+      <td><p align="left">
+          <code>h</code><br>
+          <code>min</code><br>
+          <code>s</code><br>
+          <code>ms</code><br>
+          <code>us</code><br>
+          <code>ns</code>
+      </p></td>
+      <td><p align="left">
+          A <code>std::chrono::duration</code> literal
+      </p></td>
+  </tr>
+  <tr>
+      <td><p align="left">
+          <code>s</code>
+      </p></td>
+      <td><p align="left">
+          Converts a character array literal to <code>basic_string</code>
+      </p></td>
+  </tr>
+  <tr>
+      <td><p align="left">
+          <code>sv</code>
+      </p></td>
+      <td><p align="left">
+          Creates a string view of a character array literal (C++17)
+      </p></td>
+  </tr>
+</table></li>
 </ul>
 
 </div>
 </div>
-</div></section></section>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Recommendations">Recommendations<a class="anchor-link" href="#Recommendations">&#182;</a></h2><ul>
+<li>When using strings, get in the habit of specifying <code>u8</code> encoding<ul>
+<li>To interface with platform APIs and legacy code use <code>char16_t</code> or <code>char32_t</code> as approriate</li>
+</ul>
+</li>
+<li>Use raw strings for data with caution<ul>
+<li>There is a severe penalty on iOS in terms of space for code binaries<ul>
+<li>code is encrypted (for copy protection) then compressed</li>
+<li>data files are simply compressed</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>The app binary listed below was 120.4 MB when you submitted it, but will be 166.7 MB once processed for the App Store. This exceeds the cellular network download size limit and would require your app to be downloaded over Wi-Fi:</p>
+<p>App Name: Adobe Photoshop Express</p>
+</blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Use user defined literals for <em>unit</em> types ("of" types)</li>
+<li>Make user defined literals <code>constexpr</code> where possible<ul>
+<li>Exploit the fact that you <em>know</em> the arguments to the literal operator are compile-time literals</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
+<li>Find a place to apply one of the recommendations in your code base<ul>
+<li>Discuss with your team to avoid overlapping work</li>
+</ul>
+</li>
+<li>These are useful tools be relatively limited in their scope</li>
+</ul>
+
+</div>
+</div>
+</div>
 </div>
 </div>
 

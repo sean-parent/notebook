@@ -21,3 +21,6 @@ title: notebook
 - [16-iso-trip-report](16-iso-trip-report.slides.html)
 - [17-object-lifetime-homework](17-object-lifetime-homework.slides.html)
 - [18-constexpr](18-constexpr.slides.html)
+- [19-static-variables](19-static-variables.slides.html)
+- [20-literals](20-literals.slides.html)
+- [21-classes.ipnb](21-classes.slides.html)

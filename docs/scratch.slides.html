@@ -11906,10 +11906,174 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../common.hpp&quot;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;initializer_list&gt;</span><span class="cp"></span>
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;pthread.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdint.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp"></span>
 
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+<span class="cm">/* Default is not to use posix_memalign, so systems like Android</span>
+<span class="cm"> * can use thread local data without heavier POSIX memory allocators.</span>
+<span class="cm"> */</span>
+<span class="cp">#ifndef EMUTLS_USE_POSIX_MEMALIGN</span>
+<span class="cp">#define EMUTLS_USE_POSIX_MEMALIGN 0</span>
+<span class="cp">#endif</span>
+
+<span class="k">namespace</span> <span class="p">{</span>
+<span class="cm">/* For every TLS variable xyz,</span>
+<span class="cm"> * there is one __emutls_control variable named __emutls_v.xyz.</span>
+<span class="cm"> * If xyz has non-zero initial value, __emutls_v.xyz&#39;s &quot;value&quot;</span>
+<span class="cm"> * will point to __emutls_t.xyz, which has the initial value.</span>
+<span class="cm"> */</span>
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">__emutls_control</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">size</span><span class="p">;</span>  <span class="cm">/* size of the object in bytes */</span>
+    <span class="kt">size_t</span> <span class="n">align</span><span class="p">;</span> <span class="cm">/* alignment of the object in bytes */</span>
+    <span class="k">union</span> <span class="p">{</span>
+        <span class="kt">uintptr_t</span> <span class="n">index</span><span class="p">;</span> <span class="cm">/* data[index-1] is the object address */</span>
+        <span class="kt">void</span><span class="o">*</span> <span class="n">address</span><span class="p">;</span>   <span class="cm">/* object address, when in single thread env */</span>
+    <span class="p">}</span> <span class="n">object</span><span class="p">;</span>
+    <span class="kt">void</span><span class="o">*</span> <span class="n">value</span><span class="p">;</span> <span class="cm">/* null or non-zero initial value for the object */</span>
+<span class="p">}</span> <span class="n">__emutls_control</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">emutls_memalign_alloc</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">align</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">void</span><span class="o">*</span> <span class="n">base</span><span class="p">;</span>
+<span class="cp">#if EMUTLS_USE_POSIX_MEMALIGN</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">posix_memalign</span><span class="p">(</span><span class="o">&amp;</span><span class="n">base</span><span class="p">,</span> <span class="n">align</span><span class="p">,</span> <span class="n">size</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">abort</span><span class="p">();</span>
+<span class="cp">#else</span>
+<span class="cp">#define EXTRA_ALIGN_PTR_BYTES (align - 1 + sizeof(void*))</span>
+    <span class="kt">char</span><span class="o">*</span> <span class="n">object</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">object</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">malloc</span><span class="p">(</span><span class="n">EXTRA_ALIGN_PTR_BYTES</span> <span class="o">+</span> <span class="n">size</span><span class="p">))</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">abort</span><span class="p">();</span>
+    <span class="n">base</span> <span class="o">=</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)(((</span><span class="kt">uintptr_t</span><span class="p">)(</span><span class="n">object</span> <span class="o">+</span> <span class="n">EXTRA_ALIGN_PTR_BYTES</span><span class="p">))</span> <span class="o">&amp;</span>
+                   <span class="o">~</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)(</span><span class="n">align</span> <span class="o">-</span> <span class="mi">1</span><span class="p">));</span>
+
+    <span class="p">((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="n">base</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">object</span><span class="p">;</span>
+<span class="cp">#endif</span>
+    <span class="k">return</span> <span class="n">base</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">emutls_memalign_free</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">base</span><span class="p">)</span> <span class="p">{</span>
+<span class="cp">#if EMUTLS_USE_POSIX_MEMALIGN</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">base</span><span class="p">);</span>
+<span class="cp">#else</span>
+    <span class="cm">/* The mallocated address is in ((void**)base)[-1] */</span>
+    <span class="n">free</span><span class="p">(((</span><span class="kt">void</span><span class="o">**</span><span class="p">)</span><span class="n">base</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]);</span>
+<span class="cp">#endif</span>
+<span class="p">}</span>
+
+<span class="cm">/* Emulated TLS objects are always allocated at run-time. */</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">emutls_allocate_object</span><span class="p">(</span><span class="n">__emutls_control</span><span class="o">*</span> <span class="n">control</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Use standard C types, check with gcc&#39;s emutls.o. */</span>
+    <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">gcc_word</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">mode</span><span class="p">(</span><span class="n">word</span><span class="p">)));</span>
+    <span class="k">typedef</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">gcc_pointer</span> <span class="n">__attribute__</span><span class="p">((</span><span class="n">mode</span><span class="p">(</span><span class="n">pointer</span><span class="p">)));</span>
+    <span class="k">static_assert</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">size_t</span><span class="p">)</span> <span class="o">==</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">gcc_word</span><span class="p">),</span> <span class="s">&quot;fail&quot;</span><span class="p">);</span>
+    <span class="k">static_assert</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span> <span class="o">==</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">gcc_pointer</span><span class="p">),</span> <span class="s">&quot;fail&quot;</span><span class="p">);</span>
+    <span class="k">static_assert</span><span class="p">(</span><span class="k">sizeof</span><span class="p">(</span><span class="kt">uintptr_t</span><span class="p">)</span> <span class="o">==</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">),</span> <span class="s">&quot;fail&quot;</span><span class="p">);</span>
+
+    <span class="kt">size_t</span> <span class="n">size</span> <span class="o">=</span> <span class="n">control</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">align</span> <span class="o">=</span> <span class="n">control</span><span class="o">-&gt;</span><span class="n">align</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">align</span> <span class="o">&lt;</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">))</span> <span class="n">align</span> <span class="o">=</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">);</span>
+    <span class="cm">/* Make sure that align is power of 2. */</span>
+    <span class="k">if</span> <span class="p">((</span><span class="n">align</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">align</span> <span class="o">-</span> <span class="mi">1</span><span class="p">))</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">abort</span><span class="p">();</span>
+
+    <span class="kt">void</span><span class="o">*</span> <span class="n">base</span> <span class="o">=</span> <span class="n">emutls_memalign_alloc</span><span class="p">(</span><span class="n">align</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">control</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">)</span>
+        <span class="n">memcpy</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="n">control</span><span class="o">-&gt;</span><span class="n">value</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="k">else</span>
+        <span class="n">memset</span><span class="p">(</span><span class="n">base</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">base</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="n">pthread_mutex_t</span> <span class="n">emutls_mutex</span> <span class="o">=</span> <span class="n">PTHREAD_MUTEX_INITIALIZER</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="kt">size_t</span> <span class="n">emutls_num_object</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* number of allocated TLS objects */</span>
+
+<span class="k">typedef</span> <span class="k">struct</span> <span class="n">emutls_address_array</span> <span class="p">{</span>
+    <span class="kt">uintptr_t</span> <span class="n">size</span><span class="p">;</span> <span class="cm">/* number of elements in the &#39;data&#39; array */</span>
+    <span class="kt">void</span><span class="o">*</span> <span class="n">data</span><span class="p">[];</span>
+<span class="p">}</span> <span class="n">emutls_address_array</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="n">pthread_key_t</span> <span class="n">emutls_pthread_key</span><span class="p">;</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">emutls_key_destructor</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">ptr</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">emutls_address_array</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span> <span class="p">(</span><span class="n">emutls_address_array</span><span class="o">*</span><span class="p">)</span><span class="n">ptr</span><span class="p">;</span>
+    <span class="kt">uintptr_t</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">array</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">array</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="n">emutls_memalign_free</span><span class="p">(</span><span class="n">array</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+    <span class="p">}</span>
+    <span class="n">free</span><span class="p">(</span><span class="n">ptr</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="k">static</span> <span class="kt">void</span> <span class="nf">emutls_init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">pthread_key_create</span><span class="p">(</span><span class="o">&amp;</span><span class="n">emutls_pthread_key</span><span class="p">,</span> <span class="n">emutls_key_destructor</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="n">abort</span><span class="p">();</span>
+<span class="p">}</span>
+
+<span class="cm">/* Returns control-&gt;object.index; set index if not allocated yet. */</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">uintptr_t</span> <span class="nf">emutls_get_index</span><span class="p">(</span><span class="n">__emutls_control</span><span class="o">*</span> <span class="n">control</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">uintptr_t</span> <span class="n">index</span> <span class="o">=</span> <span class="n">__atomic_load_n</span><span class="p">(</span><span class="o">&amp;</span><span class="n">control</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="n">__ATOMIC_ACQUIRE</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="n">pthread_once_t</span> <span class="n">once</span> <span class="o">=</span> <span class="n">PTHREAD_ONCE_INIT</span><span class="p">;</span>
+        <span class="n">pthread_once</span><span class="p">(</span><span class="o">&amp;</span><span class="n">once</span><span class="p">,</span> <span class="n">emutls_init</span><span class="p">);</span>
+        <span class="n">pthread_mutex_lock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">emutls_mutex</span><span class="p">);</span>
+        <span class="n">index</span> <span class="o">=</span> <span class="n">control</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">index</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="o">++</span><span class="n">emutls_num_object</span><span class="p">;</span>
+            <span class="n">__atomic_store_n</span><span class="p">(</span><span class="o">&amp;</span><span class="n">control</span><span class="o">-&gt;</span><span class="n">object</span><span class="p">.</span><span class="n">index</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">__ATOMIC_RELEASE</span><span class="p">);</span>
+        <span class="p">}</span>
+        <span class="n">pthread_mutex_unlock</span><span class="p">(</span><span class="o">&amp;</span><span class="n">emutls_mutex</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">index</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Updates newly allocated thread local emutls_address_array. */</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="nf">emutls_check_array_set_size</span><span class="p">(</span><span class="n">emutls_address_array</span><span class="o">*</span> <span class="n">array</span><span class="p">,</span>
+                                               <span class="kt">uintptr_t</span> <span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">array</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="n">abort</span><span class="p">();</span>
+    <span class="n">array</span><span class="o">-&gt;</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span><span class="p">;</span>
+    <span class="n">pthread_setspecific</span><span class="p">(</span><span class="n">emutls_pthread_key</span><span class="p">,</span> <span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">)</span><span class="n">array</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="cm">/* Returns the new &#39;data&#39; array size, number of elements,</span>
+<span class="cm"> * which must be no smaller than the given index.</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="kt">uintptr_t</span> <span class="nf">emutls_new_data_array_size</span><span class="p">(</span><span class="kt">uintptr_t</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Need to allocate emutls_address_array with one extra slot</span>
+<span class="cm">     * to store the data array size.</span>
+<span class="cm">     * Round up the emutls_address_array size to multiple of 16.</span>
+<span class="cm">     */</span>
+    <span class="k">return</span> <span class="p">((</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">+</span> <span class="mi">15</span><span class="p">)</span> <span class="o">&amp;</span> <span class="o">~</span><span class="p">((</span><span class="kt">uintptr_t</span><span class="p">)</span><span class="mi">15</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="cm">/* Returns the thread local emutls_address_array.</span>
+<span class="cm"> * Extends its size if necessary to hold address at index.</span>
+<span class="cm"> */</span>
+<span class="k">static</span> <span class="kr">inline</span> <span class="n">emutls_address_array</span><span class="o">*</span> <span class="nf">emutls_get_address_array</span><span class="p">(</span><span class="kt">uintptr_t</span> <span class="n">index</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">emutls_address_array</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span>
+        <span class="p">(</span><span class="n">emutls_address_array</span><span class="o">*</span><span class="p">)</span><span class="n">pthread_getspecific</span><span class="p">(</span><span class="n">emutls_pthread_key</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">array</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">uintptr_t</span> <span class="n">new_size</span> <span class="o">=</span> <span class="n">emutls_new_data_array_size</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="p">(</span><span class="n">emutls_address_array</span><span class="o">*</span><span class="p">)</span><span class="n">calloc</span><span class="p">(</span><span class="n">new_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">));</span>
+        <span class="n">emutls_check_array_set_size</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">new_size</span><span class="p">);</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">index</span> <span class="o">&gt;</span> <span class="n">array</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">uintptr_t</span> <span class="n">orig_size</span> <span class="o">=</span> <span class="n">array</span><span class="o">-&gt;</span><span class="n">size</span><span class="p">;</span>
+        <span class="kt">uintptr_t</span> <span class="n">new_size</span> <span class="o">=</span> <span class="n">emutls_new_data_array_size</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+        <span class="n">array</span> <span class="o">=</span>
+            <span class="p">(</span><span class="n">emutls_address_array</span><span class="o">*</span><span class="p">)</span><span class="n">realloc</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="p">(</span><span class="n">new_size</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">));</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">array</span><span class="p">)</span>
+            <span class="n">memset</span><span class="p">(</span><span class="n">array</span><span class="o">-&gt;</span><span class="n">data</span> <span class="o">+</span> <span class="n">orig_size</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span>
+                   <span class="p">(</span><span class="n">new_size</span> <span class="o">-</span> <span class="n">orig_size</span><span class="p">)</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span><span class="p">));</span>
+        <span class="n">emutls_check_array_set_size</span><span class="p">(</span><span class="n">array</span><span class="p">,</span> <span class="n">new_size</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">array</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace</span>
+
+<span class="k">extern</span> <span class="s">&quot;C&quot;</span> <span class="kt">void</span><span class="o">*</span> <span class="n">__emutls_get_address</span><span class="p">(</span><span class="n">__emutls_control</span><span class="o">*</span> <span class="n">control</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">uintptr_t</span> <span class="n">index</span> <span class="o">=</span> <span class="n">emutls_get_index</span><span class="p">(</span><span class="n">control</span><span class="p">);</span>
+    <span class="n">emutls_address_array</span><span class="o">*</span> <span class="n">array</span> <span class="o">=</span> <span class="n">emutls_get_address_array</span><span class="p">(</span><span class="n">index</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">array</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="nb">NULL</span><span class="p">)</span>
+        <span class="n">array</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="n">emutls_allocate_object</span><span class="p">(</span><span class="n">control</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">array</span><span class="o">-&gt;</span><span class="n">data</span><span class="p">[</span><span class="n">index</span> <span class="o">-</span> <span class="mi">1</span><span class="p">];</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
@@ -11922,8 +12086,9 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">const</span> <span class="kt">int</span><span class="o">*</span> <span class="n">p</span><span class="p">;</span>
-<span class="n">type_name</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">p</span><span class="p">)</span><span class="o">&gt;</span><span class="p">();</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">thread_local</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+
+<span class="n">x</span>
 </pre></div>
 
 </div>
@@ -11936,13 +12101,15 @@ a.anchor-link {
 
 <div class="output_area">
 
-<div class="prompt"></div>
+<div class="prompt output_prompt">Out[2]:</div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>int const*
-</pre>
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>42</pre>
 </div>
+
 </div>
 
 </div>

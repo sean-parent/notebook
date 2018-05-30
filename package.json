@@ -2,10 +2,10 @@
   "name": "notebook",
   "version": "1.0.0",
   "dependencies": {
-    "canvas": "^1.6.10",
+    "canvas": "^1.6.11",
     "node-gyp": "^3.6.2",
-    "npm": "^5.8.0",
-    "yarn": "^1.6.0"
+    "npm": "^6.1.0",
+    "yarn": "^1.7.0"
   },
   "repository": {
     "type": "git",
