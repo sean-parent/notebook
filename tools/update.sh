@@ -13,4 +13,11 @@ gem update bundler
 conda update conda
 conda env update -n notebook
 
+(
+source activate notebook
+jupyter labextension install --no-build @ijmbarr/jupyterlab_spellchecker
+jupyter labextension install --no-build jupyterlab-toc
+jupyter lab build
+)
+
 (cd ./docs; bundle update;)

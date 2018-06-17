@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "dependencies": {
     "canvas": "^1.6.11",
-    "node-gyp": "^3.6.2",
+    "node-gyp": "^3.7.0",
     "npm": "^6.1.0",
     "yarn": "^1.7.0"
   },

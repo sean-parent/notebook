@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>21-classes slides</title>
+<title>22-tuples slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,7 +11905,15 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Classes">Classes<a class="anchor-link" href="#Classes">&#182;</a></h1>
+<h1 id="Tuples,-Parameter-Packs,-&amp;-Initializer-Lists">Tuples, Parameter Packs, &amp; Initializer Lists<a class="anchor-link" href="#Tuples,-Parameter-Packs,-&amp;-Initializer-Lists">&#182;</a></h1><ul>
+<li><code>tuples</code>, parameter packs (variadic templates), and initializer lists are closely related<ul>
+<li>IMO, they should be the same thing</li>
+<li>They each provide a distinct set of capabilities</li>
+<li>Learn to use them in conjunction</li>
+</ul>
+</li>
+</ul>
+
 </div>
 </div>
 </div></section></section><section><section>
@@ -11913,8 +11921,12 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="final"><code>final</code><a class="anchor-link" href="#final">&#182;</a></h2><ul>
-<li><code>final</code> specifier can be used on a class to disallow derived classes</li>
+<h2 id="tuple"><code>tuple</code><a class="anchor-link" href="#tuple">&#182;</a></h2><ul>
+<li><code>std::tuple</code> is a generalization of <code>std::pair</code><ul>
+<li><code>tuple</code> is a standard library component, implemented using parameter packs</li>
+<li><code>tuple</code> holds an arbitrary number of elements of arbitrary type (including none)</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -11925,15 +11937,12 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">base</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="k">class</span> <span class="nc">derived</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
-<span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">tuple</span><span class="o">&lt;&gt;</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// empty</span>
+    <span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+    <span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="o">&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">};</span>
+    <span class="n">tuple</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">string</span><span class="p">,</span> <span class="kt">double</span><span class="o">&gt;</span> <span class="n">d</span> <span class="o">=</span> <span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">,</span> <span class="mf">42.5</span><span class="p">};</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
@@ -11945,27 +11954,11 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">error</span> <span class="o">:</span> <span class="k">public</span> <span class="n">derived</span> <span class="p">{</span> <span class="p">};</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_9:1:15: error: base 'derived' is marked 'final'
-class error : derived { };
-              ^
-input_line_8:6:8: note: 'derived' declared here
- class derived final : base {
-       ^       ~~~~~
-Interpreter Error:</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><code>final</code> specifier can also be used on a <code>virtual</code> function to specify further overrides are not permitted</li>
+<li>A tuple can be constructed from a set of arguments using <code>make_tuple</code><ul>
+<li>Or using deduction guides (C++17)</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -11976,9 +11969,9 @@ Interpreter Error:</code></pre>
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived2</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">final</span><span class="p">;</span>
-<span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="n">make_tuple</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
@@ -11986,47 +11979,27 @@ Interpreter Error:</code></pre>
 </div>
 
 </div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">error</span> <span class="o">:</span> <span class="k">public</span> <span class="n">derived2</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
-<span class="p">};</span>
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">tuple</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">};</span> <span class="c1">// since C++17</span>
+<span class="p">}</span>
 </pre></div>
-<hr>
-
-<pre><code>input_line_13:3:10: error: declaration of 'method' overrides a 'final' function
-    void method() override;
-         ^
-input_line_11:2:10: note: overridden virtual function is here
-    void method() final;
-         ^</code></pre>
 
 </div>
 </div>
+</div>
+
 </div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><code>final</code> makes it clear to the reader that there are no derived classes or methods</li>
-<li>More importantly, <code>final</code> makes it clear to the compiler, allowing devirtualization optimizations</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="override"><code>override</code><a class="anchor-link" href="#override">&#182;</a></h2><ul>
-<li><code>override</code> ensures that the function overrides a virtual member function<ul>
-<li>Avoids potential mistakes and clarifies intent</li>
-</ul>
-</li>
+<li><code>get&lt;&gt;()</code> is used to retrieve an element from a tuple</li>
 </ul>
 
 </div>
@@ -12034,30 +12007,34 @@ input_line_11:2:10: note: overridden virtual function is here
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived3</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived4</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">tuple</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">get</span><span class="o">&lt;</span><span class="mi">1</span><span class="o">&gt;</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3.2
+</pre>
+</div>
+</div>
+
 </div>
 </div>
 
@@ -12066,25 +12043,8 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">derived5</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_16:2:25: error: only virtual member functions can be marked 'override'
-    void member() const override;
-                        ^~~~~~~~</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Construction">Construction<a class="anchor-link" href="#Construction">&#182;</a></h2><ul>
-<li>You can specify a default initializer for data members directly in the class definition</li>
+<ul>
+<li><code>tuple_element_t&lt;&gt;</code> is used to retrieve an element type from a tuple</li>
 </ul>
 
 </div>
@@ -12095,31 +12055,9 @@ input_line_11:2:10: note: overridden virtual function is here
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="n">example</span> <span class="n">x</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">tuple</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">3.2</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span> <span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">typeid</span><span class="p">(</span><span class="n">tuple_element_t</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="k">decltype</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span><span class="p">).</span><span class="n">name</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12137,7 +12075,7 @@ input_line_11:2:10: note: overridden virtual function is here
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(42, 0, Hello World!)
+<pre>d
 </pre>
 </div>
 </div>
@@ -12145,13 +12083,61 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 </div>
 
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Any constructor can override a default initializer</li>
+<li><code>tuple_size_v&lt;&gt;</code> is used to get the number of elements in a tuple</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">tuple</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">10</span><span class="p">,</span> <span class="mf">3.0</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span> <span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">tuple_size_v</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The <code>tie()</code> function creates a <code>tuple</code> of l-value references<ul>
+<li>A common use is to us <code>tie()</code> to extract the elements of a <code>tuple</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -12162,36 +12148,12 @@ input_line_11:2:10: note: overridden virtual function is here
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example2</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
-    
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">example2</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    <span class="n">example2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example2</span> <span class="n">x</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">example2</span> <span class="nf">y</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">b</span><span class="p">;</span>
+    
+    <span class="n">tie</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span> <span class="o">=</span> <span class="n">tuple</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12209,8 +12171,7 @@ input_line_11:2:10: note: overridden virtual function is here
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(42, 0, Hello World!)
-(10, 0, Hello World!)
+<pre>10, Hello World!
 </pre>
 </div>
 </div>
@@ -12218,13 +12179,60 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 </div>
 
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Constructors can now delegate to other constructors</li>
+<li>You can use <code>ignore</code> with <code>tie()</code> to skip any elements</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">string</span> <span class="n">a</span><span class="p">;</span>
+    
+    <span class="n">tie</span><span class="p">(</span><span class="n">ignore</span><span class="p">,</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="n">tuple</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello World!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>With C++17 you can use structured bindings to extract the elements</li>
 </ul>
 
 </div>
@@ -12235,17 +12243,999 @@ input_line_11:2:10: note: overridden virtual function is here
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example3</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
-    
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">]</span> <span class="o">=</span> <span class="n">tuple</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10, Hello World!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>However, there is no <code>ignore</code> equivalent</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>tie()</code> is also useful for class reflection<ul>
+<li><code>tuple</code> provides lexicographical comparisons</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example1</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">_b</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">_c</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="nf">as_tuple</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">,</span> <span class="n">_c</span><span class="p">);</span> <span class="p">}</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="n">example3</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="n">example3</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">example3</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">example1</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">c</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">_c</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
     
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example3</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
+    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">example1</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">example1</span><span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="n">as_tuple</span><span class="p">()</span> <span class="o">==</span> <span class="n">y</span><span class="p">.</span><span class="n">as_tuple</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">&lt;</span><span class="p">(</span><span class="k">const</span> <span class="n">example1</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">example1</span><span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="n">as_tuple</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">.</span><span class="n">as_tuple</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="c1">//...</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">example1</span> <span class="n">x</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    <span class="n">example1</span> <span class="nf">y</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;World&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+    
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">boolalpha</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;x == x: &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;x == y: &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;x &lt; y: &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">y</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;y &lt; x: &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">y</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;x &lt; x: &quot;</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>x == x: true
+x == y: false
+x &lt; y: true
+y &lt; x: false
+x &lt; x: false
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Parameter-Packs">Parameter Packs<a class="anchor-link" href="#Parameter-Packs">&#182;</a></h2><ul>
+<li>A type parameter pack is a template argument representing a sequence of types</li>
+<li>A function parameter pack is a set of function arguments matching a type parameter pack</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span> <span class="c1">// Args is a type parameter pack</span>
+<span class="kt">void</span> <span class="n">example_fn1</span><span class="p">(</span><span class="n">Args</span><span class="p">...</span> <span class="n">args</span><span class="p">);</span> <span class="c1">// Args... is a pack expansion</span>
+                                <span class="c1">// args is a function parameter pack</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Although one might think that <code>Args</code> would be a tuple type and <code>args</code> a tuple instance that is not the case</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">example_fn1</span><span class="p">(</span><span class="n">Args</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="n">args</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+<hr>
+
+<pre><code>input_line_26:3:14: error: initializer contains unexpanded parameter pack 'args'
+    auto x = args;
+             ^~~~</code></pre>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>In order to use a parameter pack, it must be <em>expanded</em> with <code>...</code></li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">example_fn2</span><span class="p">(</span><span class="n">Args</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">tuple</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span> <span class="n">args</span><span class="p">...</span> <span class="p">};</span> <span class="c1">// expand parameter pack into a tuple</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The pack expansion is the equivalent of replacing it with a comma separated list <code>arg1, arg2, arg3, ...</code><ul>
+<li>and can be used almost anyplace a comma separated list is allowed</li>
+</ul>
+</li>
+<li>The expansion can also occur after a valid subexpression containing the parameter pack<ul>
+<li>In which case the subexpression is repeated</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="c1">// A C++14 implementation of make_tuple()</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">make_tuple1</span><span class="p">(</span>
+    <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// type parameter pack expansion to forward references</span>
+    <span class="k">return</span> <span class="n">tuple</span><span class="o">&lt;</span><span class="n">decay_t</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">...</span><span class="o">&gt;</span><span class="p">(</span>
+        <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span> <span class="c1">// type and function parameter pack expansions</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="k">auto</span> <span class="p">[</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">,</span> <span class="n">c</span><span class="p">]</span> <span class="o">=</span> <span class="n">make_tuple1</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="nb">false</span><span class="p">);</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">c</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10, Hello, false
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>C++17 adds <em>fold expressions</em>, this allows parameter packs to be expanded with an arbitrary binary function</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[17]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">sum</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">initial</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span> <span class="o">+</span> <span class="p">...</span> <span class="o">+</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">,</span> <span class="s">&quot; &quot;</span><span class="p">,</span> <span class="s">&quot;Class!&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>9
+Hello Class!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Non-type template parameter packs also work</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[19]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="kt">int</span><span class="p">...</span> <span class="n">Ns</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="kt">int</span> <span class="n">sum</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(...</span> <span class="o">+</span> <span class="n">Ns</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[20]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">sum</span><span class="o">&lt;</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>auto...</code> can be used to create a function parameter pack in a lambda</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">product</span> <span class="o">=</span> <span class="p">[](</span><span class="k">auto</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="n">args</span> <span class="o">*</span> <span class="p">...);</span> <span class="p">};</span>
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">product</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>But you can't use <em><code>type...</code></em> to get a non-type parameter pack</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">product</span> <span class="o">=</span> <span class="p">[](</span><span class="kt">int</span><span class="p">...</span> <span class="n">args</span><span class="p">){</span> <span class="k">return</span> <span class="p">(</span><span class="n">args</span> <span class="o">*</span> <span class="p">...);</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+
+<pre><code>input_line_52:3:26: error: type 'int' of function parameter pack does not contain any unexpanded parameter
+      packs
+    auto product = [](int... args){ return (args * ...); };</code></pre>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>sizeof...()</code> will tell you the number of elements in a parameter pack</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="kt">size_t</span> <span class="n">arg_count</span><span class="p">(</span><span class="k">const</span> <span class="n">Args</span><span class="o">&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="k">sizeof</span><span class="p">...(</span><span class="n">args</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[23]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">arg_count</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">32.5</span><span class="p">,</span> <span class="s">&quot;Hello&quot;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><code>std::apply()</code> converts a tuple into arguments to a function<ul>
+<li><em>C++17 but easily implemented in C++14</em></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">tuple</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;Hello!&quot;</span><span class="n">s</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
+    
+    <span class="n">apply</span><span class="p">([](</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">str</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">){</span>
+        <span class="k">while</span> <span class="p">(</span><span class="n">n</span><span class="o">--</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">},</span> <span class="n">x</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello!
+Hello!
+Hello!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>We can use <code>apply()</code> to convert a tuple into an argument pack</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">tuple</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">apply</span><span class="p">([](</span><span class="k">auto</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(...</span> <span class="o">+</span> <span class="n">args</span><span class="p">);</span> <span class="p">},</span> <span class="n">x</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>25
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="initializer_list&lt;&gt;"><code>initializer_list&lt;&gt;</code><a class="anchor-link" href="#initializer_list&lt;&gt;">&#182;</a></h2><ul>
+<li>When a function takes an argument of type <code>std::initializer_list&lt;&gt;</code> it may be passed a list of elements of the same type</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[26]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">product</span> <span class="o">=</span> <span class="p">[](</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="c1">// return (args * ...);</span>
+        <span class="k">return</span> <span class="n">reduce</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">multiplies</span><span class="p">());</span>
+    <span class="p">};</span>
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">product</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">})</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>15
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The intended use is to allow constructors for containers to behave as constructors for built in arrays</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">vector</span> <span class="n">v</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
+    
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0
+10
+20
+30
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>An <code>initializer_list&lt;&gt;</code> differs from a parameter pack in a few ways</p>
+<ul>
+<li>The elements in an <code>initializer_list&lt;&gt;</code> can only be a single type</li>
+<li>Even though the <code>initializer_list&lt;&gt;</code> is a temporary object, access to it is always via <code>const &amp;</code><ul>
+<li>It is not possible to move or forward from an <code>initializer_list&lt;&gt;</code></li>
+</ul>
+</li>
+<li>Elements of an <code>initializer_list&lt;&gt;</code> are allowed to be stored in read-only memory</li>
+<li><strong>The order the element expressions are evaluated in an <code>initializer_list&lt;&gt;</code> is defined to be left-to-right</strong></li>
+<li>An <code>initializer_list&lt;&gt;</code> does not require a template interface<ul>
+<li>Can be used in a function prototype in a header</li>
+</ul>
+</li>
+<li>An <code>initializer_list&lt;&gt;</code> can be used with a range based for loop</li>
+</ul>
+</li>
+<li><p>An <code>initializer_list</code> is not a library only feature, it is a language feature exposed through a library interface</p>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">,</span> <span class="s">&quot;World!&quot;</span><span class="n">s</span> <span class="p">};</span> <span class="c1">// a is initializer_list&lt;string&gt;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Hello
+World!
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">a</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">,</span> <span class="mi">10</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+
+<pre><code>input_line_47:3:10: error: cannot deduce actual type for variable 'a' with type
+'auto' from initializer list
+    auto a = { "Hello"s, 10 };
+         ^   ~~~~~~~~~~~~~~~~</code></pre>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Combining-the-three-building-blocks">Combining the three building blocks<a class="anchor-link" href="#Combining-the-three-building-blocks">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>By exploiting the fact that an initializer list evaluates in order we can iterate over a function parameter pack<ul>
+<li>Thanks to Eric Niebler for the suggestion</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[29]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="n">F</span> <span class="n">for_each_argument</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">std</span><span class="o">::</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{(</span><span class="n">f</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)),</span> <span class="mi">0</span><span class="p">)...};</span>
+    <span class="k">return</span> <span class="n">f</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[30]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">for_each_argument</span><span class="p">([](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">){</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">},</span> <span class="mi">10</span><span class="p">,</span> <span class="s">&quot;Hello!&quot;</span><span class="p">,</span> <span class="mf">35.2</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10
+Hello!
+35.2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>We can use <code>apply()</code> to convert a tuple to an argument list<ul>
+<li>Combined with <code>for_each_argument()</code> we can iterate over a tuple</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[31]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Tuple</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="n">F</span> <span class="n">for_each_element</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">Tuple</span><span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span>
+        <span class="p">[</span><span class="n">_f</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">)](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">return</span> <span class="n">for_each_argument</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">),</span>
+                                     <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+        <span class="p">},</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Tuple</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">for_each_element</span><span class="p">([](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">){</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="p">},</span> <span class="n">tuple</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="s">&quot;Hello!&quot;</span><span class="n">s</span><span class="p">,</span> <span class="mf">35.2</span><span class="p">));</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>10
+Hello!
+35.2
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>By using <code>tie()</code> to reflect a object members into a tuple, we can iterate the members of the object</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example2</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">_b</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">_c</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="nf">as_tuple</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">,</span> <span class="n">_c</span><span class="p">);</span> <span class="p">}</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">example2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">c</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">_c</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
+    
+    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">for_each_element</span><span class="p">([</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">){</span>
+            <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">boolalpha</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="p">},</span> <span class="n">x</span><span class="p">.</span><span class="n">as_tuple</span><span class="p">());</span>
+        <span class="k">return</span> <span class="n">out</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
@@ -12257,12 +13247,12 @@ input_line_11:2:10: note: overridden virtual function is here
 </div></div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example3</span> <span class="n">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">example2</span> <span class="n">x</span><span class="p">(</span><span class="mi">42</span><span class="p">,</span> <span class="s">&quot;Hello World&quot;</span><span class="p">,</span> <span class="nb">true</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12280,7 +13270,9 @@ input_line_11:2:10: note: overridden virtual function is here
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(43, 0, Hello World!)
+<pre>42
+Hello World
+true
 </pre>
 </div>
 </div>
@@ -12294,22 +13286,40 @@ input_line_11:2:10: note: overridden virtual function is here
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Constructors can now be inherited</li>
+<li>Recall our implementation of a polymorphic task<ul>
+<li>Using parameter packs we can write a task that takes any number of arguments and returns a value</li>
+</ul>
+</li>
 </ul>
 
 </div>
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[35]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example4</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="n">class</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">task</span><span class="p">;</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">concept</span><span class="p">;</span>
+    
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
+    <span class="k">struct</span> <span class="n">model</span><span class="p">;</span>
+    
+    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">concept</span><span class="o">&gt;</span> <span class="n">_p</span><span class="p">;</span>
+
 <span class="k">public</span><span class="o">:</span>
-    <span class="n">string</span> <span class="n">_d</span> <span class="o">=</span> <span class="s">&quot;New Member&quot;</span><span class="p">;</span>
-    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
+    <span class="k">constexpr</span> <span class="n">task</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
+    <span class="n">task</span><span class="p">(</span><span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="o">:</span> <span class="n">_p</span><span class="p">(</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">model</span><span class="o">&lt;</span><span class="n">decay_t</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;&gt;&gt;</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)))</span> <span class="p">{}</span>
+    <span class="n">task</span><span class="p">(</span><span class="n">task</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="n">task</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">task</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
+    <span class="n">R</span> <span class="nf">operator</span><span class="p">()(</span><span class="n">Args</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_p</span><span class="o">-&gt;</span><span class="n">invoke</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span> <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -12317,16 +13327,47 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 </div>
 
-</div></div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="prompt input_prompt">In&nbsp;[36]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="n">concept</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">concept</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="n">R</span> <span class="nf">invoke</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="n">model</span> <span class="k">final</span> <span class="o">:</span> <span class="n">concept</span> <span class="p">{</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">G</span><span class="o">&gt;</span>
+    <span class="k">explicit</span> <span class="n">model</span><span class="p">(</span><span class="n">G</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="o">:</span> <span class="n">_f</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">G</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">))</span> <span class="p">{}</span>
+    <span class="n">R</span> <span class="n">invoke</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span> <span class="p">}</span>
+
+    <span class="n">F</span> <span class="n">_f</span><span class="p">;</span>
+<span class="p">};</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[37]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example4</span> <span class="n">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_d</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">task</span><span class="o">&lt;</span><span class="n">string</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">;</span>
+
+    <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">_prefix</span> <span class="o">=</span> <span class="s">&quot;Hello &quot;</span><span class="n">s</span><span class="p">](</span><span class="kt">int</span> <span class="n">suffix</span><span class="p">)</span> <span class="k">mutable</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_prefix</span><span class="p">)</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">suffix</span><span class="p">);</span>
+    <span class="p">};</span>
+
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12344,8 +13385,7 @@ input_line_11:2:10: note: overridden virtual function is here
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(43, 0, Hello World!)
-New Member
+<pre>Hello 5
 </pre>
 </div>
 </div>
@@ -12353,16 +13393,13 @@ New Member
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Inheriting constructors is "all or nothing"<ul>
-<li>However, you can replace an inherited constructor</li>
-</ul>
-</li>
+<li>A function parameter pack can be captured in a lambda</li>
 </ul>
 
 </div>
@@ -12370,14 +13407,13 @@ New Member
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="prompt input_prompt">In&nbsp;[38]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example5</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-    <span class="n">example5</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">example3</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-<span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">bind_all_1</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">_f</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">args</span><span class="p">...]</span> <span class="p">{</span> <span class="n">_f</span><span class="p">(</span><span class="n">args</span><span class="p">...);</span> <span class="p">};</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
@@ -12387,12 +13423,15 @@ New Member
 </div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[39]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example5</span> <span class="n">x</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">print</span> <span class="o">=</span>
+        <span class="n">bind_all_1</span><span class="p">([](</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">b</span><span class="p">;</span> <span class="p">},</span>
+                   <span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="s">&quot;World!&quot;</span><span class="p">);</span>
+
+    <span class="n">print</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12410,8 +13449,7 @@ New Member
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>(11, 0, Hello World!)
-</pre>
+<pre>Hello, World!</pre>
 </div>
 </div>
 
@@ -12424,7 +13462,7 @@ New Member
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Or delete an inherited constructor</li>
+<li>However, there is no way to <em>move</em> or <em>forward</em> a function parameter pack directly into a lambda capture</li>
 </ul>
 
 </div>
@@ -12432,66 +13470,14 @@ New Member
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[40]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example6</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-    <span class="n">example6</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">print</span> <span class="o">=</span> <span class="n">bind_all_1</span><span class="p">([](</span><span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{},</span> <span class="n">annotate</span><span class="p">(),</span>
+                            <span class="n">annotate</span><span class="p">());</span>
 
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="n">example6</span> <span class="n">x</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_27:3:14: error: call to deleted constructor of 'example6'
-    example6 x(10);
-             ^ ~~
-input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
-    example6(int a) = delete;
-    ^</code></pre>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="static-member-variables"><code>static</code> member variables<a class="anchor-link" href="#static-member-variables">&#182;</a></h2><h3 id="Review">Review<a class="anchor-link" href="#Review">&#182;</a></h3><ul>
-<li>non-const static members must be defined at namespace scope</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-    
-<span class="k">struct</span> <span class="n">example7</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// declaration</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="n">example7</span><span class="o">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// definition (don&#39;t put in a header!)</span>
-
+    <span class="n">print</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12499,16 +13485,38 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 </div>
 </div>
 
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>annotate ctor
+annotate ctor
+annotate copy-ctor
+annotate copy-ctor
+annotate dtor
+annotate dtor
+annotate dtor
+annotate dtor
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
 </div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><code>const static</code> members may be initialized directly in the class<ul>
-<li>No definition is required unless <a href="http://en.cppreference.com/w/cpp/language/definition#ODR-use">odr-used</a></li>
-</ul>
-</li>
+<li>but you can forward a function parameter pack using a tuple</li>
 </ul>
 
 </div>
@@ -12516,14 +13524,32 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
+<div class="prompt input_prompt">In&nbsp;[41]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">example8</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">bind_all_2</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span>
+        <span class="p">[</span><span class="n">_f</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">_args</span> <span class="o">=</span> <span class="n">tuple</span><span class="p">{</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...}]</span> <span class="p">{</span> <span class="n">apply</span><span class="p">(</span><span class="n">_f</span><span class="p">,</span> <span class="n">_args</span><span class="p">);</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
 
-<span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example8</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// not an odr-use</span>
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[42]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">print</span> <span class="o">=</span> <span class="n">bind_all_2</span><span class="p">([](</span><span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{},</span> <span class="n">annotate</span><span class="p">(),</span>
+                            <span class="n">annotate</span><span class="p">());</span>
+
+    <span class="n">print</span><span class="p">();</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
@@ -12540,7 +13566,14 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>42
+<pre>annotate ctor
+annotate ctor
+annotate move-ctor
+annotate move-ctor
+annotate dtor
+annotate dtor
+annotate dtor
+annotate dtor
 </pre>
 </div>
 </div>
@@ -12548,140 +13581,29 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 </div>
 </div>
 
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="New">New<a class="anchor-link" href="#New">&#182;</a></h3><ul>
-<li><code>static</code> members may be declared <code>inline</code> <em>(C++17)</em> and <code>constexpr</code><ul>
-<li><code>inline static</code> members do not require a definition at namespace scope</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">example9</span> <span class="p">{</span>
-    <span class="kr">inline</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="n">example9</span><span class="o">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">56</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>constexpr static</code> members, like const static members, only require a namespace scope definition if odr-used <em>(until C++17)</em></li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">example10</span> <span class="p">{</span>
-    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example10</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// not an odr-use</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>42
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Since C++17, <code>constexpr</code> implies <code>inline</code> for <code>static</code> member variables<ul>
-<li>No definition is required even for an ODR use</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">example10</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// an odr-use</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>0x106fb3bf4
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Recommendations">Recommendations<a class="anchor-link" href="#Recommendations">&#182;</a></h2><ul>
-<li>If you must use public inheritance<ul>
-<li>Use <code>final</code> and <code>override</code> as appropriate</li>
+<li>Tuples, parameter packs, and initializer lists are powerful tools for generative code</li>
+<li>The ability to capture argument lists in tuples and expand back is useful for marshaling arguments</li>
+<li><code>tie()</code> is a useful tool for compile time reflection</li>
+<li>Many use cases of function parameter packs are just to provide simple bindings<ul>
+<li>Because of the complexity of specifying the callable object in C++, a lambda is a better solution</li>
+<li>e.g. <code>std::async(&amp;f, a, b);</code> vs <code>std::async([=]{ f(a, b); });</code></li>
 </ul>
 </li>
-<li>Use member initialization, delegating, and inheriting constructors to simplify class definitions</li>
-<li>Follow the recommendations for <code>static</code> variables for <code>static</code> member variables</li>
+<li>Generally <code>initializer_list&lt;&gt;</code> is troublesome because it doesn't support move, only use when the type is known to be trivial<ul>
+<li>In practice, initialization with an <code>initializer_list&lt;&gt;</code> is rarely useful outside of a test case</li>
+</ul>
+</li>
+<li>Don't use a <code>tuple</code> where a <code>struct</code> would be more clear<ul>
+<li>Especially true with C++17 structured bindings</li>
+</ul>
+</li>
+<li>Proceed with caution...</li>
 </ul>
 
 </div>
@@ -12692,16 +13614,17 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
-<li>Find code which does a cast to a derived class then makes virtual function calls<ul>
-<li>Mark the derived class as <code>final</code></li>
-<li>Inspect assembly before and after to see if the compiler is able to devirtualize the calls</li>
+<li>See if you can find a place in your project code that could be improved at the call site by using any of the above tools<ul>
+<li>How significant is the improvement?</li>
+<li>How much complexity is required in the implementation to support it?</li>
 </ul>
 </li>
+<li>Report on the homework wiki <a href="https://git.corp.adobe.com/better-code/class/wiki/Homework">https://git.corp.adobe.com/better-code/class/wiki/Homework</a></li>
 </ul>
 
 </div>
 </div>
-</div>
+</div></section></section>
 </div>
 </div>
 
