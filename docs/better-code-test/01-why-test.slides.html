@@ -12267,7 +12267,7 @@ $$assets = liabilities + equity$$</li>
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>There are at least two problems with this test<ul>
-<li>It ignores the existential quantifier, $\forall$</li>
+<li>It ignores the universal quantifier, $\forall$</li>
 <li>It is trivially satisfiable<ul>
 <li><code>operator==()</code> could always return true</li>
 </ul>
@@ -12284,7 +12284,7 @@ $$assets = liabilities + equity$$</li>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>It isn't practical, or even possible, to test existential quantifiers<ul>
+<li>It isn't practical, or even possible, to test universal quantifiers<ul>
 <li>Instead we need to choose <em>representative values</em></li>
 </ul>
 </li>
@@ -12551,9 +12551,17 @@ $$assets = liabilities + equity$$</li>
 <div class="text_cell_render border-box-sizing rendered_html">
 <p>Let $m()$ be an an action that modifies its argument such that given $a = b$, $m(a) \implies a \not= b.$</p>
 <p>\begin{align}
-a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
-\text{Let } a = c  \text{. } a \rightarrow b \text{, } m(a) &amp;\implies a \not = b \wedge b = c. \tag{Copies are Disjoint} \\
+a \rightarrow b &amp;\implies a = b. \tag{Equal} \\
+\text{Let } a = c  \text{. } a \rightarrow b \text{, } m(a) &amp;\implies a \not = b \wedge b = c. \tag{Disjoint}
 \end{align}</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>See <a href="http://stepanovpapers.com/DeSt98.pdf"><em>Fundamentals of Generic Programming</em></a></p>
 
 </div>
@@ -12568,7 +12576,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12612,7 +12620,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Except for breaking-all-the-code there is no disjoint requirement<ul>
-<li>Eric Niebler and Stephan T. Lavavej agree</li>
+<li>Eric Niebler, Stephan T. Lavavej, and Howard Hinnant agree</li>
 </ul>
 </li>
 </ul>
@@ -12645,7 +12653,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 </div>
 </div>
 
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[12]:</div>
@@ -12660,7 +12668,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 </div>
 </div>
 
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12712,7 +12720,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[13]:</div>
@@ -12735,7 +12743,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 </div>
 </div>
 
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[14]:</div>
@@ -12751,7 +12759,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 </div>
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[15]:</div>
@@ -12783,7 +12791,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 </div>
 </div>
 
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12794,7 +12802,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 
 </div>
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12805,7 +12813,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 </ul>
 </li>
 <li>Create a class with an <code>operato==()</code> which fails in various ways and test it<ul>
-<li>Implementation of <code>for_each_k_combination&lt;&gt;</code> is available here [ link and pages ]</li>
+<li>Implementation of <code>for_each_k_combination&lt;&gt;</code> is available here <a href="https://github.com/sean-parent/notebook/blob/master/common.hpp">https://github.com/sean-parent/notebook/blob/master/common.hpp</a></li>
 </ul>
 </li>
 <li>Can you create an <code>vector&lt;T&gt;</code> where <code>T</code> is not <code>EqualityComparable</code>?<ul>
@@ -12816,7 +12824,7 @@ a \rightarrow b &amp;\implies a = b. \tag{Copies are Equal} \\
 
 </div>
 </div>
-</div>
+</div></section></section>
 </div>
 </div>
 
