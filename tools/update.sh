@@ -10,7 +10,7 @@ brew upgrade ruby
 npm update -g npm
 npm update -g browser-sync
 gem update bundler
-conda update conda
+conda update conda -c conda-forge
 conda env update -n notebook
 
 (

@@ -61,7 +61,8 @@ cd ~/Projects/github.com/sean-parent/notebook
 ln -s ./reveal.js-3.6.0 ./docs/reveal.js
 
 cd ~/Projects/github.com/sean-parent/notebook
-ln -s ../docs/img ./better-code-class/img
+ln -s ../docs/better-code-class/img ./better-code-class/img
+ln -s ../docs/better-code-test/img ./better-code-test/img
 
 
 
@@ -169,6 +170,15 @@ jupyter nbconvert ./better-code-class/*.ipynb --to=slides --output-dir=./docs
 fswatch ./better-code-class | xargs -0 bash -c 'jupyter nbconvert --to=slides --output-dir=./docs'
 
 open -a "Google Chrome" ./docs/constexpr.slides.html
+
+
+cd ~/Projects/github.com/sean-parent/notebook
+export PATH=/home/sean-parent/miniconda3/bin:$PATH
+source activate notebook
+
+jupyter nbconvert ./better-code-test/*.ipynb --to=slides --reveal-prefix=../reveal.js --output-dir=./docs/better-code-test --config=./slides-config/slides_config.py
+
+
 </string>
 </dict>
 </plist>

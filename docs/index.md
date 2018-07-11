@@ -2,8 +2,22 @@
 title: notebook
 ---
 
-## Class Slides
+## Better Code Class Slides
 
+{% assign sorted = site.static_files | where_exp: 'e', 'e.basename contains ".slides"'
+    | sort: 'basename' %}
+    
+{% assign class = sorted | where_exp: 'e', 'e.path contains "better-code-class"' %}
+{% for e in class %}
+- [{{ e.basename | remove: '.slides' }}]({{ e.path }}){% endfor %}
+
+## Better Test Class Slides
+
+{% assign test = sorted | where_exp: 'e', 'e.path contains "better-code-test"' %}
+{% for e in test %}
+- [{{ e.basename | remove: '.slides' }}]({{ e.path }}){% endfor %}
+
+{% comment %}
 - [preliminaries](preliminaries.slides.html)
 - [rvalue-references](rvalue-references.slides.html)
 - [forwarding-references](forwarding-references.slides.html)
@@ -26,3 +40,4 @@ title: notebook
 - [21-classes](21-classes.slides.html)
 - [22-tuples](22-tuples.slides.html)
 - [23-enum-alias-template](23-enum-alias-template.slides.html)
+{% endcomment %}

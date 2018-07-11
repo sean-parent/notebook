@@ -45,6 +45,8 @@ div.output_stdout {
 }
 
 .reveal section img {
+    width: 95%;
+    height: 95%;
 	max-width: 95%;
 	max-height: 95%;
 	/* center images */

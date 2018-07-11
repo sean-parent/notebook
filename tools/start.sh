@@ -9,12 +9,20 @@ trap "source activate notebook; jupyter notebook stop 8888;" EXIT;
     jupyter lab;
 } & {
     source activate notebook;
-    jupyter nbconvert ./better-code-class/*.ipynb --to=slides --execute --output-dir=./docs \
-        --config=./slides-config/slides_config.py;
+    jupyter nbconvert ./better-code-class/*.ipynb --to=slides --reveal-prefix=../reveal.js \
+        --execute --output-dir=./docs/better-code-class --config=./slides-config/slides_config.py;
+
+    jupyter nbconvert ./better-code-test/*.ipynb --to=slides --reveal-prefix=../reveal.js \
+        --execute --output-dir=./docs/better-code-test --config=./slides-config/slides_config.py;
+
     {
+		fswatch --print0 --event=Updated --exclude=".*/\..*" ./better-code-test | xargs -0 -I % \
+		jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js --execute \
+		    --output-dir=./docs/better-code-test --config=./slides-config/slides_config.py;
+	} & {
 		fswatch --print0 --event=Updated --exclude=".*/\..*" ./better-code-class | xargs -0 -I % \
-		jupyter nbconvert % --to=slides --execute --output-dir=./docs \
-			--config=./slides-config/slides_config.py;
+		jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js --execute \
+		    --output-dir=./docs/better-code-class --config=./slides-config/slides_config.py;
 	} & {
 		cd ./docs;
 		bundle exec jekyll build --baseurl "";
