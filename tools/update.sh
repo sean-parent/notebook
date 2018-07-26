@@ -12,6 +12,7 @@ npm update -g browser-sync
 gem update bundler
 conda update conda -c conda-forge
 conda env update -n notebook
+git submodule update --recursive --remote
 
 (
 source activate notebook

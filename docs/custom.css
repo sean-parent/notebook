@@ -45,10 +45,10 @@ div.output_stdout {
 }
 
 .reveal section img {
-    width: 95%;
-    height: 95%;
-	max-width: 95%;
-	max-height: 95%;
+    /* Size to be contained at 90% of slide size */
+    width: 1728px; /* 1920px * 0.9 */
+    height: 972px; /* 1080px * 0.9 */
+    object-fit: contain;
 	/* center images */
 	display: block;
     margin-left: auto;
