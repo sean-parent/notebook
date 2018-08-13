@@ -11,13 +11,13 @@ npm update -g npm
 npm update -g browser-sync
 gem update bundler
 conda update conda -c conda-forge
-conda env update -n notebook
+conda env update
 git submodule update --recursive --remote
 
 (
 source activate notebook
-jupyter labextension install --no-build @ijmbarr/jupyterlab_spellchecker
-jupyter labextension install --no-build jupyterlab-toc
+# jupyter labextension install --no-build @ijmbarr/jupyterlab_spellchecker
+jupyter labextension install --no-build @jupyterlab/toc
 jupyter lab build
 )
 

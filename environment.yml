@@ -1,4 +1,4 @@
-name: sean-parent-notebook
+name: notebook
 channels:
   - QuantStack
   - conda-forge
@@ -7,3 +7,4 @@ dependencies:
   - notebook
   - jupyter_nbextensions_configurator
   - jupyterlab
+  - nodejs

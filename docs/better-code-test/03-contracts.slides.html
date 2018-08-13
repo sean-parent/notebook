@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>21-classes slides</title>
+<title>03-contracts slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11901,225 +11901,93 @@ a.anchor-link {
 <div class="reveal">
 <div class="slides">
 <section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../common.hpp&quot;</span><span class="cp"></span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Classes">Classes<a class="anchor-link" href="#Classes">&#182;</a></h1>
+<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
+<div class="toc" style="margin-top: 1em;"><ul class="toc-item"><li><span><a href="#Contracts" data-toc-modified-id="Contracts-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Contracts</a></span><ul class="toc-item"><li><span><a href="#History" data-toc-modified-id="History-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>History</a></span></li><li><span><a href="#Preconditions" data-toc-modified-id="Preconditions-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>Preconditions</a></span><ul class="toc-item"><li><span><a href="#operator[]()-and-at()" data-toc-modified-id="operator[]()-and-at()-1.2.1"><span class="toc-item-num">1.2.1&nbsp;&nbsp;</span><code>operator[]()</code> and <code>at()</code></a></span></li><li><span><a href="#Basic-Interface-Preconditions" data-toc-modified-id="Basic-Interface-Preconditions-1.2.2"><span class="toc-item-num">1.2.2&nbsp;&nbsp;</span>Basic Interface Preconditions</a></span></li></ul></li><li><span><a href="#Postconditions" data-toc-modified-id="Postconditions-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>Postconditions</a></span><ul class="toc-item"><li><span><a href="#Basic-Interface-Postconditions" data-toc-modified-id="Basic-Interface-Postconditions-1.3.1"><span class="toc-item-num">1.3.1&nbsp;&nbsp;</span>Basic Interface Postconditions</a></span><ul class="toc-item"><li><span><a href="#Lifetime-of-reference-results" data-toc-modified-id="Lifetime-of-reference-results-1.3.1.1"><span class="toc-item-num">1.3.1.1&nbsp;&nbsp;</span>Lifetime of reference results</a></span></li><li><span><a href="#Exception-Guarantees" data-toc-modified-id="Exception-Guarantees-1.3.1.2"><span class="toc-item-num">1.3.1.2&nbsp;&nbsp;</span>Exception Guarantees</a></span></li></ul></li></ul></li><li><span><a href="#Invariants" data-toc-modified-id="Invariants-1.4"><span class="toc-item-num">1.4&nbsp;&nbsp;</span>Invariants</a></span></li></ul></li></ul></div>
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="final"><code>final</code><a class="anchor-link" href="#final">&#182;</a></h2><ul>
-<li><code>final</code> specifier can be used on a class to disallow derived classes</li>
+<h1 id="Contracts">Contracts<a class="anchor-link" href="#Contracts">&#182;</a></h1><h2 id="History">History<a class="anchor-link" href="#History">&#182;</a></h2><ul>
+<li><em>Design by contract</em> comes from Bertrand Meyer's work on the Eiffel programming language</li>
+<li>Described in his book <a href="https://en.wikipedia.org/wiki/Object-Oriented_Software_Construction">Object-Oriented Software Construction</a></li>
+<li>The work builds on <em>Hoare logic</em> and Dijkstra's <em>predicate transformer semantics</em>.</li>
+<li><p>Hoare logic is also known as <em>Floyd-Hoare logic</em>, Floyd being Robert Floyd who was Jim King's advisor</p>
+</li>
+<li><p>A contract describes:</p>
+<ul>
+<li>Operation pre- and postconditions</li>
+<li>Class invariants<ul>
+<li>Class invariants are postconditions common to all operations on a class</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>A contract is a <em>Hoare triple</em></p>
+<ul>
+<li>Expectation (precondition)</li>
+<li>Guarantee (postcondition)</li>
+<li>Maintains (invariants)</li>
+</ul>
+</li>
+</ul>
+<h2 id="Preconditions">Preconditions<a class="anchor-link" href="#Preconditions">&#182;</a></h2><ul>
+<li>The preconditions of a function are what the function expects<ul>
+<li>Violation of a precondition is undefined behavior</li>
+<li>A precondition can not be tested</li>
+<li><em>Some</em> preconditions may be <em>asserted</em> by the function</li>
+</ul>
+</li>
+<li>It is not practical to assert all preconditions<ul>
+<li>Examples of preconditions which are impractical to test<ul>
+<li>A pair of pointers specify a valid range</li>
+<li>A comparison function defines a strict-weak-ordering
+### <code>operator[]()</code> and <code>at()</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><code>vector::operator[]()</code> has <em>strong</em> preconditions<ul>
+<li>If the index is out of range, behavior is undefined</li>
+<li>You cannot test behavior for an out-of-range index</li>
+</ul>
+</li>
+<li><code>vector::at()</code> has <em>weaker</em> preconditions<ul>
+<li>If the index is out of range it will throw <code>std::out_of_range</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
 </div>
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">base</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="k">class</span> <span class="nc">derived</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">error</span> <span class="o">:</span> <span class="k">public</span> <span class="n">derived</span> <span class="p">{</span> <span class="p">};</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_9:1:15: error: base 'derived' is marked 'final'
-class error : derived { };
-              ^
-input_line_8:6:8: note: 'derived' declared here
- class derived final : base {
-       ^       ~~~~~
-Interpreter Error:</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>final</code> specifier can also be used on a <code>virtual</code> function to specify further overrides are not permitted</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived2</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">final</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">error</span> <span class="o">:</span> <span class="k">public</span> <span class="n">derived2</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_13:3:10: error: declaration of 'method' overrides a 'final' function
-    void method() override;
-         ^
-input_line_11:2:10: note: overridden virtual function is here
-    void method() final;
-         ^</code></pre>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>final</code> makes it clear to the reader that there are no derived classes or methods</li>
-<li>More importantly, <code>final</code> makes it clear to the compiler, allowing devirtualization optimizations</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="override"><code>override</code><a class="anchor-link" href="#override">&#182;</a></h2><ul>
-<li><code>override</code> ensures that the function overrides a virtual member function<ul>
-<li>Avoids potential mistakes and clarifies intent</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived3</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived4</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">derived5</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_16:2:25: error: only virtual member functions can be marked 'override'
-    void member() const override;
-                        ^~~~~~~~</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Construction">Construction<a class="anchor-link" href="#Construction">&#182;</a></h2><ul>
-<li>You can specify a default initializer for data members directly in the class definition</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="n">example</span> <span class="n">x</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+    <span class="n">REQUIRE_THROWS_AS</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12136,8 +12004,8 @@ input_line_11:2:10: note: overridden virtual function is here
 <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(42, 0, Hello World!)
+<div class="output_subarea output_stream output_stderr output_text">
+<pre>FAILED: REQUIRE_THROWS_AS(x.at(2))
 </pre>
 </div>
 </div>
@@ -12145,556 +12013,17 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 </div>
 
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Any constructor can override a default initializer</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example2</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
-    
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">example2</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    <span class="n">example2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example2</span> <span class="n">x</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">example2</span> <span class="nf">y</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(42, 0, Hello World!)
-(10, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Constructors can now delegate to other constructors</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example3</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
-    
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">example3</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="n">example3</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">example3</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="p">{</span> <span class="p">}</span>
-    
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example3</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example3</span> <span class="n">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(43, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Constructors can now be inherited</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example4</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">string</span> <span class="n">_d</span> <span class="o">=</span> <span class="s">&quot;New Member&quot;</span><span class="p">;</span>
-    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example4</span> <span class="n">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_d</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(43, 0, Hello World!)
-New Member
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Inheriting constructors is "all or nothing"<ul>
-<li>However, you can replace an inherited constructor</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example5</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-    <span class="n">example5</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">example3</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example5</span> <span class="n">x</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(11, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Or delete an inherited constructor</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example6</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-    <span class="n">example6</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="n">example6</span> <span class="n">x</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_27:3:14: error: call to deleted constructor of 'example6'
-    example6 x(10);
-             ^ ~~
-input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
-    example6(int a) = delete;
-    ^</code></pre>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="static-member-variables"><code>static</code> member variables<a class="anchor-link" href="#static-member-variables">&#182;</a></h2><h3 id="Review">Review<a class="anchor-link" href="#Review">&#182;</a></h3><ul>
-<li>non-const static members must be defined at namespace scope</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-    
-<span class="k">struct</span> <span class="n">example7</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// declaration</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="n">example7</span><span class="o">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// definition (don&#39;t put in a header!)</span>
-
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>const static</code> members may be initialized directly in the class<ul>
-<li>No definition is required unless <a href="http://en.cppreference.com/w/cpp/language/definition#ODR-use">odr-used</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">example8</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example8</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// not an odr-use</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>42
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="New">New<a class="anchor-link" href="#New">&#182;</a></h3><ul>
-<li><code>static</code> members may be declared <code>inline</code> <em>(C++17)</em> and <code>constexpr</code><ul>
-<li><code>inline static</code> members do not require a definition at namespace scope</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">example9</span> <span class="p">{</span>
-    <span class="kr">inline</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="n">example9</span><span class="o">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">56</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>constexpr static</code> members, like const static members, only require a namespace scope definition if odr-used <em>(until C++17)</em></li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">example10</span> <span class="p">{</span>
-    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example10</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// not an odr-use</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>42
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Since C++17, <code>constexpr</code> implies <code>inline</code> for <code>static</code> member variables<ul>
-<li>No definition is required even for an ODR use</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">example10</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// an odr-use</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>0x10712abf4
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Recommendations">Recommendations<a class="anchor-link" href="#Recommendations">&#182;</a></h2><ul>
-<li>If you must use public inheritance<ul>
-<li>Use <code>final</code> and <code>override</code> as appropriate</li>
-</ul>
-</li>
-<li>Use member initialization, delegating, and inheriting constructors to simplify class definitions</li>
-<li>Follow the recommendations for <code>static</code> variables for <code>static</code> member variables</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
-<li>Find code which does a cast to a derived class then makes virtual function calls<ul>
-<li>Mark the derived class as <code>final</code></li>
-<li>Inspect assembly before and after to see if the compiler is able to devirtualize the calls</li>
+<h3 id="Basic-Interface-Preconditions">Basic Interface Preconditions<a class="anchor-link" href="#Basic-Interface-Preconditions">&#182;</a></h3><h2 id="Postconditions">Postconditions<a class="anchor-link" href="#Postconditions">&#182;</a></h2><h3 id="Basic-Interface-Postconditions">Basic Interface Postconditions<a class="anchor-link" href="#Basic-Interface-Postconditions">&#182;</a></h3><h4 id="Lifetime-of-reference-results">Lifetime of reference results<a class="anchor-link" href="#Lifetime-of-reference-results">&#182;</a></h4><ul>
+<li>A member function returning a reference to a <em>part</em> of the object is valid until:<ul>
+<li>a mutable (non-const) member function call</li>
+<li>or, the end of the objects lifetime
+#### Exception Guarantees
+## Invariants</li>
 </ul>
 </li>
 </ul>

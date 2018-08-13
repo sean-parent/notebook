@@ -50,6 +50,20 @@ struct annotate {
         std::cerr << "FAILED: REQUIRE(" #p ")\n"; \
     else
 
+template <class T, class F>
+void require_throw_as(const F& f, const char* expr) {
+    try {
+        f();
+    } catch (const T&) {
+        return;
+    } catch (...) {
+    }
+    std::cerr << "FAILED: REQUIRE_THROWS_AS(" << expr << ")\n";
+}
+
+#define REQUIRE_THROWS_AS(expr, type) \
+    require_throw_as<type>([&] { (expr); }, #expr)
+
 template <class BidirIt, class UnaryPredicate>
 BidirIt find_last_if(BidirIt first, BidirIt last, UnaryPredicate p) {
     auto l = last;
