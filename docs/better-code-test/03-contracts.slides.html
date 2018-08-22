@@ -11901,55 +11901,68 @@ a.anchor-link {
 <div class="reveal">
 <div class="slides">
 <section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../common.hpp&quot;</span><span class="cp"></span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><h1>Table of Contents<span class="tocSkip"></span></h1></p>
-<div class="toc" style="margin-top: 1em;"><ul class="toc-item"><li><span><a href="#Contracts" data-toc-modified-id="Contracts-1"><span class="toc-item-num">1&nbsp;&nbsp;</span>Contracts</a></span><ul class="toc-item"><li><span><a href="#History" data-toc-modified-id="History-1.1"><span class="toc-item-num">1.1&nbsp;&nbsp;</span>History</a></span></li><li><span><a href="#Preconditions" data-toc-modified-id="Preconditions-1.2"><span class="toc-item-num">1.2&nbsp;&nbsp;</span>Preconditions</a></span><ul class="toc-item"><li><span><a href="#operator[]()-and-at()" data-toc-modified-id="operator[]()-and-at()-1.2.1"><span class="toc-item-num">1.2.1&nbsp;&nbsp;</span><code>operator[]()</code> and <code>at()</code></a></span></li><li><span><a href="#Basic-Interface-Preconditions" data-toc-modified-id="Basic-Interface-Preconditions-1.2.2"><span class="toc-item-num">1.2.2&nbsp;&nbsp;</span>Basic Interface Preconditions</a></span></li></ul></li><li><span><a href="#Postconditions" data-toc-modified-id="Postconditions-1.3"><span class="toc-item-num">1.3&nbsp;&nbsp;</span>Postconditions</a></span><ul class="toc-item"><li><span><a href="#Basic-Interface-Postconditions" data-toc-modified-id="Basic-Interface-Postconditions-1.3.1"><span class="toc-item-num">1.3.1&nbsp;&nbsp;</span>Basic Interface Postconditions</a></span><ul class="toc-item"><li><span><a href="#Lifetime-of-reference-results" data-toc-modified-id="Lifetime-of-reference-results-1.3.1.1"><span class="toc-item-num">1.3.1.1&nbsp;&nbsp;</span>Lifetime of reference results</a></span></li><li><span><a href="#Exception-Guarantees" data-toc-modified-id="Exception-Guarantees-1.3.1.2"><span class="toc-item-num">1.3.1.2&nbsp;&nbsp;</span>Exception Guarantees</a></span></li></ul></li></ul></li><li><span><a href="#Invariants" data-toc-modified-id="Invariants-1.4"><span class="toc-item-num">1.4&nbsp;&nbsp;</span>Invariants</a></span></li></ul></li></ul></div>
-</div>
-</div>
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h1 id="Contracts">Contracts<a class="anchor-link" href="#Contracts">&#182;</a></h1><h2 id="History">History<a class="anchor-link" href="#History">&#182;</a></h2><ul>
-<li><em>Design by contract</em> comes from Bertrand Meyer's work on the Eiffel programming language</li>
+<li><em>Design by contract</em> comes from Bertrand Meyer's work on Eiffel</li>
 <li>Described in his book <a href="https://en.wikipedia.org/wiki/Object-Oriented_Software_Construction">Object-Oriented Software Construction</a></li>
-<li>The work builds on <em>Hoare logic</em> and Dijkstra's <em>predicate transformer semantics</em>.</li>
-<li><p>Hoare logic is also known as <em>Floyd-Hoare logic</em>, Floyd being Robert Floyd who was Jim King's advisor</p>
-</li>
-<li><p>A contract describes:</p>
+<li>The work builds on <em>Hoare logic</em> and Dijkstra's <em>predicate transformer semantics</em></li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
+<li>Hoare logic is also known as <em>Floyd-Hoare logic</em>, Floyd being Robert Floyd who was Jim King's advisor</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>A contract describes:<ul>
 <li>Operation pre- and postconditions</li>
 <li>Class invariants<ul>
-<li>Class invariants are postconditions common to all operations on a class</li>
+<li>Class invariants are postconditions common to all class operations</li>
 </ul>
 </li>
 </ul>
 </li>
-<li><p>A contract is a <em>Hoare triple</em></p>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
+<li>A contract is a <em>Hoare triple</em><ul>
 <li>Expectation (precondition)</li>
 <li>Guarantee (postcondition)</li>
 <li>Maintains (invariants)</li>
 </ul>
 </li>
 </ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Preconditions">Preconditions<a class="anchor-link" href="#Preconditions">&#182;</a></h2><ul>
 <li>The preconditions of a function are what the function expects<ul>
 <li>Violation of a precondition is undefined behavior</li>
@@ -11960,12 +11973,22 @@ a.anchor-link {
 <li>It is not practical to assert all preconditions<ul>
 <li>Examples of preconditions which are impractical to test<ul>
 <li>A pair of pointers specify a valid range</li>
-<li>A comparison function defines a strict-weak-ordering
-### <code>operator[]()</code> and <code>at()</code></li>
+<li>A comparison function defines a strict-weak-ordering</li>
 </ul>
 </li>
 </ul>
 </li>
+<li>When writing test cases, consider the inflection cases for representative values</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="operator[]()-and-at()"><code>operator[]()</code> and <code>at()</code><a class="anchor-link" href="#operator[]()-and-at()">&#182;</a></h3><ul>
 <li><code>vector::operator[]()</code> has <em>strong</em> preconditions<ul>
 <li>If the index is out of range, behavior is undefined</li>
 <li>You cannot test behavior for an out-of-range index</li>
@@ -11973,13 +11996,14 @@ a.anchor-link {
 </li>
 <li><code>vector::at()</code> has <em>weaker</em> preconditions<ul>
 <li>If the index is out of range it will throw <code>std::out_of_range</code></li>
+<li>The boundary between an index within the range and one outside is an inflection point</li>
 </ul>
 </li>
 </ul>
 
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
@@ -12013,17 +12037,616 @@ a.anchor-link {
 </div>
 </div>
 
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+    <span class="n">REQUIRE_THROWS_AS</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Exercise 3.1</strong>  Write a table with representative values and expected results and a test for indexing.</p>
+</blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Basic-Interface-Preconditions">Basic Interface Preconditions<a class="anchor-link" href="#Basic-Interface-Preconditions">&#182;</a></h3><ul>
+<li>The <em>basic interface</em> is the implicit contract which goes without saying<ul>
+<li>So much so that the standard doesn't fully specify the basic interface</li>
+</ul>
+</li>
+<li>There are the obvious basic preconditions<ul>
+<li>You can't pass arbitrary memory cast to a particular type to a function</li>
+<li>The heap can't be corrupt</li>
+</ul>
+</li>
+<li>There are also aspects that are more subtle</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;size: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, capacity: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;;</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">back</span><span class="p">());</span> <span class="c1">// OK?</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">x</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>size: 4, capacity: 4
+0 1 2 3 3 </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The signature for <code>vector::back()</code> is:
+<pre><code>T&amp; back();</code></pre>
+</li>
+<li>The signature for <code>vector::push_back()</code> is:
+<pre><code>void push_back(const T&amp;);</code></pre>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./img/vector-anatomy.svg" alt=""></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The expected precondition of a <code>const T&amp;</code> argument to a function which may alias a value being modified by the function is that the argument is valid at the invocation and it is the called functions responsible to copy if necessary to avoid problems from aliasing.</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>This is the same situation as <em>self assignment</em><ul>
+<li><code>a = a;</code> <em>must</em> be a no-op</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Exercise 3.2</strong>  Extend the assignment test to validate self assignment for representative values.</p>
+</blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>A <code>T&amp;&amp;</code> argument is more complex:</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="s">&quot;World&quot;</span> <span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;size: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, capacity: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;;</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">front</span><span class="p">()));</span> <span class="c1">// OK?</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">x</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>size: 2, capacity: 2
+ World Hello </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The signature for the <code>vector::push_back()</code> overload in this case is:
+<pre><code>void push_back(T&amp;&amp;);</code></pre>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Should this work?</p>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Postconditions">Postconditions<a class="anchor-link" href="#Postconditions">&#182;</a></h2><ul>
+<li>The postconditions of a function guarantees properties of the result<ul>
+<li>Postconditions can be tested</li>
+<li>But you cannot test what is <em>not</em> guaranteed</li>
+</ul>
+</li>
+<li>When testing a function try to be sure you cover all of the post conditions</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="clear()"><code>clear()</code><a class="anchor-link" href="#clear()">&#182;</a></h3><ul>
+<li><code>vector::clear()</code> has the following postconditions:<ul>
+<li>removes all elements from the container</li>
+<li>leaves <code>capacity()</code> unchanged</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+    <span class="k">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">capacity</span><span class="p">();</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">clear</span><span class="p">();</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">empty</span><span class="p">());</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">==</span> <span class="n">n</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
 </div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Basic-Interface-Preconditions">Basic Interface Preconditions<a class="anchor-link" href="#Basic-Interface-Preconditions">&#182;</a></h3><h2 id="Postconditions">Postconditions<a class="anchor-link" href="#Postconditions">&#182;</a></h2><h3 id="Basic-Interface-Postconditions">Basic Interface Postconditions<a class="anchor-link" href="#Basic-Interface-Postconditions">&#182;</a></h3><h4 id="Lifetime-of-reference-results">Lifetime of reference results<a class="anchor-link" href="#Lifetime-of-reference-results">&#182;</a></h4><ul>
+<h3 id="Basic-Interface-Postconditions">Basic Interface Postconditions<a class="anchor-link" href="#Basic-Interface-Postconditions">&#182;</a></h3><ul>
+<li>The <em>basic interface</em> also includes post conditions
+#### Lifetime of reference results</li>
 <li>A member function returning a reference to a <em>part</em> of the object is valid until:<ul>
-<li>a mutable (non-const) member function call</li>
+<li>a mutating (non-const) member function call<ul>
+<li>Note, that a non-mutating call might not be declared <code>const</code></li>
+<li>i.e. <code>vector::begin()</code></li>
+</ul>
+</li>
 <li>or, the end of the objects lifetime
-#### Exception Guarantees
-## Invariants</li>
+#### Unsequenced modification and conflicting postconditions</li>
+</ul>
+</li>
+<li>A classic interview test:<ul>
+<li>What does this print:</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">i</span> <span class="o">+=</span> <span class="n">i</span><span class="o">++</span> <span class="o">+</span> <span class="o">++</span><span class="n">i</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">i</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre><span class="ansi-bold">input_line_13:4:11: </span><span class="ansi-magenta-intense-fg ansi-bold">warning: </span><span class="ansi-bold">unsequenced modification and access to &#39;i&#39; [-Wunsequenced]</span>
+    i += i++ + ++i;
+<span class="ansi-green-intense-fg ansi-bold">      ~~  ^
+</span></pre>
+</div>
+</div>
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>4
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The postconditions of move assignment for <code>vector</code> are:<ul>
+<li>The lhs is equal to the prior value of the rhs </li>
+<li>references, pointers, and iterators to elements in the rhs remain valid<ul>
+<li>but refer to elements that are in lhs</li>
+</ul>
+</li>
+<li>The state of the rhs is "valid but unspecified"<ul>
+<li>but because of the above requirements, this <em>usually</em> means "empty"</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The only state that could satisfy the documented postconditions are if self move was a no-op</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Compare to <code>unique_ptr</code><ul>
+<li>move assignment is as if by calling <code>reset(r.release())</code></li>
+<li>this implies that a self move is <code>x.reset(x.release())</code><ul>
+<li>which is a no-op</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">auto</span> <span class="n">x</span> <span class="o">=</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>42
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The postconditions on moving a string are:<ul>
+<li>lhs contains the prior rhs value</li>
+<li>rhs value is "valid but unspecified"</li>
+</ul>
+</li>
+<li>Until C++17 the postcondition of self-move on a string was:<ul>
+<li>"the function has no effect"</li>
+</ul>
+</li>
+<li>But this language was removed in C++17</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">string</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>0
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>So should this case work?</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="p">{</span> <span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="s">&quot;World&quot;</span> <span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;size: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, capacity: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;;</span>
+    <span class="n">x</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">front</span><span class="p">()));</span> <span class="c1">// OK?</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">x</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>size: 2, capacity: 2
+ World Hello </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>It is debatable<ul>
+<li>If it works, x.front() is "valid but unspecified"</li>
+<li>For it to work may require moving a moved from object when <code>vector</code> is resized</li>
+<li>It requires an additional move to hold the value during reallocation</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The reality is the <em>basic interface</em> is only partially specified<ul>
+<li>aliased references are only discussed with regard to race conditions</li>
+<li>unless otherwise specified, treat modifying the same object as an unsequenced modification<ul>
+<li>even if specified, be cautious, this is an area of change</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Exception-Guarantees">Exception Guarantees<a class="anchor-link" href="#Exception-Guarantees">&#182;</a></h4><ul>
+<li>The exception guarantees are part of the basic interface</li>
+<li>They describe the postconditions of a function in the event of an exception<ul>
+<li>There are 4 levels, from strong to weak</li>
+<li><code>noexcept</code>: Will not throw an exception</li>
+<li>strong: Any modified state is returned to its prior, logical state</li>
+<li>basic: All modified objects are left in a "valid but unspecified" state</li>
+<li>weak: Result is undefined</li>
+</ul>
+</li>
+</ul>
+<p>Unless otherwise specified, the basic guarantee is assumed.</p>
+<h2 id="Invariants">Invariants<a class="anchor-link" href="#Invariants">&#182;</a></h2><h2 id="Security">Security<a class="anchor-link" href="#Security">&#182;</a></h2><ul>
+<li>A secure interface has no preconditions</li>
+<li>A secure system has no bugs, to exploit a system:<ul>
+<li>Identify interfaces which cannot be verified</li>
+<li>Boundary conditions that may not have been anticipated</li>
 </ul>
 </li>
 </ul>
