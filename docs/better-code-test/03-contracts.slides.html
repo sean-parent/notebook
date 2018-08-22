@@ -11919,7 +11919,7 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Hoare logic is also known as <em>Floyd-Hoare logic</em>, Floyd being Robert Floyd who was Jim King's advisor</li>
+<li>Hoare logic is also known as <em>Floyd-Hoare logic</em>, Floyd being Robert Floyd who was Jim&nbsp;King's advisor</li>
 </ul>
 
 </div>
@@ -11966,7 +11966,10 @@ a.anchor-link {
 <h2 id="Preconditions">Preconditions<a class="anchor-link" href="#Preconditions">&#182;</a></h2><ul>
 <li>The preconditions of a function are what the function expects<ul>
 <li>Violation of a precondition is undefined behavior</li>
-<li>A precondition can not be tested</li>
+<li>A precondition can not be tested<ul>
+<li>Instead we test within the domain of the precondition</li>
+</ul>
+</li>
 <li><em>Some</em> preconditions may be <em>asserted</em> by the function</li>
 </ul>
 </li>
@@ -11988,8 +11991,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="operator[]()-and-at()"><code>operator[]()</code> and <code>at()</code><a class="anchor-link" href="#operator[]()-and-at()">&#182;</a></h3><ul>
-<li><code>vector::operator[]()</code> has <em>strong</em> preconditions<ul>
+<h3 id="Example--operator[]-and-at()">Example  <code>operator[]</code> and <code>at()</code><a class="anchor-link" href="#Example--operator[]-and-at()">&#182;</a></h3><ul>
+<li><code>vector::operator[]</code> has <em>strong</em> preconditions<ul>
 <li>If the index is out of range, behavior is undefined</li>
 <li>You cannot test behavior for an out-of-range index</li>
 </ul>
@@ -12076,6 +12079,7 @@ a.anchor-link {
 <li>There are the obvious basic preconditions<ul>
 <li>You can't pass arbitrary memory cast to a particular type to a function</li>
 <li>The heap can't be corrupt</li>
+<li>There is sufficient stack space</li>
 </ul>
 </li>
 <li>There are also aspects that are more subtle</li>
@@ -12125,11 +12129,11 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>The signature for <code>vector::back()</code> is:
-<pre><code>T&amp; back();</code></pre>
+<li>The signature for <code>vector::back()</code> is:<div class="highlight"><pre><span></span><span class="n">T</span><span class="o">&amp;</span> <span class="n">back</span><span class="p">();</span>
+</pre></div>
 </li>
-<li>The signature for <code>vector::push_back()</code> is:
-<pre><code>void push_back(const T&amp;);</code></pre>
+<li>The signature for <code>vector::push_back()</code> is:<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">push_back</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span><span class="p">);</span>
+</pre></div>
 </li>
 </ul>
 
@@ -12149,7 +12153,11 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>The expected precondition of a <code>const T&amp;</code> argument to a function which may alias a value being modified by the function is that the argument is valid at the invocation and it is the called functions responsible to copy if necessary to avoid problems from aliasing.</p>
+<p>The expected preconditions of a <code>const T&amp;</code> argument to a function, which may alias a value being modified by the function, is:</p>
+<ul>
+<li>The argument is valid at the invocation</li>
+<li>It is the called functions responsibility to copy, if necessary, to avoid problems from aliasing</li>
+</ul>
 
 </div>
 </div>
@@ -12159,9 +12167,19 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>This is the same situation as <em>self assignment</em><ul>
-<li><code>a = a;</code> <em>must</em> be a no-op</li>
+<li>This is a <em>weak</em> precondition</li>
 </ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>This is the same situation as <em>self assignment</em><div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// must be a no-op</span>
+</pre></div>
 </li>
 </ul>
 
@@ -12228,8 +12246,8 @@ a.anchor-link {
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>The signature for the <code>vector::push_back()</code> overload in this case is:
-<pre><code>void push_back(T&amp;&amp;);</code></pre>
+<li>The signature for the <code>vector::push_back()</code> overload in this case is:<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">push_back</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="p">);</span>
+</pre></div>
 </li>
 </ul>
 
@@ -12265,7 +12283,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="clear()"><code>clear()</code><a class="anchor-link" href="#clear()">&#182;</a></h3><ul>
+<h3 id="Example-clear()">Example <code>clear()</code><a class="anchor-link" href="#Example-clear()">&#182;</a></h3><ul>
 <li><code>vector::clear()</code> has the following postconditions:<ul>
 <li>removes all elements from the container</li>
 <li>leaves <code>capacity()</code> unchanged</li>
@@ -12294,24 +12312,44 @@ a.anchor-link {
 </div>
 </div>
 
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Exercise 3.3</strong>  Review the postconditions for your existing tests and make sure your tests are complete.</p>
+</blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h3 id="Basic-Interface-Postconditions">Basic Interface Postconditions<a class="anchor-link" href="#Basic-Interface-Postconditions">&#182;</a></h3><ul>
-<li>The <em>basic interface</em> also includes post conditions
-#### Lifetime of reference results</li>
+<li>The <em>basic interface</em> also includes post conditions</li>
+</ul>
+<h4 id="Lifetime-of-reference-results">Lifetime of reference results<a class="anchor-link" href="#Lifetime-of-reference-results">&#182;</a></h4><ul>
 <li>A member function returning a reference to a <em>part</em> of the object is valid until:<ul>
 <li>a mutating (non-const) member function call<ul>
 <li>Note, that a non-mutating call might not be declared <code>const</code></li>
 <li>i.e. <code>vector::begin()</code></li>
 </ul>
 </li>
-<li>or, the end of the objects lifetime
-#### Unsequenced modification and conflicting postconditions</li>
+<li>or, the end of the objects lifetime</li>
 </ul>
 </li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h4 id="Unsequenced-modification-and-conflicting-postconditions">Unsequenced modification and conflicting postconditions<a class="anchor-link" href="#Unsequenced-modification-and-conflicting-postconditions">&#182;</a></h4><ul>
 <li>A classic interview test:<ul>
 <li>What does this print:</li>
 </ul>
@@ -12320,7 +12358,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
@@ -12368,7 +12406,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12390,7 +12428,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
@@ -12425,18 +12463,18 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>The only state that could satisfy the documented postconditions are if self move was a no-op</li>
+<li>The only state that could satisfy the documented postconditions for move assignment with self move are a no-op</li>
 </ul>
 
 </div>
 </div>
-</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12454,7 +12492,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
@@ -12489,7 +12527,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12509,7 +12547,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[10]:</div>
@@ -12544,18 +12582,18 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>So should this case work?</li>
+<li>So should this case work from 1.2.2?</li>
 </ul>
 
 </div>
 </div>
-</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[11]:</div>
@@ -12591,7 +12629,7 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12607,13 +12645,13 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>The reality is the <em>basic interface</em> is only partially specified<ul>
+<li>The <em>basic interface</em> is only partially specified<ul>
 <li>aliased references are only discussed with regard to race conditions</li>
 <li>unless otherwise specified, treat modifying the same object as an unsequenced modification<ul>
 <li>even if specified, be cautious, this is an area of change</li>
@@ -12625,7 +12663,39 @@ a.anchor-link {
 
 </div>
 </div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>The issues of aliasing can often be side-stepped by passing sink arguments by value</li>
+<li>i.e. if the signature f <code>push_back()</code> was:</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">push_back</span><span class="p">(</span><span class="n">T</span><span class="p">);</span>
+</pre></div>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>One argument is that for the basic interface, passing arguments by rvalue and lvalue references should be viewed as an optimization of passing by value and should not change behavior.</p>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>But that has performance implications.</p>
+
+</div>
+</div>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
@@ -12641,12 +12711,106 @@ a.anchor-link {
 </ul>
 </li>
 </ul>
-<p>Unless otherwise specified, the basic guarantee is assumed.</p>
-<h2 id="Invariants">Invariants<a class="anchor-link" href="#Invariants">&#182;</a></h2><h2 id="Security">Security<a class="anchor-link" href="#Security">&#182;</a></h2><ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Unless otherwise specified, the basic guarantee is assumed</li>
+<li>In the absence of a modification, the <em>basic</em> and <em>strong</em> exception guarantees are the same. </li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>For example:</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">};</span>
+    <span class="k">auto</span> <span class="n">copy</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
+    <span class="n">REQUIRE_THROWS_AS</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">at</span><span class="p">(</span><span class="mi">3</span><span class="p">),</span> <span class="n">std</span><span class="o">::</span><span class="n">out_of_range</span><span class="p">);</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">copy</span> <span class="o">==</span> <span class="n">x</span><span class="p">);</span> <span class="c1">// per basic exception guarantee</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Invariants">Invariants<a class="anchor-link" href="#Invariants">&#182;</a></h2><ul>
+<li>An invariant is a relationship which must hold irrespective of the operation performed<ul>
+<li>They are a generalized collection of postconditions and as such are testable</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">test_vector_invariants</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+    <span class="n">REQUIRE</span><span class="p">((</span><span class="n">x</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="o">==</span> <span class="n">x</span><span class="p">.</span><span class="n">empty</span><span class="p">());</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">==</span> <span class="n">x</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span>
+    <span class="c1">//...</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><strong>Exercise 3.4</strong> Complete the invariant test for a vector and extend your tests to check the invariants after each mutating operation.</p>
+</blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Security">Security<a class="anchor-link" href="#Security">&#182;</a></h2><ul>
 <li>A secure interface has no preconditions</li>
-<li>A secure system has no bugs, to exploit a system:<ul>
+<li>A secure system has no bugs<ul>
+<li>To exploit a system:<ul>
 <li>Identify interfaces which cannot be verified</li>
 <li>Boundary conditions that may not have been anticipated</li>
+</ul>
+</li>
 </ul>
 </li>
 </ul>
