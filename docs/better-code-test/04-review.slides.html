@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>21-classes slides</title>
+<title>04-review slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,7 +11905,10 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Classes">Classes<a class="anchor-link" href="#Classes">&#182;</a></h1>
+<h1 id="Review">Review<a class="anchor-link" href="#Review">&#182;</a></h1><ul>
+<li>How to construct a test case</li>
+</ul>
+
 </div>
 </div>
 </div></section></section><section><section>
@@ -11913,27 +11916,260 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="final"><code>final</code><a class="anchor-link" href="#final">&#182;</a></h2><ul>
-<li><code>final</code> specifier can be used on a class to disallow derived classes</li>
+<h2 id="Do-your-homework">Do your homework<a class="anchor-link" href="#Do-your-homework">&#182;</a></h2><ul>
+<li>Identify <em>preconditions</em> (what is expected)<ul>
+<li>Including implicit preconditions in the basic interface</li>
+</ul>
+</li>
 </ul>
 
 </div>
 </div>
 </div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Example from documentation for <code>vector::back</code><blockquote><p>Calling <code>back</code> on an empty container is undefined.</p>
+</blockquote>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>If the API is a template, what are the requirements for the type arguments?<ul>
+<li>Including the axioms of any operations on the type</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Example from documentation for <code>vector</code></li>
+</ul>
+<blockquote><p>The requirements that are imposed on the elements depend on the actual operations performed on the container. Generally, it is required that element type meets the requirements of <code>Erasable</code>, but many member functions impose stricter requirements. This container (but not its members) can be instantiated with an incomplete element type if the allocator satisfies the allocator completeness requirements.</p>
+</blockquote>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>From the general library requirements</li>
+</ul>
+<blockquote><p><code>X(a)</code> [copy construction], <em>Requires:</em> <code>T</code> is <code>CopyInsertable</code> into <code>X</code></p>
+</blockquote>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Identify <em>postconditions</em> (what is guaranteed) </li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>From documentation for <code>vector</code></li>
+</ul>
+<blockquote><p><code>a.back()</code>; <em>Operational semantics:</em></p>
+<div class="highlight"><pre><span></span><span class="p">{</span> <span class="k">auto</span> <span class="n">tmp</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">();</span> <span class="o">--</span><span class="n">tmp</span><span class="p">;</span> <span class="k">return</span> <span class="o">*</span><span class="n">tmp</span><span class="p">;</span> <span class="p">}</span>
+</pre></div>
+</blockquote>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>From definition of <em><code>CopyInsertable</code></em></li>
+</ul>
+<blockquote><p>The value of <code>v</code> is unchanged and is equivalent to <code>*p</code></p>
+</blockquote>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Note that postconditions can extend to affiliated objects</li>
+</ul>
+<blockquote><p>After container move construction, references, pointers, and iterators (other than the end iterator) to <code>other</code> remain valid, but refer to elements that are now in <code>*this</code>.</p>
+</blockquote>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Identify <em>invariants</em> (what always holds)</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Some may be implicit and follow from definition<ul>
+<li><code>!(capacity() &lt; size())</code></li>
+<li><code>distance(begin(), end()) == size()</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Have a basic mental model of the implementation</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="./img/vector-anatomy.svg" alt=""></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Design-your-tests">Design your tests<a class="anchor-link" href="#Design-your-tests">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Determine a representative set of values (and types)<ul>
+<li>Values must satisfy preconditions</li>
+<li>Different operations may require different values</li>
+<li>Include values that trigger an inflection in preconditions, postconditions, and implementation</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Tagging values is useful to identify known properties<ul>
+<li>Equality</li>
+<li>Orderings</li>
+<li>Concepts (Copyable vs. Movable)</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li><p>Execute with all meaningful combinations of representative values</p>
+<ul>
+<li>include aliased values where allowed</li>
+<li>and duplicate values</li>
+</ul>
+</li>
+<li><p>Check postconditions, axioms, and invariants after API execution</p>
+</li>
+<li>Use counters to test complexity and external failure points</li>
+<li>Use a model type with <code>static_assert</code> to test type requirements</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Anatomy-of-a-test-case-for-a-template">Anatomy of a test case for a template<a class="anchor-link" href="#Anatomy-of-a-test-case-for-a-template">&#182;</a></h2>
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Create a <code>model</code> type which counts operations to measure complexity</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">base</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="k">class</span> <span class="nc">derived</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
-<span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
+    <span class="kt">size_t</span> <span class="n">_equality</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">_ctor</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">_move_ctor</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">_copy_ctor</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">_copy_assignment</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">_move_assignment</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">_dtor</span><span class="p">;</span>
+<span class="p">}</span> <span class="n">_counters</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -11945,27 +12181,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">error</span> <span class="o">:</span> <span class="k">public</span> <span class="n">derived</span> <span class="p">{</span> <span class="p">};</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_9:1:15: error: base 'derived' is marked 'final'
-class error : derived { };
-              ^
-input_line_8:6:8: note: 'derived' declared here
- class derived final : base {
-       ^       ~~~~~
-Interpreter Error:</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><code>final</code> specifier can also be used on a <code>virtual</code> function to specify further overrides are not permitted</li>
+<li>The <code>model</code> type is parameterized for the required operations</li>
 </ul>
 
 </div>
@@ -11976,8 +12193,10 @@ Interpreter Error:</code></pre>
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived2</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">final</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">enum</span> <span class="n">operations</span> <span class="p">{</span>
+    <span class="n">moveable</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">copyable</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">equality_comparable</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -11985,75 +12204,74 @@ Interpreter Error:</code></pre>
 </div>
 </div>
 
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">error</span> <span class="o">:</span> <span class="k">public</span> <span class="n">derived2</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_13:3:10: error: declaration of 'method' overrides a 'final' function
-    void method() override;
-         ^
-input_line_11:2:10: note: overridden virtual function is here
-    void method() final;
-         ^</code></pre>
-
-</div>
-</div>
 </div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><code>final</code> makes it clear to the reader that there are no derived classes or methods</li>
-<li>More importantly, <code>final</code> makes it clear to the compiler, allowing devirtualization optimizations</li>
+<li>The model tests for valid operation use</li>
 </ul>
 
 </div>
 </div>
 </div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="override"><code>override</code><a class="anchor-link" href="#override">&#182;</a></h2><ul>
-<li><code>override</code> ensures that the function overrides a virtual member function<ul>
-<li>Avoids potential mistakes and clarifies intent</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived3</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
-<span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="n">operations</span> <span class="n">Ops</span><span class="o">&gt;</span>
+<span class="k">struct</span> <span class="n">model</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 0 flags partially formed</span>
+
+    <span class="k">explicit</span> <span class="nf">model</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="o">++</span><span class="n">_counters</span><span class="p">.</span><span class="n">_ctor</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">model</span><span class="p">(</span><span class="n">model</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">moveable</span><span class="p">);</span>
+        <span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="o">++</span><span class="n">_counters</span><span class="p">.</span><span class="n">_move_ctor</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">model</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">model</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">moveable</span><span class="p">);</span>
+        <span class="n">REQUIRE</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">||</span> <span class="n">_value</span><span class="p">));</span>
+        <span class="n">_value</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">_value</span><span class="p">;</span>
+        <span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="o">++</span><span class="n">_counters</span><span class="p">.</span><span class="n">_move_assignment</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//...</span>
+    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">equality</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_value</span><span class="p">;</span>
+    <span class="p">};</span>
+<span class="p">};</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></div><div class="fragment">
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Write a test for the class invariants</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived4</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">C</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">test_invariants</span><span class="p">(</span><span class="k">const</span> <span class="n">C</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">==</span> <span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">distance</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="o">==</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12066,60 +12284,86 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">derived5</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span> <span class="k">override</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_16:2:25: error: only virtual member functions can be marked 'override'
-    void member() const override;
-                        ^~~~~~~~</code></pre>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Construction">Construction<a class="anchor-link" href="#Construction">&#182;</a></h2><ul>
-<li>You can specify a default initializer for data members directly in the class definition</li>
+<ul>
+<li>Write a test for each operation<ul>
+<li>Test invariants after a mutable operation</li>
+<li>Test postconditions</li>
+<li>Test complexity</li>
+</ul>
+</li>
 </ul>
 
 </div>
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">C</span><span class="p">,</span> <span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">test_move_insert</span><span class="p">(</span>
+    <span class="k">const</span> <span class="n">C</span><span class="o">&amp;</span> <span class="n">initial</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">initial_value</span><span class="p">,</span> <span class="n">C</span><span class="o">&amp;</span> <span class="n">container</span><span class="p">,</span> <span class="n">I</span> <span class="n">position</span><span class="p">,</span> <span class="n">T</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">counters</span> <span class="o">=</span> <span class="n">_counters</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">has_capacity</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">capacity</span><span class="p">();</span>
+    <span class="k">auto</span> <span class="n">ip</span> <span class="o">=</span> <span class="n">begin</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span> <span class="o">+</span> <span class="n">distance</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">container</span><span class="p">),</span> <span class="n">position</span><span class="p">);</span>
 
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+    <span class="c1">// Test invariants</span>
+    <span class="n">test_invariants</span><span class="p">(</span><span class="n">container</span><span class="p">);</span>
+    <span class="c1">// Test postconditions</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">initial</span><span class="p">),</span> <span class="n">ip</span><span class="p">,</span> <span class="n">begin</span><span class="p">(</span><span class="n">container</span><span class="p">),</span> <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="o">::</span><span class="n">equality</span><span class="p">));</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">end</span><span class="p">(</span><span class="n">initial</span><span class="p">),</span> <span class="n">next</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">container</span><span class="p">),</span> <span class="n">T</span><span class="o">::</span><span class="n">equality</span><span class="p">));</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">T</span><span class="o">::</span><span class="n">equality</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">));</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">has_capacity</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">REQUIRE</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">position</span><span class="p">);</span>
     <span class="p">}</span>
-<span class="p">};</span>
+    <span class="c1">// Test complexity</span>
+    <span class="k">auto</span> <span class="n">move_count</span> <span class="o">=</span>
+        <span class="p">(</span><span class="n">has_capacity</span> <span class="o">?</span> <span class="n">distance</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">end</span><span class="p">(</span><span class="n">initial</span><span class="p">))</span> <span class="o">:</span> <span class="n">initial</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">REQUIRE</span><span class="p">((</span><span class="n">_counters</span><span class="p">.</span><span class="n">_move_ctor</span> <span class="o">-</span> <span class="n">counters</span><span class="p">.</span><span class="n">_move_ctor</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">move_count</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Write a driver to construct cases which exercise inflection points</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>A helper function to generate vectors from an array with a given capacity</li>
+</ul>
+
+</div>
+</div>
+</div></div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="n">example</span> <span class="n">x</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">C</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">auto</span> <span class="n">build_vector</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">C</span> <span class="n">r</span><span class="p">;</span>
+    <span class="n">r</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">capacity</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">r</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -12127,127 +12371,69 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(42, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Any constructor can override a default initializer</li>
+<li>A driver to generate test cases and execute the test</li>
 </ul>
 
 </div>
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example2</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
-    
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">example2</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    <span class="n">example2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="nf">test_move_insert_driver</span><span class="p">()</span> <span class="p">{</span>
+    <span class="k">using</span> <span class="n">value_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">&lt;</span><span class="n">moveable</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">build_vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+    <span class="kt">size_t</span> <span class="n">positions</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span> <span class="c1">// begin, middle, end</span>
+    <span class="c1">// insert each position without sufficient capacity</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">positions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">build_vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+        <span class="n">test_move_insert</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">},</span> <span class="n">v2</span><span class="p">,</span> <span class="n">begin</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span><span class="p">,</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">});</span>
     <span class="p">}</span>
-<span class="p">};</span>
+    <span class="c1">// insert each position with sufficient capacity</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">positions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">build_vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+        <span class="n">test_move_insert</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">},</span> <span class="n">v2</span><span class="p">,</span> <span class="n">begin</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span><span class="p">,</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">});</span>
+    <span class="p">}</span>
+    <span class="c1">// insert into an empty vector</span>
+    <span class="p">{</span>
+        <span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;</span> <span class="n">v2</span><span class="p">;</span>
+        <span class="n">test_move_insert</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">},</span> <span class="n">v2</span><span class="p">,</span> <span class="n">begin</span><span class="p">(</span><span class="n">v2</span><span class="p">),</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">});</span>
+    <span class="p">}</span>
+<span class="p">}</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Execute the tests</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example2</span> <span class="n">x</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">example2</span> <span class="nf">y</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(42, 0, Hello World!)
-(10, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Constructors can now delegate to other constructors</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example3</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
-    
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">example3</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="n">example3</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">example3</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="p">{</span> <span class="p">}</span>
-    
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example3</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">test_move_insert_driver</span><span class="p">();</span>
 </pre></div>
 
 </div>
@@ -12255,433 +12441,22 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 
 </div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example3</span> <span class="n">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(43, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Creating-general-test-cases">Creating general test cases<a class="anchor-link" href="#Creating-general-test-cases">&#182;</a></h2><ul>
+<li><p>For many operations and types you can write generic test case</p>
 <ul>
-<li>Constructors can now be inherited</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example4</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">string</span> <span class="n">_d</span> <span class="o">=</span> <span class="s">&quot;New Member&quot;</span><span class="p">;</span>
-    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example4</span> <span class="n">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_d</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(43, 0, Hello World!)
-New Member
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Inheriting constructors is "all or nothing"<ul>
-<li>However, you can replace an inherited constructor</li>
+<li>copy, move, equality, comparisons</li>
+<li>iterators, containers</li>
+<li>numerics</li>
 </ul>
 </li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example5</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-    <span class="n">example5</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">example3</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example5</span> <span class="n">x</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>(11, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Or delete an inherited constructor</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example6</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-    <span class="n">example6</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="n">example6</span> <span class="n">x</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-<hr>
-
-<pre><code>input_line_27:3:14: error: call to deleted constructor of 'example6'
-    example6 x(10);
-             ^ ~~
-input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
-    example6(int a) = delete;
-    ^</code></pre>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="static-member-variables"><code>static</code> member variables<a class="anchor-link" href="#static-member-variables">&#182;</a></h2><h3 id="Review">Review<a class="anchor-link" href="#Review">&#182;</a></h3><ul>
-<li>non-const static members must be defined at namespace scope</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-    
-<span class="k">struct</span> <span class="n">example7</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// declaration</span>
-<span class="p">};</span>
-
-<span class="kt">int</span> <span class="n">example7</span><span class="o">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// definition (don&#39;t put in a header!)</span>
-
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>const static</code> members may be initialized directly in the class<ul>
-<li>No definition is required unless <a href="http://en.cppreference.com/w/cpp/language/definition#ODR-use">odr-used</a></li>
-</ul>
+<li><p>Refine how you manage tables of representative values so you can reuse the structure with different tables for different tests</p>
 </li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">example8</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example8</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// not an odr-use</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>42
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="New">New<a class="anchor-link" href="#New">&#182;</a></h3><ul>
-<li><code>static</code> members may be declared <code>inline</code> <em>(C++17)</em> and <code>constexpr</code><ul>
-<li><code>inline static</code> members do not require a definition at namespace scope</li>
-</ul>
+<li><p>For a given type, you can write a single test for invariants and use it after each operation</p>
 </li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">example9</span> <span class="p">{</span>
-    <span class="kr">inline</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="n">example9</span><span class="o">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">56</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>constexpr static</code> members, like const static members, only require a namespace scope definition if odr-used <em>(until C++17)</em></li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">example10</span> <span class="p">{</span>
-    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example10</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// not an odr-use</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>42
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Since C++17, <code>constexpr</code> implies <code>inline</code> for <code>static</code> member variables<ul>
-<li>No definition is required even for an ODR use</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">example10</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// an odr-use</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>0x1037a0bf4
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Recommendations">Recommendations<a class="anchor-link" href="#Recommendations">&#182;</a></h2><ul>
-<li>If you must use public inheritance<ul>
-<li>Use <code>final</code> and <code>override</code> as appropriate</li>
-</ul>
-</li>
-<li>Use member initialization, delegating, and inheriting constructors to simplify class definitions</li>
-<li>Follow the recommendations for <code>static</code> variables for <code>static</code> member variables</li>
 </ul>
 
 </div>
@@ -12691,17 +12466,37 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
-<li>Find code which does a cast to a derived class then makes virtual function calls<ul>
-<li>Mark the derived class as <code>final</code></li>
-<li>Inspect assembly before and after to see if the compiler is able to devirtualize the calls</li>
+<h2 id="Designing-a-testable-interface">Designing a testable interface<a class="anchor-link" href="#Designing-a-testable-interface">&#182;</a></h2><ul>
+<li>Write complete and <em>regular</em> types</li>
+<li>When the semantics are the same, use the same name</li>
+<li>Keep class interfaces thin<ul>
+<li>Seek a minimal <em>efficient basis</em></li>
+</ul>
+</li>
+<li>Minimize dependencies<ul>
+<li>Try to write each piece of code as a stand alone library</li>
+<li>Use template arguments, callbacks, and delegates to factor out dependencies</li>
 </ul>
 </li>
 </ul>
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Upcoming">Upcoming<a class="anchor-link" href="#Upcoming">&#182;</a></h2><ul>
+<li>September 19th, Jared Wyles will guest lecture on clang-format and clang-tidy tools</li>
+<li>October 3rd, Lecture on Generic Programming</li>
+<li>October 17th, No class (I'll be at Pacific++ in Sydney)</li>
+<li>October 31st, Start Better Code section (finally!)</li>
+</ul>
+
+</div>
+</div>
+</div></section></section>
 </div>
 </div>
 
