@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export PATH="$HOME/miniconda3/bin:$PATH";
+export PATH="$HOME/miniconda3/bin:$PATH"
 # export PATH="/usr/local/opt/node@8/bin:$PATH"
 
 brew update
@@ -16,7 +16,7 @@ git submodule update --recursive --remote
 
 (
 source activate notebook
-# jupyter labextension install --no-build @ijmbarr/jupyterlab_spellchecker
+jupyter labextension install --no-build @ijmbarr/jupyterlab_spellchecker
 jupyter labextension install --no-build @jupyterlab/toc
 jupyter lab build
 )
