@@ -12531,6 +12531,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
     <span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}</span> <span class="p">{</span> <span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="p">}</span>
     <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
+        <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span>
         <span class="n">_remote</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
         <span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
         <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
@@ -12541,6 +12542,29 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </pre></div>
 
 </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+<div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre><span class="ansi-bold">input_line_14:13:9: </span><span class="ansi-magenta-intense-fg ansi-bold">warning: </span><span class="ansi-bold">deleting pointer to incomplete type &#39;library::my_type::implementation&#39; may cause undefined behavior [-Wdelete-incomplete]</span>
+        delete _remote;
+<span class="ansi-green-intense-fg ansi-bold">        ^      ~~~~~~~
+</span><span class="ansi-bold">input_line_14:3:12: </span><span class="ansi-black-intense-fg ansi-bold">note: </span>forward declaration of &#39;library::my_type::implementation&#39;
+    struct implementation;             // forward declaration
+<span class="ansi-green-intense-fg ansi-bold">           ^
+</span></pre>
+</div>
+</div>
+
 </div>
 </div>
 
