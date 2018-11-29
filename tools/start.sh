@@ -38,6 +38,9 @@ source activate notebook;
 jupyter nbconvert ./better-code-class/*.ipynb --to=slides --reveal-prefix=../reveal.js \
     --execute --output-dir=./docs/better-code-class --config=./slides-config/slides_config.py
 
+jupyter nbconvert ./better-code-new/*.ipynb --to=slides --reveal-prefix=../reveal.js \
+    --execute --output-dir=./docs/better-code-new --config=./slides-config/slides_config.py
+
 jupyter nbconvert ./better-code-test/*.ipynb --to=slides --reveal-prefix=../reveal.js \
     --execute --output-dir=./docs/better-code-test --config=./slides-config/slides_config.py
 
@@ -51,6 +54,12 @@ BKPIDS=($!)
     fswatch --print0 --event=Updated --exclude=".*/\..*" ./better-code-class | xargs -0 -I % \
     jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js --execute \
         --output-dir=./docs/better-code-class --config=./slides-config/slides_config.py
+} &
+BKPIDS=($!)
+{
+    fswatch --print0 --event=Updated --exclude=".*/\..*" ./better-code-new | xargs -0 -I % \
+    jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js --execute \
+        --output-dir=./docs/better-code-new --config=./slides-config/slides_config.py
 } &
 BKPIDS+=($!)
 {

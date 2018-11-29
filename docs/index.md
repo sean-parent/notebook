@@ -2,12 +2,21 @@
 title: notebook
 ---
 
-## Better Code Class Slides
+## Better Code
 
 {% assign sorted = site.static_files | where_exp: 'e', 'e.basename contains ".slides"'
     | sort: 'basename' %}
 
 {% assign class = sorted | where_exp: 'e', 'e.path contains "better-code-class"' %}
+{% for e in class %}
+- [{{ e.basename | remove: '.slides' }}]({{ site.baseurl }}{{ e.path }}){% endfor %}
+
+## New In C++ Slides
+
+{% assign sorted = site.static_files | where_exp: 'e', 'e.basename contains ".slides"'
+    | sort: 'basename' %}
+
+{% assign class = sorted | where_exp: 'e', 'e.path contains "better-code-new"' %}
 {% for e in class %}
 - [{{ e.basename | remove: '.slides' }}]({{ site.baseurl }}{{ e.path }}){% endfor %}
 

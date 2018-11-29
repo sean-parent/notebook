@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>09-threads-and-tasks slides</title>
+<title>01-preliminaries slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -11905,11 +11905,9 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Threads">Threads<a class="anchor-link" href="#Threads">&#182;</a></h1><ul>
-<li>Execution context consisting of a stack and processor state running in parallel, or concurrent, to other threads<ul>
-<li>When referring to threads we are referring to <em>preemptive threads</em> which can be scheduled at the instruction level by the OS</li>
-</ul>
-</li>
+<h1 id="Preliminaries">Preliminaries<a class="anchor-link" href="#Preliminaries">&#182;</a></h1><ul>
+<li>If you are using connect locally, mute your speaker and mic</li>
+<li>If you are remote, mute your mic</li>
 </ul>
 
 </div>
@@ -11919,15 +11917,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Why-Threads?">Why Threads?<a class="anchor-link" href="#Why-Threads?">&#182;</a></h2><ul>
-<li>Interactivity and Responsiveness: <em>Concurrency</em>, doing multiple things at once<ul>
-<li>save in the background</li>
-</ul>
-</li>
-<li>Performance: <em>Parallelism</em>, fully utilizing the hardware to perform tasks faster<ul>
-<li>Photoshop <em>bottlenecks</em>, image processing routines</li>
-</ul>
-</li>
+<h2 id="Class-Information">Class Information<a class="anchor-link" href="#Class-Information">&#182;</a></h2><ul>
+<li><a href="https://git.corp.adobe.com/better-code/class/wiki">https://git.corp.adobe.com/better-code/class/wiki</a></li>
 </ul>
 
 </div>
@@ -11937,32 +11928,17 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Threads are one foundational mechanism</li>
-<li><p>Other mechanisms:</p>
-<ul>
-<li>concurrency and parallelism<ul>
-<li>OS processes</li>
-</ul>
-</li>
-<li>parallelism<ul>
-<li>vectorization (SIMD)</li>
-<li>GPU and coprocessors</li>
-</ul>
-</li>
-<li>concurrency<ul>
-<li>fibers (cooperative threads, <em>stack-full</em> coroutines)</li>
-<li>coroutines (<em>stack-less</em>)</li>
-<li>callbacks</li>
-<li>continuations</li>
-<li>channels</li>
-<li>task schedulers (thread pools)</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>concurrency mechanisms can be combined with parallel mechanisms, especially threads, to reduce cost of concurrency through threads alone</p>
-</li>
+<h2 id="Brief-History-of-C++">Brief History of C++<a class="anchor-link" href="#Brief-History-of-C++">&#182;</a></h2><ul>
+<li>1979 Bjarne Stroustrup begins work on C with Classes</li>
+<li>1983 "C with Classes" renamed C++</li>
+<li>1985 <em>The C++ Programming Language</em> is published along with first commercial compiler, Cfront</li>
+<li>1989 C++ 2.0 released with Cfront 2.0</li>
+<li>1998 C++ published as ISO standard (C++98) with the STL from Alex Stepanov and Meng Lee</li>
+<li>2003 C++03 ISO standard, minor revisions to C++98</li>
+<li>2011 C++11 Major language update</li>
+<li>2014 C++14 Revisions, minor additions, corrections to C++11</li>
+<li>2017 C++17 Significant (not quite major) update</li>
+<li>2020 ...</li>
 </ul>
 
 </div>
@@ -11972,7 +11948,7 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="img/machine-mips.png" alt="Unlocking Performance"></p>
+<p>With C++11 there were significant process changes to encourage working groups to publish Technical Specifications (TS's) for experimental features, language and library, in advance of them being incorporated into the language. The process replaced the prior Technical Report (TR1) process which was used to vet library extensions prior to C++11.</p>
 
 </div>
 </div>
@@ -11981,32 +11957,16 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="img/2017-01-18-concurrency/2017-01-18-concurrency.001.png" alt="Amdahl&#39;s Law"></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="img/2017-01-18-concurrency/2017-01-18-concurrency.002.png" alt="Amdahl&#39;s Law"></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Some amount of serialization is unavoidable<ul>
-<li>The memory bus is a shared resource</li>
-<li>Heap allocations require some serialization</li>
-<li>Lock free constructs such as atomics are serialized</li>
-<li>Screen resources, main event queue, are serialized</li>
+<h2 id="C++11,-C++14,-C++17...-C++20,-TSs...">C++11, C++14, C++17... C++20, TSs...<a class="anchor-link" href="#C++11,-C++14,-C++17...-C++20,-TSs...">&#182;</a></h2><h3 id="Clang">Clang<a class="anchor-link" href="#Clang">&#182;</a></h3><ul>
+<li>2000 LLVM project is started at University of Illinois at Urbana-Champaign by Vikram Adve and Chris Lattner<ul>
+<li>later adding ObjC and C support</li>
 </ul>
 </li>
+<li>2005 Apple hires Lattner, initially working on Clang OpenGL compiler</li>
+<li>2009 GCC runtime library moves to GPLv3 license, Apple (and others) move to add C++ support to Clang</li>
+<li>2010 Clang++ able to build Boost libraries and passes nearly all tests</li>
+<li>Clang now actively developed by Apple, Microsoft, Google, ARM, Sony, Intel, AMD and others</li>
+<li>LLVM has spawned numerous other languages, including Swift</li>
 </ul>
 
 </div>
@@ -12016,8 +11976,8 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Serialization-&amp;-Thread-Safety">Serialization &amp; Thread Safety<a class="anchor-link" href="#Serialization-&amp;-Thread-Safety">&#182;</a></h2><ul>
-<li>Serialization is required when one thread is modifying memory while another thread is reading or modifying the same memory location</li>
+<h3 id="Boost">Boost<a class="anchor-link" href="#Boost">&#182;</a></h3><ul>
+<li>1998 Beman Dawes and Robert Klarer propose the idea for creating a web based library repository</li>
 </ul>
 
 </div>
@@ -12027,125 +11987,111 @@ a.anchor-link {
 </div>
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><em>thread safe</em> object instances can be safely shared between threads<ul>
-<li>thread safety may apply to a subset of the operations on an object</li>
-<li><code>const</code> objects, including a reference to a <code>const</code> object, is assumed to not be mutable for the duration of use and so can be safely shared<ul>
-<li>A <code>mutable</code> data member <em>requires</em> synchronization<ul>
-<li>i.e. a cache</li>
+<h3 id="The-Free-Lunch-Is-Over">The Free Lunch Is Over<a class="anchor-link" href="#The-Free-Lunch-Is-Over">&#182;</a></h3><ul>
+<li>2005 Herb Sutter publishes <a href="http://www.gotw.ca/publications/concurrency-ddj.htm"><em>The Free Lunch Is Over: A Fundamental Turn Toward Concurrency in Software</em></a></li>
 </ul>
-</li>
-</ul>
-</li>
-<li>The standard library assumes that <code>const</code> implies thread safe</li>
-</ul>
-</li>
+
+</div>
+</div>
+</div></div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Language-Evolution">Language Evolution<a class="anchor-link" href="#Language-Evolution">&#182;</a></h3><ul>
+<li>1987 Need for common functional language identified and work on <a href="http://haskell.cs.yale.edu/wp-content/uploads/2011/02/history.pdf">Haskell begins</a></li>
+<li>2005 Joel Spolsky publishes <a href="https://www.joelonsoftware.com/2005/12/29/the-perils-of-javaschools-2/"><em>The Perils of JavaSchools</em></a></li>
+<li>JavaScript Transpilers: Babel, CoffeeScript, TypeScript, Dart, GWT, <a href="http://elm-lang.org/">Elm</a>, ...</li>
 </ul>
 
 </div>
 </div>
 </div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Online-Resources">Online Resources<a class="anchor-link" href="#Online-Resources">&#182;</a></h2><h3 id="Information:">Information:<a class="anchor-link" href="#Information:">&#182;</a></h3><ul>
+<li><a href="https://www.reddit.com/r/cpp/">r/cpp</a>: Reddit forum to find news and blogs</li>
+<li><a href="https://cpplang.now.sh/">Cpplang Slack</a>: Get your questions answered fast</li>
+<li><a href="http://cppcast.com/">CppCast</a>: The only podcast dedicated to C++</li>
+<li><a href="https://isocpp.org/">isocpp</a>: The standard committee and recent news</li>
+<li><a href="https://stackoverflow.com/questions/tagged/c%2B%2B">stackoverflow</a>: Get your questions answered well</li>
+</ul>
+<h3 id="Reference:">Reference:<a class="anchor-link" href="#Reference:">&#182;</a></h3><ul>
+<li><a href="http://en.cppreference.com/w/">cppreference</a>: The best online reference for C++</li>
+<li><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2017/n4700.pdf">working draft</a>: The definitive answer</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Tools:">Tools:<a class="anchor-link" href="#Tools:">&#182;</a></h3><ul>
+<li><a href="https://godbolt.org/">Compiler Explorer (godbolt)</a>: See what the code generates</li>
+<li><a href="http://coliru.stacked-crooked.com/">Coliru</a>: Just run some code</li>
+<li><a href="https://tbfleming.github.io/cib/">Clang in Browser</a>: Demo of Clang to wasm in the browser</li>
+<li><a href="http://quick-bench.com/">Quick C++ Benchmarks</a>: Handy way to run small benchmarks and generate graphs</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Other-Tools">Other Tools<a class="anchor-link" href="#Other-Tools">&#182;</a></h2><ul>
+<li><a href="http://clang.llvm.org/extra/clang-tidy/">clang-tidy</a>: Diagnose and fix your code</li>
+<li><a href="https://include-what-you-use.org/">include-what-you-use</a>: Help to prune the include lists and add direct dependencies</li>
+<li><a href="https://root.cern.ch/cling">cling</a>: Interpreted C++</li>
+<li><a href="https://jupyter.org/">jupyter</a>: Data science notebook, can work with cling</li>
+<li>Xcode includes clang static analyzer and sanitizers</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Moving to <code>cmake</code> would simplify the process of using many tools.</p>
+
+</div>
+</div>
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div>
+<div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Demo">Demo<a class="anchor-link" href="#Demo">&#182;</a></h1>
+</div>
+</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">table</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="n">string</span> <span class="n">_names</span><span class="p">[</span><span class="mi">4</span><span class="p">]{</span>
-        <span class="s">&quot;Able&quot;</span><span class="p">,</span>
-        <span class="s">&quot;Bill&quot;</span><span class="p">,</span>
-        <span class="s">&quot;Colin&quot;</span><span class="p">,</span>
-        <span class="s">&quot;Zack&quot;</span>
-    <span class="p">};</span>
-    <span class="k">mutable</span> <span class="n">string</span><span class="o">*</span> <span class="n">_cache</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// Not thread safe!</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">size_t</span> <span class="n">lookup</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">_cache</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="n">_cache</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">_cache</span> <span class="o">-</span> <span class="n">begin</span><span class="p">(</span><span class="n">_names</span><span class="p">);</span>
-        <span class="k">return</span> <span class="nf">lower_bound</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">_names</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">_names</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">begin</span><span class="p">(</span><span class="n">_names</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">a</span> <span class="o">=</span> <span class="p">{</span><span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">10</span><span class="p">};</span>
+<span class="n">sort</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
 </pre></div>
 
 </div>
 </div>
 </div>
 
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><em>conditionally thread safe</em> object instances can be safely used by a single thread per instance<ul>
-<li>This is the default behavior unless otherwise specified</li>
-<li><em>As thread safe as an <code>int</code></em></li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><em>not thread safe</em> object instances must all be used by the same, or a specific, thread<ul>
-<li>This implies unsynchronized shared state between instance<ul>
-<li>shared pointers to unsynchronized mutable objects</li>
-<li>shared access to unsynchronized global variables</li>
-<li>unsynchronized mutable members</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>All current standard containers are <em>conditionally</em> thread safe</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Mutex-Model-of-Serialization">Mutex Model of Serialization<a class="anchor-link" href="#Mutex-Model-of-Serialization">&#182;</a></h2><ul>
-<li>To make a <em>not thread safe</em> class <em>conditionally thread safe</em> we can use a <code>mutex</code></li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="k">auto</span> <span class="n">pool</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;&amp;</span> <span class="p">{</span>
-        <span class="k">static</span> <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">_string</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">interned_string</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_string</span><span class="p">(</span><span class="o">&amp;*</span><span class="n">pool</span><span class="p">().</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">).</span><span class="n">first</span><span class="p">)</span> <span class="p">{}</span>
-    <span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">string</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="n">_string</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="n">interned_string</span> <span class="nf">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span><span class="p">.</span><span class="n">string</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -12162,7 +12108,10 @@ a.anchor-link {
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Hello
+<pre>10
+20
+30
+40
 </pre>
 </div>
 </div>
@@ -12170,477 +12119,6 @@ a.anchor-link {
 </div>
 </div>
 
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="kr">thread</span> <span class="nf">t</span><span class="p">([]{</span>
-    <span class="n">interned_string</span> <span class="n">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="n">interned_string</span> <span class="nf">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span><span class="p">.</span><span class="n">string</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-
-<span class="n">t</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
-</pre></div>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-<pre><code>==================
-WARNING: ThreadSanitizer: data race (pid=16636)
-  Write of size 8 at 0x0001000688c8 by main thread:
-  * #0 std::__1::__hash_table&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;::__rehash(unsigned long) __hash_table:2122 (scratch:x86_64+0x1000232a8)
-    #1 std::__1::__hash_table&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;::rehash(unsigned long) __hash_table:2098 (scratch:x86_64+0x10001cb4a)
-    #2 interned_string::interned_string(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) __hash_table:1980 (scratch:x86_64+0x10000ee20)
-    #3 interned_string::interned_string(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) main.cpp:174 (scratch:x86_64+0x1000026a1)
-    #4 main main.cpp:184 (scratch:x86_64+0x1000018cd)
-
-  Previous read of size 8 at 0x0001000688c8 by thread T4:
-  * #0 interned_string::interned_string(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) __hash_table:806 (scratch:x86_64+0x10000a137)
-    #1 interned_string::interned_string(std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; const&amp;) main.cpp:174 (scratch:x86_64+0x1000026a1)
-    #2 main::$_0::operator()() const main.cpp:181 (scratch:x86_64+0x10003ed72)
-    #3 void* std::__1::__thread_proxy&lt;std::__1::tuple&lt;std::__1::unique_ptr&lt;std::__1::__thread_struct, std::__1::default_delete&lt;std::__1::__thread_struct&gt; &gt;, main::$_0&gt; &gt;(void*) type_traits:4291 (scratch:x86_64+0x10003db4b)
-
-  Issue is caused by frames marked with "*".
-
-  Location is global 'interned_string::pool()::result' at 0x0001000688c0 (scratch+0x0001000688c8)
-
-  Thread T4 (tid=14404692, running) created by main thread at:
-    #0 pthread_create &lt;null&gt; (libclang_rt.tsan_osx_dynamic.dylib:x86_64h+0x2a34d)
-    #1 std::__1::thread::thread&lt;main::$_0, void&gt;(main::$_0&amp;&amp;) __threading_support:310 (scratch:x86_64+0x10003a63e)
-    #2 std::__1::thread::thread&lt;main::$_0, void&gt;(main::$_0&amp;&amp;) thread:354 (scratch:x86_64+0x1000025c1)
-    #3 main main.cpp:180 (scratch:x86_64+0x1000014fe)
-
-SUMMARY: ThreadSanitizer: data race __hash_table:2122 in std::__1::__hash_table&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt;, std::__1::hash&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::equal_to&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt;, std::__1::allocator&lt;std::__1::basic_string&lt;char, std::__1::char_traits&lt;char&gt;, std::__1::allocator&lt;char&gt; &gt; &gt; &gt;::__rehash(unsigned long)
-==================
-ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended information about the report.
-(lldb)</code></pre>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="n">global</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-<span class="kr">thread</span> <span class="n">t</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">global</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span> <span class="p">});</span>
-
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">global</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-
-<span class="n">t</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
-</pre></div>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-<pre><code>==================
-WARNING: ThreadSanitizer: data race (pid=16772)
-  Read of size 1 at 0x7ffeefbff45b by main thread:
-  * #0 main main.cpp:181 (scratch:x86_64+0x100000cff)
-
-  Previous write of size 1 at 0x7ffeefbff45b by thread T4:
-  * #0 main::$_0::operator()() const main.cpp:180 (scratch:x86_64+0x10001d515)
-    #1 void* std::__1::__thread_proxy&lt;std::__1::tuple&lt;std::__1::unique_ptr&lt;std::__1::__thread_struct, std::__1::default_delete&lt;std::__1::__thread_struct&gt; &gt;, main::$_0&gt; &gt;(void*) type_traits:4291 (scratch:x86_64+0x10001c64f)
-
-  Issue is caused by frames marked with "*".
-
-  Location is stack of main thread.
-
-  Thread T4 (tid=14425077, finished) created by main thread at:
-    #0 pthread_create &lt;null&gt; (libclang_rt.tsan_osx_dynamic.dylib:x86_64h+0x2a34d)
-    #1 std::__1::thread::thread&lt;main::$_0, void&gt;(main::$_0&amp;&amp;) __threading_support:310 (scratch:x86_64+0x10001906b)
-    #2 std::__1::thread::thread&lt;main::$_0, void&gt;(main::$_0&amp;&amp;) thread:354 (scratch:x86_64+0x100001991)
-    #3 main main.cpp:180 (scratch:x86_64+0x100000c09)
-
-SUMMARY: ThreadSanitizer: data race main.cpp:181 in main
-==================
-ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended information about the report.
-(lldb)</code></pre>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">shared_pool</span> <span class="p">{</span>
-        <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
-        <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_pool</span><span class="p">;</span>
-
-        <span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="nf">insert</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
-            <span class="k">return</span> <span class="o">&amp;*</span><span class="n">_pool</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">).</span><span class="n">first</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">};</span>
-
-    <span class="k">static</span> <span class="k">auto</span> <span class="nf">pool</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">shared_pool</span><span class="o">&amp;</span> <span class="p">{</span>
-        <span class="k">static</span> <span class="n">shared_pool</span> <span class="n">result</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">_string</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">interned_string</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_string</span><span class="p">(</span><span class="n">pool</span><span class="p">().</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="p">{}</span>
-    <span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">string</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="n">_string</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kr">thread</span> <span class="nf">t</span><span class="p">([]{</span>
-    <span class="n">interned_string</span> <span class="n">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
-<span class="p">});</span>
-
-<span class="n">interned_string</span> <span class="nf">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">str</span><span class="p">.</span><span class="n">string</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-
-<span class="n">t</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Hello
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="img/mutex.png" alt="mutex"></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p>“It can be shown that programs that correctly use mutexes and <code>memory_order_seq_cst</code> operations to prevent all data races and use no other synchronization operations behave as if the operations executed by their constituent threads were simply interleaved, with each value computation of an object being taken from the last side effect on that object in that interleaving. This is normally referred to as ‘sequential consistency.’”
-– C++11 Standard 1.10.21</p>
-</blockquote>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Sequential-Processes">Sequential Processes<a class="anchor-link" href="#Sequential-Processes">&#182;</a></h2><ul>
-<li>In a concurrent system a <em>task</em> is a unit of work<ul>
-<li>i.e. the single execution of a function object</li>
-</ul>
-</li>
-<li>A <em>sequential process</em> is a sequence of tasks</li>
-<li>The correct use of mutexes can be replaced with a sequential process</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="n">task</span> <span class="o">=</span> <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span><span class="p">;</span>
-
-    <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
-    <span class="n">condition_variable</span> <span class="n">_condition</span><span class="p">;</span>
-    <span class="n">deque</span><span class="o">&lt;</span><span class="n">task</span><span class="o">&gt;</span> <span class="n">_queue</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_done</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-
-    <span class="kt">void</span> <span class="nf">run_loop</span><span class="p">();</span>
-
-    <span class="kr">thread</span> <span class="n">_thread</span><span class="p">{[</span><span class="k">this</span><span class="p">]</span> <span class="p">{</span> <span class="n">run_loop</span><span class="p">();</span> <span class="p">}};</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="o">~</span><span class="n">sequential_process</span><span class="p">();</span>
-    <span class="kt">void</span> <span class="nf">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="n">sequential_process</span><span class="o">::~</span><span class="n">sequential_process</span><span class="p">()</span> <span class="p">{</span>
-    <span class="p">{</span>
-        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
-        <span class="n">_done</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">_condition</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>
-    <span class="n">_thread</span><span class="p">.</span><span class="n">join</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-    <span class="p">{</span>
-        <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
-        <span class="n">_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
-    <span class="p">}</span>
-    <span class="n">_condition</span><span class="p">.</span><span class="n">notify_one</span><span class="p">();</span>
-<span class="p">}</span>
-    
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">run_loop</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">task</span> <span class="n">work</span><span class="p">;</span>
-        <span class="p">{</span>
-            <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
-
-            <span class="k">while</span> <span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">_done</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">_condition</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">);</span>
-            <span class="p">}</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="k">return</span><span class="p">;</span>
-
-            <span class="n">work</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
-            <span class="n">_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
-        <span class="p">}</span>
-        <span class="n">work</span><span class="p">();</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-    
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="n">sequential_process</span> <span class="n">printer</span><span class="p">;</span>
-<span class="n">sequential_process</span> <span class="n">p1</span><span class="p">;</span>
-<span class="n">sequential_process</span> <span class="n">p2</span><span class="p">;</span>
-<span class="n">p1</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;p1-begin</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
-<span class="n">p1</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;p1-step_1</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
-<span class="n">p1</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;p1-step_2</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
-<span class="n">p1</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;p1-end</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
-
-<span class="n">p2</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  p2-begin</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
-<span class="n">p2</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  p2-step_1</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
-<span class="n">p2</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  p2-step_2</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
-<span class="n">p2</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">printer</span><span class="p">.</span><span class="n">async</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;  p2-end</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">});});</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-<div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>p1-begin
-p1-step_1
-p1-step_2
-p1-end
-  p2-begin
-  p2-step_1
-  p2-step_2
-  p2-end
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div><aside class="notes">
-
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p>Comment that it is important for printer to be destructed last.</p>
-
-</div>
-</div>
-</div>
-</aside></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Advantages-of-Sequential-Processes-Model">Advantages of Sequential Processes Model<a class="anchor-link" href="#Advantages-of-Sequential-Processes-Model">&#182;</a></h3><ul>
-<li>Significant body of research into writing correct Communicating Sequential Processes<ul>
-<li>C. A. R. Hoare's work on CSP is a major reason Hoare is Turing Award winner</li>
-<li><a href="http://www.usingcsp.com/cspbook.pdf">http://www.usingcsp.com/cspbook.pdf</a></li>
-</ul>
-</li>
-<li>No explicit synchronization primitives or associated errors</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Serialization time is fixed to operations under the lock</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
-    <span class="n">_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
-<span class="p">}</span>
-</pre></div>
-<hr>
-<div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
-
-    <span class="k">while</span> <span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">_done</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">_condition</span><span class="p">.</span><span class="n">wait</span><span class="p">(</span><span class="n">lock</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">empty</span><span class="p">())</span> <span class="k">return</span><span class="p">;</span>
-
-    <span class="n">work</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">_queue</span><span class="p">.</span><span class="n">front</span><span class="p">());</span>
-    <span class="n">_queue</span><span class="p">.</span><span class="n">pop_front</span><span class="p">();</span>
-<span class="p">}</span>
-</pre></div>
-<ul>
-<li>Reducing overhead and time under lock improves performance</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>With a mutex, more work done in a task under a lock decreases performance dramatically</li>
-<li>With a sequential process, more done in the task increases performance by reducing amortized overhead<ul>
-<li>apollo is written as a pair of communicating sequential processes<ul>
-<li>the core is <em>all</em> of Photoshop</li>
-<li>the surface is the UI thread</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
-<li>Rewrite intern_string::shared_pool as a sequential process<ul>
-<li>Include a paragraph about the pros/cons of doing so</li>
-</ul>
-</li>
-<li>Bonus: identify as many areas for improvement in the sequential process implementation<ul>
-<li>Include prose on the wiki or send a pull request</li>
-</ul>
-</li>
-</ul>
-<p><a href="https://git.corp.adobe.com/better-code/class/blob/master/09-threads-and-tasks.cpp">https://git.corp.adobe.com/better-code/class/blob/master/09-threads-and-tasks.cpp</a></p>
-
-</div>
-</div>
 </div>
 </div>
 </div>
