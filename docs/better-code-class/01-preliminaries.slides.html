@@ -12530,12 +12530,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
     <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
 
     <span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}</span> <span class="p">{</span> <span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="p">}</span>
-    <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
-        <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span>
-        <span class="n">_remote</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
-        <span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
-        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="p">}</span> <span class="c1">// namespace library</span>
@@ -12545,26 +12540,38 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[14]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">library</span> <span class="p">{</span>
 
+<span class="k">struct</span> <span class="n">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">_y</span><span class="p">;</span>
+    <span class="c1">//...</span>
+<span class="p">};</span>
 
-<div class="output_area">
+<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">}}</span> <span class="p">{}</span>
+<span class="n">my_type</span><span class="o">::~</span><span class="n">my_type</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span> <span class="p">}</span>
+<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}}</span> <span class="p">{}</span>
+<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span><span class="n">_remote</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
+    <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span>
+    <span class="n">_remote</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
 
-<div class="prompt"></div>
+<span class="p">}</span> <span class="c1">// namespace library</span>
+</pre></div>
 
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre><span class="ansi-bold">input_line_14:13:9: </span><span class="ansi-magenta-intense-fg ansi-bold">warning: </span><span class="ansi-bold">deleting pointer to incomplete type &#39;library::my_type::implementation&#39; may cause undefined behavior [-Wdelete-incomplete]</span>
-        delete _remote;
-<span class="ansi-green-intense-fg ansi-bold">        ^      ~~~~~~~
-</span><span class="ansi-bold">input_line_14:3:12: </span><span class="ansi-black-intense-fg ansi-bold">note: </span>forward declaration of &#39;library::my_type::implementation&#39;
-    struct implementation;             // forward declaration
-<span class="ansi-green-intense-fg ansi-bold">           ^
-</span></pre>
 </div>
-</div>
-
 </div>
 </div>
 
@@ -12592,47 +12599,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 </div>
 </div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div>
-<div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Recall our prior implementation</li>
-</ul>
-
-</div>
-</div>
 </div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">library</span> <span class="p">{</span>
-
-<span class="k">struct</span> <span class="n">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">_y</span><span class="p">;</span>
-    <span class="c1">//...</span>
-<span class="p">};</span>
-
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">}}</span> <span class="p">{}</span>
-<span class="n">my_type</span><span class="o">::~</span><span class="n">my_type</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span> <span class="p">}</span>
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}}</span> <span class="p">{}</span>
-<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-    <span class="o">*</span><span class="n">_remote</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
-    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-<span class="p">}</span>
-    
-<span class="p">}</span> <span class="c1">// namespace library</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-</div></div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div>
 <div class="inner_cell">
