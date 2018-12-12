@@ -18,6 +18,7 @@ git submodule update --recursive --remote
 source activate notebook
 jupyter labextension install --no-build @ijmbarr/jupyterlab_spellchecker
 jupyter labextension install --no-build @jupyterlab/toc
+jupyter labextension install --no-build @jupyterlab/celltags
 jupyter lab build
 )
 
