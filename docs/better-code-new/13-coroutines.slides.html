@@ -13344,9 +13344,13 @@ Program ended with exit code: 0</code></pre>
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v0</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v0</span>
 </pre></div>
 
     </div>
@@ -13366,13 +13370,17 @@ Program ended with exit code: 0</code></pre>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v1</span>
 </pre></div>
 
     </div>
@@ -13395,20 +13403,24 @@ Program ended with exit code: 0</code></pre>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    
-    <span class="kt">void</span> <span class="p">(</span><span class="n">my_coroutine_t</span><span class="o">::*</span> <span class="n">_resume</span><span class="p">)();</span>
-    
-    <span class="n">my_coroutine_t</span><span class="p">()</span> <span class="o">:</span> <span class="n">_resume</span><span class="p">{</span><span class="o">&amp;</span><span class="n">my_coroutine_t</span><span class="o">::</span><span class="n">state_01</span><span class="p">}</span> <span class="p">{</span> <span class="p">}</span>
-    
+
+    <span class="kt">void</span> <span class="p">(</span><span class="n">my_coroutine_t</span><span class="o">::*</span><span class="n">_resume</span><span class="p">)();</span>
+
+    <span class="n">my_coroutine_t</span><span class="p">()</span> <span class="o">:</span> <span class="n">_resume</span><span class="p">{</span><span class="o">&amp;</span><span class="n">my_coroutine_t</span><span class="o">::</span><span class="n">state_01</span><span class="p">}</span> <span class="p">{}</span>
+
     <span class="kt">void</span> <span class="n">resume</span><span class="p">()</span> <span class="p">{</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;*</span><span class="n">_resume</span><span class="p">)();</span> <span class="p">}</span>
-    
+
     <span class="kt">void</span> <span class="n">state_01</span><span class="p">();</span> <span class="c1">//...</span>
 <span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v2</span>
 </pre></div>
 
     </div>
@@ -13431,24 +13443,28 @@ Program ended with exit code: 0</code></pre>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="n">my_coroutine_t</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    
-    <span class="kt">void</span> <span class="p">(</span><span class="n">my_coroutine_t</span><span class="o">::*</span> <span class="n">_resume</span><span class="p">)();</span>
+
+    <span class="kt">void</span> <span class="p">(</span><span class="n">my_coroutine_t</span><span class="o">::*</span><span class="n">_resume</span><span class="p">)();</span>
     <span class="kt">int</span> <span class="n">_promise</span><span class="p">;</span>
-    
-    <span class="n">my_coroutine_t</span><span class="p">()</span> <span class="o">:</span> <span class="n">_resume</span><span class="p">{</span><span class="o">&amp;</span><span class="n">my_coroutine_t</span><span class="o">::</span><span class="n">state_01</span><span class="p">}</span> <span class="p">{</span> <span class="p">}</span>
-    
+
+    <span class="n">my_coroutine_t</span><span class="p">()</span> <span class="o">:</span> <span class="n">_resume</span><span class="p">{</span><span class="o">&amp;</span><span class="n">my_coroutine_t</span><span class="o">::</span><span class="n">state_01</span><span class="p">}</span> <span class="p">{}</span>
+
     <span class="kt">void</span> <span class="n">resume</span><span class="p">()</span> <span class="p">{</span> <span class="p">(</span><span class="k">this</span><span class="o">-&gt;*</span><span class="n">_resume</span><span class="p">)();</span> <span class="p">}</span>
-    
+
     <span class="kt">void</span> <span class="n">state_01</span><span class="p">()</span> <span class="p">{</span>
-        <span class="n">_promise</span> <span class="o">=</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span> <span class="c1">// co_yield n++</span>
+        <span class="n">_promise</span> <span class="o">=</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span>                      <span class="c1">// co_yield n++</span>
         <span class="n">_resume</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">my_coroutine_t</span><span class="o">::</span><span class="n">state_01</span><span class="p">;</span> <span class="c1">// on resume, loop</span>
     <span class="p">}</span>
 <span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v3</span>
 </pre></div>
 
     </div>
@@ -13468,24 +13484,22 @@ Program ended with exit code: 0</code></pre>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v3</span> <span class="p">{</span>
 
 <span class="k">using</span> <span class="n">coroutine_handle</span> <span class="o">=</span> <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">my_coroutine_t</span><span class="o">&gt;</span><span class="p">;</span>
 
 <span class="k">struct</span> <span class="n">generator</span> <span class="p">{</span>
     <span class="n">coroutine_handle</span> <span class="n">_handle</span><span class="p">;</span>
-    <span class="n">generator</span><span class="p">(</span><span class="n">coroutine_handle</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_handle</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">h</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">generator</span><span class="p">(</span><span class="n">coroutine_handle</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_handle</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">h</span><span class="p">))</span> <span class="p">{}</span>
     <span class="c1">// ...</span>
 <span class="p">};</span>
 
-<span class="n">generator</span> <span class="nf">my_coroutine</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">generator</span><span class="p">(</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">my_coroutine_t</span><span class="o">&gt;</span><span class="p">());</span>
-<span class="p">}</span>
+<span class="n">generator</span> <span class="nf">my_coroutine</span><span class="p">()</span> <span class="p">{</span> <span class="k">return</span> <span class="n">generator</span><span class="p">(</span><span class="n">make_unique</span><span class="o">&lt;</span><span class="n">my_coroutine_t</span><span class="o">&gt;</span><span class="p">());</span> <span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
+<span class="p">}</span> <span class="c1">// namespace v3</span>
 </pre></div>
 
     </div>
@@ -13505,22 +13519,22 @@ Program ended with exit code: 0</code></pre>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="n">generator</span> <span class="p">{</span>
     <span class="n">coroutine_handle</span> <span class="n">_handle</span><span class="p">;</span>
-    <span class="n">generator</span><span class="p">(</span><span class="n">coroutine_handle</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_handle</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">h</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
-    
+    <span class="n">generator</span><span class="p">(</span><span class="n">coroutine_handle</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_handle</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">h</span><span class="p">))</span> <span class="p">{}</span>
+
     <span class="kt">int</span> <span class="n">get</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">_handle</span><span class="o">-&gt;</span><span class="n">resume</span><span class="p">();</span>
         <span class="k">return</span> <span class="n">_handle</span><span class="o">-&gt;</span><span class="n">_promise</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
+<span class="p">}</span> <span class="c1">// namespace v3</span>
 </pre></div>
 
     </div>
@@ -13540,7 +13554,7 @@ Program ended with exit code: 0</code></pre>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[15]:</div>
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="n">generator</span> <span class="n">x</span> <span class="o">=</span> <span class="n">my_coroutine</span><span class="p">();</span>
@@ -13710,7 +13724,7 @@ done</code></pre>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span>

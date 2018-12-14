@@ -13269,7 +13269,9 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v0</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="n">shared_pool</span> <span class="p">{</span>
         <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
         <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_pool</span><span class="p">;</span>
@@ -13286,10 +13288,13 @@ a.anchor-link {
     <span class="p">}</span>
 
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">_string</span><span class="p">;</span>
+
 <span class="k">public</span><span class="o">:</span>
     <span class="n">interned_string</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_string</span><span class="p">(</span><span class="n">pool</span><span class="p">().</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="p">{}</span>
     <span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">str</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="n">_string</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v0</span>
 </pre></div>
 
     </div>
@@ -13339,7 +13344,7 @@ a.anchor-link {
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">shared_pool</span> <span class="p">{</span>
@@ -13403,10 +13408,12 @@ a.anchor-link {
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
     <span class="c1">// struct shared_pool</span>
 
     <span class="k">static</span> <span class="k">auto</span> <span class="n">pool</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">shared_pool</span><span class="o">&amp;</span> <span class="p">{</span>
@@ -13415,17 +13422,20 @@ a.anchor-link {
     <span class="p">}</span>
 
     <span class="k">const</span> <span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="o">*</span> <span class="n">_string</span><span class="p">;</span>
-    
+
     <span class="n">interned_string</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="o">:</span> <span class="n">_string</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="p">{}</span>
+
 <span class="k">public</span><span class="o">:</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="c1">// F models void(interned_string)</span>
     <span class="k">static</span> <span class="kt">void</span> <span class="n">make</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">,</span> <span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">pool</span><span class="p">().</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="p">[</span><span class="n">_f</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)](</span><span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">s</span><span class="p">){</span>
+        <span class="n">pool</span><span class="p">().</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="p">[</span><span class="n">_f</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)](</span><span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">_f</span><span class="p">(</span><span class="n">interned_string</span><span class="p">(</span><span class="n">s</span><span class="p">));</span>
         <span class="p">});</span>
     <span class="p">}</span>
     <span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">str</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="n">_string</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v1</span>
 </pre></div>
 
     </div>
@@ -13445,14 +13455,17 @@ a.anchor-link {
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">interned_string</span><span class="o">::</span><span class="n">make</span><span class="p">(</span><span class="s">&quot;Hello World&quot;</span><span class="n">s</span><span class="p">,</span> <span class="p">[](</span><span class="k">const</span> <span class="n">interned_string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">){</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">});</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v1</span><span class="p">;</span>
 
-<span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span>
+    <span class="n">interned_string</span><span class="o">::</span><span class="n">make</span><span class="p">(</span>
+        <span class="s">&quot;Hello World&quot;</span><span class="n">s</span><span class="p">,</span> <span class="p">[](</span><span class="k">const</span> <span class="n">interned_string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
+
+    <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="mi">1</span><span class="n">s</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 
     </div>
@@ -13534,7 +13547,7 @@ a.anchor-link {
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
@@ -13580,7 +13593,7 @@ answer: 42
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
@@ -13693,7 +13706,7 @@ answer: error: failure
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="c1">// F models R()</span>
