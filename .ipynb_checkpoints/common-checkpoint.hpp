@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iterator>
 #include <memory>
+#include <new>
 #include <numeric>
 #include <string>
 #include <typeinfo>
