@@ -34,7 +34,7 @@ trap 'for pid in $BKPIDS; do kill $pid; done; exit' SIGINT
     fi
 } &
 
-source activate notebook;
+source activate notebook
 jupyter nbconvert ./better-code-class/*.ipynb --to=slides --reveal-prefix=../reveal.js \
     --execute --output-dir=./docs/better-code-class --config=./slides-config/slides_config.py
 
@@ -70,5 +70,3 @@ BKPIDS+=($!)
 BKPIDS+=($!)
 
 browser-sync start --config bs-config.js
-
-
