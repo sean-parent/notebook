@@ -9,7 +9,7 @@
 ```
 xcode-select --install
 ```
-- install miniconda for Python 3.6
+- install miniconda for Python 3.7
 	- download the install script [here](https://conda.io/miniconda.html)
 	- execute the downloaded script
 	- when prompted `Do you wish the installer to prepend the Miniconda3 install location to PATH in your /Users/<name>/.bash_profile ? [yes|no]` answer no
@@ -60,3 +60,39 @@ gem install bundler
 ```
 ./tools/prepare.sh
 ```
+
+## Windows installation instructions to run locally
+
+The xeus-cling addition to Jupyter doesn't yet support Windows native. However, if you are running Windowns 10, you can run inside of the Windows Linux Subsystem.
+
+- [Enable the Windows Linux Subsystem and install Ubuntu from the app store.](https://docs.microsoft.com/en-us/windows/wsl/install-win10)
+
+- clone this repo and cd to the directory (can be done from Windows gui, window file system appears as `/mnt/c/...` inside Linux)
+- Make sure your packages are up-to-date.
+```
+sudo apt update
+```
+- Install gcc
+```
+sudo apt install gcc
+```
+- install miniconda for Python 3.7
+	- download the install script [here](https://conda.io/miniconda.html)
+	- execute the downloaded script
+	- when prompted `Do you wish the installer to prepend the Miniconda3 install location to PATH in your /Users/<name>/.bash_profile ? [yes|no]` answer yes
+
+- create the conda environment
+```
+conda env create
+```
+- install utilities (REVISIT (sparent) : ruby may be redundant, implied by ruby-dev?)
+```
+sudo apt install npm
+sudo apt install fswatch
+sudo apt install ruby
+sudo apt install ruby-dev
+sudo apt install zlib1g-dev
+npm install -g browser-sync
+sudo gem install bundler
+```
+Note: Need linux update script, must run `sudo bundle update` prior to `tools/start.sh`
