@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>19-static-variables slides</title>
+<title>03-efficiency-checkpoint slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13238,90 +13238,137 @@ a.anchor-link {
 <div class="reveal">
 <div class="slides">
 <section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../common.hpp&quot;</span><span class="cp"></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="static-&amp;-thread_local-variables"><code>static</code> &amp; <code>thread_local</code> variables<a class="anchor-link" href="#static-&amp;-thread_local-variables">&#182;</a></h1>
+<h1 id="Efficiency-&amp;-Expressiveness">Efficiency &amp; Expressiveness<a class="anchor-link" href="#Efficiency-&amp;-Expressiveness">&#182;</a></h1><h2 id="Recap">Recap<a class="anchor-link" href="#Recap">&#182;</a></h2><h3 id="Definition-of-Type-and-Regular">Definition of <em>Type</em> and <em>Regular</em><a class="anchor-link" href="#Definition-of-Type-and-Regular">&#182;</a></h3><h3 id="Semantics-and-Complexity">Semantics and Complexity<a class="anchor-link" href="#Semantics-and-Complexity">&#182;</a></h3><h3 id="Computational-Basis-and-Computationally-Complete">Computational Basis and Computationally Complete<a class="anchor-link" href="#Computational-Basis-and-Computationally-Complete">&#182;</a></h3><h3 id="Equationally-Complete">Equationally Complete<a class="anchor-link" href="#Equationally-Complete">&#182;</a></h3><h3 id="Whole/Part-Relationship">Whole/Part Relationship<a class="anchor-link" href="#Whole/Part-Relationship">&#182;</a></h3><h3 id="Safety">Safety<a class="anchor-link" href="#Safety">&#182;</a></h3><h3 id="Canonical-Type-with-and-without-Remote-Parts">Canonical Type with and without Remote Parts<a class="anchor-link" href="#Canonical-Type-with-and-without-Remote-Parts">&#182;</a></h3>
 </div>
 </div>
 </div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="static-&amp;-non-local-variables"><code>static</code> &amp; non-local variables<a class="anchor-link" href="#static-&amp;-non-local-variables">&#182;</a></h2><ul>
-<li>initialization of <code>static</code> and non-local variables with dynamic initialization is thread-safe</li>
-</ul>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
+<span class="k">class</span> <span class="nc">simple_type</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_members</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">simple_type</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>                         <span class="c1">// default-ctor</span>
+
+    <span class="n">simple_type</span><span class="p">(</span><span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>                <span class="c1">// copy-ctor</span>
+    <span class="n">simple_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>     <span class="c1">// copy-assign</span>
+
+    <span class="n">simple_type</span><span class="p">(</span><span class="n">simple_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>            <span class="c1">// move-ctor</span>
+    <span class="n">simple_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">simple_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// move_assign</span>
+
+    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">tie</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_members</span> <span class="cm">/*, ...*/</span><span class="p">)</span> <span class="o">==</span> <span class="n">tie</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">_members</span> <span class="cm">/*, ...*/</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
+</pre></div>
+
+    </div>
 </div>
 </div>
-</div><div class="fragment">
+
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc1</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-<span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">get_table</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="k">const</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">type_index</span><span class="o">&gt;</span> <span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="k">typeid</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span> <span class="k">typeid</span><span class="p">(</span><span class="kt">long</span><span class="p">),</span> <span class="k">typeid</span><span class="p">(</span><span class="kt">short</span><span class="p">)};</span>
-    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">class</span> <span class="nc">pimpl_type</span> <span class="p">{</span>
+    <span class="k">class</span> <span class="nc">implementation</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="n">deleter</span> <span class="p">{</span>
+        <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span> <span class="n">deleter</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span>
 
-<span class="p">}</span> <span class="c1">// namespace bcc1</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">pimpl_type</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>                        <span class="c1">// default-ctor</span>
+    <span class="n">pimpl_type</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span><span class="p">);</span>                          <span class="c1">// copy-ctor</span>
+    <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>            <span class="c1">// copy-assign</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span> <span class="o">=</span> <span class="n">pimpl_type</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+    <span class="p">}</span>
+    <span class="n">pimpl_type</span><span class="p">(</span><span class="n">pimpl_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>            <span class="c1">// move-ctor</span>
+    <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">pimpl_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// move_assign</span>
+    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Thread safety only applies to object initialization<ul>
-<li>If there is writeable access, additional thread safety measures must be used</li>
-<li>Thread-safety only applies to objects individually, not collectively</li>
-</ul>
-</li>
-<li>Immediately invoked lambda expressions provide a nice way to perform complex initialization<ul>
-<li>Known as 'IIFE' (pronounced "iffy") for Immediately Invoked Function Expression, from JavaScript.</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="c1">// cpp file</span>
+<span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-<span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">get_table</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="k">const</span> <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span> <span class="p">{</span>
-        <span class="n">vector</span><span class="o">&lt;</span><span class="n">type_index</span><span class="o">&gt;</span> <span class="n">r</span><span class="p">{</span><span class="k">typeid</span><span class="p">(</span><span class="kt">int</span><span class="p">),</span> <span class="k">typeid</span><span class="p">(</span><span class="kt">long</span><span class="p">),</span> <span class="k">typeid</span><span class="p">(</span><span class="kt">short</span><span class="p">)};</span>
-        <span class="n">sort</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">r</span><span class="p">));</span>
-        <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
-    <span class="p">}();</span>
-    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">pimpl_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
+    <span class="c1">// a simple type...</span>
+    <span class="kt">int</span> <span class="n">_members</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">implementation</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">implementation</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">tie</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_members</span> <span class="cm">/*, ...*/</span><span class="p">)</span> <span class="o">==</span> <span class="n">tie</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">_members</span> <span class="cm">/*, ...*/</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="n">pimpl_type</span><span class="o">::</span><span class="n">deleter</span><span class="o">::</span><span class="k">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">a</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="n">pimpl_type</span><span class="o">::</span><span class="n">pimpl_type</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span>
+    <span class="o">:</span> <span class="n">_remote</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">?</span> <span class="k">new</span> <span class="n">implementation</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">)</span> <span class="o">:</span> <span class="k">nullptr</span><span class="p">)</span> <span class="p">{}</span>
+
+<span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">==</span> <span class="o">*</span><span class="n">b</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace bcc2</span>
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>The thread safety construct imposes a negligligable performance impact (difficult to measure) on each access</li>
+<li>In both cases the default-dtor is used (not specified)</li>
+<li>We will be covering polymorphic types and containers later in the course</li>
 </ul>
 
 </div>
@@ -13330,128 +13377,102 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="thread_local-variables"><code>thread_local</code> variables<a class="anchor-link" href="#thread_local-variables">&#182;</a></h2><ul>
-<li><code>thread_local</code> implies static storage duration</li>
-<li>non-local <code>thread_local</code> variables with dynamic initialization are initialized at the start of every thread start<ul>
-<li>local <code>thread_local</code> variables are initialized on first execution in a given thread</li>
+<h2 id="Prior-Homework">Prior Homework<a class="anchor-link" href="#Prior-Homework">&#182;</a></h2><p><strong>Exercise:</strong> Look at the regular operations (copy, assignment, equality, default construction) for ZString (or a commonly used type within your project). Is the implementation correct? Complete? Efficient?</p>
+<p><code>ZString</code> operations:</p>
+<ul>
+<li>default-ctor: Should be declared <code>noexcept</code> but will not throw</li>
+<li>copy-ctor: Logical copy by incrementing reference count to immutable string, should be declared <code>noexcept</code>.</li>
+<li>copy-assign: Handles self assignment, requires locking (spin-lock). Complex logic. Benchmark against a copy/move implementation? Returns void?</li>
+<li>move-ctor: Should be declared <code>noexcept</code> but will not throw, expensive operation to atomic increment a reference count on <code>TheOneTrueEmptyZByteRun</code>, guarantees moved from <code>ZString</code> is empty string.</li>
+<li>move-assign: Implemented as swap(). Does not guarantee moved from <code>ZString</code> is empty.</li>
+<li>equality: Representational (not value) equality.</li>
+</ul>
+<p>Observation: <code>fDefaultRun</code> is hardly used except for test cases and to propagate <code>fCharacterRun</code>. Is it needed?</p>
+<p>Discussion: How can we incrementally improve ZString?</p>
+<h2 id="What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">What Should Be Part of The Public Interface On A Type?<a class="anchor-link" href="#What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">&#182;</a></h2><ul>
+<li><p>In general we want the minimum number of public calls (basis operations) to provide a type which is:</p>
+<ul>
+<li>Computationally Complete</li>
+<li>Equationally Complete</li>
 </ul>
 </li>
-<li>access to a <code>thread_local</code> imposes about a 15% performance penalty (at least on Apple platforms) compared to accessing a <code>static</code> variable</li>
+<li><p>Other operations should be implemented in terms of those basis operations</p>
+</li>
 </ul>
+<p>Example:</p>
 
 </div>
 </div>
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-<span class="k">auto</span><span class="o">&amp;</span> <span class="n">context</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">thread_local</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">;</span>
-    <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">class</span> <span class="nc">natural_number</span> <span class="p">{</span>
+    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">_data</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
-<span class="p">}</span> <span class="c1">// namespace bcc3</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">// default standard operations</span>
+    <span class="n">natural_number</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">()</span> <span class="p">{</span>
+        <span class="o">++</span><span class="n">_data</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="n">natural_number</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">--</span><span class="p">()</span> <span class="p">{</span>
+        <span class="o">--</span><span class="n">_data</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="kt">bool</span> <span class="n">is_zero</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_data</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div><div class="fragment">
+</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Access to a <code>thread_local</code> variable doesn't require synchronization<ul>
-<li>Unless it is otherwise shared to a differnt thread</li>
-</ul>
-</li>
+<li><code>natural_number</code> is computationally and equationally complete</li>
 </ul>
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-<span class="kt">void</span> <span class="n">do_stuff</span><span class="p">()</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;context: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">context</span><span class="p">().</span><span class="n">back</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">}</span>
+<span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="n">natural_number</span> <span class="n">a</span><span class="p">,</span> <span class="n">natural_number</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">a</span><span class="p">.</span><span class="n">is_zero</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">b</span><span class="p">.</span><span class="n">is_zero</span><span class="p">())</span> <span class="p">{</span>
+        <span class="o">--</span><span class="n">a</span><span class="p">;</span>
+        <span class="o">--</span><span class="n">b</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">is_zero</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">.</span><span class="n">is_zero</span><span class="p">();</span>
+<span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace</span>
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">context</span><span class="p">().</span><span class="n">push_back</span><span class="p">(</span><span class="s">&quot;selecting&quot;</span><span class="p">);</span>
-<span class="n">do_stuff</span><span class="p">();</span>
-<span class="n">context</span><span class="p">().</span><span class="n">push_back</span><span class="p">(</span><span class="s">&quot;painting&quot;</span><span class="p">);</span>
-<span class="n">do_stuff</span><span class="p">();</span>
-<span class="n">context</span><span class="p">().</span><span class="n">pop_back</span><span class="p">();</span>
-<span class="n">do_stuff</span><span class="p">();</span>
-<span class="n">context</span><span class="p">().</span><span class="n">pop_back</span><span class="p">();</span>
-</pre></div>
-
-    </div>
 </div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>context: selecting
-context: painting
-context: selecting
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Recommendations">Recommendations<a class="anchor-link" href="#Recommendations">&#182;</a></h2><ul>
-<li>Avoid non-local variables except for <code>constexpr</code> variables<ul>
-<li>Dynamic initialization of non-local variables impacts startup</li>
-<li>Non-local <code>thread_local</code> variables impact the startup of every thread</li>
-</ul>
-</li>
-<li>When you must use a dynamically initialized singleton make it a <code>static</code> local variable<ul>
-<li>Prefer <code>const</code> to ensure thread safety</li>
-<li>If mutable, consider making it a sequential process</li>
-</ul>
-</li>
-<li><code>thread-local</code> local variables can be a useful tool for establishing auxiliary scope information<ul>
-<li>Drawing contexts</li>
-<li>Transactions</li>
-<li>Memory allocators</li>
-<li>Caches</li>
-</ul>
-</li>
+<ul>
+<li>Being correct and complete is not enough</li>
 </ul>
 
 </div>
@@ -13460,23 +13481,56 @@ context: selecting
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
-<li>Find and fix one of:<ul>
-<li>A non-local with dynamic initialization</li>
-<li>A local <code>static</code> which does not have thead-safe initialization</li>
-<li>A use of <code>pthread_once()</code>, <code>boost::call_once()</code> or similar (simplify)</li>
-<li>A use of <code>pthread_getspecific()</code>, <code>boost::thread_specific_ptr()</code> or similar (simplify)</li>
-<li>A local <code>static</code> with dynamic initialization which could be <code>constexpr</code></li>
+<h2 id="Efficient-Basis">Efficient Basis<a class="anchor-link" href="#Efficient-Basis">&#182;</a></h2><ul>
+<li><p>An operation is <em>efficient</em> if there is no way to implement it to use fewer resources</p>
+<ul>
+<li>time</li>
+<li>space</li>
+<li>energy</li>
 </ul>
 </li>
+<li><p>Unless otherwise specified, we will use efficiency to mean <em>time efficiency</em></p>
+<ul>
+<li>But in practice, where not all three can be achieved the trade-offs should be considered</li>
 </ul>
-
+</li>
+<li><p>A type has an <em>efficient basis</em> if any additional operations can be implemented efficiently in terms of the basis operations. Making all data members public ensures an efficient basis, but may be unsafe</p>
+</li>
+<li>In fact, we can prove that some operations cannot be implemented both efficiently and safely</li>
+<li><p>The canonical example is in-situ sort, although it is true of any in-situ permutation</p>
+<ul>
+<li>This is why functional languages do not allow direct in-situ permutations</li>
+</ul>
+</li>
+<li><p>In C++, move is both unsafe and inefficient</p>
+<ul>
+<li>It is less safe than copy</li>
+<li>But more efficient than copy</li>
+</ul>
+</li>
+<li><p>When writing a type,</p>
+</li>
+</ul>
+<h2 id="Expressive-Basis">Expressive Basis<a class="anchor-link" href="#Expressive-Basis">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span>
