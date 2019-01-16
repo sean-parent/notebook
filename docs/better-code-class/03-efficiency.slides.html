@@ -13238,23 +13238,107 @@ a.anchor-link {
 <div class="reveal">
 <div class="slides">
 <section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&quot;../common.hpp&quot;</span><span class="cp"></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Efficiency-&amp;-Expressiveness">Efficiency &amp; Expressiveness<a class="anchor-link" href="#Efficiency-&amp;-Expressiveness">&#182;</a></h1><h2 id="Recap">Recap<a class="anchor-link" href="#Recap">&#182;</a></h2><h3 id="Definition-of-Type-and-Regular">Definition of <em>Type</em> and <em>Regular</em><a class="anchor-link" href="#Definition-of-Type-and-Regular">&#182;</a></h3><h3 id="Semantics-and-Complexity">Semantics and Complexity<a class="anchor-link" href="#Semantics-and-Complexity">&#182;</a></h3><h3 id="Computational-Basis-and-Computationally-Complete">Computational Basis and Computationally Complete<a class="anchor-link" href="#Computational-Basis-and-Computationally-Complete">&#182;</a></h3><h3 id="Equationally-Complete">Equationally Complete<a class="anchor-link" href="#Equationally-Complete">&#182;</a></h3><h3 id="Whole/Part-Relationship">Whole/Part Relationship<a class="anchor-link" href="#Whole/Part-Relationship">&#182;</a></h3><h3 id="Safety">Safety<a class="anchor-link" href="#Safety">&#182;</a></h3><h3 id="Canonical-Type-with-and-without-Remote-Parts">Canonical Type with and without Remote Parts<a class="anchor-link" href="#Canonical-Type-with-and-without-Remote-Parts">&#182;</a></h3>
+<h1 id="Efficiency-&amp;-Expressiveness">Efficiency &amp; Expressiveness<a class="anchor-link" href="#Efficiency-&amp;-Expressiveness">&#182;</a></h1>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Recap">Recap<a class="anchor-link" href="#Recap">&#182;</a></h2>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Definition-of-Type-and-Regular">Definition of <em>Type</em> and <em>Regular</em><a class="anchor-link" href="#Definition-of-Type-and-Regular">&#182;</a></h3><blockquote><p>A <em>type</em> is a pattern for storing and modifying objects.</p>
+</blockquote>
+<div></div><blockquote><p>There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to <em>copy objects</em> from one data structure to another. We call types having such a basis <em>regular</em>, since their use guarantees regularity of behavior and, therefore, interoperability.</p>
+</blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Semantics-and-Complexity">Semantics and Complexity<a class="anchor-link" href="#Semantics-and-Complexity">&#182;</a></h3><ul>
+<li>Semantics of an operation are defined with axioms derived from the definition. i.e. we can define the semantics of equality as:</li>
+</ul>
+\begin{align}
+(\forall a) a &amp; = a. &amp;&amp; \text{(Reflexivity)} \\
+(\forall a, b) a &amp; = b \implies b = a. &amp;&amp; \text{(Symmetry)} \\
+(\forall a, b, c) a &amp; = b \wedge b = c \implies a = c. &amp;&amp; \text {(Transitivity)} \\
+\end{align}<ul>
+<li>This covers any equivalence relation</li>
+<li><p>Two objects are <em>equal</em> iff their two values represent the same entity</p>
+</li>
+<li><p>The expected complexity of an operation is an important attribute of the operation</p>
+</li>
+<li>i.e. The only thing that separates the concept of <code>ForwardIterator</code> and <code>RandomAccessIterator</code> is the complexity of advancing <code>n</code> steps</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Computational-Basis-and-Computationally-Complete">Computational Basis and Computationally Complete<a class="anchor-link" href="#Computational-Basis-and-Computationally-Complete">&#182;</a></h3><blockquote><p>The <em>computational basis</em> for a type is a finite set of procedures that enable the construction of any other procedure on the type</p>
+</blockquote>
+<ul>
+<li>A type which does not implement a <em>computational basis</em> is <em>incomplete</em></li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Equationally-Complete">Equationally Complete<a class="anchor-link" href="#Equationally-Complete">&#182;</a></h3><ul>
+<li>A type for which equality can be implemented as a non-friend (non-member) function is said to be <em>equationally complete</em></li>
+<li>A type which is both equationally and computationally complete can be copied without the use of the copy-constructor or assignment operator<ul>
+<li>Equationally complete implies all the parts are readable</li>
+<li>Computationally complete implies all the values are obtainable</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Whole/Part-Relationship">Whole/Part Relationship<a class="anchor-link" href="#Whole/Part-Relationship">&#182;</a></h3><ul>
+<li>An object is a <em>whole</em>, composed of its <em>parts</em></li>
+<li>A part is <em>local</em> if it is stored directly in the object</li>
+<li>A part is <em>remote</em> if it is stored elsewhere (such as on the heap)</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Safety">Safety<a class="anchor-link" href="#Safety">&#182;</a></h3><ul>
+<li>Any operation which maintains the correspondence between an object and an entity it represents is <em>safe</em></li>
+<li>An operation which loses the correspondence is <em>unsafe</em></li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Canonical-Type-with-and-without-Remote-Parts">Canonical Type with and without Remote Parts<a class="anchor-link" href="#Canonical-Type-with-and-without-Remote-Parts">&#182;</a></h3>
 </div>
 </div>
 </div></section></section><section><section>
@@ -13378,27 +13462,69 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Prior-Homework">Prior Homework<a class="anchor-link" href="#Prior-Homework">&#182;</a></h2><p><strong>Exercise:</strong> Look at the regular operations (copy, assignment, equality, default construction) for ZString (or a commonly used type within your project). Is the implementation correct? Complete? Efficient?</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p><code>ZString</code> operations:</p>
 <ul>
-<li>default-ctor: Should be declared <code>noexcept</code> but will not throw</li>
-<li>copy-ctor: Logical copy by incrementing reference count to immutable string, should be declared <code>noexcept</code>.</li>
-<li>copy-assign: Handles self assignment, requires locking (spin-lock). Complex logic. Benchmark against a copy/move implementation? Returns void?</li>
-<li>move-ctor: Should be declared <code>noexcept</code> but will not throw, expensive operation to atomic increment a reference count on <code>TheOneTrueEmptyZByteRun</code>, guarantees moved from <code>ZString</code> is empty string.</li>
-<li>move-assign: Implemented as swap(). Does not guarantee moved from <code>ZString</code> is empty.</li>
-<li>equality: Representational (not value) equality.</li>
+<li>default-ctor: Should be declared <code>noexcept</code> but will not throw<div class="highlight"><pre><span></span><span class="n">ZString</span><span class="p">();</span>
+</pre></div>
+</li>
+<li>copy-ctor: Logical copy by incrementing reference count to immutable string, should be declared <code>noexcept</code>.<div class="highlight"><pre><span></span><span class="n">ZString</span><span class="p">(</span><span class="k">const</span> <span class="n">ZString</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+</pre></div>
+</li>
+<li>copy-assign: Handles self assignment, requires locking (spin-lock). Complex logic. Benchmark against a copy/move implementation? Returns void?<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">ZString</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">);</span>
+</pre></div>
+</li>
+<li>move-ctor: Should be declared <code>noexcept</code> but will not throw, expensive operation to atomic increment a reference count on <code>TheOneTrueEmptyZByteRun</code>, guarantees moved from <code>ZString</code> is empty string.<div class="highlight"><pre><span></span><span class="n">ZString</span><span class="p">(</span><span class="n">ZString</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">);</span>
+</pre></div>
+</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>move-assign: Implemented as swap(). Does not guarantee moved from <code>ZString</code> is empty.<div class="highlight"><pre><span></span><span class="n">ZString</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">ZString</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+</pre></div>
+</li>
+<li>equality: Representational (not value) equality. Should be declared as non-member function.<div class="highlight"><pre><span></span><span class="kt">bool</span> <span class="k">operator</span> <span class="o">==</span> <span class="p">(</span><span class="k">const</span> <span class="n">ZString</span> <span class="o">&amp;</span><span class="n">x</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
+</pre></div>
+</li>
 </ul>
 <p>Observation: <code>fDefaultRun</code> is hardly used except for test cases and to propagate <code>fCharacterRun</code>. Is it needed?</p>
 <p>Discussion: How can we incrementally improve ZString?</p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">What Should Be Part of The Public Interface On A Type?<a class="anchor-link" href="#What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">&#182;</a></h2><ul>
-<li><p>In general we want the minimum number of public calls (basis operations) to provide a type which is:</p>
+<li><p>In general we want the minimum number of public calls with private access to provide a type which is:</p>
 <ul>
 <li>Computationally Complete</li>
 <li>Equationally Complete</li>
 </ul>
 </li>
-<li><p>Other operations should be implemented in terms of those basis operations</p>
+<li><p>Other operations should be implemented in terms of those</p>
 </li>
 </ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <p>Example:</p>
 
 </div>
@@ -13411,20 +13537,18 @@ a.anchor-link {
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-<span class="k">class</span> <span class="nc">natural_number</span> <span class="p">{</span>
+<span class="k">class</span> <span class="nc">number</span> <span class="p">{</span>
     <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">_data</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">// default standard operations</span>
-    <span class="n">natural_number</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">number</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">()</span> <span class="p">{</span>
         <span class="o">++</span><span class="n">_data</span><span class="p">;</span>
         <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="n">natural_number</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">--</span><span class="p">()</span> <span class="p">{</span>
-        <span class="o">--</span><span class="n">_data</span><span class="p">;</span>
-        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="k">friend</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">_data</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">_data</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="kt">bool</span> <span class="n">is_zero</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_data</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="p">}</span> <span class="c1">// namespace bcc</span>
@@ -13434,12 +13558,12 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><code>natural_number</code> is computationally and equationally complete</li>
+<li><code>number</code> is computationally and equationally complete</li>
 </ul>
 
 </div>
@@ -13452,12 +13576,8 @@ a.anchor-link {
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-<span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="n">natural_number</span> <span class="n">a</span><span class="p">,</span> <span class="n">natural_number</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">while</span> <span class="p">(</span><span class="o">!</span><span class="n">a</span><span class="p">.</span><span class="n">is_zero</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">b</span><span class="p">.</span><span class="n">is_zero</span><span class="p">())</span> <span class="p">{</span>
-        <span class="o">--</span><span class="n">a</span><span class="p">;</span>
-        <span class="o">--</span><span class="n">b</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">is_zero</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">.</span><span class="n">is_zero</span><span class="p">();</span>
+<span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="p">}</span> <span class="c1">// namespace bcc</span>
@@ -13467,22 +13587,59 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Being correct and complete is not enough</li>
-</ul>
-
-</div>
-</div>
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Being correct and complete is not enough:</li>
+</ul>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="c1">// construct the value 3</span>
+<span class="n">number</span> <span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+
+<span class="c1">// print it</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">number</span><span class="p">())</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>3
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Efficient-Basis">Efficient Basis<a class="anchor-link" href="#Efficient-Basis">&#182;</a></h2><ul>
-<li><p>An operation is <em>efficient</em> if there is no way to implement it to use fewer resources</p>
+<li><p>An operation is <em>efficient</em> if there is no way to implement it to use fewer resources:</p>
 <ul>
 <li>time</li>
 <li>space</li>
@@ -13494,46 +13651,129 @@ a.anchor-link {
 <li>But in practice, where not all three can be achieved the trade-offs should be considered</li>
 </ul>
 </li>
-<li><p>A type has an <em>efficient basis</em> if any additional operations can be implemented efficiently in terms of the basis operations. Making all data members public ensures an efficient basis, but may be unsafe</p>
+<li><p>A type has an <em>efficient basis</em> if any additional operations can be implemented efficiently in terms of the basis operations</p>
 </li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Making all data members public ensures an efficient basis, but may be unsafe</li>
 <li>In fact, we can prove that some operations cannot be implemented both efficiently and safely</li>
 <li><p>The canonical example is in-situ sort, although it is true of any in-situ permutation</p>
 <ul>
 <li>This is why functional languages do not allow direct in-situ permutations</li>
 </ul>
 </li>
-<li><p>In C++, move is both unsafe and inefficient</p>
+<li><p>In C++, explicit <code>move</code> is both unsafe and inefficient</p>
 <ul>
 <li>It is less safe than copy</li>
 <li>But more efficient than copy</li>
 </ul>
 </li>
-<li><p>When writing a type,</p>
+<li><p>Strive to make operations safe <em>and</em> efficient</p>
 </li>
+<li>Only sacrifice safety for efficiency with good (measurable) reason</li>
 </ul>
-<h2 id="Expressive-Basis">Expressive Basis<a class="anchor-link" href="#Expressive-Basis">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
 
 </div>
 </div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Expressive-Basis">Expressive Basis<a class="anchor-link" href="#Expressive-Basis">&#182;</a></h2><blockquote><p>A basis is <em>expressive</em> iff it allows compact and convenient definitions of procedures on the type.</p>
+</blockquote>
+<p>For example:</p>
+
 </div>
+</div>
+</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="c1">// construct the value 3</span>
+<span class="n">number</span> <span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+<span class="p">}</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>is not as expressive as:</p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<ul>
+<li>Especially for common operators you should provide operations in meaningful groups:</li>
+<li>If your provide <code>operator==()</code> (and you should), also provide <code>!=</code></li>
+<li>If you provide <code>operator&lt;()</code>, <em>natural total order</em>, you should provide all comparison operators</li>
+<li>Negation and addition implies subtraction</li>
+<li>etc.</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="(Revisited)-What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">(Revisited) What Should Be Part of The Public Interface On A Type?<a class="anchor-link" href="#(Revisited)-What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">&#182;</a></h2><ul>
+<li><p>In general we want the <strong>minimum</strong> number of public calls with private access to provide a type which is:</p>
+<ul>
+<li>Computationally Complete</li>
+<li>Equationally Complete</li>
+<li>Efficient</li>
+<li>Safe</li>
+<li>Operations required to be part of the class interface by the language (i.e., you cannot implement a stand alone assignment operator)</li>
+</ul>
+</li>
+<li><p>Other operations, including operations that are part of the expressive basis, should be implemented in terms of those operations</p>
+</li>
+<li>This still leaves a fair amount up to the designer to choose how to balance safety and efficiency and what <em>expressive</em> means in the context of the type</li>
+</ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Exercise:</strong> Look at the API and implementation for ZString (or a commonly used class in your own project). What does a ZString represent? What would be a good set of basis operations? What operations would be better implemented externally? Are there operations that should be removed?</p>
+
+</div>
+</div>
 </div></section></section>
 </div>
 </div>

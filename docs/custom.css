@@ -44,6 +44,15 @@ div.output_stdout {
     font-size: smaller;
 }
 
+.reveal blockquote {
+    font-style: normal;
+    border-style: solid;
+    border-width: 0px 0px 0px 10px;
+    border-color: lightgray;
+    padding: 0px 0px 0px 28px;
+    box-shadow: 0px 0px 0px;
+}
+
 .reveal section img {
     /* Size to be contained at 90% of slide size */
     width: 1728px; /* 1920px * 0.9 */
