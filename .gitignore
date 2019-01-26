@@ -1,7 +1,6 @@
 *.bbprojectsettings
 */_site/
 */.jekyll-metadata
-*/.ipynb_checkpoints/
 .DS_Store
 node_modules/
-.ipynb_checkpionts/
+.ipynb_checkpoints/
