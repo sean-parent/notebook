@@ -20,3 +20,5 @@ jupyter nbconvert ./better-code-new/*.ipynb --to=notebook --execute \
         --output-dir=./better-code-new/
 jupyter nbconvert ./better-code-new/*.ipynb --to=slides --reveal-prefix=../reveal.js \
     --output-dir=./docs/better-code-new --config=./slides-config/slides_config.py
+
+( cd ./docs; bundle exec jekyll build --baseurl "" )
