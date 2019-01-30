@@ -11,6 +11,8 @@ div.highlight {
   border-radius: 2px;
   background: #f7f7f7;
   line-height: 1.21429em;
+  overflow-y: scroll;
+  max-height: 972px; /* 1080px * 0.9 */
 }
 
 div.highlight pre {
