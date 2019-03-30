@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>02-complexity-and-failure slides</title>
+<title>05-algorithms-2 slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13241,28 +13241,125 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Complexity,-Failure,-&amp;-Optional-Operations">Complexity, Failure, &amp; Optional Operations<a class="anchor-link" href="#Complexity,-Failure,-&amp;-Optional-Operations">&#182;</a></h1><h2 id="Revisiting-Equality">Revisiting Equality<a class="anchor-link" href="#Revisiting-Equality">&#182;</a></h2>
+<h1 id="Algorithms-(pt.-2)">Algorithms (pt. 2)<a class="anchor-link" href="#Algorithms-(pt.-2)">&#182;</a></h1>
 </div>
 </div>
-</div><div class="fragment">
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Exercise:</strong> Review list of standard algorithms.</p>
+<p><strong>Exercise:</strong> Find a <em>raw loop</em> in the ZString implementation. Claim it on the wiki <a href="https://git.corp.adobe.com/better-code/class/wiki/class-04-registration">https://git.corp.adobe.com/better-code/class/wiki/class-04-registration</a>. Improve the code, create a pull-request, and assign me as the reviewer. The PR should include a <a href="http://quick-bench.com/">http://quick-bench.com/</a> benchmark of the relevant code for comparison.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdint&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iterator&gt;</span><span class="cp"></span>
+
+<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">test_equality_3</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Reflexivity</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span>
-        <span class="n">REQUIRE</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">e</span><span class="p">.</span><span class="n">value</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
 
-    <span class="c1">// Symmetry</span>
-    <span class="n">for_each_k_combination</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">REQUIRE</span><span class="p">((</span><span class="n">a</span><span class="p">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">tag</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">value</span><span class="p">));</span>
-        <span class="n">REQUIRE</span><span class="p">((</span><span class="n">a</span><span class="p">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">tag</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">));</span>
-    <span class="p">});</span>
+<span class="k">struct</span> <span class="n">ZString</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="n">DataAndLength</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="kt">uint32_t</span><span class="o">&amp;</span> <span class="n">length</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">const</span> <span class="kt">char16_t</span> <span class="n">r</span><span class="p">[]</span> <span class="o">=</span> <span class="sa">u</span><span class="s">&quot;Unicode String© with : replacements&quot;</span><span class="p">;</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+        <span class="n">length</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
+    <span class="p">}</span>
 
-    <span class="c1">// Transitivity (implied by symmetry test)</span>
+    <span class="k">auto</span> <span class="n">range</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="k">const</span> <span class="kt">char16_t</span> <span class="n">r</span><span class="p">[]</span> <span class="o">=</span> <span class="sa">u</span><span class="s">&quot;Unicode String© with : replacements&quot;</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nf">make_pair</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">r</span><span class="p">));</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">ReplaceCharacters</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">badChars</span><span class="p">,</span>
+                           <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">replacementChars</span><span class="p">,</span>
+                           <span class="kt">uint32_t</span> <span class="n">numChars</span><span class="p">);</span>
+<span class="p">};</span>
+
+<span class="k">struct</span> <span class="n">ARawZString</span> <span class="p">{</span>
+    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">char16_t</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">_data</span><span class="p">;</span>
+
+    <span class="n">ARawZString</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">n</span><span class="p">)</span> <span class="o">:</span> <span class="n">_data</span><span class="p">(</span><span class="k">new</span> <span class="kt">char16_t</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="p">{}</span>
+    <span class="kt">char16_t</span><span class="o">*</span> <span class="n">get</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_data</span><span class="p">.</span><span class="n">get</span><span class="p">();</span> <span class="p">}</span>
+    <span class="kt">char16_t</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_data</span><span class="p">[</span><span class="n">n</span><span class="p">];</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="kt">void</span> <span class="nf">EquateToUnicodeString</span><span class="p">(</span><span class="n">ZString</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">copy_n</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">));</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">ZString</span><span class="o">::</span><span class="n">ReplaceCharacters</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">badChars</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">replacementChars</span><span class="p">,</span>
+                                <span class="kt">uint32_t</span> <span class="n">numChars</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">myData</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="kt">uint32_t</span> <span class="n">myLength</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">DataAndLength</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="n">myLength</span><span class="p">);</span>
+
+    <span class="kt">bool</span> <span class="n">hasBadCharacters</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
+    <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myLength</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">numChars</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">myData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">badChars</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="n">hasBadCharacters</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+
+            <span class="k">if</span> <span class="p">(</span><span class="n">hasBadCharacters</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">hasBadCharacters</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">uint32_t</span> <span class="n">destLength</span> <span class="o">=</span> <span class="n">myLength</span><span class="p">;</span>
+        <span class="n">ARawZString</span> <span class="nf">destData</span><span class="p">(</span><span class="n">destLength</span><span class="p">);</span>
+
+        <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myLength</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
+            <span class="n">destData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">myData</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
+
+            <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">numChars</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
+                <span class="k">if</span> <span class="p">(</span><span class="n">myData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">badChars</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
+                    <span class="n">destData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">replacementChars</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
+                    <span class="k">break</span><span class="p">;</span>
+                <span class="p">}</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+
+        <span class="n">EquateToUnicodeString</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span> <span class="n">destData</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">destLength</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -13270,14 +13367,51 @@ a.anchor-link {
 </div>
 </div>
 
-</div></div></section></section><section><section>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">.</span><span class="n">undo</span> <span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">test_equality_3</span><span class="p">(</span><span class="n">vec_rep</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">ZString</span><span class="o">::</span><span class="n">ReplaceCharacters</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">badChars</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">replacementChars</span><span class="p">,</span>
+                                <span class="kt">uint32_t</span> <span class="n">numChars</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">myData</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="kt">uint32_t</span> <span class="n">myLength</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="n">DataAndLength</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="n">myLength</span><span class="p">);</span>
+
+    <span class="k">auto</span> <span class="n">l</span> <span class="o">=</span> <span class="n">myData</span> <span class="o">+</span> <span class="n">myLength</span><span class="p">;</span>
+    <span class="kt">bool</span> <span class="n">hasBadCharacters</span> <span class="o">=</span> <span class="n">any_of</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">l</span> <span class="o">=</span> <span class="n">badChars</span> <span class="o">+</span> <span class="n">numChars</span><span class="p">;</span>
+        <span class="k">return</span> <span class="nf">find</span><span class="p">(</span><span class="n">badChars</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="n">l</span><span class="p">;</span> <span class="c1">// NOTE: Won&#39;t scale</span>
+    <span class="p">});</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">hasBadCharacters</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">uint32_t</span> <span class="n">destLength</span> <span class="o">=</span> <span class="n">myLength</span><span class="p">;</span>
+        <span class="n">ARawZString</span> <span class="nf">destData</span><span class="p">(</span><span class="n">destLength</span><span class="p">);</span>
+
+        <span class="n">transform</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">destData</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">l</span> <span class="o">=</span> <span class="n">badChars</span> <span class="o">+</span> <span class="n">numChars</span><span class="p">;</span>
+            <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">badChars</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="n">l</span><span class="p">)</span> <span class="k">return</span> <span class="n">replacementChars</span><span class="p">[</span><span class="n">p</span> <span class="o">-</span> <span class="n">badChars</span><span class="p">];</span>
+            <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+        <span class="p">});</span>
+
+        <span class="n">EquateToUnicodeString</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span> <span class="n">destData</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">destLength</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -13285,121 +13419,50 @@ a.anchor-link {
 </div>
 </div>
 
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Complexity">Complexity<a class="anchor-link" href="#Complexity">&#182;</a></h3>
 </div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./img/equality.png" alt=""></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>It is difficult to test complexity by measuring performance</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-\begin{align}
-performance \neq complexity
-\end{align}
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Complexity is a measure of the number of operations executed</li>
-</ul>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-\begin{align}
-complexity \approx performance
-\end{align}
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>For $complexity = performance$ all operations must execute in the same, constant, time<ul>
-<li>Irrespective of cache, compiler optimizations, and processor load</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>To test complexity, count operations</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
-
-<span class="k">static</span> <span class="kt">size_t</span> <span class="n">_equality</span><span class="p">;</span>
-
-<span class="k">struct</span> <span class="n">annotate_1</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_value</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-
-    <span class="n">annotate_1</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{}</span>
-
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate_1</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate_1</span><span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
-        <span class="o">++</span><span class="n">_equality</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">y</span><span class="p">.</span><span class="n">_value</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">.</span><span class="n">undo</span> <span class="mi">1</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">expect_equality</span><span class="p">(</span><span class="k">const</span> <span class="n">F</span><span class="o">&amp;</span> <span class="n">f</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">max</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">initial</span> <span class="o">=</span> <span class="n">_equality</span><span class="p">;</span>
-    <span class="n">f</span><span class="p">();</span>
-    <span class="n">REQUIRE</span><span class="p">((</span><span class="n">_equality</span> <span class="o">-</span> <span class="n">initial</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">ZString</span><span class="o">::</span><span class="n">ReplaceCharacters</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">badChars</span><span class="p">,</span>
+                                <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">replacementChars</span><span class="p">,</span>
+                                <span class="kt">uint32_t</span> <span class="n">numChars</span><span class="p">)</span> <span class="p">{</span>
+
+    <span class="k">auto</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">badChars</span><span class="p">,</span> <span class="n">lb</span> <span class="o">=</span> <span class="n">badChars</span> <span class="o">+</span> <span class="n">numChars</span><span class="p">;</span>
+
+    <span class="k">auto</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">range</span><span class="p">();</span>
+
+    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">find_if</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">lb</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="n">lb</span><span class="p">;</span> <span class="c1">// NOTE: Won&#39;t scale</span>
+    <span class="p">});</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">l</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+
+    <span class="n">u16string</span> <span class="n">result</span><span class="p">;</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="n">f</span><span class="p">);</span>
+    <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
+
+    <span class="n">transform</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">back_inserter</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">lb</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">lb</span><span class="p">)</span> <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">replacementChars</span><span class="p">[</span><span class="n">p</span> <span class="o">-</span> <span class="n">fb</span><span class="p">];</span>
+    <span class="p">});</span>
+
+    <span class="n">EquateToUnicodeString</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">result</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -13407,573 +13470,15 @@ complexity \approx performance
 </div>
 </div>
 
-</div></section></section><section><section>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[8]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">test_equality_4</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-    <span class="c1">// Reflexivity</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">expect_equality</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">REQUIRE</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">e</span><span class="p">.</span><span class="n">value</span><span class="p">);</span> <span class="p">},</span> <span class="n">e</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-    <span class="p">}</span>
-
-    <span class="c1">// Symmetry</span>
-    <span class="n">for_each_k_combination</span><span class="o">&lt;</span><span class="mi">2</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">expect_equality</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">REQUIRE</span><span class="p">((</span><span class="n">a</span><span class="p">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">tag</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">value</span><span class="p">));</span> <span class="p">},</span>
-                        <span class="p">((</span><span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
-
-        <span class="n">expect_equality</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">REQUIRE</span><span class="p">((</span><span class="n">a</span><span class="p">.</span><span class="n">tag</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">tag</span><span class="p">)</span> <span class="o">==</span> <span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">value</span> <span class="o">==</span> <span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">));</span> <span class="p">},</span>
-                        <span class="p">((</span><span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">!=</span> <span class="n">b</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">a</span><span class="p">.</span><span class="n">value</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
-    <span class="p">});</span>
-
-    <span class="c1">// Transitivity (implied by symmetry test)</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">tag</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span> <span class="n">value</span><span class="p">;</span>
-<span class="p">}</span> <span class="n">vec_rep_1</span><span class="p">[]{</span>
-    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">1</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">2</span><span class="p">)},</span>
-
-    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">1</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">2</span><span class="p">)},</span>
-
-    <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
-
-    <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
-
-    <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
-<span class="p">};</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">test_equality_4</span><span class="p">(</span><span class="n">vec_rep_1</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Revisiting-Copy-and-Assignment">Revisiting Copy and Assignment<a class="anchor-link" href="#Revisiting-Copy-and-Assignment">&#182;</a></h2>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p><strong>Exercise 2.1</strong>  Add a counter to <code>annotate_1</code> for copy and a test case for copy and assignment complexity.</p>
-</blockquote>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Exception-During-Copy-and-Assignment">Exception During Copy and Assignment<a class="anchor-link" href="#Exception-During-Copy-and-Assignment">&#182;</a></h3>
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Should we test the behavior when an exception is thrown copying or assigning a <code>vector</code>?</li>
-</ul>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>There are two possible points of failure:<ul>
-<li>Allocating memory for the <code>vector</code></li>
-<li>Copying the objects in the <code>vector</code><ul>
-<li>Most likely because of a memory allocation failure</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Out-of-memory, OOM, rarely actually results in a <code>bad_alloc</code> exception<ul>
-<li>The OS behavior of out-of-memory, OOM, cannot be relied upon</li>
-<li>MacOS, and Linux (and Android) over-commit<ul>
-<li>Exhausting virtual memory suspends or kills the application</li>
-<li>A <code>bad_alloc</code> is only possible in 32 bit mode (deprecated MacOS) by exhausting the address space<ul>
-<li>iOS also over-commits</li>
-<li>But there is no backing store</li>
-<li>Exhausting physical memory kills the application</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Most OOM recovery code is untested<ul>
-<li>likely to fail</li>
-<li>and a possible security risk</li>
-</ul>
-</li>
-<li>Platform calls are likely not to handle memory failures</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Herb Sutter has put forth a proposal to migrate away from exceptions to signal out-of-memory, and simply terminate the app is such circumstances, this may make it into C++20 or a TS in the C++20 time frame<ul>
-<li><a href="http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2018/p0709r1.pdf">Zero-overhead deterministic exceptions: Throwing values</a></li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>I'm cautiously in favor of this proposal</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>There are several scenarios where <code>vector</code> or <code>T</code> could still throw on copy<ul>
-<li>When using a custom allocator which limits resources</li>
-<li>When using replacement operator new / delete which limit resources<ul>
-<li>(This may be disallowed by the above proposal.)</li>
-</ul>
-</li>
-<li>When the copying <code>T</code> throws for a reason other tham OOM<ul>
-<li>(Though it is dificult to give a non-contrived example.)</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Jupyter doesn't allow me to replace <code>operator new</code> and <code>operator delete</code><ul>
-<li>But typically you could use these to test failures with allocations</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">size_t</span> <span class="n">_allocate</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-<span class="kt">size_t</span> <span class="n">_deallocate</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-<span class="kt">size_t</span> <span class="n">_allocate_limit</span><span class="p">{</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">()};</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">test_allocator</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="n">value_type</span> <span class="o">=</span> <span class="n">T</span><span class="p">;</span>
-
-    <span class="n">test_allocator</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
-    <span class="k">constexpr</span> <span class="n">test_allocator</span><span class="p">(</span><span class="k">const</span> <span class="n">test_allocator</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{}</span>
-    
-    <span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span> <span class="n">T</span><span class="o">*</span> <span class="n">allocate</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">_allocate</span> <span class="o">==</span> <span class="n">_allocate_limit</span><span class="p">)</span> <span class="k">throw</span> <span class="n">bad_alloc</span><span class="p">();</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="o">&gt;::</span><span class="n">max</span><span class="p">()</span> <span class="o">/</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">T</span><span class="p">)))</span> <span class="k">throw</span> <span class="n">bad_alloc</span><span class="p">();</span>
-        <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="n">T</span><span class="o">*&gt;</span><span class="p">(</span><span class="o">::</span><span class="k">operator</span> <span class="k">new</span><span class="p">(</span><span class="n">n</span> <span class="o">*</span> <span class="k">sizeof</span><span class="p">(</span><span class="n">T</span><span class="p">)));</span>
-        <span class="o">++</span><span class="n">_allocate</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
-    <span class="p">}</span>
-
-    <span class="kt">void</span> <span class="n">deallocate</span><span class="p">(</span><span class="n">T</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
-        <span class="o">::</span><span class="k">operator</span> <span class="k">delete</span><span class="p">(</span><span class="n">p</span> <span class="cm">/*, n */</span><span class="p">);</span> <span class="c1">// gcc doesn&#39;t yet support delete with size</span>
-        <span class="o">++</span><span class="n">_deallocate</span><span class="p">;</span>
-    <span class="p">}</span>
-    
-    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">test_allocator</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">test_allocator</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">true</span><span class="p">;</span> <span class="p">}</span>
-    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">test_allocator</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">test_allocator</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nb">false</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">};</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[13]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="k">auto</span> <span class="n">make_vector_2</span><span class="p">(</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="n">init</span><span class="p">,</span> <span class="n">std</span><span class="o">::</span><span class="kt">size_t</span> <span class="n">additional_capacity</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">test_allocator</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span> <span class="n">r</span><span class="p">;</span>
-    <span class="n">r</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">size</span><span class="p">(</span><span class="n">init</span><span class="p">)</span> <span class="o">+</span> <span class="n">additional_capacity</span><span class="p">);</span>
-    <span class="n">r</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">end</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">init</span><span class="p">);</span>
-    <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[14]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">,</span> <span class="n">test_allocator</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">vec_rep_2</span><span class="p">[]{</span>
-    <span class="n">make_vector_2</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">0</span><span class="p">),</span> <span class="n">make_vector_2</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">1</span><span class="p">),</span> <span class="n">make_vector_2</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="n">make_vector_2</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">0</span><span class="p">),</span>     <span class="n">make_vector_2</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">1</span><span class="p">),</span>     <span class="n">make_vector_2</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">2</span><span class="p">),</span>
-    <span class="n">make_vector_2</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">},</span> <span class="mi">0</span><span class="p">),</span>  <span class="n">make_vector_2</span><span class="p">({</span><span class="mi">0</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="mi">0</span><span class="p">),</span>  <span class="n">make_vector_2</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">},</span> <span class="mi">0</span><span class="p">)};</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[16]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">test_copy_and_assignment_2</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">decay_t</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// copy construct</span>
-        <span class="n">REQUIRE</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>            <span class="c1">// copies are equal</span>
-        <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>                      <span class="c1">// self assignment</span>
-        <span class="n">REQUIRE</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>            <span class="c1">// self assignment is a no-op</span>
-        <span class="n">modify</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
-        <span class="n">REQUIRE</span><span class="p">(</span><span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="p">);</span>            <span class="c1">// copies are disjoint</span>
-    <span class="p">}</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">decay_t</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// make a copy</span>
-            <span class="n">b</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>                      <span class="c1">// copy assignment</span>
-            <span class="n">REQUIRE</span><span class="p">(</span><span class="n">b</span> <span class="o">==</span> <span class="n">c</span><span class="p">);</span>            <span class="c1">// copies ar equal</span>
-            <span class="n">modify</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
-            <span class="n">REQUIRE</span><span class="p">(</span><span class="n">b</span> <span class="o">!=</span> <span class="n">c</span><span class="p">);</span>            <span class="c1">// copies are disjoint</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[17]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
-<span class="kt">size_t</span> <span class="n">allocation_count</span><span class="p">(</span><span class="k">const</span> <span class="n">F</span><span class="o">&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">initial</span> <span class="o">=</span> <span class="n">_allocate</span><span class="p">;</span>
-    <span class="n">f</span><span class="p">();</span>
-    <span class="k">return</span> <span class="n">_allocate</span> <span class="o">-</span> <span class="n">initial</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">allocation_failure</span><span class="p">(</span><span class="k">const</span> <span class="n">F</span><span class="o">&amp;</span> <span class="n">f</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">limit</span> <span class="o">=</span> <span class="n">_allocate</span> <span class="o">+</span> <span class="n">i</span><span class="p">;</span>
-    <span class="n">swap</span><span class="p">(</span><span class="n">limit</span><span class="p">,</span> <span class="n">_allocate_limit</span><span class="p">);</span>
-
-    <span class="k">auto</span> <span class="n">initial</span> <span class="o">=</span> <span class="n">_allocate</span> <span class="o">-</span> <span class="n">_deallocate</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">failed</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-
-    <span class="k">try</span> <span class="p">{</span>
-        <span class="n">f</span><span class="p">();</span>
-    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="n">bad_alloc</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">failed</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="n">swap</span><span class="p">(</span><span class="n">limit</span><span class="p">,</span> <span class="n">_allocate_limit</span><span class="p">);</span>
-    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">failed</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">initial</span> <span class="o">==</span> <span class="p">(</span><span class="n">_allocate</span> <span class="o">-</span> <span class="n">_deallocate</span><span class="p">)));</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[18]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">test_copy_and_assignment_failure</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">a</span> <span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">c</span> <span class="p">:</span> <span class="n">v</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="n">allocation_count</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span>
-                <span class="n">decay_t</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// copy construct</span>
-                <span class="n">b</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>                      <span class="c1">// copy assignment</span>
-            <span class="p">});</span>
-
-            <span class="k">for</span> <span class="p">(</span><span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">!=</span> <span class="n">n</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-                <span class="n">allocation_failure</span><span class="p">(</span>
-                    <span class="p">[</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span>
-                        <span class="n">decay_t</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span> <span class="c1">// copy construct</span>
-                        <span class="n">b</span> <span class="o">=</span> <span class="n">c</span><span class="p">;</span>                      <span class="c1">// copy assignment</span>
-                    <span class="p">},</span>
-                    <span class="n">i</span><span class="p">);</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[19]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">test_copy_and_assignment_failure</span><span class="p">(</span><span class="n">vec_rep_2</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<blockquote><p><strong>Exercise 2.2</strong>  Add a <code>_copy_limit</code> to <code>annotate_1</code> from <em>exercise 2.1</em> and add a destructor counter. Extend the above test to ensure the all <code>annotate_1</code> objects are correctely destructed in the event of an exception from the allocator or from copying the <code>annotate_1</code> object.</p>
-</blockquote>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h3 id="Optional-Move/Copy-Operations">Optional Move/Copy Operations<a class="anchor-link" href="#Optional-Move/Copy-Operations">&#182;</a></h3>
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./img/container-copy-constructible.png" alt=""></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<p><img src="./img/container-copy-assignable.png" alt=""></p>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>"Requires" in this context means that the concept is required for <em>this</em> operation<ul>
-<li>Not for a <code>vector</code> in general</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">;</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">b</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">;</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-<pre><code>In file included from input_line_5:1:
-In file included from /Users/sean-parent/miniconda3/envs/notebook/include/xeus/xinterpreter.hpp:12:
-In file included from /Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/functional:487:
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/memory:1759:31: error: call to implicitly-deleted copy constructor of 'std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt;'
-            ::new((void*)__p) _Up(_VSTD::forward&lt;_Args&gt;(__args)...);
-                              ^   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/memory:1670:18: note: in instantiation of function template specialization 'std::__1::allocator&lt;std::__1::unique_ptr&lt;int,
-      std::__1::default_delete&lt;int&gt; &gt; &gt;::construct&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt;,
-      std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt; &amp;&gt;' requested here
-            {__a.construct(__p, _VSTD::forward&lt;_Args&gt;(__args)...);}
-                 ^
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/memory:1516:14: note: in instantiation of function template specialization
-      'std::__1::allocator_traits&lt;std::__1::allocator&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt; &gt;
-      &gt;::__construct&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt;, std::__1::unique_ptr&lt;int,
-      std::__1::default_delete&lt;int&gt; &gt; &amp;&gt;' requested here
-            {__construct(__has_construct&lt;allocator_type, _Tp*, _Args...&gt;(),
-             ^
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/memory:1600:17: note: in instantiation of function template specialization
-      'std::__1::allocator_traits&lt;std::__1::allocator&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt; &gt;
-      &gt;::construct&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt;, std::__1::unique_ptr&lt;int,
-      std::__1::default_delete&lt;int&gt; &gt; &amp;&gt;' requested here
-                construct(__a, _VSTD::__to_raw_pointer(__begin2), *__begin1);
-                ^
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/vector:1019:21: note: in instantiation of function template specialization
-      'std::__1::allocator_traits&lt;std::__1::allocator&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt; &gt;
-      &gt;::__construct_range_forward&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt; *,
-      std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt; *&gt;' requested here
-    __alloc_traits::__construct_range_forward(__a, __first, __last, this-&gt;__end_);
-                    ^
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/vector:1202:9: note: in instantiation of function template specialization 'std::__1::vector&lt;std::__1::unique_ptr&lt;int,
-      std::__1::default_delete&lt;int&gt; &gt;, std::__1::allocator&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt;
-      &gt; &gt;::__construct_at_end&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt; *&gt;' requested here
-        __construct_at_end(__x.__begin_, __x.__end_, __n);
-        ^
-input_line_29:4:33: note: in instantiation of member function 'std::__1::vector&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt;,
-      std::__1::allocator&lt;std::__1::unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt; &gt; &gt;::vector' requested here
-    vector&lt;unique_ptr&lt;int&gt;&gt; b = a;
-                                ^
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/memory:2388:3: note: copy constructor is implicitly deleted because 'unique_ptr&lt;int, std::__1::default_delete&lt;int&gt; &gt;' has a user-declared
-      move constructor
-  unique_ptr(unique_ptr&amp;&amp; __u) noexcept
-  ^
-Interpreter Error:</code></pre>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>To make matters worse, we cannot test if <code>vector</code> is copyable or not</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">vector</span><span class="o">&lt;</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&gt;</span> <span class="n">a</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">boolalpha</span> <span class="o">&lt;&lt;</span> <span class="n">is_copy_constructible_v</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="o">&gt;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">ZString</span> <span class="n">example</span><span class="p">;</span>
+    <span class="n">example</span><span class="p">.</span><span class="n">ReplaceCharacters</span><span class="p">(</span><span class="sa">u</span><span class="s">&quot;:©&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s">&quot;/c&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -13991,7 +13496,7 @@ Interpreter Error:</code></pre>
 
 
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>true
+<pre>Unicode Stringc with / replacements 
 </pre>
 </div>
 </div>
@@ -13999,189 +13504,19 @@ Interpreter Error:</code></pre>
 </div>
 </div>
 
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>This is because the copy-constructor for <code>vector</code> is declared, but it will fail to instanciate<ul>
-<li>There is currently no good way to SFINAE the a copy constructor<ul>
-<li>To "fix" this would require multiple specializations of <code>vector</code></li>
-</ul>
-</li>
-<li>This is a defect in the language/library that <em>should</em> be fixed with concepts</li>
-</ul>
-</li>
-</ul>
-
 </div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="n">vector</span><span class="p">(</span><span class="k">const</span> <span class="n">vector</span><span class="o">&amp;</span><span class="p">)</span>
-    <span class="n">requires</span> <span class="n">is_copy_constructible_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">;</span>
-</pre></div>
-
-</div>
-</div>
-</div><div class="fragment">As of C++11, the only requirement on `T` is that it is _Erasable_ (Destructible)</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[22]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">class</span> <span class="nc">useless</span> <span class="p">{</span>
-    <span class="k">public</span><span class="o">:</span>        
-        <span class="n">useless</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-        
-        <span class="n">useless</span><span class="p">(</span><span class="k">const</span> <span class="n">useless</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-        <span class="n">useless</span><span class="p">(</span><span class="n">useless</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-        
-        <span class="n">useless</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">useless</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-        <span class="n">useless</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">useless</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
-    <span class="p">};</span>
-    
-    <span class="n">vector</span><span class="o">&lt;</span><span class="n">useless</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span> <span class="c1">// a few useless things!</span>
-<span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Creating models for all permuations of operations would be prohibitive<ul>
-<li>Instead we can use static_asserts to ensure operations are not instanciated</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[23]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
-
-<span class="k">enum</span> <span class="n">operations</span> <span class="p">{</span> <span class="n">copy_constructible</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">equality_comparable</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="p">};</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="n">operations</span> <span class="n">Ops</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">annotate_2</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_value</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-
-    <span class="n">annotate_2</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{}</span>
-
-    <span class="n">annotate_2</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate_2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">{</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span><span class="p">}</span> <span class="p">{</span>
-        <span class="k">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">copy_constructible</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate_2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate_2</span><span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">equality_comparable</span><span class="p">);</span>
-        <span class="o">++</span><span class="n">_equality</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">y</span><span class="p">.</span><span class="n">_value</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[24]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    
-<span class="k">using</span> <span class="n">annotate_t</span> <span class="o">=</span> <span class="n">annotate_2</span><span class="o">&lt;</span><span class="n">copy_constructible</span><span class="o">&gt;</span><span class="p">;</span>
-
-<span class="n">vector</span><span class="o">&lt;</span><span class="n">annotate_t</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">;</span>
-<span class="n">x</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">annotate_t</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
-
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<div class="highlight"><pre><span></span><span class="p">{</span>
-
-<span class="k">using</span> <span class="n">annotate_t</span> <span class="o">=</span> <span class="n">annotate_2</span><span class="o">&lt;</span><span class="n">copy_constructible</span><span class="o">&gt;</span><span class="p">;</span>
-
-<span class="n">vector</span><span class="o">&lt;</span><span class="n">annotate_t</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
-
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-
-<span class="p">}</span>
-</pre></div>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-
-<pre><code>input_line_30:11:9: error: static_assert failed
-        static_assert(Ops &amp; equality_comparable);
-        ^             ~~~~~~~~~~~~~~~~~~~~~~~~~
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/algorithm:682:71: note: in instantiation of member function '(anonymous namespace)::operator==' requested here
-    bool operator()(const _T1&amp; __x, const _T1&amp; __y) const {return __x == __y;}
-                                                                      ^
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/algorithm:1337:19: note: in instantiation of function template specialization 'std::__1::equal&lt;std::__1::__wrap_iter&lt;const (anonymous
-      namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt;, std::__1::__wrap_iter&lt;const
-      (anonymous namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt;,
-      std::__1::__equal_to&lt;(anonymous namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt;,
-      (anonymous namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; &gt; &gt;' requested here
-    return _VSTD::equal(__first1, __last1, __first2, __equal_to&lt;__v1, __v2&gt;());
-                  ^
-/Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/vector:3301:41: note: in instantiation of function template specialization 'std::__1::equal&lt;std::__1::__wrap_iter&lt;const (anonymous
-      namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt;, std::__1::__wrap_iter&lt;const
-      (anonymous namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt; &gt;' requested here
-    return __sz == __y.size() &amp;&amp; _VSTD::equal(__x.begin(), __x.end(), __y.begin());
-                                        ^
-input_line_32:6:12: note: in instantiation of function template specialization 'std::__1::operator==&lt;(anonymous
-      namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt;, std::__1::allocator&lt;(anonymous
-      namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; &gt; &gt;' requested here
-cout &lt;&lt; (a == b) &lt;&lt; endl;
-           ^
-Interpreter Error:</code></pre>
-
-</div>
-</div>
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
-<li>Do the exercises</li>
-<li>Write a program that can iterate through the combinations of operations for <code>annotate_2</code> and only test those operations<ul>
-<li>Hint: this is going to require metaprogramming and/or constexpr</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
 </div></section></section>
 </div>
 </div>
