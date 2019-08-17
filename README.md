@@ -9,39 +9,41 @@
 ```
 xcode-select --install
 ```
-- install miniconda for Python 3.7
-	- download the install script [here](https://conda.io/miniconda.html)
-	- execute the downloaded script
-	- when prompted `Do you wish the installer to prepend the Miniconda3 install location to PATH in your /Users/<name>/.bash_profile ? [yes|no]` answer no
+_Note:_ There is an issue with the Xcode 11 beta 5 command line tools which will cause the xeus-cling kernel to crash. A work around is to use xcode-select to select tools from an older version of Xcode. Download Xcode 10.3 from Apple's. Move to a folder such as`/Application/Xcode_10.3/`. And then select the developer tools from the package:
 ```
-chmod +x ~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
-~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
+sudo xcode-select -s /Applications/Xcode_10.3/Xcode.app/Contents/Developer
 ```
-- Create the conda environment
-```
-export PATH="$HOME/miniconda3/bin:$PATH"
-conda env create
-```
-
-## To run the notebook
-```
-export PATH="$HOME/miniconda3/bin:$PATH"
-source activate sean-parent-notebook
-jupyter notebook
-```
-- use control-c and `source deactivate` to exit
-
-## To setup complete environment with interactive slide editing and jekyl pages
-
 - install [homebrew](https://brew.sh/)
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
+- install miniconda
+```
+brew cask install miniconda
+```
+- Create the conda environment
+```
+conda env create
+conda init bash
+source ~/.bash_profile
+```
+
+## To run the notebook
+```
+source activate notebook
+jupyter lab
+```
+- use control-c and `conda deactivate` to exit
+
+## To setup complete environment with interactive slide editing and jekyl pages
+
 - install utilities
 ```
-brew install npm
+brew install node
 brew install fswatch
-brew install ruby
+brew install rbenv
+rbenv init
+rbenv install 2.6.3
 npm install -g browser-sync
 gem install bundler
 ```
