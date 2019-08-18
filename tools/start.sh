@@ -24,13 +24,14 @@ set -- "${POSITIONAL[@]}" # restore positional parameters
 
 # end command processing
 
-export PATH="$HOME/miniconda3/bin:$PATH"
+#export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
+eval "$(conda shell.bash hook)"
 
-trap "source activate notebook; jupyter notebook stop 8888" EXIT
+trap "conda activate notebook; jupyter notebook stop 8888" EXIT
 trap 'for pid in $BKPIDS; do kill $pid; done; exit' SIGINT
 
 {
-    source activate notebook
+    conda activate notebook
     if [[ $LAB = NO ]]; then
         jupyter notebook
     else
@@ -38,7 +39,7 @@ trap 'for pid in $BKPIDS; do kill $pid; done; exit' SIGINT
     fi
 } &
 
-source activate notebook
+conda activate notebook
 
 function generate_slides {
     fswatch --print0 --event=Updated --extended --exclude=".*" --include="^[^~]*\.ipynb$" "./$1" \

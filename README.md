@@ -24,13 +24,14 @@ brew cask install miniconda
 - Create the conda environment
 ```
 conda env create
+conda config --set auto_activate_base false
 conda init bash
 source ~/.bash_profile
 ```
 
 ## To run the notebook
 ```
-source activate notebook
+conda activate notebook
 jupyter lab
 ```
 - use control-c and `conda deactivate` to exit
