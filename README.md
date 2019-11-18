@@ -13,13 +13,30 @@ xcode-select --install
 	- download and run the install .pkg [here](https://conda.io/miniconda.html)
 
 - reload the updated bash profile
+
 ```
 source ~/.bash_profile
+```
+
+- install miniconda for Python 3.7
+	- download the install script [here](https://conda.io/miniconda.html)
+	- execute the downloaded script
+	- when prompted `Do you wish the installer to prepend the Miniconda3 install location to PATH in your /Users/<name>/.bash_profile ? [yes|no]` answer no
+- install [homebrew](https://brew.sh/)
+```
+/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+```
+- install miniconda
+```
+brew cask install miniconda
 ```
 
 - Create the conda environment
 ```
 conda env create
+conda config --set auto_activate_base false
+conda init bash
+source ~/.bash_profile
 ```
 
 ## To run the notebook
@@ -60,6 +77,8 @@ jupyter lab
 ```
 
 ## To prepare all slides (do after updating and before pushing to github)
+
+- install utilities
 ```
 ./tools/prepare.sh
 ```
@@ -98,10 +117,35 @@ conda env create
 ```
 sudo apt install npm
 sudo apt install fswatch
-sudo apt install ruby
-sudo apt install ruby-dev
-sudo apt install zlib1g-dev
+sudo apt install rbenv
+rbenv init
+rbenv install 2.4.1
+#sudo apt install ruby
+#sudo apt install ruby-dev
+#sudo apt install zlib1g-dev
 npm install -g browser-sync
-sudo gem install bundler
+gem install bundler
 ```
 Note: Need linux update script, must run `sudo bundle update` prior to `tools/start.sh`
+
+
+
+## Running Tools
+```
+docker run --env JUPYTER_CONFIG_DIR=/mnt/home/_jupyter --mount type=bind,source="$(pwd)",target=/mnt/home  -t -i -p 3000:3000 -p 3001:3001 -p 8888:8888 docker.pkg.github.com/sean-parent/notebook/tools:1.0.0  bash
+```
+
+## Updating docker package
+```
+docker run --mount type=bind,source="$(pwd)",target=/mnt/docs-src -t -i \
+  --expose 8888 -p 3000:3000 -p 3001:3001 -p 8888:8888 \
+  docker.pkg.github.com/sean-parent/jupyter-docker/docs-tool-cpp-base:1.1.0 bash
+
+cd /mnt/docs-src
+./tools/update.sh
+exit
+
+docker build -t docker.pkg.github.com/sean-parent/notebook/tools:1.0.0 .
+
+
+```
