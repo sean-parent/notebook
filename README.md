@@ -10,40 +10,58 @@
 xcode-select --install
 ```
 - install miniconda for Python 3.7
-	- download the install script [here](https://conda.io/miniconda.html)
-	- execute the downloaded script
-	- when prompted `Do you wish the installer to prepend the Miniconda3 install location to PATH in your /Users/<name>/.bash_profile ? [yes|no]` answer no
+	- download and run the install .pkg [here](https://conda.io/miniconda.html)
+
+- reload the updated bash profile
 ```
-chmod +x ~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
-~/Downloads/Miniconda3-latest-MacOSX-x86_64.sh
+source ~/.bash_profile
 ```
+
 - Create the conda environment
 ```
-export PATH="$HOME/miniconda3/bin:$PATH"
 conda env create
 ```
 
 ## To run the notebook
 ```
-export PATH="$HOME/miniconda3/bin:$PATH"
-source activate sean-parent-notebook
-jupyter notebook
+conda activate notebook
+jupyter lab
 ```
-- use control-c and `source deactivate` to exit
+- use control-c and `conda deactivate` to exit
 
 ## To setup complete environment with interactive slide editing and jekyl pages
 
 - install [homebrew](https://brew.sh/)
-```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
+	```
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	```
+
+- install [rbenv](https://github.com/rbenv/rbenv)
+	```
+	brew install rbenv
+	echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+	source ~/.bash_profile
+	```
+- install the correct version of ruby
+	```
+	rbenv install
+	```
 - install utilities
+	```
+	brew install npm
+	brew install fswatch
+	npm install -g browser-sync
+	gem install bundler
+	```
+
+## To update environment
 ```
-brew install npm
-brew install fswatch
-brew install ruby
-npm install -g browser-sync
-gem install bundler
+./tools/update.sh
+```
+
+## To prepare all slides (do after updating and before pushing to github)
+```
+./tools/prepare.sh
 ```
 
 ## To run complete environment
@@ -51,15 +69,6 @@ gem install bundler
 ./tools/start.sh
 ```
 - use control-c to exit
-
-## To update environment
-```
-./tools/update.sh
-```
-## To prepare all slides before pushing to github
-```
-./tools/prepare.sh
-```
 
 ## Windows installation instructions to run locally
 
