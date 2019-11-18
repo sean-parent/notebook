@@ -9,10 +9,19 @@
 ```
 xcode-select --install
 ```
-_Note:_ There is an issue with the Xcode 11 beta 5 command line tools which will cause the xeus-cling kernel to crash. A work around is to use xcode-select to select tools from an older version of Xcode. Download Xcode 10.3 from Apple's. Move to a folder such as`/Application/Xcode_10.3/`. And then select the developer tools from the package:
+- install miniconda for Python 3.7
+	- download and run the install .pkg [here](https://conda.io/miniconda.html)
+
+- reload the updated bash profile
+
 ```
-sudo xcode-select -s /Applications/Xcode_10.3/Xcode.app/Contents/Developer
+source ~/.bash_profile
 ```
+
+- install miniconda for Python 3.7
+	- download the install script [here](https://conda.io/miniconda.html)
+	- execute the downloaded script
+	- when prompted `Do you wish the installer to prepend the Miniconda3 install location to PATH in your /Users/<name>/.bash_profile ? [yes|no]` answer no
 - install [homebrew](https://brew.sh/)
 ```
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
@@ -21,6 +30,7 @@ sudo xcode-select -s /Applications/Xcode_10.3/Xcode.app/Contents/Developer
 ```
 brew cask install miniconda
 ```
+
 - Create the conda environment
 ```
 conda env create
@@ -38,15 +48,39 @@ jupyter lab
 
 ## To setup complete environment with interactive slide editing and jekyl pages
 
+- install [homebrew](https://brew.sh/)
+	```
+	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	```
+
+- install [rbenv](https://github.com/rbenv/rbenv)
+	```
+	brew install rbenv
+	echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
+	source ~/.bash_profile
+	```
+- install the correct version of ruby
+	```
+	rbenv install
+	```
+- install utilities
+	```
+	brew install npm
+	brew install fswatch
+	npm install -g browser-sync
+	gem install bundler
+	```
+
+## To update environment
+```
+./tools/update.sh
+```
+
+## To prepare all slides (do after updating and before pushing to github)
+
 - install utilities
 ```
-brew install node
-brew install fswatch
-brew install rbenv
-rbenv init
-rbenv install 2.4.1
-npm install -g browser-sync
-gem install bundler
+./tools/prepare.sh
 ```
 
 ## To run complete environment
@@ -54,15 +88,6 @@ gem install bundler
 ./tools/start.sh
 ```
 - use control-c to exit
-
-## To update environment
-```
-./tools/update.sh
-```
-## To prepare all slides before pushing to github
-```
-./tools/prepare.sh
-```
 
 ## Windows installation instructions to run locally
 
@@ -115,7 +140,7 @@ docker run --env JUPYTER_CONFIG_DIR=/mnt/home/_jupyter --mount type=bind,source=
 docker run --mount type=bind,source="$(pwd)",target=/mnt/docs-src -t -i \
   --expose 8888 -p 3000:3000 -p 3001:3001 -p 8888:8888 \
   docker.pkg.github.com/sean-parent/jupyter-docker/docs-tool-cpp-base:1.1.0 bash
-  
+
 cd /mnt/docs-src
 ./tools/update.sh
 exit
