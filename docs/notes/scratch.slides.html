@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>15-concurrent-code-object-lifetimes slides</title>
+<title>scratch slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13198,132 +13198,685 @@ a.anchor-link {
 <div class="reveal">
 <div class="slides">
 <section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Concurrent-Code-&amp;-Object-Lifetimes">Concurrent Code &amp; Object Lifetimes<a class="anchor-link" href="#Concurrent-Code-&amp;-Object-Lifetimes">&#182;</a></h1>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;atomic&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;chrono&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;functional&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;set&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;thread&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;utility&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;vector&gt;</span><span class="cp"></span>
+</pre></div>
+
+    </div>
 </div>
 </div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Mutable, <em>conditionally thread safe</em>, objects may only be accessed from one execution context at a time<ul>
-<li>Such objects can be safely moved, or copied, between execution contexts</li>
-</ul>
-</li>
-</ul>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</pre></div>
+
+    </div>
 </div>
-</div></div><div class="fragment">
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">chrono</span><span class="p">;</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">async</span><span class="p">([</span><span class="n">_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">]()</span> <span class="k">mutable</span> <span class="p">{</span> <span class="c1">// copy object to new context</span>
-        <span class="n">_x</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">_x</span><span class="p">;</span>
-    <span class="p">});</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">temp</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="n">set_property</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="kt">void</span> <span class="n">operation</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
 
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="k">const</span> <span class="kt">int</span> <span class="n">value</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">temp</span><span class="o">&gt;</span> <span class="n">p</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">temp</span><span class="o">&gt;</span><span class="p">();</span>
+
+<span class="n">p</span><span class="o">-&gt;</span><span class="n">set_property</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
+<span class="c1">// Someplace else...</span>
+<span class="n">p</span><span class="o">-&gt;</span><span class="n">set_property</span><span class="p">(</span><span class="n">value</span><span class="p">);</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
 </div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">async</span><span class="p">([</span><span class="n">_p</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">p</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span> <span class="c1">// move object to new context</span>
-        <span class="o">*</span><span class="n">_p</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">_p</span><span class="p">);</span>
-    <span class="p">});</span> 
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
 
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">r</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">type</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="n">type</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">operation</span><span class="p">();</span>
+    <span class="c1">//</span>
 <span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v1</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
 
+<span class="k">using</span> <span class="n">type</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
 
-<div class="output_area">
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="n">type</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">operation</span><span class="p">();</span>
+    <span class="c1">//</span>
+<span class="p">}</span>
 
-    <div class="prompt"></div>
+<span class="p">}</span> <span class="c1">// namespace v1</span>
+</pre></div>
 
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
+    </div>
 </div>
 </div>
 
 </div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+
+<span class="k">using</span> <span class="n">type</span> <span class="o">=</span> <span class="n">temp</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(</span><span class="n">type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">operation</span><span class="p">();</span>
+    <span class="c1">//</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v1</span>
+</pre></div>
+
+    </div>
+</div>
 </div>
 
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>const</code> objects are assumed to be thread safe, and can safely be shared by more than one context<ul>
-<li>Care must be taken if you have <em>mutable</em> members</li>
-</ul>
-</li>
-</ul>
-
 </div>
-</div>
-</div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">async</span><span class="p">([</span><span class="n">_p</span> <span class="o">=</span> <span class="n">p</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_p</span><span class="p">;</span> <span class="p">});</span> <span class="c1">// share object between contexts</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">f</span><span class="p">(</span><span class="k">nullptr</span><span class="p">)</span>
+</pre></div>
 
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">r</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stderr output_text">
+<pre><span class="ansi-bold">input_line_11:6:5: </span><span class="ansi-magenta-intense-fg ansi-bold">warning: </span><span class="ansi-bold">null passed to a callee that requires a non-null argument [-Wnonnull]</span>
+    p-&gt;operation();
+<span class="ansi-green-intense-fg ansi-bold">    ^
+</span></pre>
+</div>
+</div>
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_text output_error">
+<pre>
+Interpreter Exception: </pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Problem statement: Save documents every 5 minutes after application has been idle for 5 seconds.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Save documents every <em>n</em> minutes after application has been idle for <em>m</em> seconds.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Save documents every <em>n</em> minutes</strong> after application has been idle for <em>m</em> seconds.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Save documents every <em>n</em> minutes</strong> - we can use a recurring timer.<sup>*</sup></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>(Not really - but we'll come back to it.)</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><strong>Invoke a tast after the application has been idle for <em>m</em> seconds.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="o">?</span><span class="n">std</span><span class="o">::</span><span class="n">vector</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+
+<span class="k">extern</span> <span class="n">system_clock</span><span class="o">::</span><span class="n">time_point</span> <span class="n">_last_idle</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">invoke_after</span><span class="p">(</span><span class="n">system_clock</span><span class="o">::</span><span class="n">duration</span><span class="p">,</span> <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span><span class="p">);</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="c1">// F is task of the form void()</span>
+<span class="kt">void</span> <span class="n">after_idle</span><span class="p">(</span><span class="n">F</span> <span class="n">task</span><span class="p">,</span> <span class="n">system_clock</span><span class="o">::</span><span class="n">duration</span> <span class="n">delay</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">when</span> <span class="o">=</span> <span class="n">delay</span> <span class="o">-</span> <span class="p">(</span><span class="n">system_clock</span><span class="o">::</span><span class="n">now</span><span class="p">()</span> <span class="o">-</span> <span class="n">_last_idle</span><span class="p">);</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">system_clock</span><span class="o">::</span><span class="n">duration</span><span class="o">::</span><span class="n">zero</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">when</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">invoke_after</span><span class="p">([</span><span class="o">=</span><span class="p">]</span> <span class="p">{</span> <span class="n">after_idle</span><span class="p">(</span><span class="n">task</span><span class="p">,</span> <span class="n">delay</span><span class="p">);</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">task</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">S</span><span class="p">,</span> <span class="c1">// S is a scheduler void(task, duration)</span>
+          <span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="c1">// T is a timer duration()</span>
+          <span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="c1">// F is a task void()</span>
+<span class="kt">void</span> <span class="n">on_expiration</span><span class="p">(</span><span class="n">S</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">T</span> <span class="n">timer</span><span class="p">,</span> <span class="n">F</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="n">local</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="kt">void</span> <span class="n">recursive</span><span class="p">(</span><span class="n">S</span><span class="o">&amp;</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">T</span> <span class="n">timer</span><span class="p">,</span> <span class="n">F</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">auto</span> <span class="n">remaining</span> <span class="o">=</span> <span class="n">timer</span><span class="p">();</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">remaining</span><span class="p">)</span> <span class="p">{</span>
+                <span class="n">scheduler</span><span class="p">(</span><span class="n">remaining</span><span class="p">,</span> <span class="p">[</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">_timer</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">timer</span><span class="p">),</span>
+                                      <span class="n">_task</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">task</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span>
+                    <span class="n">recursive</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">_timer</span><span class="p">),</span> <span class="n">move</span><span class="p">(</span><span class="n">_task</span><span class="p">));</span>
+                <span class="p">});</span>
+            <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+                <span class="n">task</span><span class="p">();</span>
+            <span class="p">}</span>
+        <span class="p">}</span>
+    <span class="p">};</span>
+    <span class="k">auto</span> <span class="n">remaining</span> <span class="o">=</span> <span class="n">timer</span><span class="p">();</span> <span class="c1">// invoke before move</span>
+    <span class="n">scheduler</span><span class="p">(</span><span class="n">remaining</span><span class="p">,</span>
+              <span class="p">[</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">_timer</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">timer</span><span class="p">),</span> <span class="n">_task</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">task</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span>
+                  <span class="n">local</span><span class="o">::</span><span class="n">recursive</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">_timer</span><span class="p">),</span> <span class="n">move</span><span class="p">(</span><span class="n">_task</span><span class="p">));</span>
+              <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v3</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">S</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">recursive</span><span class="p">(</span><span class="n">S</span><span class="o">&amp;</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">T</span> <span class="n">timer</span><span class="p">,</span> <span class="n">F</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">remaining</span> <span class="o">=</span> <span class="n">timer</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">decltype</span><span class="p">(</span><span class="n">remaining</span><span class="p">){</span><span class="mi">0</span><span class="p">}</span> <span class="o">&lt;</span> <span class="n">remaining</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">scheduler</span><span class="p">(</span><span class="n">remaining</span><span class="p">,</span> <span class="p">[</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">_timer</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">timer</span><span class="p">),</span>
+                              <span class="n">_task</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">task</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span>
+            <span class="n">recursive</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">_timer</span><span class="p">),</span> <span class="n">move</span><span class="p">(</span><span class="n">_task</span><span class="p">));</span>
+        <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">task</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v3</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v3</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">S</span><span class="p">,</span> <span class="c1">// S is a scheduler void(task, duration)</span>
+          <span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="c1">// T is a timer duration()</span>
+          <span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="c1">// F is a task void()</span>
+<span class="kt">void</span> <span class="n">on_expiration</span><span class="p">(</span><span class="n">S</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">T</span> <span class="n">timer</span><span class="p">,</span> <span class="n">F</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">remaining</span> <span class="o">=</span> <span class="n">timer</span><span class="p">();</span> <span class="c1">// invoke before move</span>
+    <span class="n">scheduler</span><span class="p">(</span><span class="n">remaining</span><span class="p">,</span>
+              <span class="p">[</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">_timer</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">timer</span><span class="p">),</span> <span class="n">_task</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">task</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span>
+                  <span class="n">recursive</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">_timer</span><span class="p">),</span> <span class="n">move</span><span class="p">(</span><span class="n">_task</span><span class="p">));</span>
+              <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v3</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#if 0</span><span class="c"></span>
+<span class="c">v3::on_expiration(</span>
+<span class="c">    [](auto after, auto task) {</span>
+<span class="c">        cout &lt;&lt; &quot;try again in &quot; &lt;&lt; duration_cast&lt;duration&lt;double&gt;&gt;(after).count() &lt;&lt; &quot; seconds.&quot; &lt;&lt; endl;</span>
+<span class="c">        this_thread::sleep_for(after);</span>
+<span class="c">        task();</span>
+<span class="c">    },</span>
+<span class="c">    [_target = 4.0s]() mutable {</span>
+<span class="c">        _target -= 1.0s;</span>
+<span class="c">        return _target;</span>
+<span class="c">    },</span>
+<span class="c">    [] { cout &lt;&lt; &quot;done!\n&quot;; }</span>
+<span class="c">);</span>
+<span class="cp">#endif</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+    
+    
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">S</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">on_expiration_</span><span class="p">(</span><span class="n">S</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">T</span> <span class="n">timer</span><span class="p">,</span> <span class="n">F</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">remaining</span> <span class="o">=</span> <span class="n">timer</span><span class="p">();</span>
+    <span class="k">if</span> <span class="p">(</span><span class="k">decltype</span><span class="p">(</span><span class="n">remaining</span><span class="p">){</span><span class="mi">0</span><span class="p">}</span> <span class="o">&lt;</span> <span class="n">remaining</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">scheduler</span><span class="p">(</span><span class="n">remaining</span><span class="p">,</span> <span class="p">[</span><span class="o">=</span><span class="p">]</span> <span class="p">{</span> <span class="n">on_expiration_</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">timer</span><span class="p">,</span> <span class="n">task</span><span class="p">);</span> <span class="p">});</span>
+    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+        <span class="n">task</span><span class="p">();</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">S</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
+<span class="kt">void</span> <span class="n">on_expiration</span><span class="p">(</span><span class="n">S</span> <span class="n">scheduler</span><span class="p">,</span> <span class="n">T</span> <span class="n">timer</span><span class="p">,</span> <span class="n">F</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">scheduler</span><span class="p">(</span><span class="n">timer</span><span class="p">(),</span> <span class="p">[</span><span class="o">=</span><span class="p">]</span> <span class="p">{</span> <span class="n">on_expiration_</span><span class="p">(</span><span class="n">scheduler</span><span class="p">,</span> <span class="n">timer</span><span class="p">,</span> <span class="n">task</span><span class="p">);</span> <span class="p">});</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v4</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">v4</span><span class="o">::</span><span class="n">on_expiration</span><span class="p">(</span>
+    <span class="p">[](</span><span class="k">auto</span> <span class="n">after</span><span class="p">,</span> <span class="k">auto</span> <span class="n">task</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;try again in &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">duration_cast</span><span class="o">&lt;</span><span class="n">duration</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">after</span><span class="p">).</span><span class="n">count</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; seconds.&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+        <span class="n">this_thread</span><span class="o">::</span><span class="n">sleep_for</span><span class="p">(</span><span class="n">after</span><span class="p">);</span>
+        <span class="n">task</span><span class="p">();</span>
+    <span class="p">},</span>
+    <span class="p">[</span><span class="n">_target</span> <span class="o">=</span> <span class="mf">4.0</span><span class="n">s</span><span class="p">]()</span> <span class="k">mutable</span> <span class="p">{</span>
+        <span class="n">_target</span> <span class="o">-=</span> <span class="mf">1.0</span><span class="n">s</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">_target</span><span class="p">;</span>
+    <span class="p">},</span>
+    <span class="p">[]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;done!</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span> <span class="p">}</span>
+<span class="p">);</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">map</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">string</span><span class="p">,</span> <span class="kt">int</span><span class="o">&gt;</span> <span class="n">c</span> <span class="o">=</span> <span class="p">{</span> <span class="p">{</span> <span class="s">&quot;Hello&quot;</span><span class="p">,</span> <span class="mi">42</span> <span class="p">}</span> <span class="p">};</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+\begin{align}
+a * b &amp; = c \\
+a &amp; = c / b
+\end{align}
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">c</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="n">c</span><span class="p">[</span><span class="s">&quot;Hello&quot;</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">registry</span> <span class="p">{</span>
+    <span class="n">unordered_map</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">T</span><span class="o">&gt;</span> <span class="n">_map</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">auto</span> <span class="n">append</span><span class="p">(</span><span class="n">T</span> <span class="n">element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">size_t</span> <span class="p">{</span>
+        <span class="n">_map</span><span class="p">.</span><span class="n">emplace</span><span class="p">(</span><span class="n">_id</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">element</span><span class="p">));</span>
+        <span class="k">return</span> <span class="n">_id</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="kt">void</span> <span class="n">erase</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span> <span class="n">_map</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">id</span><span class="p">);</span> <span class="p">}</span>
+
+    <span class="k">auto</span> <span class="n">find</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="o">*</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">_map</span><span class="p">.</span><span class="n">find</span><span class="p">(</span><span class="n">id</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">end</span><span class="p">(</span><span class="n">_map</span><span class="p">))</span> <span class="o">?</span> <span class="k">nullptr</span> <span class="o">:</span> <span class="o">&amp;</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">F</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="n">for_each</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">_map</span><span class="p">)</span>
+            <span class="n">f</span><span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">registry</span> <span class="p">{</span>
+    <span class="n">vector</span><span class="o">&lt;</span><span class="n">pair</span><span class="o">&lt;</span><span class="kt">size_t</span><span class="p">,</span> <span class="n">optional</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;&gt;</span> <span class="n">_map</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">_size</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">_id</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">//...</span>
+    <span class="k">auto</span> <span class="n">append</span><span class="p">(</span><span class="n">T</span> <span class="n">element</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">size_t</span> <span class="p">{</span>
+        <span class="n">_map</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">_id</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">element</span><span class="p">));</span>
+        <span class="o">++</span><span class="n">_size</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">_id</span><span class="o">++</span><span class="p">;</span>
+    <span class="p">}</span>
+    <span class="c1">//...</span>
+
+    <span class="kt">void</span> <span class="n">erase</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">id</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span>
+            <span class="n">begin</span><span class="p">(</span><span class="n">_map</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">_map</span><span class="p">),</span> <span class="n">id</span><span class="p">,</span>
+            <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">first</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">;</span> <span class="p">});</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">end</span><span class="p">(</span><span class="n">_map</span><span class="p">)</span> <span class="o">||</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">first</span> <span class="o">!=</span> <span class="n">id</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+        
+        <span class="n">p</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">.</span><span class="n">reset</span><span class="p">();</span>
+        <span class="o">--</span><span class="n">_size</span><span class="p">;</span>
+        
+        <span class="k">if</span> <span class="p">(</span><span class="n">_size</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">_map</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span> <span class="p">{</span>
+            <span class="n">_map</span><span class="p">.</span><span class="n">erase</span><span class="p">(</span><span class="n">remove_if</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">_map</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">_map</span><span class="p">),</span>
+                                 <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="n">e</span><span class="p">.</span><span class="n">second</span><span class="p">;</span> <span class="p">}),</span>
+                       <span class="n">end</span><span class="p">(</span><span class="n">_map</span><span class="p">));</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">//...</span>
+
+    <span class="k">auto</span> <span class="n">find</span><span class="p">(</span><span class="kt">size_t</span> <span class="n">id</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">T</span><span class="o">*</span> <span class="p">{</span>
+        <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">lower_bound</span><span class="p">(</span>
+            <span class="n">begin</span><span class="p">(</span><span class="n">_map</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">_map</span><span class="p">),</span> <span class="n">id</span><span class="p">,</span>
+            <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">first</span> <span class="o">&lt;</span> <span class="n">b</span><span class="p">;</span> <span class="p">});</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">end</span><span class="p">(</span><span class="n">_map</span><span class="p">)</span> <span class="o">||</span> <span class="p">(</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">first</span> <span class="o">!=</span> <span class="n">id</span><span class="p">)</span> <span class="o">||</span> <span class="o">!</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">)</span> <span class="o">?</span> <span class="k">nullptr</span> <span class="o">:</span>
+                                                                    <span class="o">&amp;*</span><span class="n">p</span><span class="o">-&gt;</span><span class="n">second</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">typename</span> <span class="n">F</span><span class="o">&gt;</span>
+    <span class="kt">void</span> <span class="n">for_each</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">_map</span><span class="p">)</span> <span class="p">{</span>
+            <span class="k">if</span> <span class="p">(</span><span class="n">e</span><span class="p">.</span><span class="n">second</span><span class="p">)</span> <span class="n">f</span><span class="p">(</span><span class="o">*</span><span class="n">e</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    
+    <span class="kt">int</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
+    <span class="kt">int</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="o">*</span> <span class="n">f</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">a</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+    
+    <span class="n">std</span><span class="o">::</span><span class="n">rotate</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">f</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">adobe</span> <span class="p">{</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">forest</span> <span class="p">{};</span>
+<span class="p">}</span> <span class="c1">// namespace adobe</span>
+
+<span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">view</span> <span class="p">{</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">list</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">view</span><span class="o">&gt;&gt;</span> <span class="n">_children</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">view</span><span class="o">&gt;</span> <span class="n">_parent</span><span class="p">;</span>
+    <span class="c1">//...</span>
+<span class="p">};</span>
+
+<span class="n">view</span> <span class="n">screen</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="c1">// namespace v1</span>
+
+<span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">view</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+<span class="p">};</span>
+
+<span class="k">class</span> <span class="nc">adobe</span><span class="o">::</span><span class="n">forest</span><span class="o">&lt;</span><span class="n">view</span><span class="o">&gt;</span> <span class="n">views</span><span class="p">;</span>
+
+<span class="p">}</span> <span class="c1">// namespace v2</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">type</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="p">{</span> <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">{</span>
+    <span class="n">type</span><span class="o">*</span> <span class="n">p</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="n">p</span><span class="o">-&gt;</span><span class="n">member</span><span class="p">();</span>
+    
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">member</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -13341,73 +13894,24 @@ IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callab
 
 
 <div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
+<pre><span class="ansi-bold">input_line_9:1:8: </span><span class="ansi-red-intense-fg ansi-bold">error: </span><span class="ansi-bold">redefinition of &#39;type&#39;</span>
+struct type {
+<span class="ansi-green-intense-fg ansi-bold">       ^
+</span><span class="ansi-bold">input_line_8:1:8: </span><span class="ansi-black-intense-fg ansi-bold">note: </span>previous definition is here
+struct type {
+<span class="ansi-green-intense-fg ansi-bold">       ^
+</span></pre>
 </div>
 </div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Futures allow us to associate a result with a particular task<ul>
-<li>Sometimes it is useful to have the result still owned by another context</li>
-<li><code>std::weak_ptr&lt;&gt;</code> is one way to track the lifetime without taking ownership</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">struct</span> <span class="n">photoshop</span> <span class="p">{</span>
-        <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_document</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;best.jpg&quot;</span><span class="p">);</span>
-
-        <span class="n">sequential_process</span> <span class="n">_process</span><span class="p">;</span>
-    <span class="p">}</span> <span class="n">ps</span><span class="p">;</span>
-
-    <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">doc_token</span> <span class="o">=</span>
-        <span class="n">async_packaged</span><span class="p">(</span><span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ps</span><span class="p">.</span><span class="n">_document</span><span class="p">);</span> <span class="p">})</span>
-            <span class="p">.</span><span class="n">get</span><span class="p">();</span>
-
-    <span class="c1">// ps._process.async([&amp;]{ ps._document = make_shared&lt;string&gt;(&quot;better.png&quot;); });</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">doc_token</span><span class="p">.</span><span class="n">lock</span><span class="p">())</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="s">&quot;renamed.jpg&quot;</span><span class="p">;</span>
-    <span class="p">});</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ps</span><span class="p">.</span><span class="n">_document</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
 
 <div class="output_area">
 
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
+<div class="output_subarea output_text output_error">
+<pre>
+Interpreter Error: </pre>
 </div>
 </div>
 
@@ -13417,96 +13921,29 @@ IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callab
 </div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">struct</span> <span class="n">photoshop</span> <span class="p">{</span>
-        <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_document</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;best.jpg&quot;</span><span class="p">);</span>
-
-        <span class="n">sequential_process</span> <span class="n">_process</span><span class="p">;</span>
-    <span class="p">}</span> <span class="n">ps</span><span class="p">;</span>
-
-    <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">doc_token</span> <span class="o">=</span>
-        <span class="n">async_packaged</span><span class="p">(</span><span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ps</span><span class="p">.</span><span class="n">_document</span><span class="p">);</span> <span class="p">})</span>
-            <span class="p">.</span><span class="n">get</span><span class="p">();</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">ps</span><span class="p">.</span><span class="n">_document</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;better.png&quot;</span><span class="p">);</span> <span class="p">});</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">doc_token</span><span class="p">.</span><span class="n">lock</span><span class="p">())</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="s">&quot;renamed.jpg&quot;</span><span class="p">;</span>
-    <span class="p">});</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ps</span><span class="p">.</span><span class="n">_document</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="n">f</span><span class="p">(</span><span class="n">type</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">member</span><span class="p">();</span>
+    <span class="c1">//...</span>
 <span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">f</span><span class="p">(</span><span class="n">type</span><span class="o">&amp;</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="c1">//...</span>
+    <span class="n">p</span><span class="p">.</span><span class="n">member</span><span class="p">();</span>
+    <span class="c1">//...</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace</span>
 </pre></div>
 
     </div>
 </div>
 </div>
 
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>std::weak_ptr&lt;&gt;</code> also has the advantage that it will not create a retain loop</li>
-<li>Makes it more clear that the operation doesn't own the object</li>
-<li><code>apollo</code> has a <code>track</code> library that can be used to track object lifetimes which are not owned by <code>std::shared_ptr&lt;&gt;</code></li>
-<li><code>apollo::track(T)</code> will return a weak pointer type when T is<ul>
-<li><code>std::shared_ptr&lt;&gt;</code></li>
-<li>A pointer to an object derived from <code>std::enabled_shared_from_this&lt;&gt;</code></li>
-<li>An Objective C/C++ <code>__strong</code> pointer</li>
-<li>A pointer to an object derived from <code>apollo::enable_track&lt;&gt;</code></li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Weak pointer type are also useful to avoid retain loops with delegates</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></div></section></section>
+</div></section></section>
 </div>
 </div>
 

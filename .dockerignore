@@ -1,0 +1,5 @@
+*
+!./docs/Gemfile
+!./docs/Gemfile.lock
+!./.ruby-version
+!./environment.yml

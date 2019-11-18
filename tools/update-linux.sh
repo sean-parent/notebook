@@ -12,7 +12,7 @@ conda env update
 git submodule update --recursive --remote
 
 (
-source activate notebook
+conda activate notebook
 jupyter labextension update --all
 )
 

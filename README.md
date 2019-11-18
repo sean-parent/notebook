@@ -44,7 +44,7 @@ brew install node
 brew install fswatch
 brew install rbenv
 rbenv init
-rbenv install 2.6.3
+rbenv install 2.4.1
 npm install -g browser-sync
 gem install bundler
 ```
@@ -92,10 +92,35 @@ conda env create
 ```
 sudo apt install npm
 sudo apt install fswatch
-sudo apt install ruby
-sudo apt install ruby-dev
-sudo apt install zlib1g-dev
+sudo apt install rbenv
+rbenv init
+rbenv install 2.4.1
+#sudo apt install ruby
+#sudo apt install ruby-dev
+#sudo apt install zlib1g-dev
 npm install -g browser-sync
-sudo gem install bundler
+gem install bundler
 ```
 Note: Need linux update script, must run `sudo bundle update` prior to `tools/start.sh`
+
+
+
+## Running Tools
+```
+docker run --env JUPYTER_CONFIG_DIR=/mnt/home/_jupyter --mount type=bind,source="$(pwd)",target=/mnt/home  -t -i -p 3000:3000 -p 3001:3001 -p 8888:8888 docker.pkg.github.com/sean-parent/notebook/tools:1.0.0  bash
+```
+
+## Updating docker package
+```
+docker run --mount type=bind,source="$(pwd)",target=/mnt/docs-src -t -i \
+  --expose 8888 -p 3000:3000 -p 3001:3001 -p 8888:8888 \
+  docker.pkg.github.com/sean-parent/jupyter-docker/docs-tool-cpp-base:1.1.0 bash
+  
+cd /mnt/docs-src
+./tools/update.sh
+exit
+
+docker build -t docker.pkg.github.com/sean-parent/notebook/tools:1.0.0 .
+
+
+```

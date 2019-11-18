@@ -5,7 +5,40 @@
 	<key>CurrentWorkingDirectory</key>
 	<string>/Users/sean-parent/Projects/github.com/sean-parent/notebook</string>
 	<key>WorksheetContents</key>
-	<string># Setup
+	<string>## VMWare - mounting shared folder
+# Lightning Talk
+## Launch BBEdit
+## Launch VMWare and start
+## Launch Terminal
+## Launch Vanilla
+## Launch Anti-Sleep
+
+open -a terminal
+# in terminal
+ssh sean-parent-linux
+sudo /usr/bin/vmhgfs-fuse .host:/ /mnt/hgfs -o subtype=vmhgfs-fuse,allow_other
+cd /mnt/hgfs/Projects/github.com/sean-parent/notebook/
+./tools/start.sh --server
+# From host
+open http://sean-parent-linux:3000/notes/scratch.slides.html
+open http://sean-parent-linux:3000/notes/2019-09-15-three-tools.slides.html
+open "http://sean-parent-linux:8888/?token=abeaccc5e7f98c489b404f90d6d6b341ce8826c47015ab38"
+
+
+## Arrange Windows
+
+## Put slides in full screen mode
+
+
+    fswatch --print0 --event=Updated --extended --exclude=".*" --include="^[^~]*\.ipynb$" "./notes" \
+        | xargs -0 -I % jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js \
+            --output-dir="./docs/notes" --config=./slides-config/slides_config.py
+
+
+
+fswatch --print0 --event=Updated --exclude=".*" --include="^.*\.ipynb$" "./notes"
+
+# Setup
 
 ## install xcode command line tools
 ### install xcode from apple store and launch

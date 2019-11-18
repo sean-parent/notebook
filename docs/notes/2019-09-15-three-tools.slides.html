@@ -8,7 +8,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
-<title>15-concurrent-code-object-lifetimes slides</title>
+<title>2019-09-15-three-tools slides</title>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -13201,78 +13201,86 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Concurrent-Code-&amp;-Object-Lifetimes">Concurrent Code &amp; Object Lifetimes<a class="anchor-link" href="#Concurrent-Code-&amp;-Object-Lifetimes">&#182;</a></h1>
+<h1 id="Three-Tools-for-C++-Presenters">Three Tools for C++ Presenters<a class="anchor-link" href="#Three-Tools-for-C++-Presenters">&#182;</a></h1>
 </div>
 </div>
 </div><div class="fragment">
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Mutable, <em>conditionally thread safe</em>, objects may only be accessed from one execution context at a time<ul>
-<li>Such objects can be safely moved, or copied, between execution contexts</li>
-</ul>
-</li>
-</ul>
+<p>Sean Parent | Sr. Principal Scientist, Adobe Photoshop</p>
 
 </div>
 </div>
-</div></div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">async</span><span class="p">([</span><span class="n">_x</span> <span class="o">=</span> <span class="n">x</span><span class="p">]()</span> <span class="k">mutable</span> <span class="p">{</span> <span class="c1">// copy object to new context</span>
-        <span class="n">_x</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">_x</span><span class="p">;</span>
-    <span class="p">});</span>
-
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">r</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="reveal.js">reveal.js<a class="anchor-link" href="#reveal.js">&#182;</a></h2><p><em>A framework for easily creating beautiful presentations using HTML.</em></p>
+<p><a href="https://github.com/hakimel/reveal.js/">https://github.com/hakimel/reveal.js/</a></p>
+
+</div>
+</div>
+</div><div class="fragment">
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Type <code>?</code> for help.</p>
+
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>show speaker notes.</p>
+
+</div>
+</div>
+</div>
+</aside></div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="cling">cling<a class="anchor-link" href="#cling">&#182;</a></h2><p><em>Cling is an interactive C++ interpreter, built on the top of LLVM and Clang libraries.</em></p>
+<p><a href="https://root.cern.ch/cling">https://root.cern.ch/cling</a></p>
+
+</div>
+</div>
+</div><aside class="notes">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>show cling</p>
+
+</div>
+</div>
+</div>
+</aside></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Jupyter-Lab">Jupyter Lab<a class="anchor-link" href="#Jupyter-Lab">&#182;</a></h2><p><em>Project Jupyter exists to develop open-source software, open-standards, and services for interactive computing across dozens of programming languages.</em></p>
+<p><a href="https://jupyter.org">https://jupyter.org</a></p>
+
+</div>
+</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">async</span><span class="p">([</span><span class="n">_p</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">p</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span> <span class="c1">// move object to new context</span>
-        <span class="o">*</span><span class="n">_p</span> <span class="o">+=</span> <span class="mi">5</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">_p</span><span class="p">);</span>
-    <span class="p">});</span> 
+    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">});</span>
 
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">bool</span><span class="o">&gt;</span><span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">r</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
+
+    <span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">then</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;done!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
+
+    <span class="n">blocking_get</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="c1">// &lt;-- DON&#39;T DO THIS IN REAL CODE!!!</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -13289,9 +13297,9 @@ IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callab
     <div class="prompt"></div>
 
 
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>42
+done!
 </pre>
 </div>
 </div>
@@ -13303,210 +13311,37 @@ IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callab
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>const</code> objects are assumed to be thread safe, and can safely be shared by more than one context<ul>
-<li>Care must be taken if you have <em>mutable</em> members</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-</div><div class="fragment">
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
-    <span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">async</span><span class="p">([</span><span class="n">_p</span> <span class="o">=</span> <span class="n">p</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_p</span><span class="p">;</span> <span class="p">});</span> <span class="c1">// share object between contexts</span>
-
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">p</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">r</span><span class="p">.</span><span class="n">get</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Futures allow us to associate a result with a particular task<ul>
-<li>Sometimes it is useful to have the result still owned by another context</li>
-<li><code>std::weak_ptr&lt;&gt;</code> is one way to track the lifetime without taking ownership</li>
-</ul>
-</li>
-</ul>
+<h2 id="Xeus-Cling">Xeus Cling<a class="anchor-link" href="#Xeus-Cling">&#182;</a></h2><p><em>xeus-cling is a Jupyter kernel for C++ based on the C++ interpreter cling and the native implementation of the Jupyter protocol xeus.</em></p>
+<p><a href="https://github.com/QuantStack/xeus-cling">https://github.com/QuantStack/xeus-cling</a></p>
 
 </div>
 </div>
 </div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">struct</span> <span class="n">photoshop</span> <span class="p">{</span>
-        <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_document</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;best.jpg&quot;</span><span class="p">);</span>
-
-        <span class="n">sequential_process</span> <span class="n">_process</span><span class="p">;</span>
-    <span class="p">}</span> <span class="n">ps</span><span class="p">;</span>
-
-    <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">doc_token</span> <span class="o">=</span>
-        <span class="n">async_packaged</span><span class="p">(</span><span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ps</span><span class="p">.</span><span class="n">_document</span><span class="p">);</span> <span class="p">})</span>
-            <span class="p">.</span><span class="n">get</span><span class="p">();</span>
-
-    <span class="c1">// ps._process.async([&amp;]{ ps._document = make_shared&lt;string&gt;(&quot;better.png&quot;); });</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">doc_token</span><span class="p">.</span><span class="n">lock</span><span class="p">())</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="s">&quot;renamed.jpg&quot;</span><span class="p">;</span>
-    <span class="p">});</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ps</span><span class="p">.</span><span class="n">_document</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
-</div>
-</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="More...">More...<a class="anchor-link" href="#More...">&#182;</a></h2><h3 id="Binder">Binder<a class="anchor-link" href="#Binder">&#182;</a></h3><p><em>Have a repository full of Jupyter notebooks? With Binder, open those notebooks in an executable environment, making your code immediately reproducible by anyone, anywhere.</em></p>
+<p><a href="https://mybinder.org/">https://mybinder.org/</a></p>
+<h3 id="GitHub">GitHub<a class="anchor-link" href="#GitHub">&#182;</a></h3><p><em>When you add Jupyter Notebook or IPython Notebook files with a .ipynb extension on GitHub, they will render as static HTML files in your repository.</em></p>
+<p><a href="https://help.github.com/en/articles/working-with-jupyter-notebook-files-on-github">https://help.github.com/en/articles/working-with-jupyter-notebook-files-on-github</a></p>
 
 </div>
 </div>
-
-</div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">struct</span> <span class="n">photoshop</span> <span class="p">{</span>
-        <span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_document</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;best.jpg&quot;</span><span class="p">);</span>
-
-        <span class="n">sequential_process</span> <span class="n">_process</span><span class="p">;</span>
-    <span class="p">}</span> <span class="n">ps</span><span class="p">;</span>
-
-    <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">doc_token</span> <span class="o">=</span>
-        <span class="n">async_packaged</span><span class="p">(</span><span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="k">return</span> <span class="n">weak_ptr</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="n">ps</span><span class="p">.</span><span class="n">_document</span><span class="p">);</span> <span class="p">})</span>
-            <span class="p">.</span><span class="n">get</span><span class="p">();</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">ps</span><span class="p">.</span><span class="n">_document</span> <span class="o">=</span> <span class="n">make_shared</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span><span class="p">(</span><span class="s">&quot;better.png&quot;</span><span class="p">);</span> <span class="p">});</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span>
-        <span class="k">if</span> <span class="p">(</span><span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">doc_token</span><span class="p">.</span><span class="n">lock</span><span class="p">())</span> <span class="o">*</span><span class="n">p</span> <span class="o">=</span> <span class="s">&quot;renamed.jpg&quot;</span><span class="p">;</span>
-    <span class="p">});</span>
-
-    <span class="n">ps</span><span class="p">.</span><span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">ps</span><span class="p">.</span><span class="n">_document</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li><code>std::weak_ptr&lt;&gt;</code> also has the advantage that it will not create a retain loop</li>
-<li>Makes it more clear that the operation doesn't own the object</li>
-<li><code>apollo</code> has a <code>track</code> library that can be used to track object lifetimes which are not owned by <code>std::shared_ptr&lt;&gt;</code></li>
-<li><code>apollo::track(T)</code> will return a weak pointer type when T is<ul>
-<li><code>std::shared_ptr&lt;&gt;</code></li>
-<li>A pointer to an object derived from <code>std::enabled_shared_from_this&lt;&gt;</code></li>
-<li>An Objective C/C++ <code>__strong</code> pointer</li>
-<li>A pointer to an object derived from <code>apollo::enable_track&lt;&gt;</code></li>
-</ul>
-</li>
+<h3 id="JupyterHub">JupyterHub<a class="anchor-link" href="#JupyterHub">&#182;</a></h3><p><em>Multi-user deployment infrastructure</em></p>
+<p><a href="https://github.com/jupyterhub/jupyterhub">https://github.com/jupyterhub/jupyterhub</a></p>
+<h3 id="Libraries">Libraries<a class="anchor-link" href="#Libraries">&#182;</a></h3><ul>
+<li>Xwidgets: widgets enable interactive data visualization</li>
+<li>Xplot: 2D plotting</li>
+<li>Xtensor: Numerical analysis with multi-dimensional arrays</li>
 </ul>
 
 </div>
 </div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>Weak pointer type are also useful to avoid retain loops with delegates</li>
-</ul>
-
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div></div></section></section>
+</div></section></section>
 </div>
 </div>
 

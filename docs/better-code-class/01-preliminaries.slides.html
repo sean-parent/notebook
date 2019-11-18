@@ -13232,7 +13232,7 @@ a.anchor-link {
 <blockquote><p>A <em>type</em> is a pattern for storing and modifying objects.</p>
 </blockquote>
 <ul>
-<li>In C++ a <em>type</em> is mechanism for implementing types, but can also be used for other purposes</li>
+<li>In C++ <em>type</em> is a mechanism for implementing types, but can also be used for other purposes</li>
 <li>We use <em>type</em> to mean <em>type</em> as well as the mechanism for implementing types in C++ interchangeably</li>
 </ul>
 
@@ -13347,7 +13347,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </li>
 <li>To copy an object, simply copy all the <em>members</em> or <em>parts</em></li>
 <li>If not defined, the compiler will provide a member-wise copy-constructor</li>
-<li>The copy-constructor can be declared <code>= default</code> to ensure the compiler it is present</li>
+<li>The copy-constructor can be declared <code>= default</code> to ensure it is present</li>
 </ul>
 
 </div>
@@ -13408,7 +13408,10 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </li>
 <li><p>Do not declare <code>operator==()</code> as a member operator</p>
 </li>
-<li>An <code>friend inline</code> declaration may be used to implement directly in the class definition.</li>
+<li>A <code>friend</code> declaration may be used to implement directly in the class definition.<ul>
+<li><code>inline</code> is implied.</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -13428,10 +13431,10 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
     <span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
     <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
     
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">underlying</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">underlying</span><span class="p">();</span>
     <span class="p">}</span>
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
@@ -13495,7 +13498,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </div>
 </div>
 </div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_exercise"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Exercise:</strong> Find a type in your project which is not equationally complete and make it so.</p>
@@ -13875,7 +13878,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </div>
 </div>
 </div></div></section></section><section><section>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+<div class="cell border-box-sizing text_cell rendered celltag_exercise"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Exercise:</strong> Fix the bug using at least two different approaches. What are the trade-offs?</p>

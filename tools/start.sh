@@ -14,6 +14,10 @@ case $key in
         LAB=NO
         shift
     ;;
+    -s|--server)
+        OPTIONS="--ip=0.0.0.0 --no-browser"
+        shift
+    ;;
     *)    # unknown option
         POSITIONAL+=("$1") # save it in an array for later
         shift # past argument
@@ -33,16 +37,18 @@ trap 'for pid in $BKPIDS; do kill $pid; done; exit' SIGINT
 {
     conda activate notebook
     if [[ $LAB = NO ]]; then
-        jupyter notebook
+        jupyter notebook $OPTIONS
     else
-        jupyter lab
+        jupyter lab $OPTIONS
     fi
 } &
 
 conda activate notebook
 
+# fswatch --print0 --event=Updated --extended --exclude=".*" --include="^[^~]*\.ipynb$" "./$1" \
+
 function generate_slides {
-    fswatch --print0 --event=Updated --extended --exclude=".*" --include="^[^~]*\.ipynb$" "./$1" \
+    fswatch --print0 --event=Updated --extended --exclude="\.~" "./$1" \
         | xargs -0 -I % jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js \
             --output-dir="./docs/$1" --config=./slides-config/slides_config.py
 }
@@ -54,9 +60,13 @@ BKPIDS=($!)
 {
     generate_slides "better-code-class"
 } &
-BKPIDS=($!)
+BKPIDS+=($!)
 {
     generate_slides "better-code-new"
+} &
+BKPIDS+=($!)
+{
+    generate_slides "notes"
 } &
 BKPIDS+=($!)
 {
