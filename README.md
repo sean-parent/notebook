@@ -107,7 +107,7 @@ Note: Need linux update script, must run `sudo bundle update` prior to `tools/st
 
 ## Running Tools
 ```
-docker run --env JUPYTER_CONFIG_DIR=/mnt/home/_jupyter --mount type=bind,source="$(pwd)",target=/mnt/home  -t -i -p 3000:3000 -p 3001:3001 -p 8888:8888 docker.pkg.github.com/sean-parent/notebook/tools:1.0.0  bash
+docker run --env JUPYTER_CONFIG_DIR=/mnt/home/_jupyter --mount type=bind,source="$(pwd)",target=/mnt/home  -t -i -p 3000:3000 -p 3001:3001 -p 8888:8888 docker.pkg.github.com/sean-parent/notebook/notebook-tools:1.0.0  bash
 ```
 
 ## Updating docker package
@@ -120,7 +120,7 @@ cd /mnt/docs-src
 ./tools/update.sh
 exit
 
-docker build -t docker.pkg.github.com/sean-parent/notebook/tools:1.0.0 .
+docker build -t docker.pkg.github.com/sean-parent/notebook/notebook-tools:1.0.0 .
 
 
 ```
