@@ -1,6 +1,7 @@
 #!/bin/bash
 
 POSITIONAL=()
+OPTIONS=""
 while [[ $# -gt 0 ]]
 do
 key="$1"
@@ -15,7 +16,11 @@ case $key in
         shift
     ;;
     -s|--server)
-        OPTIONS="--ip=0.0.0.0 --no-browser"
+        OPTIONS+=" --ip=0.0.0.0 --no-browser"
+        shift
+    ;;
+    -t|--no-token)
+        OPTIONS+=" --NotebookApp.token=''"
         shift
     ;;
     *)    # unknown option

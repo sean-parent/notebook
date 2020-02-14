@@ -13504,33 +13504,11 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">std</span> <span class="p">{</span>
-    <span class="n">_GLIBCXX_BEGIN_NAMESPACE_VERSION</span>
-        
-    <span class="n">__thread</span> <span class="kt">void</span><span class="o">*</span> <span class="n">__once_callable</span><span class="p">;</span>
-    <span class="n">__thread</span> <span class="nf">void</span> <span class="p">(</span><span class="o">*</span><span class="n">__once_call</span><span class="p">)();</span>
-    
-    <span class="n">_GLIBCXX_END_NAMESPACE_VERSION</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="n">packaged_task</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">task</span><span class="p">([]{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;executing...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
     <span class="k">return</span> <span class="mi">42</span><span class="p">;</span>
@@ -13546,47 +13524,13 @@ a.anchor-link {
 <span class="p">}</span>
 </pre></div>
 
-    </div>
 </div>
 </div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt11__once_call&#39; unresolved while linking [cling interface function]!
-IncrementalExecutor::executeFunction: symbol &#39;__emutls_v._ZSt15__once_callable&#39; unresolved while linking [cling interface function]!
-</pre>
-</div>
-</div>
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_text output_error">
-<pre>
-Interpreter Error: </pre>
-</div>
-</div>
-
-</div>
-</div>
-
 </div></section></section><section><section>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="n">packaged_task</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">task</span><span class="p">([]{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;executing...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
     <span class="k">throw</span> <span class="s">&quot;failure&quot;</span><span class="n">s</span><span class="p">;</span>
@@ -13607,10 +13551,8 @@ Interpreter Error: </pre>
 <span class="p">}</span>
 </pre></div>
 
-    </div>
 </div>
 </div>
-
 </div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
@@ -13676,7 +13618,7 @@ Interpreter Error: </pre>
 </div><div class="fragment">
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="c1">// F models R()</span>
