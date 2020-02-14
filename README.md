@@ -141,6 +141,9 @@ cd /mnt/home/
 
 ## Updating docker package
 ```
+
+VERSION="1.0.0"
+echo $VERSION > ./VERSION
 docker run --mount type=bind,source="$(pwd)",target=/mnt/docs-src -t -i \
   docker.pkg.github.com/sean-parent/jupyter-docker/docs-tool-cpp-base:latest bash
 
@@ -149,6 +152,9 @@ cd /mnt/docs-src
 exit
 
 docker build -t docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest .
-
+docker tag docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest \
+    docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
+docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest
+docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
 
 ```

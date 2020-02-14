@@ -21,4 +21,6 @@ RUN eval "$(~/miniconda3/bin/conda shell.bash hook)"; conda activate notebook;  
 
 WORKDIR ../
 
+ADD VERSION .
+
 EXPOSE 8888 3000 3001
