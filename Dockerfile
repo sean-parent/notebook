@@ -1,4 +1,4 @@
-FROM docker.pkg.github.com/sean-parent/jupyter-docker/docs-tool-cpp-base:1.1.0
+FROM docker.pkg.github.com/sean-parent/jupyter-docker/docs-tool-cpp-base:latest
 USER app
 
 RUN mkdir ./install
@@ -18,7 +18,7 @@ RUN eval "$(~/miniconda3/bin/conda shell.bash hook)"; conda activate notebook;  
   jupyter labextension install --no-build @jupyterlab/toc; \
   jupyter lab build; \
    conda deactivate
-    
+
 WORKDIR ../
 
 EXPOSE 8888 3000 3001

@@ -132,20 +132,23 @@ Note: Need linux update script, must run `sudo bundle update` prior to `tools/st
 
 ## Running Tools
 ```
-docker run --env JUPYTER_CONFIG_DIR=/mnt/home/_jupyter --mount type=bind,source="$(pwd)",target=/mnt/home  -t -i -p 3000:3000 -p 3001:3001 -p 8888:8888 docker.pkg.github.com/sean-parent/notebook/notebook-tools:1.0.0  bash
+docker run --env JUPYTER_CONFIG_DIR=/mnt/home/_jupyter --mount type=bind,source="$(pwd)",target=/mnt/home  -t -i -p 3000:3000 -p 3001:3001 -p 8888:8888 docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest  bash
+
+cd /mnt/home/
+./tools/prepare.sh
+./tools/start.sh --lab --server
 ```
 
 ## Updating docker package
 ```
 docker run --mount type=bind,source="$(pwd)",target=/mnt/docs-src -t -i \
-  --expose 8888 -p 3000:3000 -p 3001:3001 -p 8888:8888 \
-  docker.pkg.github.com/sean-parent/jupyter-docker/docs-tool-cpp-base:1.1.0 bash
+  docker.pkg.github.com/sean-parent/jupyter-docker/docs-tool-cpp-base:latest bash
 
 cd /mnt/docs-src
 ./tools/update.sh
 exit
 
-docker build -t docker.pkg.github.com/sean-parent/notebook/notebook-tools:1.0.0 .
+docker build -t docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest .
 
 
 ```
