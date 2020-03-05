@@ -13208,262 +13208,45 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Exercise:</strong> Review list of standard algorithms.</p>
-<p><strong>Exercise:</strong> Find a <em>raw loop</em> in the ZString implementation. Claim it on the wiki <a href="https://git.corp.adobe.com/better-code/class/wiki/class-04-registration">https://git.corp.adobe.com/better-code/class/wiki/class-04-registration</a>. Improve the code, create a pull-request, and assign me as the reviewer. The PR should include a <a href="http://quick-bench.com/">http://quick-bench.com/</a> benchmark of the relevant code for comparison.</p>
+<h2 id="More-advanced-algorithms">More advanced algorithms<a class="anchor-link" href="#More-advanced-algorithms">&#182;</a></h2><h3 id="Sorting">Sorting<a class="anchor-link" href="#Sorting">&#182;</a></h3><ul>
+<li><code>sort()</code></li>
+<li><code>stable_sort()</code></li>
+</ul>
 
 </div>
 </div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;algorithm&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;cstdint&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
-<span class="cp">#include</span> <span class="cpf">&lt;iterator&gt;</span><span class="cp"></span>
-
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[2]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
-
-<span class="k">struct</span> <span class="n">ZString</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="n">DataAndLength</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*&amp;</span> <span class="n">data</span><span class="p">,</span> <span class="kt">uint32_t</span><span class="o">&amp;</span> <span class="n">length</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">static</span> <span class="k">const</span> <span class="kt">char16_t</span> <span class="n">r</span><span class="p">[]</span> <span class="o">=</span> <span class="sa">u</span><span class="s">&quot;Unicode String© with : replacements&quot;</span><span class="p">;</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="o">&amp;</span><span class="n">r</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
-        <span class="n">length</span> <span class="o">=</span> <span class="n">size</span><span class="p">(</span><span class="n">r</span><span class="p">);</span>
-    <span class="p">}</span>
-
-    <span class="k">auto</span> <span class="n">range</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="k">static</span> <span class="k">const</span> <span class="kt">char16_t</span> <span class="n">r</span><span class="p">[]</span> <span class="o">=</span> <span class="sa">u</span><span class="s">&quot;Unicode String© with : replacements&quot;</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nf">make_pair</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">r</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">r</span><span class="p">));</span>
-    <span class="p">}</span>
-
-    <span class="kt">void</span> <span class="n">ReplaceCharacters</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">badChars</span><span class="p">,</span>
-                           <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">replacementChars</span><span class="p">,</span>
-                           <span class="kt">uint32_t</span> <span class="n">numChars</span><span class="p">);</span>
-<span class="p">};</span>
-
-<span class="k">struct</span> <span class="n">ARawZString</span> <span class="p">{</span>
-    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">char16_t</span><span class="p">[]</span><span class="o">&gt;</span> <span class="n">_data</span><span class="p">;</span>
-
-    <span class="n">ARawZString</span><span class="p">(</span><span class="kt">uint32_t</span> <span class="n">n</span><span class="p">)</span> <span class="o">:</span> <span class="n">_data</span><span class="p">(</span><span class="k">new</span> <span class="kt">char16_t</span><span class="p">[</span><span class="n">n</span><span class="p">])</span> <span class="p">{}</span>
-    <span class="kt">char16_t</span><span class="o">*</span> <span class="n">get</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_data</span><span class="p">.</span><span class="n">get</span><span class="p">();</span> <span class="p">}</span>
-    <span class="kt">char16_t</span><span class="o">&amp;</span> <span class="k">operator</span><span class="p">[](</span><span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_data</span><span class="p">[</span><span class="n">n</span><span class="p">];</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kt">void</span> <span class="nf">EquateToUnicodeString</span><span class="p">(</span><span class="n">ZString</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">p</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">copy_n</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">ostream_iterator</span><span class="o">&lt;</span><span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="n">cout</span><span class="p">,</span> <span class="s">&quot;&quot;</span><span class="p">));</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="p">}</span> <span class="c1">// namespace</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[3]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">ZString</span><span class="o">::</span><span class="n">ReplaceCharacters</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">badChars</span><span class="p">,</span>
-                                <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">replacementChars</span><span class="p">,</span>
-                                <span class="kt">uint32_t</span> <span class="n">numChars</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">myData</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
-    <span class="kt">uint32_t</span> <span class="n">myLength</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">DataAndLength</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="n">myLength</span><span class="p">);</span>
-
-    <span class="kt">bool</span> <span class="n">hasBadCharacters</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="p">{</span>
-        <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myLength</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">numChars</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">myData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">badChars</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
-                    <span class="n">hasBadCharacters</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
-                    <span class="k">break</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-
-            <span class="k">if</span> <span class="p">(</span><span class="n">hasBadCharacters</span><span class="p">)</span> <span class="k">break</span><span class="p">;</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">hasBadCharacters</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">uint32_t</span> <span class="n">destLength</span> <span class="o">=</span> <span class="n">myLength</span><span class="p">;</span>
-        <span class="n">ARawZString</span> <span class="nf">destData</span><span class="p">(</span><span class="n">destLength</span><span class="p">);</span>
-
-        <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">myLength</span><span class="p">;</span> <span class="o">++</span><span class="n">i</span><span class="p">)</span> <span class="p">{</span>
-            <span class="n">destData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">myData</span><span class="p">[</span><span class="n">i</span><span class="p">];</span>
-
-            <span class="k">for</span> <span class="p">(</span><span class="kt">uint32_t</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">j</span> <span class="o">&lt;</span> <span class="n">numChars</span><span class="p">;</span> <span class="o">++</span><span class="n">j</span><span class="p">)</span> <span class="p">{</span>
-                <span class="k">if</span> <span class="p">(</span><span class="n">myData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">badChars</span><span class="p">[</span><span class="n">j</span><span class="p">])</span> <span class="p">{</span>
-                    <span class="n">destData</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">replacementChars</span><span class="p">[</span><span class="n">j</span><span class="p">];</span>
-                    <span class="k">break</span><span class="p">;</span>
-                <span class="p">}</span>
-            <span class="p">}</span>
-        <span class="p">}</span>
-
-        <span class="n">EquateToUnicodeString</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span> <span class="n">destData</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">destLength</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[4]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">.</span><span class="n">undo</span> <span class="mi">1</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[5]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">ZString</span><span class="o">::</span><span class="n">ReplaceCharacters</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">badChars</span><span class="p">,</span>
-                                <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">replacementChars</span><span class="p">,</span>
-                                <span class="kt">uint32_t</span> <span class="n">numChars</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">myData</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
-    <span class="kt">uint32_t</span> <span class="n">myLength</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-    <span class="n">DataAndLength</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="n">myLength</span><span class="p">);</span>
-
-    <span class="k">auto</span> <span class="n">l</span> <span class="o">=</span> <span class="n">myData</span> <span class="o">+</span> <span class="n">myLength</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">hasBadCharacters</span> <span class="o">=</span> <span class="n">any_of</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">auto</span> <span class="n">l</span> <span class="o">=</span> <span class="n">badChars</span> <span class="o">+</span> <span class="n">numChars</span><span class="p">;</span>
-        <span class="k">return</span> <span class="nf">find</span><span class="p">(</span><span class="n">badChars</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="n">l</span><span class="p">;</span> <span class="c1">// NOTE: Won&#39;t scale</span>
-    <span class="p">});</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">hasBadCharacters</span><span class="p">)</span> <span class="p">{</span>
-        <span class="kt">uint32_t</span> <span class="n">destLength</span> <span class="o">=</span> <span class="n">myLength</span><span class="p">;</span>
-        <span class="n">ARawZString</span> <span class="nf">destData</span><span class="p">(</span><span class="n">destLength</span><span class="p">);</span>
-
-        <span class="n">transform</span><span class="p">(</span><span class="n">myData</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">destData</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">auto</span> <span class="n">l</span> <span class="o">=</span> <span class="n">badChars</span> <span class="o">+</span> <span class="n">numChars</span><span class="p">;</span>
-            <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">badChars</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
-            <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">!=</span> <span class="n">l</span><span class="p">)</span> <span class="k">return</span> <span class="n">replacementChars</span><span class="p">[</span><span class="n">p</span> <span class="o">-</span> <span class="n">badChars</span><span class="p">];</span>
-            <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
-        <span class="p">});</span>
-
-        <span class="n">EquateToUnicodeString</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span> <span class="n">destData</span><span class="p">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">destLength</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[6]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">.</span><span class="n">undo</span> <span class="mi">1</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">ZString</span><span class="o">::</span><span class="n">ReplaceCharacters</span><span class="p">(</span><span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">badChars</span><span class="p">,</span>
-                                <span class="k">const</span> <span class="kt">char16_t</span><span class="o">*</span> <span class="n">replacementChars</span><span class="p">,</span>
-                                <span class="kt">uint32_t</span> <span class="n">numChars</span><span class="p">)</span> <span class="p">{</span>
-
-    <span class="k">auto</span> <span class="n">fb</span> <span class="o">=</span> <span class="n">badChars</span><span class="p">,</span> <span class="n">lb</span> <span class="o">=</span> <span class="n">badChars</span> <span class="o">+</span> <span class="n">numChars</span><span class="p">;</span>
-
-    <span class="k">auto</span> <span class="p">[</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">]</span> <span class="o">=</span> <span class="n">range</span><span class="p">();</span>
-
-    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">find_if</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">find</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">lb</span><span class="p">,</span> <span class="n">c</span><span class="p">)</span> <span class="o">!=</span> <span class="n">lb</span><span class="p">;</span> <span class="c1">// NOTE: Won&#39;t scale</span>
-    <span class="p">});</span>
-
-    <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">l</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
-
-    <span class="n">u16string</span> <span class="n">result</span><span class="p">;</span>
-    <span class="n">result</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">l</span> <span class="o">-</span> <span class="n">f</span><span class="p">);</span>
-    <span class="n">result</span><span class="p">.</span><span class="n">append</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">p</span><span class="p">);</span>
-
-    <span class="n">transform</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">back_inserter</span><span class="p">(</span><span class="n">result</span><span class="p">),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">auto</span> <span class="n">c</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">find</span><span class="p">(</span><span class="n">fb</span><span class="p">,</span> <span class="n">lb</span><span class="p">,</span> <span class="n">c</span><span class="p">);</span>
-        <span class="k">if</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">lb</span><span class="p">)</span> <span class="k">return</span> <span class="n">c</span><span class="p">;</span>
-        <span class="k">return</span> <span class="n">replacementChars</span><span class="p">[</span><span class="n">p</span> <span class="o">-</span> <span class="n">fb</span><span class="p">];</span>
-    <span class="p">});</span>
-
-    <span class="n">EquateToUnicodeString</span><span class="p">(</span><span class="o">*</span><span class="k">this</span><span class="p">,</span> <span class="n">result</span><span class="p">.</span><span class="n">data</span><span class="p">(),</span> <span class="n">result</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">ZString</span> <span class="n">example</span><span class="p">;</span>
-    <span class="n">example</span><span class="p">.</span><span class="n">ReplaceCharacters</span><span class="p">(</span><span class="sa">u</span><span class="s">&quot;:©&quot;</span><span class="p">,</span> <span class="sa">u</span><span class="s">&quot;/c&quot;</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Unicode Stringc with / replacements 
-</pre>
-</div>
-</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Algorithms-requiring-a-sorted-sequence">Algorithms requiring a sorted sequence<a class="anchor-link" href="#Algorithms-requiring-a-sorted-sequence">&#182;</a></h3><ul>
+<li><code>lower_bound()</code></li>
+<li><code>upper_bound()</code></li>
+<li><code>equal_range()</code></li>
+<li><code>merge()</code></li>
+<li><code>inplace_merge()</code></li>
+<li><code>includes()</code></li>
+<li><code>set_difference()</code></li>
+<li><code>set_intersection()</code></li>
+<li><code>set_symmetric_difference()</code></li>
+<li><code>set_union()</code></li>
+</ul>
 
 </div>
 </div>
-
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="New-Algorithms-(C++11---20)">New Algorithms (C++11 - 20)<a class="anchor-link" href="#New-Algorithms-(C++11---20)">&#182;</a></h2><h2 id="Projection-Functions">Projection Functions<a class="anchor-link" href="#Projection-Functions">&#182;</a></h2><h2 id="Position-Based-Algorithms">Position Based Algorithms<a class="anchor-link" href="#Position-Based-Algorithms">&#182;</a></h2><ul>
+<li>All non-modifying sequence operations taking a predicate</li>
+</ul>
+<h2 id="Strict-Weak-Order">Strict Weak Order<a class="anchor-link" href="#Strict-Weak-Order">&#182;</a></h2><h2 id="Iterator-hierarchy-(and-why-you-probably-shouldn't-care)">Iterator hierarchy (and why you probably shouldn't care)<a class="anchor-link" href="#Iterator-hierarchy-(and-why-you-probably-shouldn't-care)">&#182;</a></h2><h2 id="Writing-a-custom-algorithm">Writing a custom algorithm<a class="anchor-link" href="#Writing-a-custom-algorithm">&#182;</a></h2><ul>
+<li>what to return</li>
+</ul>
+<h2 id="Composition-vs.-multi-pass">Composition vs. multi-pass<a class="anchor-link" href="#Composition-vs.-multi-pass">&#182;</a></h2><h2 id="Generators-vs-input-iterator">Generators vs input iterator<a class="anchor-link" href="#Generators-vs-input-iterator">&#182;</a></h2><h2 id="Output-iterators-vs-sink-functions">Output iterators vs sink functions<a class="anchor-link" href="#Output-iterators-vs-sink-functions">&#182;</a></h2>
+</div>
+</div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">

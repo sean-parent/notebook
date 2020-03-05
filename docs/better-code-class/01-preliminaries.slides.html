@@ -13237,6 +13237,7 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Not limited to C++</li>
+<li>Language is a constraint</li>
 </ul>
 
 </div>
@@ -13283,7 +13284,7 @@ a.anchor-link {
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li><p>Has a set of common, <em>basis</em>, operations</p>
+<li><p>All objects have of common, <em>basis</em>, operations</p>
 <ul>
 <li>constructible</li>
 <li>destructible</li>
@@ -13316,7 +13317,7 @@ a.anchor-link {
 <h2 id="Regular">Regular<a class="anchor-link" href="#Regular">&#182;</a></h2><blockquote><p>There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to <em>copy objects</em> from one data structure to another. We call types having such a basis <em>regular</em>, since their use guarantees regularity of behavior and, therefore, interoperability.</p>
 </blockquote>
 <ul>
-<li>The copy operation creates a new object, equal to, and disjoint from the original</li>
+<li>The copy operation creates a new object, equal to, and logically disjoint from the original</li>
 </ul>
 \begin{align}
 b &amp; \to a \implies a = b. &amp;&amp; \text{(copies are equal)}
@@ -13498,7 +13499,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>Naming is language<ul>
-<li>Often semantics are expected from pattern of common use</li>
+<li>Often semantics are expected from patterns of common use</li>
 <li>When naming functions consider expectations and that few will read any specification</li>
 </ul>
 </li>
@@ -13521,15 +13522,17 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 </div>
 </div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered celltag_exercise"><div class="prompt input_prompt">
+</div><aside class="notes">
+
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Exercise:</strong> Find a type in your project which is not equationally complete and make it so.</p>
+<p><strong>SKIP</strong> Next cell is skipped for workshop</p>
 
 </div>
 </div>
-</div></div></section></section><section><section>
+</div>
+</aside></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13773,7 +13776,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </ul>
 </li>
 <li>The expectation is that moving a value does not require additional resources, beyond the local storage, for an object<ul>
-<li>In this way, move is a <em>stronger</em> than copy</li>
+<li>In this way, move is a <em>stronger</em> form of copy</li>
 </ul>
 </li>
 <li>Move is a distinct operation as part of an <em>efficient</em> basis</li>
@@ -13885,6 +13888,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 <li>i.e. <code>std::vector::clear()</code></li>
 </ul>
 </li>
+<li>self move assignment</li>
 </ul>
 </li>
 </ul>
