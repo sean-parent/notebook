@@ -13201,7 +13201,14 @@ a.anchor-link {
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h1 id="Data-Structures-and-Structured-Data">Data Structures and Structured Data<a class="anchor-link" href="#Data-Structures-and-Structured-Data">&#182;</a></h1><h2 id="Definitions">Definitions<a class="anchor-link" href="#Definitions">&#182;</a></h2><blockquote><p>A <em>data structure</em> is a format for organizing and storing data.</p>
+<h1 id="Data-Structures-and-Structured-Data">Data Structures and Structured Data<a class="anchor-link" href="#Data-Structures-and-Structured-Data">&#182;</a></h1>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Definitions">Definitions<a class="anchor-link" href="#Definitions">&#182;</a></h2><blockquote><p><em>Classic:</em> A <em>data structure</em> is a format for organizing and storing data.</p>
 </blockquote>
 <ul>
 <li>Doesn't define <em>structure</em>, replaces it with the related word, <em>format</em></li>
@@ -13209,10 +13216,19 @@ a.anchor-link {
 </ul>
 <blockquote><p>A <em>structure</em> on a set consists of additional entities that, in some manner, relate to the set, endowing the collection with meaning or significance.</p>
 </blockquote>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>A type is a pattern for storing and modifying objects</li>
-<li>A type is a structure that relates a set of objects to a set of values</li>
+<li>A type is a structure that relates a set of objects to a set of values<ul>
 <li>This is a <em>representational</em> relationship</li>
+</ul>
+</li>
 <li><p>A representational relationship creates a <em>trivial data structure</em> consisting of a single value</p>
 </li>
 <li><p>Values are related to other values, i.e. $3 \neq 4$</p>
@@ -13221,7 +13237,7 @@ a.anchor-link {
 
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
@@ -13233,19 +13249,43 @@ a.anchor-link {
 <ul>
 <li>The choice of encoding can make a dramatic difference on the performance of operations</li>
 </ul>
-<p><strong>Insert chart of performance of memory hierarchy</strong></p>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<center>
+    <img src='img/memory-hierarchy.svg' alt='Memory Hierarchy'>
+    <br>
+    <em>Data from <a href='http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/'>IT Hare</a></em>
+</center>
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <ul>
-<li>Anytime a relationship is established between objects, a data structure is created</li>
-<li>However, to avoid confusion we will reserve the term <em>data structure</em> to refer to types with a set of invariants which insure a set of relationship are maintained. i.e. A container.</li>
+<li>A data structure is created anytime a relationship is established between objects</li>
+<li>To avoid confusion we will reserve the term <em>data structure</em> to refer to types with a set of invariants which insure a set of relationship are maintained. i.e. standard containers</li>
 <li>More transient data structures will be referred to as <em>structured data</em></li>
 </ul>
+
+</div>
+</div>
+</div></section></section><section><section>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
 <h2 id="Problem">Problem<a class="anchor-link" href="#Problem">&#182;</a></h2>
 </div>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="o">&gt;</span> <span class="c1">// I models RandomAccessIterator</span>
@@ -13255,11 +13295,11 @@ a.anchor-link {
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="o">&gt;</span> <span class="c1">// I models RandomAccessIterator</span>
 <span class="kt">void</span> <span class="n">sort_subrange</span><span class="p">(</span><span class="n">I</span> <span class="n">f</span><span class="p">,</span> <span class="n">I</span> <span class="n">l</span><span class="p">,</span> <span class="n">I</span> <span class="n">sf</span><span class="p">,</span> <span class="n">I</span> <span class="n">sl</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">nth_element</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span> <span class="c1">// partition [f, l) at sf</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">sf</span> <span class="o">!=</span> <span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">f</span> <span class="o">!=</span> <span class="n">sf</span> <span class="o">&amp;&amp;</span> <span class="n">sf</span> <span class="o">!=</span> <span class="n">l</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">std</span><span class="o">::</span><span class="n">nth_element</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sf</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span> <span class="c1">// partition [f, l) at sf</span>
         <span class="o">++</span><span class="n">sf</span><span class="p">;</span>
-        <span class="n">std</span><span class="o">::</span><span class="n">partial_sort</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">sl</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
     <span class="p">}</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">partial_sort</span><span class="p">(</span><span class="n">sf</span><span class="p">,</span> <span class="n">sl</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -13267,14 +13307,30 @@ a.anchor-link {
 </div>
 </div>
 
-</div>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><a href="http://quick-bench.com/FqOyKLpH-jOhM1bgTWn3QuFG1qc">Benchmark</a></p>
+<center>
+    <img src='img/sort-v-sort-subrange.png' alt='Sort v Sort Subrange'>
+    <br>
+    <em><a href='http://quick-bench.com/C0fww_d39OVBvCnoNrXUN5XU0nE'>Benchmark Code</a></em>
+</center>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-c++"><pre><span></span>
+</pre></div>
 
+    </div>
 </div>
 </div>
+
 </div></section></section>
 </div>
 </div>

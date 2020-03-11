@@ -13877,39 +13877,25 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li>The requirements in the C++ standard are that we must leave the moved from object <em>"valid but unspecified"</em> state<ul>
-<li>This is a bit of a contradiction</li>
-<li>Because the value is <em>unspecified</em> the object no longer has <em>meaning</em> and is not all operations are valid</li>
+<li>This is a contradiction</li>
+<li>Because the value is <em>unspecified</em> the object no longer has <em>meaning</em> and not all operations are valid</li>
 </ul>
 </li>
 <li>Some operations <em>must</em> be valid on the otherwise unspecified state<ul>
 <li>destruction</li>
 <li>copy and move assigning to the object (to establish a new value)</li>
-<li>any operation which can be written in terms of assignment (does not require reading the value)<ul>
-<li>i.e. <code>std::vector::clear()</code></li>
-</ul>
-</li>
-<li>self move assignment</li>
+<li>self move assignment (for self-swap)</li>
 </ul>
 </li>
 </ul>
 
 </div>
 </div>
-</div><div class="fragment">
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<ul>
-<li>What is the bug?</li>
-</ul>
-
-</div>
-</div>
-</div></div></section></section><section><section>
+</div></section></section><section><section>
 <div class="cell border-box-sizing text_cell rendered celltag_exercise"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p><strong>Exercise:</strong> Fix the bug using at least two different approaches. What are the trade-offs?</p>
+<p><strong>Exercise:</strong> <code>my_type</code> contains a bug. Find the bug. Fix it using at least two different approaches. What are the trade-offs?</p>
 
 </div>
 </div>

@@ -134,9 +134,13 @@ Note: Need linux update script, must run `sudo bundle update` prior to `tools/st
 ```
 docker run --env JUPYTER_CONFIG_DIR=/mnt/home/_jupyter --mount type=bind,source="$(pwd)",target=/mnt/home  -t -i -p 3000:3000 -p 3001:3001 -p 8888:8888 docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest  bash
 
+docker container ls
+docker exec -it <container ID>  bash
+
+
 cd /mnt/home/
 ./tools/prepare.sh
-./tools/start.sh --lab --server
+./tools/start.sh --lab --server --no-token
 ```
 
 ## Updating docker package

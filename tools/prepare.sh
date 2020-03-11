@@ -2,6 +2,7 @@
 
 cp -Rf ./better-code-new/img ./docs/better-code-new/
 cp -Rf ./better-code-test/img ./docs/better-code-test/
+cp -Rf ./better-code-class/img ./docs/better-code-class/
 
 #export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
 eval "$(conda shell.bash hook)"
