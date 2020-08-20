@@ -1,40 +1,61 @@
 #!/bin/bash
 
-# export PATH="$HOME/miniconda3/bin:$PATH"
-# export PATH="/usr/local/opt/node@8/bin:$PATH"
+POSITIONAL=()
+OPTIONS=""
+while [[ $# -gt 0 ]]
+do
+key="$1"
 
-# export PATH="/usr/local/Caskroom/miniconda/base/bin:$PATH"
+case $key in
+    -l|--lock)
+        LOCK=YES
+        shift # past argument
+    ;;
+    -r|--ruby-version)
+      if [ -n "$2" ] && [ ${2:0:1} != "-" ]; then
+        RUBY_VERSION=$2
+        shift 2
+      else
+        echo "Error: Argument for $1 is missing" >&2
+        exit 1
+      fi
+    ;;
+    *)    # unknown option
+        POSITIONAL+=("$1") # save it in an array for later
+        shift # past argument
+    ;;
+esac
+done
+set -- "${POSITIONAL[@]}" # restore positional parameters
 
-cp ~/.rbenv/version .ruby-version
-# rbenv install $(rbenv install -l | grep -v - | tail -1)
-# gem install bundler
-# rbenv rehash
-(cd ./docs; bundle update)
+if [ -z ${RUBY_VERSION+x} ]; then
+    rbenv local $(rbenv install -l | grep -v - | tail -1)
+else
+    rbenv install $RUBY_VERSION
+    rbenv local $RUBY_VERSION
+fi
 
-conda env create
+gem install bundler
+rbenv rehash
+
+cd ./docs
+rm ./Gemfile.lock
+
+if [[ $LOCK = YES ]]; then
+    bundle lock --update
+else
+    bundle update
+fi
+
+cd -
+
+conda update conda -c conda-forge
 conda env update
+
+git submodule update --recursive --remote
+
 (
 eval "$(conda shell.bash hook)"
 conda activate notebook
 jupyter labextension update --all
 )
-
-# brew update
-# brew upgrade npm
-# brew upgrade fswatch
-# npm update -g npm
-# npm update -g browser-sync
-# gem update bundler
-# conda update conda -c conda-forge
-# conda env update
-# git submodule update --recursive --remote
-# 
-# (
-# eval "$(conda shell.bash hook)"
-# conda activate notebook
-# jupyter labextension update --all
-# )
-# 
-# # create symlinks
-# 
-# (cd ./docs; bundle update;)
