@@ -13245,12 +13245,12 @@ a.anchor-link {
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
     
 <span class="k">class</span> <span class="nc">task</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">concept</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="k">concept</span><span class="p">;</span>
 
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
     <span class="k">struct</span> <span class="n">model</span><span class="p">;</span>
 
-    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">concept</span><span class="o">&gt;</span> <span class="n">_self</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="k">concept</span><span class="o">&gt;</span> <span class="n">_self</span><span class="p">;</span>
 
 <span class="k">public</span><span class="o">:</span>
     <span class="n">task</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
@@ -13275,8 +13275,8 @@ a.anchor-link {
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">task</span><span class="o">::</span><span class="n">concept</span> <span class="p">{</span>
-    <span class="k">virtual</span> <span class="o">~</span><span class="n">concept</span><span class="p">()</span> <span class="p">{}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="n">task</span><span class="o">::</span><span class="k">concept</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="k">concept</span><span class="p">()</span> <span class="p">{}</span>
     <span class="k">virtual</span> <span class="kt">void</span> <span class="n">invoke</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
@@ -13292,7 +13292,7 @@ a.anchor-link {
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">task</span><span class="o">::</span><span class="n">model</span> <span class="k">final</span> <span class="o">:</span> <span class="n">concept</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">task</span><span class="o">::</span><span class="n">model</span> <span class="k">final</span> <span class="o">:</span> <span class="k">concept</span> <span class="p">{</span>
     <span class="n">F</span> <span class="n">_f</span><span class="p">;</span>
     <span class="n">model</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">)</span> <span class="o">:</span> <span class="n">_f</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">))</span> <span class="p">{}</span>
     <span class="kt">void</span> <span class="n">invoke</span><span class="p">()</span> <span class="k">override</span> <span class="p">{</span> <span class="n">_f</span><span class="p">();</span> <span class="p">}</span>

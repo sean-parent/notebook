@@ -61,7 +61,7 @@ COPY ./docs/Gemfile.lock .
 COPY ./environment.yml .
 COPY ./.ruby-version .
 
-RUN  cd ./docs; (eval "$(rbenv init -)"; \
+RUN (eval "$(rbenv init -)"; \
     rbenv install `cat .ruby-version`; \
     gem install bundler; \
     rbenv rehash; \

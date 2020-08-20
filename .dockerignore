@@ -3,4 +3,4 @@
 !./docs/Gemfile.lock
 !./.ruby-version
 !./environment.yml
-!./VERSION
+!./tools/docker-tools/VERSION

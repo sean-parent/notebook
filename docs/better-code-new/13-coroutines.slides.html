@@ -13266,7 +13266,7 @@ a.anchor-link {
 <div class="highlight"><pre><span></span><span class="n">generator</span> <span class="nf">my_coroutine</span><span class="p">()</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-        <span class="n">co_yield</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span>
+        <span class="k">co_yield</span> <span class="n">n</span><span class="o">++</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">}</span>
 
@@ -13625,9 +13625,9 @@ Program ended with exit code: 0</code></pre>
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <div class="highlight"><pre><span></span><span class="n">future</span><span class="o">&lt;</span><span class="kt">void</span><span class="o">&gt;</span> <span class="n">do_it</span><span class="p">(</span><span class="n">future</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="n">co_await</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+    <span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="k">co_await</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">result</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">co_return</span><span class="p">;</span>
+    <span class="k">co_return</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="k">auto</span> <span class="n">done</span> <span class="o">=</span> <span class="n">do_it</span><span class="p">(</span><span class="n">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]{</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">}));</span>

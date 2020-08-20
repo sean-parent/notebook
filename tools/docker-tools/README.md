@@ -11,15 +11,14 @@ To build the docker image, first update the VERSION variable below (please use s
 
 #### Using Windows PowerShell
 ```
-$VERSION='1.0.0'
-echo $VERSION > ./tools/docker-tools/VERSION
-$VOLUME="sean-parent-notebook"
+$VERSION='1.0.1'
+$VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 ```
 
 #### Linux or macOS
 ```
-VERSION="1.0.0"
-VOLUME="sean-parent-notebook"
+VERSION="1.0.1"
+VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 ```
 
 ### Common
@@ -46,10 +45,14 @@ docker build --file ./tools/docker-tools/Dockerfile --target full --tag $VOLUME 
 To run the docker image, execute the following.
 
 ```
-VOLUME="sean-parent.github.io"
-docker run --mount type=bind,source="$(pwd)",target=/mnt/host \
-    --tty --interactive --publish 3000-3001:3000-3001 \
-    $VOLUME bash
+$VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
+```
+
+```
+VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
+```
+```
+docker run --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive --publish 3000-3001:3000 --publish 8888:8888 $VOLUME bash
 ```
 
 This should leave you at bash prompt that looks like:
@@ -66,7 +69,7 @@ To build or rebuild the complete documentation site locally execute the followin
 
 ```
 cd /mnt/host
-./tools/docs/prepare.sh
+./tools/prepare.sh
 ```
 
 ## Run a local server for the site
@@ -74,7 +77,7 @@ cd /mnt/host
 Once the site has been prepared, you can run it to see how it looks. From the docker promt enter:
 
 ```
-./tools/docs/start.sh
+./tools/start.sh --lab --server --no-token
 ```
 
 To view the site, open a browser to `http://localhost:3000`. The site will auto rebuild and refresh as files are changed. The [Atom editor](https://atom.io/) has a nice [language package for markdown](https://atom.io/packages/language-markdown) that understand the YAML front matter that Jekyll uses, as well as a core package for markdown previews that uses the github style (great for editing readme files).
@@ -97,7 +100,30 @@ docker run --mount type=bind,source="$(pwd)",target=/mnt/host \
     $VOLUME bash
 ```
 
+## Updating docker package
+
+### Setup
+
+Login to docker with a github token. Generate a token [here](https://github.com/settings/tokens) with read/write/delete permissions for packages.
+
+Copy the generated token and paste it as the password (use your USERNAME).
+```
+docker login docker.pkg.github.com --username USERNAME
+```
+
+### Pushing the packages
+
+```
+# Tag the image with the version
+docker tag docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
+
+# Push the image
+docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest
+
+docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
+```
+
 ### Release Notes
 
-- 1.0.0 - Initial release for jekyll
-- 1.0.1 - First update
+- 1.0.0 - Initial release
+- 1.0.1 - Rebuilt without external dependencies

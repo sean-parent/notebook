@@ -2,42 +2,16 @@
 
 [![Binder](https://mybinder.org/badge.svg)](https://mybinder.org/v2/gh/sean-parent/notebook/master)
 
-## Mac installation instructions to run locally
+## Running locally
 
-- clone this repo and cd to the directory
-- if you don't already have the xcode command line tools installed, install them
-```
-xcode-select --install
-```
-- install miniconda for Python 3.7
-	- download and run the install .pkg [here](https://conda.io/miniconda.html)
+\[ _Note: I've moved to Docker for consistent, cross platform use. Platform specific instructions are no longer included._ \]
 
-- reload the updated bash profile
+### Setup
 
-```
-source ~/.bash_profile
-```
+- [Install Docker](https://docs.docker.com/get-docker/).
+- Clone this repo and `cd` to the repo directory.
 
-- install miniconda for Python 3.7
-	- download the install script [here](https://conda.io/miniconda.html)
-	- execute the downloaded script
-	- when prompted `Do you wish the installer to prepend the Miniconda3 install location to PATH in your /Users/<name>/.bash_profile ? [yes|no]` answer no
-- install [homebrew](https://brew.sh/)
-```
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
-```
-- install miniconda
-```
-brew cask install miniconda
-```
 
-- Create the conda environment
-```
-conda env create
-conda config --set auto_activate_base false
-conda init bash
-source ~/.bash_profile
-```
 
 ## To run the notebook
 ```
@@ -133,32 +107,28 @@ Note: Need linux update script, must run `sudo bundle update` prior to `tools/st
 ## Running Tools
 ```
 docker run --env JUPYTER_CONFIG_DIR=/mnt/home/_jupyter --mount type=bind,source="$(pwd)",target=/mnt/home  -t -i -p 3000:3000 -p 3001:3001 -p 8888:8888 docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest  bash
+```
 
-docker container ls
-docker exec -it <container ID>  bash
+From the Docker prompt
 
-
+```
 cd /mnt/home/
 ./tools/prepare.sh
 ./tools/start.sh --lab --server --no-token
 ```
 
-## Updating docker package
-```
+- [Use this link to view the lab environment.](http://localhost:8888)
+- [Use this link to view the slides.](http://localhost:3000)
 
-VERSION="1.0.0"
-echo $VERSION > ./VERSION
-docker run --mount type=bind,source="$(pwd)",target=/mnt/docs-src -t -i \
-  docker.pkg.github.com/sean-parent/jupyter-docker/docs-tool-cpp-base:latest bash
+## Tips
 
-cd /mnt/docs-src
-./tools/update.sh
-exit
-
-docker build -t docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest .
-docker tag docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest \
-    docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
-docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest
-docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
+If you want to open another terminal on the running image use:
 
 ```
+docker ps
+docker exec -it <container id> bash
+```
+
+## Updating the tools image
+
+[See ./tools/docker-tools/README.md](./tools/docker-tools/README.md)

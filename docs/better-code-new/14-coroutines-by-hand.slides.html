@@ -13259,7 +13259,7 @@ a.anchor-link {
     <span class="n">sequential_process</span><span class="p">()</span> <span class="p">{</span>
         <span class="n">_running</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]()</span> <span class="p">{</span>
             <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-                <span class="p">(</span><span class="n">co_await</span> <span class="n">_queue</span><span class="p">.</span><span class="n">pop</span><span class="p">())();</span>
+                <span class="p">(</span><span class="k">co_await</span> <span class="n">_queue</span><span class="p">.</span><span class="n">pop</span><span class="p">())();</span>
             <span class="p">}</span>
         <span class="p">}</span>
     <span class="p">}</span>
@@ -13338,7 +13338,7 @@ a.anchor-link {
 <div class="text_cell_render border-box-sizing rendered_html">
 <ul>
 <li><code>resume()</code> is the body of our coroutine:<div class="highlight"><pre><span></span><span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
-  <span class="p">(</span><span class="n">co_await</span> <span class="n">_queue</span><span class="p">.</span><span class="n">pop</span><span class="p">())();</span>
+  <span class="p">(</span><span class="k">co_await</span> <span class="n">_queue</span><span class="p">.</span><span class="n">pop</span><span class="p">())();</span>
 <span class="p">}</span>
 </pre></div>
 </li>

@@ -14570,12 +14570,12 @@ true
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">class</span> <span class="nc">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="n">concept</span><span class="p">;</span>
+    <span class="k">struct</span> <span class="k">concept</span><span class="p">;</span>
     
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
     <span class="k">struct</span> <span class="n">model</span><span class="p">;</span>
     
-    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">concept</span><span class="o">&gt;</span> <span class="n">_p</span><span class="p">;</span>
+    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="k">concept</span><span class="o">&gt;</span> <span class="n">_p</span><span class="p">;</span>
 
 <span class="k">public</span><span class="o">:</span>
     <span class="k">constexpr</span> <span class="n">task</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
@@ -14599,14 +14599,14 @@ true
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="n">concept</span> <span class="p">{</span>
-    <span class="k">virtual</span> <span class="o">~</span><span class="n">concept</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+<span class="k">struct</span> <span class="n">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="k">concept</span> <span class="p">{</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="k">concept</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
     <span class="k">virtual</span> <span class="n">R</span> <span class="nf">invoke</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="n">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="n">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="n">model</span> <span class="k">final</span> <span class="o">:</span> <span class="n">concept</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="n">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="n">model</span> <span class="k">final</span> <span class="o">:</span> <span class="k">concept</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">G</span><span class="o">&gt;</span>
     <span class="k">explicit</span> <span class="n">model</span><span class="p">(</span><span class="n">G</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="o">:</span> <span class="n">_f</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">G</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">))</span> <span class="p">{}</span>
     <span class="n">R</span> <span class="n">invoke</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span> <span class="p">}</span>
