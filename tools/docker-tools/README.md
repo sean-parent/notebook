@@ -11,13 +11,13 @@ To build the docker image, first update the VERSION variable below (please use s
 
 #### Using Windows PowerShell
 ```
-$VERSION='1.0.1'
+$VERSION='1.0.2'
 $VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 ```
 
 #### Linux or macOS
 ```
-VERSION="1.0.1"
+VERSION="1.0.2"
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 ```
 
@@ -26,18 +26,25 @@ VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 echo $VERSION > ./tools/docker-tools/VERSION
 
 # build the base image, no-cache is used so the latest tools are installed
-docker build --no-cache --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
+# Ruby v2.6.6 is needed until Jekyll is updated to 4.1.
+docker build --no-cache --build-arg RUBY_VERSION=2.6.6 --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
 
 # update the docs environment
 docker run --mount type=bind,source="$(pwd)",target=/mnt/host --tty --interactive $VOLUME bash
 
-# from docker prompt (v2.6.6 is needed until Jekyll is updated to 4.1).
+# from docker prompt
 cd /mnt/host
-./tools/update.sh --lock --ruby-version 2.6.6
+./tools/update.sh --lock
 exit
 
 # build the final image
-docker build --file ./tools/docker-tools/Dockerfile --target full --tag $VOLUME .
+docker build --build-arg RUBY_VERSION=2.6.6 --file ./tools/docker-tools/Dockerfile --target full --tag $VOLUME .
+```
+
+If you are editing the DockerFile you might want to build the base image from cache.
+
+```
+docker build --build-arg RUBY_VERSION=2.6.6 --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
 ```
 
 ## Running the Docker image
@@ -91,16 +98,7 @@ docker ps
 docker exec -it <container id> bash
 ```
 
-To test a local copy of the jekyll theme, edit the Gemfile and use:
-
-```
-docker run --mount type=bind,source="$(pwd)",target=/mnt/host \
-    --mount type=bind,source=$HOME/Projects/github.com/adobe/hyde-theme,target=/mnt/themes \
-    --tty --interactive --publish 3000-3001:3000-3001 \
-    $VOLUME bash
-```
-
-## Updating docker package
+## Updating Docker package
 
 ### Setup
 
@@ -127,3 +125,4 @@ docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
 
 - 1.0.0 - Initial release
 - 1.0.1 - Rebuilt without external dependencies
+- 1.0.2 - Rebuilding without lock files
