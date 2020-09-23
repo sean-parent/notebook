@@ -82,6 +82,7 @@ SHELL ["/bin/bash", "-c"]
 RUN eval "$(~/miniconda3/bin/conda shell.bash hook)"; conda activate notebook;  \
   jupyter labextension install --no-build @ijmbarr/jupyterlab_spellchecker; \
   jupyter labextension install --no-build @jupyterlab/toc; \
+  jupyter labextension install --no-build jupyter-offlinenotebook; \
   jupyter lab build; \
    conda deactivate
 
