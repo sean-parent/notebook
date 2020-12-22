@@ -15,6 +15,10 @@ div.highlight {
   max-height: 972px; /* 1080px * 0.9 */
 }
 
+div.jp-InputPrompt {
+    display: none;
+}
+
 div.highlight pre {
   background: #f7f7f7;
 }

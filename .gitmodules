@@ -1,6 +1,6 @@
-[submodule "docs/reveal.js"]
-	path = docs/reveal.js
-	url = https://github.com/sean-parent/reveal.js
 [submodule "stlab/libraries"]
 	path = stlab/libraries
 	url = https://github.com/stlab/libraries
+[submodule "docs/reveal.js"]
+	path = docs/reveal.js
+	url = https://github.com/sean-parent/reveal.js.git

@@ -44,7 +44,7 @@ trap 'for pid in $BKPIDS; do kill $pid; done; exit' SIGINT
     if [[ $LAB = NO ]]; then
         jupyter notebook $OPTIONS
     else
-        jupyter lab $OPTIONS
+        (export JUPYTERLAB_SETTINGS_DIR='/mnt/host/_jupyter/lab/user-settings/'; jupyter lab $OPTIONS)
     fi
 } &
 
@@ -53,7 +53,7 @@ conda activate notebook
 # fswatch --print0 --event=Updated --extended --exclude=".*" --include="^[^~]*\.ipynb$" "./$1" \
 
 function generate_slides {
-    fswatch --print0 --event=Updated --extended --exclude="\.~" "./$1" \
+    fswatch --print0 --monitor=poll_monitor --event=Updated ./$1/*.ipynb \
         | xargs -0 -I % jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js \
             --output-dir="./docs/$1" --config=./slides-config/slides_config.py
 }
