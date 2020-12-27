@@ -2,11 +2,5 @@
     "base_template": "reveal",
     "mimetypes": {
       "text/html": true
-    },
-    "preprocessors": {
-        "custom": {
-          "type": "nbconvert.exporters.slides._RevealMetadataPreprocessor",
-          "enabled": true
-        }
-      }
-  }
+    }
+}
