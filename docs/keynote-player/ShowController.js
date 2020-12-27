@@ -142,7 +142,7 @@ var ShowController = Class.create({
         this.playbackController = new KPFPlaybackController({}, this.stageManager.stage);
 
         // Navigator
-        this.navigatorController = new NavigatorController(document.getElementById("slideshowNavigator"));
+        this.navigatorController = new NavigatorController(this.showUrl, document.getElementById("slideshowNavigator"));
 
         // Slide number feedback
         this.slideNumberController = new SlideNumberController(document.getElementById("slideNumberControl"));
