@@ -49,10 +49,6 @@ docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/
 To run the docker image, execute the following.
 
 ```
-$VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
-```
-
-```
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 ```
 ```
