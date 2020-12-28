@@ -9,29 +9,22 @@ If you don't already have docker installed, [install Docker](https://docs.docker
 
 To build the docker image, first update the VERSION variable below (please use semantic versioning). Add a [release note](#release-notes).
 
-#### Using Windows PowerShell
+#### Linux, WSL 2, MacOS
 ```
-$VERSION='1.0.5'
-$VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
-```
-
-#### Linux or macOS
-```
-VERSION="1.0.3"
+VERSION="1.0.6"
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
+
+# The ruby version should match what github pages requires: https://pages.github.com/versions/
+RUBY_VERSION=2.7.1
+
 ```
 
-### Common
 ```
 echo $VERSION > ./tools/docker-tools/VERSION
 
 # build the base image, no-cache is used so the latest tools are installed
-# Ruby v2.6.6 is needed until Jekyll is updated to 4.1.
 
-
-docker build --no-cache --build-arg RUBY_VERSION=2.7.1 --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
-
-docker build --no-cache --build-arg RUBY_VERSION=2.6.6 --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
+docker build --no-cache --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
 
 # update the docs environment
 docker run --mount type=bind,source="$(pwd)",target=/mnt/host --tty --interactive $VOLUME bash
@@ -42,13 +35,13 @@ cd /mnt/host
 exit
 
 # build the final image
-docker build --build-arg RUBY_VERSION=2.7.1 --file ./tools/docker-tools/Dockerfile --target full --tag $VOLUME .
+docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile --target full --tag $VOLUME .
 ```
 
 If you are editing the DockerFile you might want to build the base image from cache.
 
 ```
-docker build --build-arg RUBY_VERSION=2.7.1 --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
+docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
 ```
 
 ## Running the Docker image
