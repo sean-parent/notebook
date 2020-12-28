@@ -14376,6 +14376,124 @@ div.jp-OutputPrompt {
   background: #727272 !important;
 }
 </style>
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+.reveal section iframe {
+  /* Size to be contained at 90% of slide size */
+  width: 763px; /* 848px * 0.9 */
+  height: 432px; /* 480px * 0.9 */
+  object-fit: contain;
+/* center images */
+display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  /*
+  .reveal pre {
+    width: inherit;
+    padding: 0.4em;
+    margin: 0px;
+    font-family: monospace, sans-serif;
+    font-size: 80%;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+  .reveal pre code {
+    padding: 0px;
+  }
+  .reveal section img {
+    border: 0px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+  }
+  .reveal i {
+    font-style: normal;
+    font-family: FontAwesome;
+    font-size: 2em;
+  }
+  .reveal .slides {
+    text-align: left;
+  }
+  .reveal.fade {
+    opacity: 1;
+  }
+  .reveal .progress {
+    position: static;
+  }
+
+  div.jp-InputArea-editor {
+    padding: 0.06em;
+  }
+
+  div.code_cell {
+    background-color: transparent;
+  }
+
+  div.output_area pre {
+    font-family: monospace, sans-serif;
+    font-size: 80%;
+  }
+
+  div.jp-OutputPrompt {
+    // 5px right shift to account for margin in parent container
+    margin: 5px 5px 0 0;
+  }
+
+  // Reveal navigation controls
+
+  .reveal .controls .navigate-left,
+  .reveal .controls .navigate-left.enabled {
+    border-right-color: #727272;
+  }
+  .reveal .controls .navigate-left.enabled:hover,
+  .reveal .controls .navigate-left.enabled.enabled:hover {
+    border-right-color: #dfdfdf;
+  }
+  .reveal .controls .navigate-right,
+  .reveal .controls .navigate-right.enabled {
+    border-left-color: #727272;
+  }
+  .reveal .controls .navigate-right.enabled:hover,
+  .reveal .controls .navigate-right.enabled.enabled:hover {
+    border-left-color: #dfdfdf;
+  }
+  .reveal .controls .navigate-up,
+  .reveal .controls .navigate-up.enabled {
+    border-bottom-color: #727272;
+  }
+  .reveal .controls .navigate-up.enabled:hover,
+  .reveal .controls .navigate-up.enabled.enabled:hover {
+    border-bottom-color: #dfdfdf;
+  }
+  .reveal .controls .navigate-down,
+  .reveal .controls .navigate-down.enabled {
+    border-top-color: #727272;
+  }
+  .reveal .controls .navigate-down.enabled:hover,
+  .reveal .controls .navigate-down.enabled.enabled:hover {
+    border-top-color: #dfdfdf;
+  }
+  .reveal .progress span {
+    background: #727272;
+  }
+
+  // Scrollbars
+
+  ::-webkit-scrollbar
+  {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar *
+  {
+    background:transparent;
+  }
+  ::-webkit-scrollbar-thumb
+  {
+    background: #727272 !important;
+  }
+
+  */
+</style>
 
 </head>
 
@@ -14383,21 +14501,19 @@ div.jp-OutputPrompt {
 
 <div class="reveal">
 <div class="slides"><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="constexpr"><code>constexpr</code><a class="anchor-link" href="#constexpr">&#182;</a></h1><p><code>constexpr</code> specifier declares that it is possible to evaluate a function or variable at compile time. Such variables and functions can then be used inside a <a href="http://en.cppreference.com/w/cpp/language/constant_expression">constant expression</a>.</p>
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="constexpr-variables"><code>constexpr</code> variables<a class="anchor-link" href="#constexpr-variables">&#182;</a></h2><p>A variable declared <code>constexpr</code> is <code>const</code> (implied) and must be evaluated at compile time.</p>
 
 </div>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">const</span> <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
@@ -14409,15 +14525,13 @@ div.jp-OutputPrompt {
 </div>
 
 </div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="k">constexpr</span> <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
 </pre></div>
 
 </div>
 </div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 <pre><code>input_line_9:2:16: error: constexpr variable 'r' must be initialized by a constant expression
  constexpr int r = rand();
@@ -14428,14 +14542,12 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Review:</strong> <code>const</code> variables defined at <code>namespace</code> scope have <a href="http://en.cppreference.com/w/cpp/language/language_linkage">internal linkage</a> by default. This allows them to be safely used in header files without an <a href="http://en.cppreference.com/w/cpp/language/definition">ODR</a> violation. However, each compilation unit will have its own logical copy.</p>
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="c1">// header.hpp</span>
 <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">variable</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 </pre></div>
@@ -14461,22 +14573,19 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 <pre><code>0x10004b6c8
 0x10004bd7c</code></pre>
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>C++17 adds <a href="http://en.cppreference.com/w/cpp/language/inline">inline variables</a> which, at namespace scope, default to external linkage. This is what you likely want in your header files (<em>finally!</em>).</p>
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="c1">// header.hpp</span>
 <span class="kr">inline</span> <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">variable</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 </pre></div>
@@ -14502,16 +14611,14 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 <pre><code>0x10004b6c8
 0x10004b6c8</code></pre>
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="constexpr-functions"><code>constexpr</code> functions<a class="anchor-link" href="#constexpr-functions">&#182;</a></h2><p>A <code>constexpr</code> function is a function for which it is <em>possible</em> to evaluate it at compile time provided appropriate function argument are provided.</p>
 <p>A <code>constexpr</code> function must satisfy the following requirements:</p>
 <ul>
@@ -14523,8 +14630,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Function body contains <strong>any statement except</strong><ul>
 <li><code>asm</code></li>
@@ -14540,15 +14646,14 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Example:</p>
 
 </div>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="n">fnv64_hash_str</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
@@ -14570,7 +14675,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">auto</span> <span class="n">str_hash</span> <span class="o">=</span> <span class="n">fnv64_hash_str</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
@@ -14584,7 +14689,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">str_hash</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
@@ -14597,14 +14702,9 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-Cell-outputWrapper">
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>8e59dd02f68c387c
@@ -14617,8 +14717,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="constexpr-constructor"><code>constexpr</code> constructor<a class="anchor-link" href="#constexpr-constructor">&#182;</a></h2><p>The definition of a literal type has been extended to include types with a <code>constexpr</code> constructor (though not all classes with a constexpr constructor are a literal type).</p>
 <p>A <code>constexpr</code> constructor must satisfy the requirements of a <code>constexpr</code> function and:</p>
 <ul>
@@ -14629,15 +14728,14 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Example:</p>
 
 </div>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">point</span> <span class="p">{</span>
@@ -14660,7 +14758,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="n">point</span> <span class="n">origin</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span> <span class="p">};</span>
@@ -14674,7 +14772,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">static_assert</span><span class="p">(</span><span class="n">origin</span> <span class="o">==</span> <span class="n">point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s">&quot;mismatch&quot;</span><span class="p">);</span>
@@ -14686,15 +14784,14 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><code>std::pair</code>, <code>std::tuple</code>, and <code>std::array</code> may all be used as literal types. With <code>constexpr</code> functions, you can create and manipulate complex data structures at compile time. These classes have been extended in C++17 to allow more operations, including non-const operations.</p>
 
 </div>
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">M</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
@@ -14726,7 +14823,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="kt">bool</span> <span class="n">strless</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
@@ -14746,7 +14843,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">a1</span> <span class="o">=</span> <span class="p">{</span>
@@ -14771,7 +14868,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">strless</span><span class="p">);</span>
@@ -14785,7 +14882,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">result</span><span class="p">)</span>
@@ -14799,14 +14896,9 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-Cell-outputWrapper">
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Dave
@@ -14825,15 +14917,14 @@ Seetha
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="if-constexpr-(C++17)"><code>if constexpr</code> (C++17)<a class="anchor-link" href="#if-constexpr-(C++17)">&#182;</a></h2><p>A conditional of the form <code>if constexpr</code> is known as a <em>constexpr if</em> statement. The predicate must be a constant expression. An unexecuted statement is discarded. If used in a template, the discarded path is not instanciated and <em>constexpr if</em> is an alternative to <a href="http://en.cppreference.com/w/cpp/language/sfinae">SFINAE</a> for some use cases.</p>
 
 </div>
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[16]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="c1">// C++14 example</span>
@@ -14858,7 +14949,7 @@ Seetha
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="c1">// C++17 example</span>
@@ -14883,7 +14974,7 @@ Seetha
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">names</span><span class="p">[]{</span>
@@ -14902,7 +14993,7 @@ Seetha
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">sorted</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
@@ -14915,14 +15006,9 @@ Seetha
 
 <div class="jp-Cell-outputWrapper">
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Ahmad Ashley Bill Carole Cherelle Dara Elene Goldie Hayley Janae Joannie Manuel Myrtle Nicky Odis Otto Sharice Stepanie Stephenie Taylor </pre>
@@ -14934,14 +15020,13 @@ Seetha
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="constexpr-lambda-expressions-(C++17)"><code>constexpr</code> lambda expressions (C++17)<a class="anchor-link" href="#constexpr-lambda-expressions-(C++17)">&#182;</a></h2>
 </div>
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">auto</span> <span class="n">rsorted</span> <span class="o">=</span>
@@ -14956,7 +15041,7 @@ Seetha
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">rsorted</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
@@ -14969,14 +15054,9 @@ Seetha
 
 <div class="jp-Cell-outputWrapper">
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Taylor Stephenie Stepanie Sharice Otto Odis Nicky Myrtle Manuel Joannie Janae Hayley Goldie Elene Dara Cherelle Carole Bill Ashley Ahmad </pre>
@@ -14988,39 +15068,34 @@ Seetha
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="What-should-be-declared-constexpr?">What should be declared <code>constexpr</code>?<a class="anchor-link" href="#What-should-be-declared-constexpr?">&#182;</a></h2><p>The short answer is "<a href="https://www.youtube.com/watch?v=PJwd4JLYJJY">all the things</a>."</p>
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>If a function can be made constexpr, without adding a performance penalty then make it constexpr.</p>
 
 </div>
 </div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Be cautious about declaring variables that require complex calculations as <code>constexpr</code>.</p>
 
 </div>
 </div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>Constructs like ZStrings and ExpressViews explicitly made a trade-off of runtime performance to improve developer productivity. Such gains are easily wiped out by doing too much at compile time.</p>
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>Find something in your product that would be improved using <code>constexpr</code>, either by simplifying the code or by directly improving performance. Measure the results, including compile time impact, and write a summary of what you found.</p>
 
 </div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[23]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span>
@@ -15055,21 +15130,21 @@ require(
     function(Reveal){
 
         // Full list of configuration options available here: https://github.com/hakimel/reveal.js#configuration
-        
+
         Reveal.initialize({
-            controls: true,
+            controls: false,
             progress: true,
             // history: true,
             transition: "slide",
 
-            
-            width: 1280,
-            height: 720,
+
+            width: 848,
+            height: 480,
             slideNumber: 'c',
             hashOneBasedIndex: true,
 
             // Optional libraries used to extend on reveal.js
-            
+
             plugins: [Search, Notes]
         });
 

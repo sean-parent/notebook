@@ -14376,6 +14376,124 @@ div.jp-OutputPrompt {
   background: #727272 !important;
 }
 </style>
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+.reveal section iframe {
+  /* Size to be contained at 90% of slide size */
+  width: 763px; /* 848px * 0.9 */
+  height: 432px; /* 480px * 0.9 */
+  object-fit: contain;
+/* center images */
+display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  /*
+  .reveal pre {
+    width: inherit;
+    padding: 0.4em;
+    margin: 0px;
+    font-family: monospace, sans-serif;
+    font-size: 80%;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+  .reveal pre code {
+    padding: 0px;
+  }
+  .reveal section img {
+    border: 0px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+  }
+  .reveal i {
+    font-style: normal;
+    font-family: FontAwesome;
+    font-size: 2em;
+  }
+  .reveal .slides {
+    text-align: left;
+  }
+  .reveal.fade {
+    opacity: 1;
+  }
+  .reveal .progress {
+    position: static;
+  }
+
+  div.jp-InputArea-editor {
+    padding: 0.06em;
+  }
+
+  div.code_cell {
+    background-color: transparent;
+  }
+
+  div.output_area pre {
+    font-family: monospace, sans-serif;
+    font-size: 80%;
+  }
+
+  div.jp-OutputPrompt {
+    // 5px right shift to account for margin in parent container
+    margin: 5px 5px 0 0;
+  }
+
+  // Reveal navigation controls
+
+  .reveal .controls .navigate-left,
+  .reveal .controls .navigate-left.enabled {
+    border-right-color: #727272;
+  }
+  .reveal .controls .navigate-left.enabled:hover,
+  .reveal .controls .navigate-left.enabled.enabled:hover {
+    border-right-color: #dfdfdf;
+  }
+  .reveal .controls .navigate-right,
+  .reveal .controls .navigate-right.enabled {
+    border-left-color: #727272;
+  }
+  .reveal .controls .navigate-right.enabled:hover,
+  .reveal .controls .navigate-right.enabled.enabled:hover {
+    border-left-color: #dfdfdf;
+  }
+  .reveal .controls .navigate-up,
+  .reveal .controls .navigate-up.enabled {
+    border-bottom-color: #727272;
+  }
+  .reveal .controls .navigate-up.enabled:hover,
+  .reveal .controls .navigate-up.enabled.enabled:hover {
+    border-bottom-color: #dfdfdf;
+  }
+  .reveal .controls .navigate-down,
+  .reveal .controls .navigate-down.enabled {
+    border-top-color: #727272;
+  }
+  .reveal .controls .navigate-down.enabled:hover,
+  .reveal .controls .navigate-down.enabled.enabled:hover {
+    border-top-color: #dfdfdf;
+  }
+  .reveal .progress span {
+    background: #727272;
+  }
+
+  // Scrollbars
+
+  ::-webkit-scrollbar
+  {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar *
+  {
+    background:transparent;
+  }
+  ::-webkit-scrollbar-thumb
+  {
+    background: #727272 !important;
+  }
+
+  */
+</style>
 
 </head>
 
@@ -14384,8 +14502,7 @@ div.jp-OutputPrompt {
 <div class="reveal">
 <div class="slides"><aside class="notes">
 
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Everything about parallelism and concurrency boils down to:<ul>
 <li>How to handle function results</li>
@@ -14397,8 +14514,7 @@ div.jp-OutputPrompt {
 </div>
 </div>
 </aside><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Futures">Futures<a class="anchor-link" href="#Futures">&#182;</a></h1><ul>
 <li>Homework from last class, rewrite <code>interned_string</code> as a sequential process</li>
 </ul>
@@ -14407,7 +14523,7 @@ div.jp-OutputPrompt {
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v0</span> <span class="p">{</span>
@@ -14444,16 +14560,14 @@ div.jp-OutputPrompt {
 </div>
 
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>How do we return a value from a sequential process?</li>
 </ul>
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="k">struct</span> <span class="nc">shared_pool</span> <span class="p">{</span>
     <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_pool</span><span class="p">;</span>
     <span class="n">sequential_process</span> <span class="n">_process</span><span class="p">;</span>
@@ -14470,8 +14584,7 @@ div.jp-OutputPrompt {
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Callbacks">Callbacks<a class="anchor-link" href="#Callbacks">&#182;</a></h2><ul>
 <li>One common method is to pass a callback which is called with the result instead of returning it</li>
 </ul>
@@ -14480,7 +14593,7 @@ div.jp-OutputPrompt {
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">shared_pool</span> <span class="p">{</span>
@@ -14502,16 +14615,14 @@ div.jp-OutputPrompt {
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>But what do we pass to the callback when constructing our <code>interned_string</code>?</li>
 </ul>
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
     <span class="c1">// struct shared_pool</span>
 
@@ -14529,8 +14640,7 @@ div.jp-OutputPrompt {
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>The construction of the <code>interned_string</code> becomes asynchronous...</li>
 </ul>
@@ -14539,7 +14649,7 @@ div.jp-OutputPrompt {
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
@@ -14575,8 +14685,7 @@ div.jp-OutputPrompt {
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>And so on...</li>
 </ul>
@@ -14585,7 +14694,7 @@ div.jp-OutputPrompt {
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
@@ -14605,14 +14714,9 @@ div.jp-OutputPrompt {
 
 <div class="jp-Cell-outputWrapper">
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Hello World
@@ -14625,8 +14729,7 @@ div.jp-OutputPrompt {
 </div>
 
 </div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>To properly rejoin another serial context we need<ul>
 <li>A block call</li>
@@ -14638,8 +14741,7 @@ div.jp-OutputPrompt {
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Pros of callbacks:<ul>
 <li>Fast, no synchronization required</li>
@@ -14657,8 +14759,7 @@ div.jp-OutputPrompt {
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="std::future&lt;&gt;"><code>std::future&lt;&gt;</code><a class="anchor-link" href="#std::future&lt;&gt;">&#182;</a></h2><ul>
 <li><code>std::future&lt;&gt;</code> is a mechanism to separate a task result, from a task<ul>
 <li>After the task is executed, the task result is available from the <code>future</code></li>
@@ -14673,8 +14774,7 @@ div.jp-OutputPrompt {
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 <pre><code>{
 packaged_task&lt;int()&gt; task([]{
@@ -14693,8 +14793,7 @@ cout &lt;&lt; "answer: " &lt;&lt; result.get() &lt;&lt; '\n';
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="n">packaged_task</span><span class="o">&lt;</span><span class="kt">int</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">task</span><span class="p">([]{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;executing...</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
@@ -14718,8 +14817,7 @@ cout &lt;&lt; "answer: " &lt;&lt; result.get() &lt;&lt; '\n';
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>In C++14 there are 3 ways to optain a <code>future</code><ul>
 <li>from <code>std::promise</code></li>
@@ -14749,23 +14847,20 @@ cout &lt;&lt; "answer: " &lt;&lt; result.get() &lt;&lt; '\n';
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Recall the <code>sequential_process::async()</code></li>
 </ul>
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">);</span>
 </pre></div>
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>We can wrap the invocation of <code>async()</code> and pass a <code>packaged_task</code></li>
 </ul>
@@ -14774,7 +14869,7 @@ cout &lt;&lt; "answer: " &lt;&lt; result.get() &lt;&lt; '\n';
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="c1">// F models R()</span>
@@ -14796,8 +14891,7 @@ cout &lt;&lt; "answer: " &lt;&lt; result.get() &lt;&lt; '\n';
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="p">{</span>
 <span class="n">sequential_process</span> <span class="n">process</span><span class="p">;</span>
 
@@ -14809,8 +14903,7 @@ cout &lt;&lt; "answer: " &lt;&lt; result.get() &lt;&lt; '\n';
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 <pre><code>In file included from input_line_5:1:
 In file included from /Users/sean-parent/miniconda3/envs/sean-parent-notebook/include/xeus/xinterpreter.hpp:12:
@@ -14892,8 +14985,7 @@ struct __compressed_pair_elem {
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><p>The underlying issue is <code>function&lt;&gt;</code> (our task type) requires:</p>
 <ul>
@@ -14911,8 +15003,7 @@ struct __compressed_pair_elem {
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>We need a type similar <code>std::function&lt;&gt;</code> but for movable types with a mutable call operator<ul>
 <li>For now we only need the signature <code>void()</code></li>
@@ -14922,8 +15013,7 @@ struct __compressed_pair_elem {
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><a href="./11-futures-pt2.slides.html">Part 2</a></p>
 
 </div>
@@ -14951,21 +15041,21 @@ require(
     function(Reveal){
 
         // Full list of configuration options available here: https://github.com/hakimel/reveal.js#configuration
-        
+
         Reveal.initialize({
-            controls: true,
+            controls: false,
             progress: true,
             // history: true,
             transition: "slide",
 
-            
-            width: 1280,
-            height: 720,
+
+            width: 848,
+            height: 480,
             slideNumber: 'c',
             hashOneBasedIndex: true,
 
             // Optional libraries used to extend on reveal.js
-            
+
             plugins: [Search, Notes]
         });
 

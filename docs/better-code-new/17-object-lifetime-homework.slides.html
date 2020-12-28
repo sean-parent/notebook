@@ -14376,6 +14376,124 @@ div.jp-OutputPrompt {
   background: #727272 !important;
 }
 </style>
+<style type="text/css">
+/* Overrides of notebook CSS for static HTML export */
+.reveal section iframe {
+  /* Size to be contained at 90% of slide size */
+  width: 763px; /* 848px * 0.9 */
+  height: 432px; /* 480px * 0.9 */
+  object-fit: contain;
+/* center images */
+display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+  /*
+  .reveal pre {
+    width: inherit;
+    padding: 0.4em;
+    margin: 0px;
+    font-family: monospace, sans-serif;
+    font-size: 80%;
+    box-shadow: 0px 0px 0px rgba(0, 0, 0, 0);
+  }
+  .reveal pre code {
+    padding: 0px;
+  }
+  .reveal section img {
+    border: 0px solid black;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0);
+  }
+  .reveal i {
+    font-style: normal;
+    font-family: FontAwesome;
+    font-size: 2em;
+  }
+  .reveal .slides {
+    text-align: left;
+  }
+  .reveal.fade {
+    opacity: 1;
+  }
+  .reveal .progress {
+    position: static;
+  }
+
+  div.jp-InputArea-editor {
+    padding: 0.06em;
+  }
+
+  div.code_cell {
+    background-color: transparent;
+  }
+
+  div.output_area pre {
+    font-family: monospace, sans-serif;
+    font-size: 80%;
+  }
+
+  div.jp-OutputPrompt {
+    // 5px right shift to account for margin in parent container
+    margin: 5px 5px 0 0;
+  }
+
+  // Reveal navigation controls
+
+  .reveal .controls .navigate-left,
+  .reveal .controls .navigate-left.enabled {
+    border-right-color: #727272;
+  }
+  .reveal .controls .navigate-left.enabled:hover,
+  .reveal .controls .navigate-left.enabled.enabled:hover {
+    border-right-color: #dfdfdf;
+  }
+  .reveal .controls .navigate-right,
+  .reveal .controls .navigate-right.enabled {
+    border-left-color: #727272;
+  }
+  .reveal .controls .navigate-right.enabled:hover,
+  .reveal .controls .navigate-right.enabled.enabled:hover {
+    border-left-color: #dfdfdf;
+  }
+  .reveal .controls .navigate-up,
+  .reveal .controls .navigate-up.enabled {
+    border-bottom-color: #727272;
+  }
+  .reveal .controls .navigate-up.enabled:hover,
+  .reveal .controls .navigate-up.enabled.enabled:hover {
+    border-bottom-color: #dfdfdf;
+  }
+  .reveal .controls .navigate-down,
+  .reveal .controls .navigate-down.enabled {
+    border-top-color: #727272;
+  }
+  .reveal .controls .navigate-down.enabled:hover,
+  .reveal .controls .navigate-down.enabled.enabled:hover {
+    border-top-color: #dfdfdf;
+  }
+  .reveal .progress span {
+    background: #727272;
+  }
+
+  // Scrollbars
+
+  ::-webkit-scrollbar
+  {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar *
+  {
+    background:transparent;
+  }
+  ::-webkit-scrollbar-thumb
+  {
+    background: #727272 !important;
+  }
+
+  */
+</style>
 
 </head>
 
@@ -14383,13 +14501,11 @@ div.jp-OutputPrompt {
 
 <div class="reveal">
 <div class="slides"><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h1 id="Object-Lifetime-Homework">Object Lifetime Homework<a class="anchor-link" href="#Object-Lifetime-Homework">&#182;</a></h1>
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><strong>Problem:</strong> The transformation to call <code>resume()</code> on a thread pool causes on object life time problem.<ul>
 <li>The <code>sequential_process</code> may destruct before <code>resume()</code> is invoked.</li>
@@ -14401,7 +14517,7 @@ div.jp-OutputPrompt {
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
@@ -14425,8 +14541,7 @@ div.jp-OutputPrompt {
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>As is, this code has <em>undefined behavior</em> because <code>process</code> may destruct before the lambda executes, causing a data race</li>
 </ul>
@@ -14442,8 +14557,7 @@ div.jp-OutputPrompt {
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 <pre><code>==================
 WARNING: ThreadSanitizer: data race (pid=7699)
@@ -14496,13 +14610,11 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="A-Cheasy-Fix">A <strike>Ch</strike>easy Fix<a class="anchor-link" href="#A-Cheasy-Fix">&#182;</a></h2>
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Extend the lifetime of <code>process</code> to <em>fix</em> the invocation</li>
 </ul>
@@ -14511,7 +14623,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
@@ -14533,14 +14645,9 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-Cell-outputWrapper">
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Made it!
@@ -14553,8 +14660,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>We can no longer rely on when all tasks in our <code>sequential_process</code> are done<ul>
 <li>Our tasks must be constructed to be independent of process destruction</li>
@@ -14564,13 +14670,11 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 </div>
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Blocking">Blocking<a class="anchor-link" href="#Blocking">&#182;</a></h2>
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>To keep the original semantics we could block on destruction of <code>sequential_process</code></li>
 <li>To do this we again need:<ul>
@@ -14585,7 +14689,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
@@ -14616,8 +14720,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div>
 
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>In the destructor if we are are still running<ul>
 <li>signal that we are done and want a notification</li>
@@ -14630,7 +14733,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
@@ -14652,8 +14755,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Finally in <code>resume()</code> if we are done then notify when we stop running</li>
 </ul>
@@ -14662,7 +14764,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
@@ -14694,8 +14796,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>It works in our example<ul>
 <li>But only so long as we have <em>enough</em> threads</li>
@@ -14710,8 +14811,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>But how many threads are enough?<ul>
 <li>On a system with <code>N</code> processes we need <code>N+1</code> threads available in the pool to guarantee no deadlocks</li>
@@ -14721,16 +14821,14 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 </div>
 </div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>In a single threaded environment, like wasm, this will deadlock <em>often</em></li>
 </ul>
 
 </div>
 </div></div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Probability of failure is a function of number of threads, number of processes, frequency of dispatched tasks, and frequency of joins<ul>
 <li>I have no idea how to calculate it...</li>
@@ -14740,13 +14838,11 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Handle-/-Body">Handle / Body<a class="anchor-link" href="#Handle-/-Body">&#182;</a></h2>
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Same as the easy approach, but we push the <code>shared_ptr</code> into the implementation</li>
 </ul>
@@ -14755,7 +14851,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc3</span> <span class="p">{</span>
@@ -14780,8 +14876,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Our prior <code>sequential_process</code> class becomes the implementation</li>
 </ul>
@@ -14790,7 +14885,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[12]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc3</span> <span class="p">{</span>
@@ -14814,8 +14909,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><code>implementation::async()</code> can then attach a shared pointer from this to <code>resume()</code></li>
 </ul>
@@ -14824,7 +14918,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[13]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc3</span> <span class="p">{</span>
@@ -14849,8 +14943,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>The approach suffers the same problem as the easy approach</li>
 <li>We can no longer rely on when all tasks in our sequential_process are done<ul>
@@ -14861,8 +14954,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>A similar approach, capturing <code>weak_from_this()</code> in the lambda has the effect of canceling any operations that haven't started before destruction<ul>
 <li>But does not provide any stronger guarantees</li>
@@ -14873,13 +14965,11 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Completion-Task">Completion Task<a class="anchor-link" href="#Completion-Task">&#182;</a></h2>
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>To solve the handle/body issue of not knowing when the process completes we can add a completion task</li>
 </ul>
@@ -14888,7 +14978,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[14]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc4</span> <span class="p">{</span>
@@ -14913,8 +15003,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>The task is stored in the implementation<ul>
 <li>And invoked on destruction</li>
@@ -14926,7 +15015,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[15]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc4</span> <span class="p">{</span>
@@ -14957,7 +15046,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 </div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[17]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
@@ -14978,14 +15067,9 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-Cell-outputWrapper">
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Made it!
@@ -14999,8 +15083,7 @@ End
 </div>
 
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>A completion handler can also be adapted to a future with continuations</li>
 <li>This is likely the approach I would take in a library<ul>
@@ -15011,13 +15094,11 @@ End
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Safe-Blocking">Safe Blocking<a class="anchor-link" href="#Safe-Blocking">&#182;</a></h2>
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>To safely block on destruction<ul>
 <li>If the process is already running (not just queued) then wait</li>
@@ -15028,8 +15109,7 @@ End
 
 </div>
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Because we could be in a queued state<ul>
 <li>The queued task may end up running after destruction we need a shared implementation</li>
@@ -15042,7 +15122,7 @@ End
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[18]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc5</span> <span class="p">{</span>
@@ -15074,8 +15154,7 @@ End
 </div>
 
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>In our blocking case we had <code>_running</code> and <code>_done</code> flags<ul>
 <li>Instead of adding more flags, we replace the flags with an <code>enum</code> for the state</li>
@@ -15087,7 +15166,7 @@ End
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[19]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc5</span> <span class="p">{</span>
@@ -15115,8 +15194,7 @@ End
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>When we enqueue the task, we change the state to <code>queued</code> if we were <code>idle</code></li>
 </ul>
@@ -15125,7 +15203,7 @@ End
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[20]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc5</span> <span class="p">{</span>
@@ -15150,8 +15228,7 @@ End
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li><code>resume()</code> handles the various states<ul>
 <li><code>idle</code> -&gt; <code>idle</code> (canceled)</li>
@@ -15166,7 +15243,7 @@ End
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[21]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">bcc5</span><span class="o">::</span><span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">resume</span><span class="p">()</span> <span class="p">{</span>
@@ -15200,8 +15277,7 @@ End
 </div>
 
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Finally, we provide the <code>wait()</code> operation, called from <code>~sequential_process()</code><ul>
 <li>If <code>idle</code> we are done and destruct</li>
@@ -15215,7 +15291,7 @@ End
 </div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[22]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">bcc5</span><span class="o">::</span><span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">wait</span><span class="p">()</span> <span class="p">{</span>
@@ -15249,8 +15325,7 @@ End
 </div>
 
 </div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Our process will now join cleanly without risk of a dead lock</li>
 </ul>
@@ -15259,7 +15334,7 @@ End
 </div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[24]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
@@ -15280,14 +15355,9 @@ End
 
 <div class="jp-Cell-outputWrapper">
 
-
 <div class="jp-OutputArea jp-Cell-outputArea">
 
 <div class="jp-OutputArea-child">
-
-    
-    <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
-
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>Made it!
@@ -15301,8 +15371,7 @@ process destructed
 </div>
 
 </div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Concluding-remarks">Concluding remarks<a class="anchor-link" href="#Concluding-remarks">&#182;</a></h2><ul>
 <li>One of the more challenging problems in an async environment is to shut things down<ul>
 <li>Supply a completion handler and make it the client problem<ul>
@@ -15318,8 +15387,7 @@ process destructed
 
 </div>
 </div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-InputPrompt jp-InputArea-prompt">
-</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Apple's GCD uses completion handlers to solve this problem<ul>
 <li>Which is to say, they don't solve it</li>
@@ -15331,7 +15399,7 @@ process destructed
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[25]:</div>
+
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span>
@@ -15366,21 +15434,21 @@ require(
     function(Reveal){
 
         // Full list of configuration options available here: https://github.com/hakimel/reveal.js#configuration
-        
+
         Reveal.initialize({
-            controls: true,
+            controls: false,
             progress: true,
             // history: true,
             transition: "slide",
 
-            
-            width: 1280,
-            height: 720,
+
+            width: 848,
+            height: 480,
             slideNumber: 'c',
             hashOneBasedIndex: true,
 
             // Optional libraries used to extend on reveal.js
-            
+
             plugins: [Search, Notes]
         });
 

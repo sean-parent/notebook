@@ -53,7 +53,7 @@ conda activate notebook
 # fswatch --print0 --event=Updated --extended --exclude=".*" --include="^[^~]*\.ipynb$" "./$1" \
 
 function generate_slides {
-    fswatch --print0 --monitor=poll_monitor --event=Updated ./$1/*.ipynb \
+    fswatch --print0 --event=Updated ./$1/*.ipynb \
         | xargs -0 -I % jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js \
             --output-dir="./docs/$1" --config=./slides-config/slides_config.py
 }
@@ -76,7 +76,7 @@ BKPIDS+=($!)
 BKPIDS+=($!)
 {
     cd ./docs
-    bundle exec jekyll build --baseurl "" --force_polling --watch --incremental
+    bundle exec jekyll build --baseurl "" --watch --incremental
 } &
 BKPIDS+=($!)
 

@@ -21,8 +21,7 @@ module.exports = {
         "change"
     ],
     "watchOptions": {
-        "ignoreInitial": true,
-        "usePolling": true
+        "ignoreInitial": true
     },
     "server": true,
     "proxy": false,
