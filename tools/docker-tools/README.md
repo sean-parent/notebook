@@ -11,7 +11,7 @@ To build the docker image, first update the VERSION variable below (please use s
 
 #### Linux, WSL 2, MacOS
 ```
-VERSION="1.0.6"
+VERSION="1.0.7"
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 
 # The ruby version should match what github pages requires: https://pages.github.com/versions/
@@ -55,13 +55,13 @@ VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 docker run --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive --publish 3000-3001:3000 --publish 8888:8888 $VOLUME bash
 ```
 
-This should leave you at bash prompt that looks like:
+This should leave you at a bash prompt that looks like:
 
 ```
 app@fc7590a63ba3:~$
 ```
 
-The hex number is the docker image container ID and may be different. Going forward I refer to this as the _docker_ prompt to distinguish it from the _local_ promt.
+The hex number is the docker image container ID and may be different. Going forward I refer to this as the _docker_ prompt to distinguish it from the _local_ prompt.
 
 ## Build the documentation site
 
@@ -74,13 +74,13 @@ cd /mnt/host
 
 ## Run a local server for the site
 
-Once the site has been prepared, you can run it to see how it looks. From the docker promt enter:
+Once the site has been prepared, you can run it to see how it looks. From the docker prompt enter:
 
 ```
 ./tools/start.sh --lab --server --no-token
 ```
 
-To view the site, open a browser to `http://localhost:3000`. The site will auto rebuild and refresh as files are changed. The [Atom editor](https://atom.io/) has a nice [language package for markdown](https://atom.io/packages/language-markdown) that understand the YAML front matter that Jekyll uses, as well as a core package for markdown previews that uses the github style (great for editing readme files).
+To view the site, open a browser to `http://localhost:3000`. The site will auto rebuild and refresh as files are changed. The [Atom editor](https://atom.io/) has a nice [language package for markdown](https://atom.io/packages/language-markdown) that understand the YAML front matter that Jekyll uses, as well as a core package for markdown previews that uses the GitHub style (great for editing readme files).
 
 ## Tips
 
@@ -95,7 +95,7 @@ docker exec -it <container id> bash
 
 ### Setup
 
-Login to docker with a github token. Generate a token [here](https://github.com/settings/tokens) with read/write/delete permissions for packages.
+Login to docker with a GitHub token. Generate a token [here](https://github.com/settings/tokens) with read/write/delete permissions for packages.
 
 Copy the generated token and paste it as the password (use your USERNAME).
 ```

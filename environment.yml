@@ -2,6 +2,7 @@ name: notebook
 channels:
   - conda-forge
 dependencies:
-  - jupyterlab
+  - jupyterlab=2.2.*
   - xeus-cling
   - nodejs
+  - jupytext

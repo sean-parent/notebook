@@ -1,0 +1,1 @@
+{"data":{"layout-restorer:data":{"main":{"dock":{"type":"tab-area","currentIndex":0,"widgets":[]}},"left":{"collapsed":false,"current":"extensionmanager.main-view","widgets":["filebrowser","running-sessions","@jupyterlab/toc:plugin","extensionmanager.main-view"]},"right":{"collapsed":true,"widgets":["jp-property-inspector"]}}},"metadata":{"id":"default"}}

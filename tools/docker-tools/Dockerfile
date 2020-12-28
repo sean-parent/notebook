@@ -62,7 +62,7 @@ USER app
 WORKDIR /home/app
 
 RUN mkdir ./install
-WORKDIR ./install
+WORKDIR /home/app/install
 COPY ./docs/Gemfile .
 COPY ./docs/Gemfile.lock .
 COPY ./environment.yml .

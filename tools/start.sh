@@ -44,7 +44,11 @@ trap 'for pid in $BKPIDS; do kill $pid; done; exit' SIGINT
     if [[ $LAB = NO ]]; then
         jupyter notebook $OPTIONS
     else
-        (export JUPYTERLAB_SETTINGS_DIR='/mnt/host/_jupyter/lab/user-settings/'; jupyter lab $OPTIONS)
+        (
+            export JUPYTERLAB_SETTINGS_DIR='/mnt/host/_jupyter/lab/user-settings/';
+            export JUPYTERLAB_WORKSPACES_DIR='/mnt/host/_jupyter/lab/workspaces/';
+            jupyter lab $OPTIONS
+        )
     fi
 } &
 

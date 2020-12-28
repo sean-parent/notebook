@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>2019-09-15-three-tools slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>bresenham-algorithm slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
@@ -14502,112 +14502,7 @@ display: block;
 <div class="reveal">
 <div class="slides"><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Three-Tools-for-C++-Presenters">Three Tools for C++ Presenters<a class="anchor-link" href="#Three-Tools-for-C++-Presenters">&#182;</a></h1>
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Sean Parent | Sr. Principal Scientist, Adobe Photoshop</p>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="reveal.js">reveal.js<a class="anchor-link" href="#reveal.js">&#182;</a></h2><p><em>A framework for easily creating beautiful presentations using HTML.</em></p>
-<p><a href="https://github.com/hakimel/reveal.js/">https://github.com/hakimel/reveal.js/</a></p>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Type <code>?</code> for help.</p>
-
-</div>
-</div><aside class="notes">
-
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>show speaker notes.</p>
-
-</div>
-</div>
-</aside></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="cling">cling<a class="anchor-link" href="#cling">&#182;</a></h2><p><em>Cling is an interactive C++ interpreter, built on the top of LLVM and Clang libraries.</em></p>
-<p><a href="https://root.cern.ch/cling">https://root.cern.ch/cling</a></p>
-
-</div>
-</div><aside class="notes">
-
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>show cling</p>
-
-</div>
-</div>
-</aside></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Jupyter-Lab">Jupyter Lab<a class="anchor-link" href="#Jupyter-Lab">&#182;</a></h2><p><em>Project Jupyter exists to develop open-source software, open-standards, and services for interactive computing across dozens of programming languages.</em></p>
-<p><a href="https://jupyter.org">https://jupyter.org</a></p>
-
-</div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">});</span>
-
-    <span class="k">auto</span> <span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
-
-    <span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">then</span><span class="p">([]</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;done!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
-
-    <span class="n">blocking_get</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="c1">// &lt;-- DON&#39;T DO THIS IN REAL CODE!!!</span>
-<span class="p">}</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>42
-done!
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Xeus-Cling">Xeus Cling<a class="anchor-link" href="#Xeus-Cling">&#182;</a></h2><p><em>xeus-cling is a Jupyter kernel for C++ based on the C++ interpreter cling and the native implementation of the Jupyter protocol xeus.</em></p>
-<p><a href="https://github.com/QuantStack/xeus-cling">https://github.com/QuantStack/xeus-cling</a></p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="More...">More...<a class="anchor-link" href="#More...">&#182;</a></h2><h3 id="Binder">Binder<a class="anchor-link" href="#Binder">&#182;</a></h3><p><em>Have a repository full of Jupyter notebooks? With Binder, open those notebooks in an executable environment, making your code immediately reproducible by anyone, anywhere.</em></p>
-<p><a href="https://mybinder.org/">https://mybinder.org/</a></p>
-<h3 id="GitHub">GitHub<a class="anchor-link" href="#GitHub">&#182;</a></h3><p><em>When you add Jupyter Notebook or IPython Notebook files with a .ipynb extension on GitHub, they will render as static HTML files in your repository.</em></p>
-<p><a href="https://help.github.com/en/articles/working-with-jupyter-notebook-files-on-github">https://help.github.com/en/articles/working-with-jupyter-notebook-files-on-github</a></p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="JupyterHub">JupyterHub<a class="anchor-link" href="#JupyterHub">&#182;</a></h3><p><em>Multi-user deployment infrastructure</em></p>
-<p><a href="https://github.com/jupyterhub/jupyterhub">https://github.com/jupyterhub/jupyterhub</a></p>
-<h3 id="Libraries">Libraries<a class="anchor-link" href="#Libraries">&#182;</a></h3><ul>
-<li>Xwidgets: widgets enable interactive data visualization</li>
-<li>Xplot: 2D plotting</li>
-<li>Xtensor: Numerical analysis with multi-dimensional arrays</li>
-</ul>
+<p>Bresenham Algorithm</p>
 
 </div>
 </div></section></section>
