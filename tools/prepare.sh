@@ -30,6 +30,8 @@ cp -ru ./better-code-class/img ./docs/better-code-class/
 eval "$(conda shell.bash hook)"
 conda activate notebook
 
+jupytext --sync ./*/*.md
+
 if [ $SECTION == "all" ] || [ $SECTION == "class" ]; then
 jupyter nbconvert ./better-code-class/*.ipynb --to=notebook --execute \
         --output-dir=./better-code-class/
