@@ -1,4 +1,8 @@
 {
     "jupyter.jupyterServerType": "local",
-    "cmake.configureOnOpen": false
+    "cmake.configureOnOpen": false,
+    "files.associations": {
+        "ratio": "cpp",
+        "chrono": "cpp"
+    }
 }
