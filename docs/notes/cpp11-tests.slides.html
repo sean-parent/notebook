@@ -14928,6 +14928,91 @@ Standard Exception: bad optional access</pre>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstdint&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp"></span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="kr">inline</span> <span class="kt">uint8_t</span> <span class="n">Mul8x8Div255</span><span class="p">(</span><span class="kt">unsigned</span> <span class="n">a</span><span class="p">,</span> <span class="kt">unsigned</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+   <span class="kt">uint32_t</span> <span class="n">temp</span> <span class="o">=</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span> <span class="o">+</span> <span class="mi">128</span><span class="p">;</span> <span class="c1">// why isn’t this 127?</span>
+   <span class="k">return</span> <span class="p">(</span><span class="kt">uint8_t</span><span class="p">)((</span><span class="n">temp</span> <span class="o">+</span> <span class="p">(</span><span class="n">temp</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">))</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+    <span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="n">low_mask</span> <span class="o">=</span> <span class="mh">0x00FF00FF00FF00FFull</span><span class="p">;</span>
+    <span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="n">hi_mask</span> <span class="o">=</span> <span class="mh">0xFF00FF00FF00FF00ull</span><span class="p">;</span>
+    
+    <span class="kt">uint64_t</span> <span class="n">a</span> <span class="o">=</span> <span class="mh">0xFF80FF80FF80FF80ULL</span><span class="p">;</span>
+    <span class="kt">uint64_t</span> <span class="n">b</span> <span class="o">=</span> <span class="mh">0x80ULL</span><span class="p">;</span>
+    
+    <span class="kt">uint64_t</span> <span class="n">al</span> <span class="o">=</span> <span class="n">a</span> <span class="o">&amp;</span> <span class="n">low_mask</span><span class="p">;</span>
+    <span class="kt">uint64_t</span> <span class="n">bl</span> <span class="o">=</span> <span class="n">b</span> <span class="o">&amp;</span> <span class="n">low_mask</span><span class="p">;</span>
+    <span class="kt">uint64_t</span> <span class="n">tl</span> <span class="o">=</span> <span class="n">al</span> <span class="o">*</span> <span class="n">bl</span> <span class="o">+</span> <span class="mh">0x0080008000800080ull</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">hex</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">al</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">bl</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">tl</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">Mul8x8Div255</span><span class="p">(</span><span class="mh">0x80</span><span class="p">,</span> <span class="mh">0x80</span><span class="p">))</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(((</span><span class="n">tl</span> <span class="o">+</span> <span class="p">((</span><span class="n">tl</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">low_mask</span><span class="p">))</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="n">low_mask</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+
+<span class="p">}</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>80008000800080
+80
+4080408040804080
+40
+40004000400040
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span>
 </pre></div>
 

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.8.0
+      jupytext_version: 1.9.1
   kernelspec:
     display_name: C++17
     language: C++17
@@ -15,9 +15,6 @@ jupyter:
 
 ```c++ slideshow={"slide_type": "skip"}
 #include "../common.hpp"
-
-namespace bcc { }
-using namespace bcc;
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -29,8 +26,9 @@ using namespace bcc;
 <!-- #region slideshow={"slide_type": "fragment"} -->
 > A _type_ is a pattern for storing and modifying objects.
 
-- In C++, `struct`, `class`, and `enum` are mechanisms for implementing types, but can also be used for other purposes
-- We use _type_ to mean _type_ as well as the mechanisms for implementing types in C++ interchangeably
+- In C++, `struct` and`class` are mechanisms for implementing types, but can also be used for other purposes
+    - Example: as a mechanism to execute a function at the end of a scope
+- I use _type_ to mean _type_ as well as the mechanisms for implementing types in C++ interchangeably
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -42,7 +40,7 @@ using namespace bcc;
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- All objects have of common, _basis_, operations
+- All objects have common, _basis_, operations
     - constructible
     - destructible
     - copyable<sup>1</sup>
@@ -57,16 +55,20 @@ using namespace bcc;
 - A type which implements a _computational basis_ is _computationally complete_
 <!-- #endregion -->
 
+\[ Make sure in this chapter I cover other operations such as hash, representational equality, representational ordering, serialization. \]
+
 <!-- #region slideshow={"slide_type": "slide"} -->
 ## Regular
 
-> There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to _copy objects_ from one data structure to another. We call types having such a basis _regular_, since their use guarantees regularity of behavior and, therefore, interoperability.
+> There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to _copy objects_ from one data structure to another. We call types having such a basis _regular_ since their use guarantees regularity of behavior and, therefore, interoperability.<sup>2</sup>
 
 - The copy operation creates a new object, equal to, and logically disjoint from the original
 
 \begin{align}
 b & \to a \implies a = b. && \text{(copies are equal)}
 \end{align}
+
+<sup>2</sup>_Elements of Programming_
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -91,7 +93,7 @@ b & \to a, op(a) \implies a \neq b \wedge b = c.  && \text{(copies are disjoint)
 
 - An _algebraic structure_ is a set of connected axioms
     - as with copy and assignment
-- Algebraic structures define the basic semantics of operations
+- Algebraic structures define the semantics of operations
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -105,15 +107,15 @@ b & \to a, op(a) \implies a \neq b \wedge b = c.  && \text{(copies are disjoint)
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
+namespace v1 {
+
 class my_type {
     // members
 public:
     my_type(const my_type&) = default;
 };
-```
 
-```c++ slideshow={"slide_type": "skip"}
-.undo
+} // namespace v1
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -121,49 +123,75 @@ public:
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
+namespace v2 {
+
 class my_type {
     // members
 public:
     my_type(const my_type&) = default;
     my_type& operator=(const my_type&) = default;
 };
+
+} // namespace v2
 ```
 
-```c++ slideshow={"slide_type": "skip"}
-.undo
-```
+- A type which is both copy-constructible and copy-assignable is _copyable_
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - If the representation of an object is unique, then equality can be implemented as member-wise equality
-- Unfortunately, the compiler does not implement member-wise equality (until C++20)
-- Use `std::tie()` as a simple mechanism to implement equality
+- C++20 provides member-wise equality (and inequality) by explicitly defaulting `operator ==()`
 
-- Do not declare `operator==()` as a member operator
-- A `friend` declaration may be used to implement directly in the class definition.
-    - `inline` is implied.
+- For C++17
+    - Use `std::tie()` as a simple mechanism to implement equality
+    - Declare `operator==()` as a non-member operator
+        - Otherwise implicit conversions will apply different for the left and right argument
+    - A `friend` declaration may be used to implement directly in the class definition
+        - `inline` is implied
 <!-- #endregion -->
 
-```c++ slideshow={"slide_type": "slide"}
+<!-- #region slideshow={"slide_type": "slide"} -->
+```cpp
+namespace v3 {
+
+// C++20
+
 class my_type {
     int _a = 0;
     int _b = 42;
-    
-    auto underlying() const { return std::tie(_a, _b); }
+
 public:
     my_type(const my_type&) = default;
     my_type& operator=(const my_type&) = default;
-    
+
+    bool operator==(const my_type&) const = default;
+};
+
+} // namespace v3
+```
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"}
+namespace v3 {
+
+// C++17
+
+class my_type {
+    int _a = 0;
+    int _b = 42;
+
+    auto underlying() const { return std::tie(_a, _b); }
+
+public:
+    my_type(const my_type&) = default;
+    my_type& operator=(const my_type&) = default;
+
     friend bool operator==(const my_type& a, const my_type& b) {
         return a.underlying() == b.underlying();
     }
-    friend bool operator!=(const my_type& a, const my_type& b) {
-        return !(a == b);
-    }
+    friend bool operator!=(const my_type& a, const my_type& b) { return !(a == b); }
 };
-```
 
-```c++ slideshow={"slide_type": "skip"}
-.undo
+} // namespace v3
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -184,6 +212,8 @@ public:
 - Naming is language
     - Often semantics are expected from patterns of common use
     - When naming functions consider expectations and that few will read any specification
+        - But beware, our expectations may be incorrect
+        - Trying to always meet expectations does not lead to logically consistent systems
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -195,46 +225,6 @@ public:
     - Computationally complete implies all the values are obtainable
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "notes"} -->
-**SKIP** Next cell is skipped for workshop
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "skip"} tags=["exercise"] -->
-**Exercise:** Find a type in your project which is not equationally complete and make it so.
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-## Relationships
-
-- Relationships are unavoidable with objects in a space
-    - The address of an object is the relationship between the object and the space within which it resides
-    
-- For any relationship there is a predicate form
-    - Dick and Jane are married (relationship)
-    - Are Dick and Jane married? (predicate)
-
-- We normally think of objects as representing _things_ or _nouns_
-    - An object may also represent a _relationship_
-    - The `next` pointer in a linked list represents the relationship between one element and its successor
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- An object which represents a relationship is a _witness_ to the relationship
-- When copying a witness there are three possible outcomes
-    - The relationship is maintained
-    - The relationship is severed
-    - The witness is invalidated 
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- Other mutating operations on any object in the relationship have the same possible outcomes
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "notes"} -->
-Give two example - the wedding band example
-An offset into an array example
-<!-- #endregion -->
-
 <!-- #region slideshow={"slide_type": "slide"} -->
 ### Whole-Part Relationship
 
@@ -244,15 +234,14 @@ An offset into an array example
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
+namespace v4 {
+
 class my_type {
-    std::string _str; // local part
     int _val; // local part
     //...
 };
-```
 
-```c++ slideshow={"slide_type": "skip"}
-.undo
+} // namespace v4
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -270,11 +259,12 @@ class my_type {
     - Each access is a potential cache miss
     - Most objects are never or rarely copied
         - We'll see why soon
+        
+\[ Double-check numbers in this section. These may currently be too high - reference IT Hare. \]
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - Prefer local parts when appropriate
-    - There are _many_ unnecessary heap allocations in Photoshop (and most products) 
 - But also be aware that techniques like PImpl can greatly improve build time and reduce header file pollution
     - In C++20, modules may make this less necessary
 <!-- #endregion -->
@@ -287,7 +277,7 @@ class my_type {
 ```c++ slideshow={"slide_type": "fragment"}
 // my_type.hpp
 
-namespace library {
+namespace library_v1 {
 
 class my_type {
     struct implementation;             // forward declaration
@@ -300,7 +290,7 @@ public:
     my_type& operator=(const my_type&);
 };
 
-} // namespace library
+} // namespace library_v1
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
@@ -310,7 +300,7 @@ public:
 
 // other includes
 
-namespace library {
+namespace library_v1 {
 
 struct my_type::implementation {
     int _x;
@@ -325,16 +315,134 @@ my_type& my_type::operator=(const my_type& a) {
     *_remote = *a._remote;
     return *this;
 }
-    
-} // namespace library
-```
 
-```c++
-.undo 2
+} // namespace library_v1
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - A major downside of using the PImpl pattern is the amount of forwarding boiler plate that must be written.
+<!-- #endregion -->
+
+### `std::regular<T>`
+
+The C++20 standard defines the _concept_ std::regular<T> to be a type which is copyable, equality comparable, and default constructible. The latter is an odd choice. Default constructible is covered later in this section, and concepts are discussed more in Chapter 3, Algorithms.
+
+<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
+## Efficient Basis and Safety
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
+### Efficient Basis
+
+- An operation is _efficient_ if there is no way to implement it to use fewer resources:
+    - time
+    - space
+    - energy
+    
+- Unless otherwise specified, we will use efficiency to mean _time efficiency_
+    - But in practice, where not all three can be achieved the trade-offs should be considered
+
+- A type has an _efficient basis_ if any additional operations can be implemented efficiently in terms of the basis operations
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
+- Making all data members public ensures an efficient basis, but may be _unsafe_
+- In fact, we can prove that some operations cannot be implemented both efficiently and safely
+- The canonical example is in-situ sort, although it is true of any in-situ permutation
+    - This is why functional languages do not allow direct in-situ permutations
+
+- In C++, explicit `move` is both unsafe and inefficient
+    - It is less safe than copy
+    - But more efficient than copy
+    
+- Strive to make operations safe _and_ efficient
+- Only sacrifice safety for efficiency with good (measurable) reason
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+### Safety
+
+- An object which represents an entity is _fully formed_.
+- An object which does not represent an entity is _partially formed_.
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- Any operation which maintains the correspondence between an object and an entity it represents is _safe_
+- An operation which loses the correspondence is _unsafe_
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- There are different categories of safety
+    - i.e. _memory safety_
+        - Destroying the correspondence of unrelated objects to an entity ultimately causes the bug
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- An operation is _operationally safe_ if, when the operation pre-conditions are satisfied, the operation results in objects which are fully formed
+- An operation is _operationally unsafe_ if, when the operation pre-conditions are satisfied, the operation may result in an object which is not fully formed
+    - From here on, when referring to a _safe_ operation we mean _operationally safe_
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- As a general rule
+    - Only safe operations should be public
+    - Unsafe operations should be private
+    
+- Moving from an object _may_ leave the object in a "valid but **unspecified**" state
+    - _Unspecified_ is without correspondence to an entity
+    - move is a public unsafe operation, it may leave the moved-from object in a partially formed state
+    
+- There is a trade-off between safety, and efficiency
+    - Not every operation can be implemented to be both safe, and efficient (provably)
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- There are many examples of unsafe operations with the built in types:
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "fragment"}
+{
+    double x = 0.0/0.0; // explicitly undefined
+    cout << x << endl;
+}
+```
+
+```c++ slideshow={"slide_type": "fragment"}
+{
+    int x; // unspecified
+    cout << x << endl;
+}
+```
+
+```c++ slideshow={"slide_type": "slide"}
+{
+    string x = "hello world";
+    string y = move(x); // unspecified
+    cout << x << endl;
+}
+```
+
+```c++ slideshow={"slide_type": "fragment"}
+{
+    unique_ptr<int> x = make_unique<int>(42);
+    unique_ptr<int> y = move(x); // safe! x is guaranteed to be == nullptr
+}
+```
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- After an unsafe operation where an object is left partially formed
+    - Subsequent operations are required to restore the fully formed state prior to use
+        - If the partially formed state is _explicit_ it may by used in subsequent operation but those operations must yield explicitly undefined values for later detection and handling
+        - i.e. NaN, expected, maybe-monad pattern
+    - Or the object must be destroyed
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- An _implicit move_, one generated by the compiler, always occurs on an expiring value
+    - This means the combined operation of `op(rv); rv.~T();` is safe
+- `std::move()` is equivalent to `static_cast<T&&>()`
+    - Explicit move is unsafe
+    - Circumventing the type system requires additional care
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -365,7 +473,7 @@ a = b, a & \rightharpoonup c \implies c = b. && \text{(move is value preserving)
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "slide"}
-namespace library {
+namespace library2 {
 
 class my_type {
     struct implementation;             // forward declaration
@@ -385,7 +493,7 @@ public:
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
-namespace library {
+namespace library2 {
 
 struct my_type::implementation {
     int _x;
@@ -425,55 +533,7 @@ my_type& my_type::operator=(my_type&& a) noexcept {
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-# Types
-
-**Goal: Write _complete_, _expressive_, and _efficient_ types**
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
 ## Exercises
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "skip"} -->
-**SKIP** Following cells are skipped for workshop
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "skip"} tags=["exercise"] -->
-**Exercise:** Find a type in your project which is not equationally complete and make it so.
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "skip"} -->
-- Why?
-    - An equationally complete type is easier to test
-        - If you cannot read a property, how do you validate it?
-    - Considering how to make a type equationally complete forces you to think through the properties of the type
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "skip"} -->
-- Considerations
-    - Only properties with associated constraints (invariants) and relationships require accessors member functions
-    - Providing direct data access is preferred to boiler plate _getters and setters_
-    - The Objective-C naming conventions can make an API more clear
-        - Reading a property is simply the name of the property, i.e. `property()`
-        - Writing a property is done with `set_property()`
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "skip"} -->
-```cpp
-v.resize(10);
-auto s = v.size();
-
-v.reserve(10);
-auto s = v.capacity();
-```
-vs.
-```cpp
-v.set_size(10);
-auto s = v.size();
-
-v.set_capacity(10);
-auto s = v.capacity();
-```
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} tags=["exercise"] -->
@@ -482,7 +542,7 @@ approaches. What are the trade-offs?
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "slide"}
-namespace library {
+namespace library3 {
 
 class my_type {
     struct implementation;             // forward declaration
@@ -502,7 +562,7 @@ public:
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
-namespace library {
+namespace library3 {
 
 struct my_type::implementation {
     int _x;
@@ -581,93 +641,7 @@ my_type& my_type::operator=(const my_type& a) {
 - Some operations _must_ be valid on the otherwise unspecified state
     - destruction
     - copy and move assigning to the object (to establish a new value)
-    - self move assignment (for self-swap)
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-## Safety
-
-- An object which represents an entity is _fully formed_.
-- An object which does not represent an entity is _partially formed_.
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- Any operation which maintains the correspondence between an object and an entity it represents is _safe_
-- An operation which loses the correspondence is _unsafe_
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- There are different categories of safety
-    - i.e. _memory safety_
-        - Destroying the correspondence of unrelated objects to an entity ultimately causes the bug
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- An operation is _operationally safe_ if, when the operation pre-conditions are satisfied, the operation results in objects which are fully formed
-- An operation is _operationally unsafe_ if, when the operation pre-conditions are satisfied, the operation may result in an object which is not fully formed
-    - From here on, when referring to a _safe_ operation we mean _operationally safe_
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- As a general rule
-    - Only safe operations should be public
-    - Unsafe operations should be private
-    
-- Moving from an object _may_ leave the object in a "valid but **unspecified**" state
-    - _Unspecified_ is without a correspondence to an entity
-    - move is a public unsafe operation, it may leave the moved from object in a partially formed state
-    
-- There is a trade-off between safety, and efficiency
-    - Not every operation can be implemented to be both safe, and efficient (provably)
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- There are many examples of unsafe operations with the built in types:
-<!-- #endregion -->
-
-```c++ slideshow={"slide_type": "fragment"}
-{
-    int x; // unspecified
-    cout << x << endl;
-}
-```
-
-```c++ slideshow={"slide_type": "fragment"}
-{
-    double x = 0.0/0.0; // explicitly undefined
-    cout << x << endl;
-}
-```
-
-```c++ slideshow={"slide_type": "slide"}
-{
-    string x = "hello world";
-    string y = move(x); // unspecified
-    cout << x << endl;
-}
-```
-
-```c++ slideshow={"slide_type": "fragment"}
-{
-    unique_ptr<int> x = make_unique<int>(42);
-    unique_ptr<int> y = move(x); // safe! x is guaranteed to be == nullptr
-}
-```
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- After an unsafe operation where an object is left partially formed
-    - Subsequent operations are required to restore the fully formed state prior to use
-        - If the partially formed state is _explicit_ it may by used in subsequent operation but those operations must yield explicitly undefined values for later detection and handling
-        - i.e. NaN, expected, maybe-monad pattern
-    - Or the object must be destroyed
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- An _implicit move_, one generated by the compiler, always occurs on an expiring value
-    - This means the combined operation of `op(rv); rv.~T();` is safe
-- `std::move()` is equivalent to `static_cast<T&&>()`
-    - Explicit move is unsafe
-    - Circumventing the type system requires additional care
-<!-- #endregion -->
+    - self-move assignment (for self-swap)
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 ### Fixes to copy-assignment crash
@@ -983,7 +957,7 @@ void my_type::deleter::operator()(implementation* p) const noexcept { delete p; 
 ## Default Construction
 
 - What should the state be of a default constructed object?
-    - Should it always be fully formed?
+    - Should it always be fully-formed?
     
 - A common use case of a default constructed object is to create the object before we have a value to give to it:
 <!-- #endregion -->
@@ -1109,7 +1083,7 @@ public:
 
 <div></div>
 
-> There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to _copy objects_ from one data structure to another. We call types having such a basis _regular_, since their use guarantees regularity of behavior and, therefore, interoperability.
+> There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to _copy objects_ from one data structure to another. We call types having such a basis _regular_ since their use guarantees regularity of behavior and, therefore, interoperability.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
@@ -1258,41 +1232,6 @@ bool operator==(const pimpl_type& a, const pimpl_type& b) {
 **Exercise:** Look at the regular operations (copy, assignment, equality, default construction) for ZString (or a commonly used type within your project). Is the implementation correct? Complete? Efficient?
 <!-- #endregion -->
 
-<!-- #region jupyter={"source_hidden": true} slideshow={"slide_type": "skip"} toc-hr-collapsed=false -->
-`ZString` operations:
-- default-ctor: Should be declared `noexcept` but will not throw
-```cpp
-    ZString();
-```
-- copy-ctor: Logical copy by incrementing reference count to immutable string, should be declared `noexcept`.
-```cpp
-    ZString(const ZString &x);
-```
-- copy-assign: Handles self assignment, requires locking (spin-lock). Complex logic. Benchmark against a copy/move implementation? Returns void?
-```cpp
-    void operator=(const ZString &x);
-```
-- move-ctor: Should be declared `noexcept` but will not throw, expensive operation to atomic increment a reference count on `TheOneTrueEmptyZByteRun`, guarantees moved from `ZString` is empty string.
-```cpp
-    ZString(ZString&& x);
-```
-<!-- #endregion -->
-
-<!-- #region jupyter={"source_hidden": true} slideshow={"slide_type": "skip"} toc-hr-collapsed=false -->
-- move-assign: Implemented as swap(). Does not guarantee moved from `ZString` is empty.
-```cpp
-    ZString& operator=(ZString&& x) noexcept;
-```
-- equality: Representational (not value) equality. Should be declared as non-member function.
-```cpp
-    bool operator == (const ZString &x) const;
-```
-
-Observation: `fDefaultRun` is hardly used except for test cases and to propagate `fCharacterRun`. Is it needed?
-
-Discussion: How can we incrementally improve ZString?
-<!-- #endregion -->
-
 <!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
 ## What Should Be Part of The Public Interface On A Type?
 
@@ -1347,6 +1286,7 @@ bool operator==(const number& a, const number& b) {
 
 ```c++ slideshow={"slide_type": "fragment"}
 {
+using namespace bcc;
 // construct the value 3
 number a; ++a; ++a; ++a;
 
@@ -1354,34 +1294,6 @@ number a; ++a; ++a; ++a;
 cout << (a - number()) << endl;
 }
 ```
-
-<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
-## Efficient Basis
-
-- An operation is _efficient_ if there is no way to implement it to use fewer resources:
-    - time
-    - space
-    - energy
-    
-- Unless otherwise specified, we will use efficiency to mean _time efficiency_
-    - But in practice, where not all three can be achieved the trade-offs should be considered
-
-- A type has an _efficient basis_ if any additional operations can be implemented efficiently in terms of the basis operations
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
-- Making all data members public ensures an efficient basis, but may be unsafe
-- In fact, we can prove that some operations cannot be implemented both efficiently and safely
-- The canonical example is in-situ sort, although it is true of any in-situ permutation
-    - This is why functional languages do not allow direct in-situ permutations
-
-- In C++, explicit `move` is both unsafe and inefficient
-    - It is less safe than copy
-    - But more efficient than copy
-    
-- Strive to make operations safe _and_ efficient
-- Only sacrifice safety for efficiency with good (measurable) reason
-<!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
 ## Expressive Basis
@@ -1393,6 +1305,8 @@ For example:
 
 ```c++ slideshow={"slide_type": "fragment"}
 {
+using namespace bcc;
+
 // construct the value 3
 number a; ++a; ++a; ++a;
 }
@@ -1424,12 +1338,8 @@ int a = 3;
     - Equationally Complete
     - Efficient
     - Safe
-    - Operations required to be part of the class interface by the language (i.e., you cannot implement a stand alone assignment operator)
+    - Operations required to be part of the class interface by the language (i.e., you cannot implement a stand-alone assignment operator)
     
 - Other operations, including operations that are part of the expressive basis, should be implemented in terms of those operations
 - This still leaves a fair amount up to the designer to choose how to balance safety and efficiency and what _expressive_ means in the context of the type
-<!-- #endregion -->
-
-<!-- #region jupyter={"source_hidden": true} slideshow={"slide_type": "skip"} -->
-**Exercise:** Look at the API and implementation for ZString (or a commonly used class in your own project). What does a ZString represent? What would be a good set of basis operations? What operations would be better implemented externally? Are there operations that should be removed?
 <!-- #endregion -->
