@@ -11,15 +11,12 @@ To build the docker image, first update the VERSION variable below (please use s
 
 #### Linux, WSL 2, MacOS
 ```
-VERSION="1.0.7"
+VERSION="1.0.9"
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 
 # The ruby version should match what github pages requires: https://pages.github.com/versions/
 RUBY_VERSION=2.7.1
 
-```
-
-```
 echo $VERSION > ./tools/docker-tools/VERSION
 
 # build the base image, no-cache is used so the latest tools are installed
@@ -50,9 +47,7 @@ To run the docker image, execute the following.
 
 ```
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
-```
-```
-docker run --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive --publish 3000-3001:3000 --publish 8888:8888 $VOLUME bash
+docker run --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive --publish 3000:3000 --publish 3001:3001 --publish 8888:8888 $VOLUME bash
 ```
 
 This should leave you at a bash prompt that looks like:

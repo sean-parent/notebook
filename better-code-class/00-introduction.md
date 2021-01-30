@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.2'
-      jupytext_version: 1.8.0
+      jupytext_version: 1.9.1
   kernelspec:
     display_name: C++17
     language: C++17
@@ -50,19 +50,15 @@ jupyter:
 
 - Introduction
 - Preface
-- Types
-    - Goal: Write _complete_, _expressive_, and _efficient_ types
-- Algorithms
-    - Goal: No _raw_ loops
-- Data Structures
-    - Goal: No _incidental_ data structures
-- Concurrency
-    - Goal: No _raw_ synchronization
-- Relationships
-    - Goal: No contradictions
+- Types - Goal: Write _complete_, _expressive_, and _efficient_ types
+- Algorithms - Goal: No _raw_ loops
+- Data Structures - Goal: No _incidental_ data structures
+- Concurrency - Goal: No _raw_ synchronization
+- Relationships - Goal: No contradictions
 - Epilogue
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "skip"} -->
 Find a place:
 Requirements vs. Guarantees (Algorithms)
 Physical nature of machine - transistors (Preface)
@@ -74,3 +70,4 @@ Story Arc -
 - Data structure - priority queue, queue
 - Concurrency - timer tasks, sequential process
 - Relationship (rename architecture?) - declarative flow graph?
+<!-- #endregion -->

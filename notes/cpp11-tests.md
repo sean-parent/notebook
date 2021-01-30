@@ -186,5 +186,40 @@ Should work with optional (and futures?) as well. Also, this would be when/if_al
 ```
 
 ```c++
+#include <cstdint>
+#include <iostream>
+```
+
+```c++
+inline uint8_t Mul8x8Div255(unsigned a, unsigned b) {
+   uint32_t temp = a * b + 128; // why isn’t this 127?
+   return (uint8_t)((temp + (temp >> 8)) >> 8);
+}
+```
+
+```c++
+{
+    using namespace std;
+    constexpr uint64_t low_mask = 0x00FF00FF00FF00FFull;
+    constexpr uint64_t hi_mask = 0xFF00FF00FF00FF00ull;
+    
+    uint64_t a = 0xFF80FF80FF80FF80ULL;
+    uint64_t b = 0x80ULL;
+    
+    uint64_t al = a & low_mask;
+    uint64_t bl = b & low_mask;
+    uint64_t tl = al * bl + 0x0080008000800080ull;
+    cout << hex;
+    cout << al << endl;
+    cout << bl << endl;
+    cout << tl << endl;
+    cout << static_cast<int>(Mul8x8Div255(0x80, 0x80)) << endl;
+    
+    cout << (((tl + ((tl >> 8) & low_mask)) >> 8) & low_mask) << endl;
+
+}
+```
+
+```c++
 
 ```

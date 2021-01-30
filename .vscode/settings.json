@@ -4,5 +4,9 @@
     "files.associations": {
         "ratio": "cpp",
         "chrono": "cpp"
-    }
+    },
+    "grammarly.userWords": [
+        "equationally",
+        "toc"
+    ]
 }

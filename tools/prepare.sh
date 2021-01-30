@@ -30,26 +30,20 @@ cp -ru ./better-code-class/img ./docs/better-code-class/
 eval "$(conda shell.bash hook)"
 conda activate notebook
 
-jupytext --sync ./*/*.md
+jupytext --sync --execute ./*/*.md
 
 if [ $SECTION == "all" ] || [ $SECTION == "class" ]; then
-jupyter nbconvert ./better-code-class/*.ipynb --to=notebook --execute \
-        --output-dir=./better-code-class/
 jupyter nbconvert ./better-code-class/*.ipynb --to=slides --reveal-prefix=../reveal.js \
     --output-dir=./docs/better-code-class --config=./slides-config/slides_config.py
 fi
 
 
 if [ $SECTION == "all" ] || [ $SECTION == "test" ]; then
-jupyter nbconvert ./better-code-test/*.ipynb --to=notebook --execute \
-        --output-dir=./better-code-test/
 jupyter nbconvert ./better-code-test/*.ipynb --to=slides --reveal-prefix=../reveal.js \
     --output-dir=./docs/better-code-test --config=./slides-config/slides_config.py
 fi
 
 if [ $SECTION == "all" ] || [ $SECTION == "new" ]; then
-jupyter nbconvert ./better-code-new/*.ipynb --to=notebook --execute \
-        --output-dir=./better-code-new/
 jupyter nbconvert ./better-code-new/*.ipynb --to=slides --reveal-prefix=../reveal.js \
     --output-dir=./docs/better-code-new --config=./slides-config/slides_config.py
 fi
