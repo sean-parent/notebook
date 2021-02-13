@@ -3,23 +3,23 @@
 ## Setup
 
 ### Install Docker
-If you don't already have docker installed, [install Docker](https://docs.docker.com/get-docker/).
+If you don't already have Docker installed, [install Docker](https://docs.docker.com/get-docker/).
 
 ### Building the docker image
 
-To build the docker image, first update the VERSION variable below (please use semantic versioning). Add a [release note](#release-notes).
+To build the Docker image, first, update the VERSION variable below (please use semantic versioning). Add a [release note](#release-notes).
 
 #### Linux, WSL 2, MacOS
 ```
-VERSION="1.0.9"
+VERSION="1.0.11"
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 
-# The ruby version should match what github pages requires: https://pages.github.com/versions/
+# The ruby version should match what GitHub Pages requires: https://pages.github.com/versions/
 RUBY_VERSION=2.7.1
 
 echo $VERSION > ./tools/docker-tools/VERSION
 
-# build the base image, no-cache is used so the latest tools are installed
+# build the base image, no-cache is used, so the latest tools are installed
 
 docker build --no-cache --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
 
@@ -35,7 +35,7 @@ exit
 docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile --target full --tag $VOLUME .
 ```
 
-If you are editing the DockerFile you might want to build the base image from cache.
+If you are editing the Dockerfile you might want to build the base image from cache.
 
 ```
 docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
@@ -69,9 +69,10 @@ cd /mnt/host
 
 ## Run a local server for the site
 
-Once the site has been prepared, you can run it to see how it looks. From the docker prompt enter:
+Once the site has been prepared, you can run it to see how it looks. From the Docker prompt enter:
 
 ```
+cd /mnt/host
 ./tools/start.sh --lab --server --no-token
 ```
 

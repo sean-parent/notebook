@@ -14514,10 +14514,10 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">add_n_simple</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_n</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">add_n_simple</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_n</span><span class="p">;</span>
     
-    <span class="kt">int</span> <span class="nf">invoke</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+    <span class="nb">int</span> <span class="n">invoke</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">)</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14533,35 +14533,19 @@ display: block;
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">add_n_simple</span> <span class="n">add_s</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add_s</span><span class="p">.</span><span class="n">invoke</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_n_simple</span> <span class="n">add_s</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add_s</span><span class="o">.</span><span class="n">invoke</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>15
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -14578,10 +14562,10 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">add_n_function</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_n</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">add_n_function</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_n</span><span class="p">;</span>
         
-    <span class="kt">int</span> <span class="nf">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
+    <span class="nb">int</span> <span class="n">operator</span><span class="p">()(</span><span class="nb">int</span> <span class="n">x</span><span class="p">)</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14597,35 +14581,19 @@ display: block;
 </ul>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">add_n_function</span> <span class="n">add_f</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add_f</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">add_n_function</span> <span class="n">add_f</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add_f</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>15
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -14653,16 +14621,16 @@ display: block;
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
     
-<span class="k">auto</span> <span class="n">add_n_lambda</span> <span class="o">=</span> <span class="p">[</span><span class="n">_n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">](</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kt">int</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">};</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add_n_lambda</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="n">auto</span> <span class="n">add_n_lambda</span> <span class="o">=</span> <span class="p">[</span><span class="n">_n</span> <span class="o">=</span> <span class="mi">5</span><span class="p">](</span><span class="nb">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_n</span> <span class="o">+</span> <span class="n">x</span><span class="p">;</span> <span class="p">};</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add_n_lambda</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
     
 <span class="p">}</span>
 </pre></div>
@@ -14670,22 +14638,6 @@ display: block;
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>15
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -14716,17 +14668,17 @@ display: block;
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
 
-<span class="kt">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-<span class="k">auto</span> <span class="n">return_n</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]{</span> <span class="k">return</span> <span class="n">n</span><span class="p">;</span> <span class="p">};</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">return_n</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">n</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<span class="n">auto</span> <span class="n">return_n</span> <span class="o">=</span> <span class="p">[</span><span class="n">n</span><span class="p">]{</span> <span class="k">return</span> <span class="n">n</span><span class="p">;</span> <span class="p">};</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">return_n</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
 
 <span class="p">}</span>
 </pre></div>
@@ -14734,22 +14686,6 @@ display: block;
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>42
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -14769,54 +14705,34 @@ display: block;
 </ul>
 
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
-<span class="kt">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
-<span class="k">auto</span> <span class="n">ex1</span> <span class="o">=</span> <span class="p">[</span><span class="o">=</span><span class="p">]{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
-<span class="k">auto</span> <span class="n">ex2</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]{</span> <span class="n">x</span> <span class="o">*=</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
-<span class="k">auto</span> <span class="n">ex3</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
-<span class="k">auto</span> <span class="n">ex4</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">]{</span> <span class="n">y</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span> <span class="p">};</span>
-<span class="k">auto</span> <span class="n">ex5</span> <span class="o">=</span> <span class="p">[</span><span class="n">_x</span> <span class="o">=</span> <span class="n">ex1</span><span class="p">()]{</span> <span class="k">return</span> <span class="n">_x</span><span class="p">;</span> <span class="p">};</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+<span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span><span class="p">;</span>
+<span class="nb">int</span> <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span><span class="p">;</span>
+<span class="n">auto</span> <span class="n">ex1</span> <span class="o">=</span> <span class="p">[</span><span class="o">=</span><span class="p">]{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
+<span class="n">auto</span> <span class="n">ex2</span> <span class="o">=</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">]{</span> <span class="n">x</span> <span class="o">*=</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
+<span class="n">auto</span> <span class="n">ex3</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
+<span class="n">auto</span> <span class="n">ex4</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">y</span><span class="p">]{</span> <span class="n">y</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span> <span class="p">};</span>
+<span class="n">auto</span> <span class="n">ex5</span> <span class="o">=</span> <span class="p">[</span><span class="n">_x</span> <span class="o">=</span> <span class="n">ex1</span><span class="p">()]{</span> <span class="k">return</span> <span class="n">_x</span><span class="p">;</span> <span class="p">};</span>
     
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ex1</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ex1</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
 <span class="n">ex2</span><span class="p">();</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ex3</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ex3</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
 <span class="n">ex4</span><span class="p">();</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ex5</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;x:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;y:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">ex5</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;x:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;y:&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>30
-30
-30
-x:200
-y:30
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section><section>
@@ -14845,9 +14761,9 @@ y:30
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">add_t</span> <span class="p">{</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
-    <span class="k">auto</span> <span class="k">operator</span><span class="p">()(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="n">U</span> <span class="n">y</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">add_t</span> <span class="p">{</span>
+    <span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
+    <span class="n">auto</span> <span class="n">operator</span><span class="p">()(</span><span class="n">T</span> <span class="n">x</span><span class="p">,</span> <span class="n">U</span> <span class="n">y</span><span class="p">)</span> <span class="n">const</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
@@ -14858,38 +14774,22 @@ y:30
 </div>
 </div>
 
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
     <span class="n">add_t</span> <span class="n">add</span><span class="p">;</span>
 
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>15.3
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -14899,38 +14799,22 @@ y:30
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">auto</span> <span class="n">add</span> <span class="o">=</span> <span class="p">[](</span><span class="k">auto</span> <span class="n">x</span><span class="p">,</span> <span class="k">auto</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">auto</span> <span class="n">add</span> <span class="o">=</span> <span class="p">[](</span><span class="n">auto</span> <span class="n">x</span><span class="p">,</span> <span class="n">auto</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">;</span> <span class="p">};</span>
 
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">10.3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>15.3
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div><div class="fragment">
@@ -14953,10 +14837,10 @@ y:30
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">accumulate_t</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_value</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">accumulate_t</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_value</span><span class="p">;</span>
     
-    <span class="kt">int</span> <span class="nf">operator</span><span class="p">()(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">operator</span><span class="p">()(</span><span class="nb">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">_value</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span>
         <span class="k">return</span> <span class="n">_value</span><span class="p">;</span>
     <span class="p">}</span>
@@ -14968,40 +14852,23 @@ y:30
 </div>
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
 <span class="n">accumulate_t</span> <span class="n">accumulate</span><span class="p">{</span><span class="mi">5</span><span class="p">};</span>
 
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>15
-18
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -15011,21 +14878,21 @@ y:30
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
 
-<span class="k">auto</span> <span class="n">accumulate</span> <span class="o">=</span> <span class="p">[</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">5</span><span class="p">](</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="k">mutable</span> <span class="p">{</span>
+<span class="n">auto</span> <span class="n">accumulate</span> <span class="o">=</span> <span class="p">[</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">5</span><span class="p">](</span><span class="nb">int</span> <span class="n">x</span><span class="p">)</span> <span class="n">mutable</span> <span class="p">{</span>
     <span class="n">_value</span> <span class="o">+=</span> <span class="n">x</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">_value</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">accumulate</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
     
 <span class="p">}</span>
 </pre></div>
@@ -15033,23 +14900,6 @@ y:30
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>15
-18
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -15065,10 +14915,10 @@ y:30
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">print_all_t</span> <span class="p">{</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
-    <span class="kt">void</span> <span class="k">operator</span><span class="p">()(</span><span class="k">const</span> <span class="n">Args</span><span class="o">&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
-        <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{((</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">),</span><span class="mi">0</span><span class="p">)...};</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">print_all_t</span> <span class="p">{</span>
+    <span class="n">template</span> <span class="o">&lt;</span><span class="n">class</span><span class="o">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+    <span class="n">void</span> <span class="n">operator</span><span class="p">()(</span><span class="n">const</span> <span class="n">Args</span><span class="o">&amp;...</span> <span class="n">args</span><span class="p">)</span> <span class="n">const</span> <span class="p">{</span>
+        <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">{((</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span><span class="mi">0</span><span class="p">)</span><span class="o">...</span><span class="p">};</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
@@ -15078,40 +14928,22 @@ y:30
 </div>
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
     <span class="n">print_all_t</span> <span class="n">print_all</span><span class="p">;</span>
 
-    <span class="n">print_all</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="s">&quot;Hello!&quot;</span><span class="p">);</span>
+    <span class="n">print_all</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="s2">&quot;Hello!&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>1
-10.5
-Hello!
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -15121,42 +14953,24 @@ Hello!
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">auto</span> <span class="n">print_all</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="p">(</span><span class="kt">void</span><span class="p">)</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">{((</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)...};</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">auto</span> <span class="n">print_all</span> <span class="o">=</span> <span class="p">[](</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+        <span class="p">(</span><span class="n">void</span><span class="p">)</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">{((</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">args</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">),</span> <span class="mi">0</span><span class="p">)</span><span class="o">...</span><span class="p">};</span>
     <span class="p">};</span>
 
-    <span class="n">print_all</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="s">&quot;Hello!&quot;</span><span class="p">);</span>
+    <span class="n">print_all</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mf">10.5</span><span class="p">,</span> <span class="s2">&quot;Hello!&quot;</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>1
-10.5
-Hello!
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -15172,11 +14986,11 @@ Hello!
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">lambda_member</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">lambda_member</span> <span class="p">{</span>
+    <span class="n">size_t</span> <span class="n">_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     
-    <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">_lambda</span> <span class="o">=</span> <span class="p">[</span><span class="n">_n</span> <span class="o">=</span> <span class="n">_count</span><span class="p">](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">for</span><span class="p">(</span><span class="k">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="n">_n</span><span class="p">;</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">n</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+    <span class="n">function</span><span class="o">&lt;</span><span class="n">void</span><span class="p">(</span><span class="n">const</span> <span class="n">string</span><span class="o">&amp;</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">_lambda</span> <span class="o">=</span> <span class="p">[</span><span class="n">_n</span> <span class="o">=</span> <span class="n">_count</span><span class="p">](</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">for</span><span class="p">(</span><span class="n">auto</span> <span class="n">n</span> <span class="o">=</span> <span class="n">_n</span><span class="p">;</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">--</span><span class="n">n</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
     <span class="p">};</span>
 <span class="p">};</span>
 </pre></div>
@@ -15186,39 +15000,20 @@ Hello!
 </div>
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">lambda_member</span> <span class="n">object</span><span class="p">{</span><span class="mi">4</span><span class="p">};</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">lambda_member</span> <span class="nb">object</span><span class="p">{</span><span class="mi">4</span><span class="p">};</span>
 
-<span class="n">object</span><span class="p">.</span><span class="n">_lambda</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="nb">object</span><span class="o">.</span><span class="n">_lambda</span><span class="p">(</span><span class="s2">&quot;Hello&quot;</span><span class="p">);</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>Hello
-Hello
-Hello
-Hello
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -15228,38 +15023,22 @@ Hello
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">object</span><span class="p">.</span><span class="n">_lambda</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;I heard you the first time, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">object</span><span class="o">.</span><span class="n">_lambda</span> <span class="o">=</span> <span class="p">[](</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;I heard you the first time, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="n">object</span><span class="p">.</span><span class="n">_lambda</span><span class="p">(</span><span class="s">&quot;World!&quot;</span><span class="p">);</span>
+<span class="nb">object</span><span class="o">.</span><span class="n">_lambda</span><span class="p">(</span><span class="s2">&quot;World!&quot;</span><span class="p">);</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>I heard you the first time, World!
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -15287,14 +15066,14 @@ Hello
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
-<span class="k">auto</span> <span class="n">bind_once</span><span class="p">(</span><span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nf">bind</span><span class="p">([</span><span class="n">_f</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)](</span><span class="k">auto</span><span class="o">&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="k">mutable</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">move</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
-    <span class="p">},</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="n">class</span><span class="o">...</span> <span class="n">Args</span><span class="o">&gt;</span>
+<span class="n">auto</span> <span class="n">bind_once</span><span class="p">(</span><span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span> <span class="o">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">bind</span><span class="p">([</span><span class="n">_f</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)](</span><span class="n">auto</span><span class="o">&amp;</span> <span class="o">...</span><span class="n">args</span><span class="p">)</span> <span class="n">mutable</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">move</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">...</span><span class="p">);</span>
+    <span class="p">},</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">...</span><span class="p">);</span>
 <span class="p">}</span>
 
-<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sink</span><span class="p">(</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="p">}</span>
+<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">sink</span><span class="p">(</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="p">}</span>
 </pre></div>
 
      </div>
@@ -15302,36 +15081,20 @@ Hello
 </div>
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">auto</span> <span class="n">bound</span> <span class="o">=</span> <span class="n">bind_once</span><span class="p">(</span><span class="n">sink</span><span class="p">,</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">auto</span> <span class="n">bound</span> <span class="o">=</span> <span class="n">bind_once</span><span class="p">(</span><span class="n">sink</span><span class="p">,</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
 
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">bound</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
+<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">bound</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>42
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>

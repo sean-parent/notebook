@@ -14681,14 +14681,14 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
-    <span class="kt">size_t</span> <span class="n">_equality</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">_ctor</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">_move_ctor</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">_copy_ctor</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">_copy_assignment</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">_move_assignment</span><span class="p">;</span>
-    <span class="kt">size_t</span> <span class="n">_dtor</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="p">{</span>
+    <span class="n">size_t</span> <span class="n">_equality</span><span class="p">;</span>
+    <span class="n">size_t</span> <span class="n">_ctor</span><span class="p">;</span>
+    <span class="n">size_t</span> <span class="n">_move_ctor</span><span class="p">;</span>
+    <span class="n">size_t</span> <span class="n">_copy_ctor</span><span class="p">;</span>
+    <span class="n">size_t</span> <span class="n">_copy_assignment</span><span class="p">;</span>
+    <span class="n">size_t</span> <span class="n">_move_assignment</span><span class="p">;</span>
+    <span class="n">size_t</span> <span class="n">_dtor</span><span class="p">;</span>
 <span class="p">}</span> <span class="n">_counters</span><span class="p">;</span>
 </pre></div>
 
@@ -14710,7 +14710,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">enum</span> <span class="nc">operations</span> <span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">enum</span> <span class="n">operations</span> <span class="p">{</span>
     <span class="n">moveable</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span>
     <span class="n">copyable</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">equality_comparable</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">2</span>
@@ -14735,27 +14735,27 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="n">operations</span> <span class="n">Ops</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="nc">model</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 0 flags partially formed</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="n">operations</span> <span class="n">Ops</span><span class="o">&gt;</span>
+<span class="n">struct</span> <span class="n">model</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="o">//</span> <span class="mi">0</span> <span class="n">flags</span> <span class="n">partially</span> <span class="n">formed</span>
 
-    <span class="k">explicit</span> <span class="nf">model</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="o">++</span><span class="n">_counters</span><span class="p">.</span><span class="n">_ctor</span><span class="p">;</span> <span class="p">}</span>
-    <span class="n">model</span><span class="p">(</span><span class="n">model</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">moveable</span><span class="p">);</span>
-        <span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="o">++</span><span class="n">_counters</span><span class="p">.</span><span class="n">_move_ctor</span><span class="p">;</span>
+    <span class="n">explicit</span> <span class="n">model</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">)</span> <span class="p">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="o">++</span><span class="n">_counters</span><span class="o">.</span><span class="n">_ctor</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">model</span><span class="p">(</span><span class="n">model</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="n">noexcept</span> <span class="p">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">_value</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">moveable</span><span class="p">);</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="o">++</span><span class="n">_counters</span><span class="o">.</span><span class="n">_move_ctor</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="n">model</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">model</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">moveable</span><span class="p">);</span>
-        <span class="n">REQUIRE</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">||</span> <span class="o">!</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">||</span> <span class="n">_value</span><span class="p">));</span>
-        <span class="n">_value</span> <span class="o">=</span> <span class="n">x</span><span class="p">.</span><span class="n">_value</span><span class="p">;</span>
-        <span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-        <span class="o">++</span><span class="n">_counters</span><span class="p">.</span><span class="n">_move_assignment</span><span class="p">;</span>
-        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+    <span class="n">model</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">model</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">moveable</span><span class="p">);</span>
+        <span class="n">REQUIRE</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">_value</span> <span class="o">||</span> <span class="o">!(</span>x._value <span class="o">||</span> _value<span class="o">))</span><span class="p">;</span>
+        <span class="n">_value</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">_value</span><span class="p">;</span>
+        <span class="n">x</span><span class="o">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="o">++</span><span class="n">_counters</span><span class="o">.</span><span class="n">_move_assignment</span><span class="p">;</span>
+        <span class="k">return</span> <span class="o">*</span><span class="n">this</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="c1">//...</span>
-    <span class="k">static</span> <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">equality</span> <span class="o">=</span> <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_value</span><span class="p">;</span>
+    <span class="o">//...</span>
+    <span class="n">static</span> <span class="n">constexpr</span> <span class="n">auto</span> <span class="n">equality</span> <span class="o">=</span> <span class="p">[](</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">_value</span><span class="p">;</span>
     <span class="p">};</span>
 <span class="p">};</span>
 </pre></div>
@@ -14778,11 +14778,11 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">C</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">test_invariants</span><span class="p">(</span><span class="k">const</span> <span class="n">C</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">==</span> <span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">()));</span>
-    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">distance</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">a</span><span class="p">.</span><span class="n">end</span><span class="p">())</span> <span class="o">==</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">());</span>
-    <span class="n">REQUIRE</span><span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">capacity</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">size</span><span class="p">()));</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">C</span><span class="o">&gt;</span>
+<span class="n">void</span> <span class="n">test_invariants</span><span class="p">(</span><span class="n">const</span> <span class="n">C</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">empty</span><span class="p">()</span> <span class="o">==</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">begin</span><span class="p">()</span> <span class="o">==</span> <span class="n">a</span><span class="o">.</span><span class="n">end</span><span class="p">()));</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">distance</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">begin</span><span class="p">(),</span> <span class="n">a</span><span class="o">.</span><span class="n">end</span><span class="p">())</span> <span class="o">==</span> <span class="n">a</span><span class="o">.</span><span class="n">size</span><span class="p">());</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="o">!(</span>a.capacity<span class="o">()</span> &lt; a.size<span class="o">()))</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -14809,27 +14809,27 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">C</span><span class="p">,</span> <span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span> <span class="n">test_move_insert</span><span class="p">(</span>
-    <span class="k">const</span> <span class="n">C</span><span class="o">&amp;</span> <span class="n">initial</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">initial_value</span><span class="p">,</span> <span class="n">C</span><span class="o">&amp;</span> <span class="n">container</span><span class="p">,</span> <span class="n">I</span> <span class="n">position</span><span class="p">,</span> <span class="n">T</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">counters</span> <span class="o">=</span> <span class="n">_counters</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">has_capacity</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">container</span><span class="p">.</span><span class="n">capacity</span><span class="p">();</span>
-    <span class="k">auto</span> <span class="n">ip</span> <span class="o">=</span> <span class="n">begin</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span> <span class="o">+</span> <span class="n">distance</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">container</span><span class="p">),</span> <span class="n">position</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">C</span><span class="p">,</span> <span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">void</span> <span class="n">test_move_insert</span><span class="p">(</span>
+    <span class="n">const</span> <span class="n">C</span><span class="o">&amp;</span> <span class="n">initial</span><span class="p">,</span> <span class="n">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">initial_value</span><span class="p">,</span> <span class="n">C</span><span class="o">&amp;</span> <span class="n">container</span><span class="p">,</span> <span class="n">I</span> <span class="n">position</span><span class="p">,</span> <span class="n">T</span> <span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">auto</span> <span class="n">counters</span> <span class="o">=</span> <span class="n">_counters</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">has_capacity</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">size</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">container</span><span class="o">.</span><span class="n">capacity</span><span class="p">();</span>
+    <span class="n">auto</span> <span class="n">ip</span> <span class="o">=</span> <span class="n">begin</span><span class="p">(</span><span class="n">initial</span><span class="p">)</span> <span class="o">+</span> <span class="n">distance</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">container</span><span class="p">),</span> <span class="n">position</span><span class="p">);</span>
 
-    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">container</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
-    <span class="c1">// Test invariants</span>
+    <span class="n">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">container</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="n">move</span><span class="p">(</span><span class="n">value</span><span class="p">));</span>
+    <span class="o">//</span> <span class="n">Test</span> <span class="n">invariants</span>
     <span class="n">test_invariants</span><span class="p">(</span><span class="n">container</span><span class="p">);</span>
-    <span class="c1">// Test postconditions</span>
-    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">initial</span><span class="p">),</span> <span class="n">ip</span><span class="p">,</span> <span class="n">begin</span><span class="p">(</span><span class="n">container</span><span class="p">),</span> <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="o">::</span><span class="n">equality</span><span class="p">));</span>
-    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">end</span><span class="p">(</span><span class="n">initial</span><span class="p">),</span> <span class="n">next</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">container</span><span class="p">),</span> <span class="n">T</span><span class="o">::</span><span class="n">equality</span><span class="p">));</span>
-    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">T</span><span class="o">::</span><span class="n">equality</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">));</span>
+    <span class="o">//</span> <span class="n">Test</span> <span class="n">postconditions</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">initial</span><span class="p">),</span> <span class="n">ip</span><span class="p">,</span> <span class="n">begin</span><span class="p">(</span><span class="n">container</span><span class="p">),</span> <span class="n">p</span><span class="p">,</span> <span class="n">T</span><span class="p">::</span><span class="n">equality</span><span class="p">));</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">equal</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">end</span><span class="p">(</span><span class="n">initial</span><span class="p">),</span> <span class="nb">next</span><span class="p">(</span><span class="n">p</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">container</span><span class="p">),</span> <span class="n">T</span><span class="p">::</span><span class="n">equality</span><span class="p">));</span>
+    <span class="n">REQUIRE</span><span class="p">(</span><span class="n">T</span><span class="p">::</span><span class="n">equality</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">,</span> <span class="n">initial_value</span><span class="p">));</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">has_capacity</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">REQUIRE</span><span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">position</span><span class="p">);</span>
     <span class="p">}</span>
-    <span class="c1">// Test complexity</span>
-    <span class="k">auto</span> <span class="n">move_count</span> <span class="o">=</span>
-        <span class="p">(</span><span class="n">has_capacity</span> <span class="o">?</span> <span class="n">distance</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">end</span><span class="p">(</span><span class="n">initial</span><span class="p">))</span> <span class="o">:</span> <span class="n">initial</span><span class="p">.</span><span class="n">size</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-    <span class="n">REQUIRE</span><span class="p">((</span><span class="n">_counters</span><span class="p">.</span><span class="n">_move_ctor</span> <span class="o">-</span> <span class="n">counters</span><span class="p">.</span><span class="n">_move_ctor</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">move_count</span><span class="p">);</span>
+    <span class="o">//</span> <span class="n">Test</span> <span class="n">complexity</span>
+    <span class="n">auto</span> <span class="n">move_count</span> <span class="o">=</span>
+        <span class="p">(</span><span class="n">has_capacity</span> <span class="err">?</span> <span class="n">distance</span><span class="p">(</span><span class="n">ip</span><span class="p">,</span> <span class="n">end</span><span class="p">(</span><span class="n">initial</span><span class="p">))</span> <span class="p">:</span> <span class="n">initial</span><span class="o">.</span><span class="n">size</span><span class="p">())</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="n">REQUIRE</span><span class="p">((</span><span class="n">_counters</span><span class="o">.</span><span class="n">_move_ctor</span> <span class="o">-</span> <span class="n">counters</span><span class="o">.</span><span class="n">_move_ctor</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">move_count</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -14858,12 +14858,12 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">C</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
-<span class="k">auto</span> <span class="n">build_vector</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">C</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">auto</span> <span class="n">build_vector</span><span class="p">(</span><span class="n">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">capacity</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">C</span> <span class="n">r</span><span class="p">;</span>
-    <span class="n">r</span><span class="p">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">capacity</span><span class="p">);</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span>
-        <span class="n">r</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
+    <span class="n">r</span><span class="o">.</span><span class="n">reserve</span><span class="p">(</span><span class="n">capacity</span><span class="p">);</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">r</span><span class="o">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="n">e</span><span class="p">);</span>
     <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -14886,23 +14886,23 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="nf">test_move_insert_driver</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="n">value_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">&lt;</span><span class="n">moveable</span><span class="o">&gt;</span><span class="p">;</span>
-    <span class="k">constexpr</span> <span class="kt">int</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">void</span> <span class="n">test_move_insert_driver</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">using</span> <span class="n">value_t</span> <span class="o">=</span> <span class="n">model</span><span class="o">&lt;</span><span class="n">moveable</span><span class="o">&gt;</span><span class="p">;</span>
+    <span class="n">constexpr</span> <span class="nb">int</span> <span class="n">a</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
 
-    <span class="k">auto</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">build_vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
-    <span class="kt">size_t</span> <span class="n">positions</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span> <span class="c1">// begin, middle, end</span>
-    <span class="c1">// insert each position without sufficient capacity</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">positions</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">auto</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">build_vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+    <span class="n">auto</span> <span class="n">v1</span> <span class="o">=</span> <span class="n">build_vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+    <span class="n">size_t</span> <span class="n">positions</span><span class="p">[]</span> <span class="o">=</span> <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span> <span class="o">//</span> <span class="n">begin</span><span class="p">,</span> <span class="n">middle</span><span class="p">,</span> <span class="n">end</span>
+    <span class="o">//</span> <span class="n">insert</span> <span class="n">each</span> <span class="n">position</span> <span class="n">without</span> <span class="n">sufficient</span> <span class="n">capacity</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="p">:</span> <span class="n">positions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">auto</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">build_vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
         <span class="n">test_move_insert</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">},</span> <span class="n">v2</span><span class="p">,</span> <span class="n">begin</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span><span class="p">,</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">});</span>
     <span class="p">}</span>
-    <span class="c1">// insert each position with sufficient capacity</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">positions</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">auto</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">build_vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
+    <span class="o">//</span> <span class="n">insert</span> <span class="n">each</span> <span class="n">position</span> <span class="k">with</span> <span class="n">sufficient</span> <span class="n">capacity</span>
+    <span class="k">for</span> <span class="p">(</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="p">:</span> <span class="n">positions</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">auto</span> <span class="n">v2</span> <span class="o">=</span> <span class="n">build_vector</span><span class="o">&lt;</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">size</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">);</span>
         <span class="n">test_move_insert</span><span class="p">(</span><span class="n">v1</span><span class="p">,</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">},</span> <span class="n">v2</span><span class="p">,</span> <span class="n">begin</span><span class="p">(</span><span class="n">v2</span><span class="p">)</span> <span class="o">+</span> <span class="n">e</span><span class="p">,</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">});</span>
     <span class="p">}</span>
-    <span class="c1">// insert into an empty vector</span>
+    <span class="o">//</span> <span class="n">insert</span> <span class="n">into</span> <span class="n">an</span> <span class="n">empty</span> <span class="n">vector</span>
     <span class="p">{</span>
         <span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;</span> <span class="n">v2</span><span class="p">;</span>
         <span class="n">test_move_insert</span><span class="p">(</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">value_t</span><span class="o">&gt;</span><span class="p">(),</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">},</span> <span class="n">v2</span><span class="p">,</span> <span class="n">begin</span><span class="p">(</span><span class="n">v2</span><span class="p">),</span> <span class="n">value_t</span><span class="p">{</span><span class="mi">4</span><span class="p">});</span>
@@ -14928,7 +14928,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">test_move_insert_driver</span><span class="p">();</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">test_move_insert_driver</span><span class="p">();</span>
 </pre></div>
 
      </div>

@@ -27,7 +27,10 @@ module.exports = {
     "proxy": false,
     "port": 3000,
     "middleware": false,
-    "serveStatic": ["./docs/_site"],
+    "serveStatic": [{
+        "route": "/notebook",
+        "dir": "./docs/_site"
+    }],
     "ghostMode": {
         "clicks": true,
         "scroll": true,

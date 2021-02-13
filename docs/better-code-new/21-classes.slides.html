@@ -14517,14 +14517,14 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">base</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">base</span> <span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">virtual</span> <span class="n">void</span> <span class="n">member</span><span class="p">()</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="k">class</span> <span class="nc">derived</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">override</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">derived</span> <span class="n">final</span> <span class="p">:</span> <span class="n">public</span> <span class="n">base</span> <span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">void</span> <span class="n">member</span><span class="p">()</span> <span class="n">override</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14561,8 +14561,8 @@ Interpreter Error:</code></pre>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived2</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="nf">member</span><span class="p">()</span> <span class="k">final</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">derived2</span> <span class="p">:</span> <span class="n">public</span> <span class="n">base</span> <span class="p">{</span>
+    <span class="n">void</span> <span class="n">member</span><span class="p">()</span> <span class="n">final</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14611,8 +14611,8 @@ input_line_11:2:10: note: overridden virtual function is here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived3</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="kt">void</span> <span class="nf">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">derived3</span> <span class="p">:</span> <span class="n">public</span> <span class="n">base</span> <span class="p">{</span>
+    <span class="n">void</span> <span class="n">member</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span> <span class="o">//</span> <span class="n">no</span> <span class="n">error</span> <span class="ow">or</span> <span class="n">warning</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -14627,8 +14627,8 @@ input_line_11:2:10: note: overridden virtual function is here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived4</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">derived4</span> <span class="p">:</span> <span class="n">public</span> <span class="n">base</span> <span class="p">{</span>
+    <span class="n">virtual</span> <span class="n">void</span> <span class="n">member</span><span class="p">()</span> <span class="n">const</span><span class="p">;</span> <span class="o">//</span> <span class="n">no</span> <span class="n">error</span> <span class="ow">or</span> <span class="n">warning</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -14663,14 +14663,14 @@ input_line_11:2:10: note: overridden virtual function is here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">example</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
 
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">friend</span> <span class="n">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="n">const</span> <span class="n">example</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;)&quot;</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
@@ -14680,13 +14680,13 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 </div>
 
-</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
 <span class="n">example</span> <span class="n">x</span><span class="p">;</span>
 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
@@ -14695,22 +14695,6 @@ input_line_11:2:10: note: overridden virtual function is here
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>(42, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section><section>
@@ -14726,17 +14710,17 @@ input_line_11:2:10: note: overridden virtual function is here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example2</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">example2</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
     
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">example2</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    <span class="n">example2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">example2</span><span class="p">()</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">example2</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
     
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
+    <span class="n">friend</span> <span class="n">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="n">const</span> <span class="n">example2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;)&quot;</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
@@ -14746,16 +14730,16 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 </div>
 
-</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
     <span class="n">example2</span> <span class="n">x</span><span class="p">;</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">example2</span> <span class="nf">y</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+    <span class="n">example2</span> <span class="n">y</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -14763,23 +14747,6 @@ input_line_11:2:10: note: overridden virtual function is here
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>(42, 0, Hello World!)
-(10, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section><section>
@@ -14795,17 +14762,17 @@ input_line_11:2:10: note: overridden virtual function is here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example3</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-    <span class="kt">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">example3</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+    <span class="nb">bool</span> <span class="n">_b</span> <span class="o">=</span> <span class="n">false</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">_c</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
     
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">example3</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="n">example3</span><span class="p">(</span><span class="kt">double</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">example3</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="n">round</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="p">{</span> <span class="p">}</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">example3</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">example3</span><span class="p">(</span><span class="n">double</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">example3</span><span class="p">(</span><span class="n">static_cast</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="p">{</span> <span class="p">}</span>
     
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">example3</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;)&quot;</span><span class="p">;</span>
+    <span class="n">friend</span> <span class="n">inline</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="n">const</span> <span class="n">example3</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
+       <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;(&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_a</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_b</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_c</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;)&quot;</span><span class="p">;</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
@@ -14815,14 +14782,14 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 </div>
 
-</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example3</span> <span class="nf">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">example3</span> <span class="n">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -14830,22 +14797,6 @@ input_line_11:2:10: note: overridden virtual function is here
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>(43, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section><section>
@@ -14861,11 +14812,11 @@ input_line_11:2:10: note: overridden virtual function is here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example4</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">string</span> <span class="n">_d</span> <span class="o">=</span> <span class="s">&quot;New Member&quot;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">example4</span> <span class="p">:</span> <span class="n">public</span> <span class="n">example3</span> <span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">string</span> <span class="n">_d</span> <span class="o">=</span> <span class="s2">&quot;New Member&quot;</span><span class="p">;</span>
     
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
+    <span class="n">using</span> <span class="n">example3</span><span class="p">::</span><span class="n">example3</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14874,39 +14825,22 @@ input_line_11:2:10: note: overridden virtual function is here
 </div>
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example4</span> <span class="nf">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">example4</span> <span class="n">x</span><span class="p">(</span><span class="mf">42.8</span><span class="p">);</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="p">.</span><span class="n">_d</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span><span class="o">.</span><span class="n">_d</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>(43, 0, Hello World!)
-New Member
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -14925,10 +14859,10 @@ New Member
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example5</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-    <span class="n">example5</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">example3</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">example5</span> <span class="p">:</span> <span class="n">public</span> <span class="n">example3</span> <span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>    
+    <span class="n">using</span> <span class="n">example3</span><span class="p">::</span><span class="n">example3</span><span class="p">;</span>
+    <span class="n">example5</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">example3</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14937,14 +14871,14 @@ New Member
 </div>
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">example5</span> <span class="nf">x</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">example5</span> <span class="n">x</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -14952,22 +14886,6 @@ New Member
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>(11, 0, Hello World!)
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -14983,10 +14901,10 @@ New Member
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example6</span> <span class="o">:</span> <span class="k">public</span> <span class="n">example3</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>    
-    <span class="k">using</span> <span class="n">example3</span><span class="o">::</span><span class="n">example3</span><span class="p">;</span>
-    <span class="n">example6</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="k">delete</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">example6</span> <span class="p">:</span> <span class="n">public</span> <span class="n">example3</span> <span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>    
+    <span class="n">using</span> <span class="n">example3</span><span class="p">::</span><span class="n">example3</span><span class="p">;</span>
+    <span class="n">example6</span><span class="p">(</span><span class="nb">int</span> <span class="n">a</span><span class="p">)</span> <span class="o">=</span> <span class="n">delete</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -15025,13 +14943,13 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
     
-<span class="k">struct</span> <span class="nc">example7</span> <span class="p">{</span>
-    <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// declaration</span>
+<span class="n">struct</span> <span class="n">example7</span> <span class="p">{</span>
+    <span class="n">static</span> <span class="nb">int</span> <span class="n">x</span><span class="p">;</span> <span class="o">//</span> <span class="n">declaration</span>
 <span class="p">};</span>
 
-<span class="kt">int</span> <span class="n">example7</span><span class="o">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="c1">// definition (don&#39;t put in a header!)</span>
+<span class="nb">int</span> <span class="n">example7</span><span class="p">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span> <span class="o">//</span> <span class="n">definition</span> <span class="p">(</span><span class="n">don</span><span class="s1">&#39;t put in a header!)</span>
 
 <span class="p">}</span>
 </pre></div>
@@ -15051,38 +14969,22 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">example8</span> <span class="p">{</span>
-    <span class="k">const</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">example8</span> <span class="p">{</span>
+    <span class="n">const</span> <span class="n">static</span> <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example8</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// not an odr-use</span>
+<span class="p">(</span><span class="n">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example8</span><span class="p">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="o">//</span> <span class="ow">not</span> <span class="n">an</span> <span class="n">odr</span><span class="o">-</span><span class="n">use</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>42
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -15101,11 +15003,11 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">example9</span> <span class="p">{</span>
-    <span class="kr">inline</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">example9</span> <span class="p">{</span>
+    <span class="n">inline</span> <span class="n">static</span> <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="n">example9</span><span class="o">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">56</span><span class="p">;</span>
+<span class="n">example9</span><span class="p">::</span><span class="n">x</span> <span class="o">=</span> <span class="mi">56</span><span class="p">;</span>
 </pre></div>
 
      </div>
@@ -15120,38 +15022,22 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">example10</span> <span class="p">{</span>
-    <span class="k">constexpr</span> <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">example10</span> <span class="p">{</span>
+    <span class="n">constexpr</span> <span class="n">static</span> <span class="nb">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example10</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// not an odr-use</span>
+<span class="p">(</span><span class="n">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">example10</span><span class="p">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="o">//</span> <span class="ow">not</span> <span class="n">an</span> <span class="n">odr</span><span class="o">-</span><span class="n">use</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>42
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -15164,34 +15050,18 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">(</span><span class="kt">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">example10</span><span class="o">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="c1">// an odr-use</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">(</span><span class="n">void</span><span class="p">)(</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">example10</span><span class="p">::</span><span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">);</span> <span class="o">//</span> <span class="n">an</span> <span class="n">odr</span><span class="o">-</span><span class="n">use</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>0x7f23e137e000
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section><section>
@@ -15223,7 +15093,7 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
      </div>

@@ -14534,7 +14534,7 @@ display: block;
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p>All objects have common, <em>basis</em>, operations</p>
+<li><p>All type have common, <em>basis</em>, operations</p>
 <ul>
 <li>constructible</li>
 <li>destructible</li>
@@ -14680,7 +14680,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>If the representation of an object is unique, then equality can be implemented as member-wise equality</li>
-<li><p>C++20 provides member-wise equality (and inequality) by explicitly defaulting <code>operator ==()</code></p>
+<li><p>C++20 provides member-wise equality (and inequality) by explicitly defaulting <code>operator==()</code></p>
 </li>
 <li><p>For C++17</p>
 <ul>
@@ -14952,16 +14952,16 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </ul>
 
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="std::regular&lt;T&gt;"><code>std::regular&lt;T&gt;</code><a class="anchor-link" href="#std::regular&lt;T&gt;">&#182;</a></h3><p>The C++20 standard defines the <em>concept</em> std::regular<T> to be a type which is copyable, equality comparable, and default constructible. The latter is an odd choice. Default constructible is covered later in this section, and concepts are discussed more in Chapter 3, Algorithms.</p>
 
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Efficient-Basis-and-Safety">Efficient Basis and Safety<a class="anchor-link" href="#Efficient-Basis-and-Safety">&#182;</a></h2>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Efficient-Basis">Efficient Basis<a class="anchor-link" href="#Efficient-Basis">&#182;</a></h3><ul>
 <li><p>An operation is <em>efficient</em> if there is no way to implement it to use fewer resources:</p>
@@ -14981,7 +14981,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </ul>
 
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Making all data members public ensures an efficient basis, but may be <em>unsafe</em></li>
@@ -15130,7 +15130,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>22030
+<pre>21866
 </pre>
 </div>
 </div>
@@ -15551,10 +15551,10 @@ Interpreter Exception:</code></pre>
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib3</span><span class="p">;</span>
-    
+
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
-    
+
     <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
 <span class="p">}</span>
@@ -15607,10 +15607,10 @@ Interpreter Exception:</code></pre>
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib4</span><span class="p">;</span>
-    
+
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
-    
+
     <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
 <span class="p">}</span>
@@ -15685,17 +15685,17 @@ Interpreter Exception:</code></pre>
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib5</span><span class="p">;</span>
-    
+
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
-    
+
     <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
 <span class="p">}</span>
 
 <span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib5</span><span class="p">;</span>
-    
+
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
@@ -15781,7 +15781,7 @@ Interpreter Exception:</code></pre>
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib6</span><span class="p">;</span>
-    
+
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
 
@@ -15791,7 +15791,7 @@ Interpreter Exception:</code></pre>
 
 <span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib6</span><span class="p">;</span>
-    
+
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
@@ -15946,7 +15946,7 @@ Interpreter Exception:</code></pre>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>This makes having a default constructor optional<ul>
-<li>But not having one can be inconvenient </li>
+<li>But not having one can be inconvenient</li>
 </ul>
 </li>
 </ul>
@@ -16262,9 +16262,7 @@ Interpreter Exception:</code></pre>
         <span class="o">++</span><span class="n">_data</span><span class="p">;</span>
         <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="k">friend</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">_data</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">_data</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span class="k">friend</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">_data</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">_data</span><span class="p">;</span> <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="p">}</span> <span class="c1">// namespace bcc</span>
@@ -16290,9 +16288,7 @@ Interpreter Exception:</code></pre>
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-<span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
 
 <span class="p">}</span> <span class="c1">// namespace bcc</span>
 </pre></div>
@@ -16316,12 +16312,15 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
-<span class="c1">// construct the value 3</span>
-<span class="n">number</span> <span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
+    <span class="c1">// construct the value 3</span>
+    <span class="n">number</span> <span class="n">a</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
 
-<span class="c1">// print it</span>
-<span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">number</span><span class="p">())</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="c1">// print it</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">number</span><span class="p">())</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16360,10 +16359,13 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
 
-<span class="c1">// construct the value 3</span>
-<span class="n">number</span> <span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span> <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+    <span class="c1">// construct the value 3</span>
+    <span class="n">number</span> <span class="n">a</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
+    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16383,9 +16385,7 @@ Interpreter Exception:</code></pre>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
-<span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
 </pre></div>
 
      </div>
@@ -16422,6 +16422,239 @@ Interpreter Exception:</code></pre>
 </ul>
 
 </div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Runtime-Polymorphism">Runtime-Polymorphism<a class="anchor-link" href="#Runtime-Polymorphism">&#182;</a></h1>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>The requirement of runtime-polymorphism within a system comes from the need to use objects of different but <em>related</em> types</li>
+<li><em>Inheritance</em> is a mechanism to implement runtime-polymorphism where one class is <em>derived</em> from another class, but overriding all or part of the implementation.</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<span class="k">using</span> <span class="n">circle</span> <span class="o">=</span> <span class="kt">int</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="k">const</span> <span class="n">circle</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="k">using</span> <span class="n">document</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">circle</span><span class="o">&gt;</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="k">const</span> <span class="n">document</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&lt;document&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">draw</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">position</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&lt;/document&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="p">}</span> <span class="c1">// namespace v5</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">shape</span> <span class="p">{</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">virtual</span> <span class="o">~</span><span class="n">shape</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">draw</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="k">using</span> <span class="n">document</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">shape</span><span class="o">&gt;&gt;</span><span class="p">;</span>
+
+<span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="k">const</span> <span class="n">document</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&lt;document&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span>
+        <span class="n">e</span><span class="o">-&gt;</span><span class="n">draw</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">position</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
+    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&lt;/document&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v4</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">circle</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">shape</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_radius</span><span class="p">;</span>
+
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">explicit</span> <span class="n">circle</span><span class="p">(</span><span class="kt">int</span> <span class="n">radius</span><span class="p">)</span> <span class="o">:</span> <span class="n">_radius</span><span class="p">{</span><span class="n">radius</span><span class="p">}</span> <span class="p">{}</span>
+    <span class="kt">void</span> <span class="n">draw</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;circle: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">_radius</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v4</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">rectangle</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">shape</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_width</span><span class="p">,</span> <span class="n">_height</span><span class="p">;</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="k">explicit</span> <span class="n">rectangle</span><span class="p">(</span><span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span> <span class="o">:</span> <span class="n">_width</span><span class="p">{</span><span class="n">width</span><span class="p">},</span> <span class="n">_height</span><span class="p">{</span><span class="n">height</span><span class="p">}</span> <span class="p">{}</span>
+    <span class="kt">void</span> <span class="n">draw</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
+        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;rectangle: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">_width</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">_height</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace 4</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v4</span><span class="p">;</span>
+
+    <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
+
+    <span class="n">d</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="k">new</span> <span class="n">circle</span><span class="p">{</span><span class="mi">5</span><span class="p">});</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="k">new</span> <span class="n">rectangle</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">});</span>
+    <span class="n">draw</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">cout</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>&lt;document&gt;
+  circle: 5
+  rectangle: 10, 42
+&lt;/document&gt;
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>This line contains a defect:<div class="highlight"><pre><span></span><span class="n">d</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="k">new</span> <span class="n">circle</span><span class="p">{</span><span class="mi">5</span><span class="p">});</span>
+</pre></div>
+<ul>
+<li>An instance of <code>circle</code> will be allocated first</li>
+<li>Then the document will grow to make room</li>
+<li>If growing the document throws an exception, the memory from <code>circle</code> is leaked</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v4</span><span class="p">;</span>
+
+    <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
+
+    <span class="n">d</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">circle</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
+    <span class="n">d</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">rectangle</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">));</span>
+    <span class="n">draw</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">cout</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>&lt;document&gt;
+  circle: 5
+  rectangle: 10, 42
+&lt;/document&gt;
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
 </div></section></section>
 </div>
 </div>

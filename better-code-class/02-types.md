@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.9.1
+      format_version: '1.3'
+      jupytext_version: 1.10.0
   kernelspec:
     display_name: C++17
     language: C++17
@@ -40,7 +40,7 @@ jupyter:
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- All objects have common, _basis_, operations
+- All type have common, _basis_, operations
     - constructible
     - destructible
     - copyable<sup>1</sup>
@@ -139,7 +139,7 @@ public:
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - If the representation of an object is unique, then equality can be implemented as member-wise equality
-- C++20 provides member-wise equality (and inequality) by explicitly defaulting `operator ==()`
+- C++20 provides member-wise equality (and inequality) by explicitly defaulting `operator==()`
 
 - For C++17
     - Use `std::tie()` as a simple mechanism to implement equality
@@ -259,7 +259,7 @@ class my_type {
     - Each access is a potential cache miss
     - Most objects are never or rarely copied
         - We'll see why soon
-        
+
 \[ Double-check numbers in this section. These may currently be too high - reference IT Hare. \]
 <!-- #endregion -->
 
@@ -323,29 +323,31 @@ my_type& my_type::operator=(const my_type& a) {
 - A major downside of using the PImpl pattern is the amount of forwarding boiler plate that must be written.
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
 ### `std::regular<T>`
 
 The C++20 standard defines the _concept_ std::regular<T> to be a type which is copyable, equality comparable, and default constructible. The latter is an odd choice. Default constructible is covered later in this section, and concepts are discussed more in Chapter 3, Algorithms.
+<!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
+<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false slideshow={"slide_type": "slide"} -->
 ## Efficient Basis and Safety
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
+<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false slideshow={"slide_type": "slide"} -->
 ### Efficient Basis
 
 - An operation is _efficient_ if there is no way to implement it to use fewer resources:
     - time
     - space
     - energy
-    
+
 - Unless otherwise specified, we will use efficiency to mean _time efficiency_
     - But in practice, where not all three can be achieved the trade-offs should be considered
 
 - A type has an _efficient basis_ if any additional operations can be implemented efficiently in terms of the basis operations
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
+<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false slideshow={"slide_type": "slide"} -->
 - Making all data members public ensures an efficient basis, but may be _unsafe_
 - In fact, we can prove that some operations cannot be implemented both efficiently and safely
 - The canonical example is in-situ sort, although it is true of any in-situ permutation
@@ -354,7 +356,7 @@ The C++20 standard defines the _concept_ std::regular<T> to be a type which is c
 - In C++, explicit `move` is both unsafe and inefficient
     - It is less safe than copy
     - But more efficient than copy
-    
+
 - Strive to make operations safe _and_ efficient
 - Only sacrifice safety for efficiency with good (measurable) reason
 <!-- #endregion -->
@@ -387,11 +389,11 @@ The C++20 standard defines the _concept_ std::regular<T> to be a type which is c
 - As a general rule
     - Only safe operations should be public
     - Unsafe operations should be private
-    
+
 - Moving from an object _may_ leave the object in a "valid but **unspecified**" state
     - _Unspecified_ is without correspondence to an entity
     - move is a public unsafe operation, it may leave the moved-from object in a partially formed state
-    
+
 - There is a trade-off between safety, and efficiency
     - Not every operation can be implemented to be both safe, and efficient (provably)
 <!-- #endregion -->
@@ -448,7 +450,7 @@ The C++20 standard defines the _concept_ std::regular<T> to be a type which is c
 <!-- #region slideshow={"slide_type": "slide"} -->
 ### Move
 - The _move_ operation transfers the value of one object to a new or existing object
-    
+
 \begin{align}
 a = b, a & \rightharpoonup c \implies c = b. && \text{(move is value preserving)}
 \end{align}
@@ -595,10 +597,10 @@ my_type& my_type::operator=(my_type&& a) noexcept {
 ```cpp
 {
     using namespace library;
-    
+
     my_type a{10, 20};
     my_type b{12, 30};
-    
+
     b = move(a);
     a = b;
 }
@@ -610,7 +612,7 @@ my_type& my_type::operator=(my_type&& a) noexcept {
 input_line_9:11:6: warning: null passed to a callee that requires a non-null argument [-Wnonnull]
     *_remote = *a._remote;
      ^~~~~~~
-Interpreter Exception: 
+Interpreter Exception:
 ```
 <!-- #endregion -->
 
@@ -702,10 +704,10 @@ my_type& my_type::operator=(my_type&& a) noexcept {
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace lib3;
-    
+
     my_type a{10, 20};
     my_type b{12, 30};
-    
+
     b = move(a);
     a = b;
 }
@@ -758,10 +760,10 @@ my_type& my_type::operator=(my_type&& a) noexcept {
 ```c++
 {
     using namespace lib4;
-    
+
     my_type a{10, 20};
     my_type b{12, 30};
-    
+
     b = move(a);
     a = b;
 }
@@ -771,7 +773,7 @@ my_type& my_type::operator=(my_type&& a) noexcept {
 ```cpp
 {
     using namespace lib4;
-    
+
     my_type a{10, 20};
     my_type b = move(a);
     a = b;
@@ -781,7 +783,7 @@ my_type& my_type::operator=(my_type&& a) noexcept {
 input_line_17:11:6: warning: null passed to a callee that requires a non-null argument [-Wnonnull]
     *_remote = *a._remote;
      ^~~~~~~
-Interpreter Exception: 
+Interpreter Exception:
 ```
 <!-- #endregion -->
 
@@ -837,17 +839,17 @@ my_type& my_type::operator=(my_type&& a) noexcept {
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace lib5;
-    
+
     my_type a{10, 20};
     my_type b{12, 30};
-    
+
     b = move(a);
     a = b;
 }
 
 {
     using namespace lib5;
-    
+
     my_type a{10, 20};
     my_type b = move(a);
     a = b;
@@ -901,7 +903,7 @@ void my_type::deleter::operator()(implementation* p) const noexcept { delete p; 
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace lib6;
-    
+
     my_type a{10, 20};
     my_type b{12, 30};
 
@@ -911,7 +913,7 @@ void my_type::deleter::operator()(implementation* p) const noexcept { delete p; 
 
 {
     using namespace lib6;
-    
+
     my_type a{10, 20};
     my_type b = move(a);
     a = b;
@@ -958,7 +960,7 @@ void my_type::deleter::operator()(implementation* p) const noexcept { delete p; 
 
 - What should the state be of a default constructed object?
     - Should it always be fully-formed?
-    
+
 - A common use case of a default constructed object is to create the object before we have a value to give to it:
 <!-- #endregion -->
 
@@ -1003,7 +1005,7 @@ std::pair<std::string, std::string> get_pair() { return std::make_pair<string, s
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - This makes having a default constructor optional
-    - But not having one can be inconvenient 
+    - But not having one can be inconvenient
 <!-- #endregion -->
 
 - A default constructor value is often overwritten before use
@@ -1063,7 +1065,7 @@ public:
     - time
     - space
     - energy
-    
+
 - Unless otherwise specified, we will use efficiency to mean _time efficiency_
     - But in practice, where not all three can be achieved the trade-offs should be consider
 <!-- #endregion -->
@@ -1117,7 +1119,7 @@ public:
 - A type which is both equationally and computationally complete can be copied without the use of the copy-constructor or assignment operator
     - Equationally complete implies all the parts are readable
     - Computationally complete implies all the values are obtainable
-    
+
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
@@ -1238,7 +1240,7 @@ bool operator==(const pimpl_type& a, const pimpl_type& b) {
 - In general we want the minimum number of public calls with private access to provide a type which is:
     - Computationally Complete
     - Equationally Complete
-    
+
 - Other operations should be implemented in terms of those
 <!-- #endregion -->
 
@@ -1258,9 +1260,7 @@ public:
         ++_data;
         return *this;
     }
-    friend unsigned int operator-(const number& a, const number& b) {
-        return a._data - b._data;
-    }
+    friend unsigned int operator-(const number& a, const number& b) { return a._data - b._data; }
 };
 
 } // namespace bcc
@@ -1273,9 +1273,7 @@ public:
 ```c++ slideshow={"slide_type": "-"}
 namespace bcc {
 
-bool operator==(const number& a, const number& b) {
-    return (a - b) == 0;
-}
+bool operator==(const number& a, const number& b) { return (a - b) == 0; }
 
 } // namespace bcc
 ```
@@ -1286,12 +1284,15 @@ bool operator==(const number& a, const number& b) {
 
 ```c++ slideshow={"slide_type": "fragment"}
 {
-using namespace bcc;
-// construct the value 3
-number a; ++a; ++a; ++a;
+    using namespace bcc;
+    // construct the value 3
+    number a;
+    ++a;
+    ++a;
+    ++a;
 
-// print it
-cout << (a - number()) << endl;
+    // print it
+    cout << (a - number()) << endl;
 }
 ```
 
@@ -1305,10 +1306,13 @@ For example:
 
 ```c++ slideshow={"slide_type": "fragment"}
 {
-using namespace bcc;
+    using namespace bcc;
 
-// construct the value 3
-number a; ++a; ++a; ++a;
+    // construct the value 3
+    number a;
+    ++a;
+    ++a;
+    ++a;
 }
 ```
 
@@ -1317,9 +1321,7 @@ is not as expressive as:
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-{
-int a = 3;
-}
+{ int a = 3; }
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -1339,7 +1341,120 @@ int a = 3;
     - Efficient
     - Safe
     - Operations required to be part of the class interface by the language (i.e., you cannot implement a stand-alone assignment operator)
-    
+
 - Other operations, including operations that are part of the expressive basis, should be implemented in terms of those operations
 - This still leaves a fair amount up to the designer to choose how to balance safety and efficiency and what _expressive_ means in the context of the type
 <!-- #endregion -->
+
+# Runtime-Polymorphism
+
+
+- The requirement of runtime-polymorphism within a system comes from the need to use objects of different but _related_ types
+- _Inheritance_ is a mechanism to implement runtime-polymorphism where one class is _derived_ from another class, but overriding all or part of the implementation.
+
+```c++
+namespace v5 {
+using circle = int;
+
+void draw(const circle& a, ostream& out, size_t position) {
+    out << string(position, ' ') << a << endl;
+}
+
+using document = vector<circle>;
+
+void draw(const document& a, ostream& out, size_t position) {
+    out << string(position, ' ') << "<document>\n";
+    for (const auto& e : a)
+        draw(e, out, position + 2);
+    out << string(position, ' ') << "</document>\n";
+}
+} // namespace v5
+```
+
+```c++
+namespace v4 {
+
+class shape {
+public:
+    virtual ~shape() = default;
+    virtual void draw(ostream&, size_t) const = 0;
+};
+
+using document = vector<shared_ptr<shape>>;
+
+void draw(const document& a, ostream& out, size_t position) {
+    out << string(position, ' ') << "<document>\n";
+    for (const auto& e : a)
+        e->draw(out, position + 2);
+    out << string(position, ' ') << "</document>\n";
+}
+
+} // namespace v4
+```
+
+```c++
+namespace v4 {
+
+class circle final : public shape {
+    int _radius;
+
+public:
+    explicit circle(int radius) : _radius{radius} {}
+    void draw(ostream& out, size_t position) const override {
+        out << string(position, ' ') << "circle: " << _radius << "\n";
+    }
+};
+
+} // namespace v4
+```
+
+```c++
+namespace v4 {
+
+class rectangle final : public shape {
+    int _width, _height;
+public:
+    explicit rectangle(int width, int height) : _width{width}, _height{height} {}
+    void draw(ostream& out, size_t position) const override {
+        out << string(position, ' ') << "rectangle: " << _width << ", " << _height << "\n";
+    }
+};
+
+} // namespace 4
+```
+
+```c++
+{
+    using namespace v4;
+
+    document d;
+
+    d.emplace_back(new circle{5});
+    d.emplace_back(new rectangle{10, 42});
+    draw(d, cout, 0);
+}
+```
+
+- This line contains a defect:
+```cpp
+    d.emplace_back(new circle{5});
+```
+    - An instance of `circle` will be allocated first
+    - Then the document will grow to make room
+    - If growing the document throws an exception, the memory from `circle` is leaked
+
+```c++
+{
+    using namespace v4;
+
+    document d;
+
+    d.push_back(make_shared<circle>(5));
+    d.push_back(make_shared<rectangle>(10, 42));
+    draw(d, cout, 0);
+}
+```
+
+```c++
+
+```
