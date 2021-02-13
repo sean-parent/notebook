@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.8.0
+      format_version: '1.3'
+      jupytext_version: 1.10.0
   kernelspec:
     display_name: C++17
     language: C++17
@@ -157,7 +157,16 @@ x.value_or(42)
 ```
 
 ```c++
-x.value()
+#include <cstdint>
+#include <iostream>
+```
+
+```c++
+try {
+   x.value();
+} catch (...) {
+    std::cerr << "failed." << std::endl;
+}
 ```
 
 Thought on tracked values -
@@ -183,11 +192,6 @@ Should work with optional (and futures?) as well. Also, this would be when/if_al
 (track1, track2) | core | [](auto& x1, auto& x2){
        // use x1 an x2
 } | surface ;
-```
-
-```c++
-#include <cstdint>
-#include <iostream>
 ```
 
 ```c++

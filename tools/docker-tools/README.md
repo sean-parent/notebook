@@ -1,53 +1,32 @@
 # Using the docker image
 
 ## Setup
-
 ### Install Docker
 If you don't already have Docker installed, [install Docker](https://docs.docker.com/get-docker/).
 
-### Building the docker image
+### Login to GitHub package registry
+Login to docker with a GitHub token. Generate a token [here](https://github.com/settings/tokens) with read/write/delete permissions for packages.
 
-To build the Docker image, first, update the VERSION variable below (please use semantic versioning). Add a [release note](#release-notes).
-
-#### Linux, WSL 2, MacOS
+Copy the generated token and paste it as the password (use your GitHub USERNAME).
 ```
-VERSION="1.0.11"
-VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
-
-# The ruby version should match what GitHub Pages requires: https://pages.github.com/versions/
-RUBY_VERSION=2.7.1
-
-echo $VERSION > ./tools/docker-tools/VERSION
-
-# build the base image, no-cache is used, so the latest tools are installed
-
-docker build --no-cache --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
-
-# update the docs environment
-docker run --mount type=bind,source="$(pwd)",target=/mnt/host --tty --interactive $VOLUME bash
-
-# from docker prompt
-cd /mnt/host
-./tools/update.sh --lock
-exit
-
-# build the final image
-docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile --target full --tag $VOLUME .
+docker login docker.pkg.github.com --username USERNAME
 ```
+## Running the tools
 
-If you are editing the Dockerfile you might want to build the base image from cache.
+### Pull the latest docker image
 
 ```
-docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
+docker pull docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest
 ```
 
-## Running the Docker image
+### Running the Docker image
 
 To run the docker image, execute the following.
 
 ```
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
-docker run --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive --publish 3000:3000 --publish 3001:3001 --publish 8888:8888 $VOLUME bash
+docker run --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive \
+    --publish 3000:3000 --publish 3001:3001 --publish 8888:8888 $VOLUME bash
 ```
 
 This should leave you at a bash prompt that looks like:
@@ -58,7 +37,7 @@ app@fc7590a63ba3:~$
 
 The hex number is the docker image container ID and may be different. Going forward I refer to this as the _docker_ prompt to distinguish it from the _local_ prompt.
 
-## Build the documentation site
+### Build the documentation site
 
 To build or rebuild the complete documentation site locally execute the following from the docker prompt:
 
@@ -67,7 +46,7 @@ cd /mnt/host
 ./tools/prepare.sh
 ```
 
-## Run a local server for the site
+### Run a local server for the site
 
 Once the site has been prepared, you can run it to see how it looks. From the Docker prompt enter:
 
@@ -89,13 +68,44 @@ docker exec -it <container id> bash
 
 ## Updating Docker package
 
-### Setup
 
-Login to docker with a GitHub token. Generate a token [here](https://github.com/settings/tokens) with read/write/delete permissions for packages.
+### Building the docker image
 
-Copy the generated token and paste it as the password (use your USERNAME).
+To build the Docker image, first, update the VERSION variable below (please use semantic versioning). Add a [release note](#release-notes).
+
+#### Linux, WSL 2, MacOS
 ```
-docker login docker.pkg.github.com --username USERNAME
+VERSION="1.0.11"
+VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
+
+# The ruby version should match what GitHub Pages requires: https://pages.github.com/versions/
+RUBY_VERSION=2.7.1
+
+echo $VERSION > ./tools/docker-tools/VERSION
+
+# build the base image, no-cache is used, so the latest tools are installed
+
+docker build --no-cache --build-arg RUBY_VERSION=$RUBY_VERSION \
+    --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
+
+# update the docs environment
+docker run --mount type=bind,source="$(pwd)",target=/mnt/host --tty --interactive $VOLUME bash
+
+# from docker prompt
+cd /mnt/host
+./tools/update.sh --lock
+exit
+
+# build the final image
+docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile \
+    --target full --tag $VOLUME .
+```
+
+If you are editing the Dockerfile you might want to build the base image from cache.
+
+```
+docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile \
+    --target base --tag $VOLUME .
 ```
 
 ### Pushing the packages

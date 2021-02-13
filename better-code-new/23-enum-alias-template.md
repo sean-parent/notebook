@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.8.0
+      format_version: '1.3'
+      jupytext_version: 1.10.0
   kernelspec:
     display_name: C++17
     language: C++17
@@ -368,11 +368,11 @@ enum very_small : std::uint8_t {
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-typedef int some_type;
-```
+namespace cpp98 {
 
-```c++ slideshow={"slide_type": "skip"}
-.undo 1
+typedef int some_type;
+
+}
 ```
 
 ```c++ slideshow={"slide_type": "fragment"}
@@ -384,19 +384,15 @@ using some_type = int;
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-typedef int (*some_func)(int);
-```
+namespace cpp98 {
 
-```c++ slideshow={"slide_type": "skip"}
-.undo 1
+typedef int (*some_func)(int);
+
+}
 ```
 
 ```c++ slideshow={"slide_type": "fragment"}
 using some_func = int (*)(int);
-```
-
-```c++ slideshow={"slide_type": "skip"}
-.undo 1
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -405,12 +401,12 @@ using some_func = int (*)(int);
 
 ```c++ slideshow={"slide_type": "fragment"}
 template <class T>
-using some_func = T (*)(T);
+using func_ptr = T (*)(T);
 ```
 
 ```c++ slideshow={"slide_type": "fragment"}
 {
-    some_func<double> f = [](double x){ return x * x; };
+    func_ptr<double> f = [](double x){ return x * x; };
     
     cout << f(10);
 }
@@ -421,12 +417,12 @@ using some_func = T (*)(T);
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
+namespace cpp98 {
+
 template <class I>
 auto distance(I f, I l) -> typename iterator_traits<I>::difference_type;
-```
 
-```c++ slideshow={"slide_type": "skip"}
-.undo 1
+}
 ```
 
 ```c++ slideshow={"slide_type": "fragment"}

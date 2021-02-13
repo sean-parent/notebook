@@ -14553,26 +14553,43 @@ display: block;
 </ul>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
-<span class="n">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="k">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]{</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">});</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]{</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">});</span>
     
-<span class="n">auto</span> <span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="o">.</span><span class="n">then</span><span class="p">([](</span><span class="nb">int</span> <span class="n">x</span><span class="p">){</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
+<span class="k">auto</span> <span class="n">q</span> <span class="o">=</span> <span class="n">p</span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="kt">int</span> <span class="n">x</span><span class="p">){</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
     
-<span class="n">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">q</span><span class="o">.</span><span class="n">then</span><span class="p">([]{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;done!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
+<span class="k">auto</span> <span class="n">r</span> <span class="o">=</span> <span class="n">q</span><span class="p">.</span><span class="n">then</span><span class="p">([]{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;done!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
 
-<span class="n">blocking_get</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="o">//</span> <span class="o">&lt;--</span> <span class="n">DON</span><span class="s1">&#39;T DO THIS IN REAL CODE!!!</span>
+<span class="n">blocking_get</span><span class="p">(</span><span class="n">r</span><span class="p">);</span> <span class="c1">// &lt;-- DON&#39;T DO THIS IN REAL CODE!!!</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>42
+done!
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div></div></section></section><section><section>
@@ -14588,18 +14605,18 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-<span class="n">struct</span> <span class="n">shared_pool</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="nc">shared_pool</span> <span class="p">{</span>
     <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_pool</span><span class="p">;</span>
     <span class="n">sequential_process</span> <span class="n">_process</span><span class="p">;</span>
     
-    <span class="n">auto</span> <span class="n">insert</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="p">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">string</span><span class="o">*&gt;</span><span class="p">;</span>
+    <span class="k">auto</span> <span class="nf">insert</span><span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">*&gt;</span><span class="p">;</span>
 <span class="p">};</span>
     
-<span class="n">auto</span> <span class="n">shared_pool</span><span class="p">::</span><span class="n">insert</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="p">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">string</span><span class="o">*&gt;</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">async_packaged</span><span class="p">(</span><span class="n">_process</span><span class="p">,</span> <span class="p">[</span><span class="n">this</span><span class="p">,</span> <span class="n">_a</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)]()</span> <span class="n">mutable</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="o">&amp;*</span><span class="n">_pool</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">_a</span><span class="p">))</span><span class="o">.</span><span class="n">first</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">shared_pool</span><span class="o">::</span><span class="n">insert</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">async_packaged</span><span class="p">(</span><span class="n">_process</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">,</span> <span class="n">_a</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="o">&amp;*</span><span class="n">_pool</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">_a</span><span class="p">)).</span><span class="n">first</span><span class="p">;</span>
     <span class="p">});</span>
 <span class="p">}</span>
     
@@ -14638,26 +14655,26 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
-    <span class="o">//</span> <span class="n">struct</span> <span class="n">shared_pool</span>
+    <span class="c1">// struct shared_pool</span>
 
-    <span class="n">static</span> <span class="n">auto</span> <span class="n">pool</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">shared_pool</span><span class="o">&amp;</span> <span class="p">{</span>
-        <span class="n">static</span> <span class="n">shared_pool</span> <span class="n">result</span><span class="p">;</span>
+    <span class="k">static</span> <span class="k">auto</span> <span class="n">pool</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">shared_pool</span><span class="o">&amp;</span> <span class="p">{</span>
+        <span class="k">static</span> <span class="n">shared_pool</span> <span class="n">result</span><span class="p">;</span>
         <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
     <span class="p">}</span>
 
-    <span class="n">stlab</span><span class="p">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">string</span><span class="o">*&gt;</span> <span class="n">_string</span><span class="p">;</span> <span class="o">//</span> <span class="ow">or</span> <span class="n">std</span><span class="p">::</span><span class="n">experimental</span><span class="p">::</span><span class="n">shared_future</span>
-<span class="n">public</span><span class="p">:</span>
-    <span class="n">interned_string</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_string</span><span class="p">(</span><span class="n">pool</span><span class="p">()</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="p">{}</span>
+    <span class="n">stlab</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">*&gt;</span> <span class="n">_string</span><span class="p">;</span> <span class="c1">// or std::experimental::shared_future</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="n">interned_string</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_string</span><span class="p">(</span><span class="n">pool</span><span class="p">().</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="p">{}</span>
     
-    <span class="n">auto</span> <span class="nb">str</span><span class="p">()</span> <span class="n">const</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="p">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">string</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">_string</span><span class="o">.</span><span class="n">then</span><span class="p">([](</span><span class="n">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">cref</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">);</span> <span class="p">});</span>
+    <span class="k">auto</span> <span class="n">str</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">_string</span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">cref</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">);</span> <span class="p">});</span>
     <span class="p">}</span>
 <span class="p">};</span>
     
-<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span>
+<span class="p">}</span> <span class="c1">// namespace</span>
 </pre></div>
 
      </div>
@@ -14665,17 +14682,17 @@ display: block;
 </div>
 </div>
 
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
-<span class="n">interned_string</span> <span class="n">s</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="n">interned_string</span> <span class="nf">s</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="n">s</span><span class="p">);</span>
 
-<span class="n">auto</span> <span class="n">done</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">str</span><span class="p">()</span><span class="o">.</span><span class="n">then</span><span class="p">([](</span><span class="n">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">){</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">;</span>
+<span class="k">auto</span> <span class="n">done</span> <span class="o">=</span> <span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">().</span><span class="n">then</span><span class="p">([](</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">){</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span> <span class="o">&lt;&lt;</span> <span class="sc">&#39;\n&#39;</span><span class="p">;</span>
 <span class="p">});</span>
     
 <span class="n">blocking_get</span><span class="p">(</span><span class="n">done</span><span class="p">);</span>
@@ -14685,6 +14702,22 @@ display: block;
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Hello World!
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div></section></section><section><section>
@@ -14730,17 +14763,17 @@ display: block;
 </ul>
 
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
-<span class="n">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="k">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]{</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">});</span>
-<span class="n">auto</span> <span class="n">q</span> <span class="o">=</span> <span class="k">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]{</span> <span class="k">return</span> <span class="mi">5</span><span class="p">;</span> <span class="p">});</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+<span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]{</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">});</span>
+<span class="k">auto</span> <span class="n">q</span> <span class="o">=</span> <span class="n">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]{</span> <span class="k">return</span> <span class="mi">5</span><span class="p">;</span> <span class="p">});</span>
 
-<span class="n">auto</span> <span class="n">done</span> <span class="o">=</span> <span class="n">when_all</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[](</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">){</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">},</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
+<span class="k">auto</span> <span class="n">done</span> <span class="o">=</span> <span class="n">when_all</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[](</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">){</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">},</span> <span class="n">p</span><span class="p">,</span> <span class="n">q</span><span class="p">);</span>
     
 <span class="n">blocking_get</span><span class="p">(</span><span class="n">done</span><span class="p">);</span>
 <span class="p">}</span>
@@ -14749,6 +14782,22 @@ display: block;
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>47
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div></section></section><section><section>
@@ -14777,7 +14826,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
+<div class=" highlight hl-c++"><pre><span></span>
 </pre></div>
 
      </div>

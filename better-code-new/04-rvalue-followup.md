@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.8.0
+      format_version: '1.3'
+      jupytext_version: 1.10.0
   kernelspec:
     display_name: C++17
     language: C++17
@@ -66,12 +66,8 @@ sink s;
 s.set(x);
 ```
 
-```c++ slideshow={"slide_type": "skip"}
-.undo 2
-```
-
 ```c++ slideshow={"slide_type": "slide"}
-class sink {
+class sink2 {
     example _m;
 public:
     void set(const example& e) { _m = e; }
@@ -80,6 +76,6 @@ public:
 ```
 
 ```c++ slideshow={"slide_type": "fragment"}
-sink s;
+sink2 s;
 s.set(x);
 ```

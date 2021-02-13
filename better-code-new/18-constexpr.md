@@ -5,8 +5,8 @@ jupyter:
     text_representation:
       extension: .md
       format_name: markdown
-      format_version: '1.2'
-      jupytext_version: 1.8.0
+      format_version: '1.3'
+      jupytext_version: 1.10.0
   kernelspec:
     display_name: C++17
     language: C++17
@@ -321,6 +321,7 @@ constexpr auto end(const span<I, N>& x) {
 
 ```c++ slideshow={"slide_type": "slide"}
 // C++14 example
+namespace cpp14 {
 
 template <class I, class Comp>
 constexpr auto merge_sort(const span<I, 1>& a, Comp comp) {
@@ -330,12 +331,10 @@ constexpr auto merge_sort(const span<I, 1>& a, Comp comp) {
 template <class I, size_t N, class Comp>
 constexpr auto merge_sort(const span<I, N>& a, Comp comp) {
     return merge(merge_sort(span<I, N / 2>{begin(a)}, comp),
-        merge_sort(span<I, N - N / 2>{begin(a) + N / 2}, comp), comp);
+                 merge_sort(span<I, N - N / 2>{begin(a) + N / 2}, comp), comp);
 }
-```
 
-```c++ slideshow={"slide_type": "skip"}
-.undo 1
+} // namespace cpp14
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
@@ -400,7 +399,3 @@ Constructs like ZStrings and ExpressViews explicitly made a trade-off of runtime
 ### Exercise
 Find something in your product that would be improved using `constexpr`, either by simplifying the code or by directly improving performance. Measure the results, including compile time impact, and write a summary of what you found.
 <!-- #endregion -->
-
-```c++
-
-```

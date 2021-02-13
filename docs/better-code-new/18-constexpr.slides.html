@@ -14516,7 +14516,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">const</span> <span class="nb">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">const</span> <span class="kt">int</span> <span class="n">r</span> <span class="o">=</span> <span class="n">rand</span><span class="p">();</span>
 </pre></div>
 
      </div>
@@ -14656,14 +14656,14 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">constexpr</span> <span class="n">uint64_t</span> <span class="n">fnv64_hash_str</span><span class="p">(</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">uint64_t</span> <span class="nb">hash</span> <span class="o">=</span> <span class="n">UINT64_C</span><span class="p">(</span><span class="mi">14695981039346656037</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="n">fnv64_hash_str</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">uint64_t</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">UINT64_C</span><span class="p">(</span><span class="mi">14695981039346656037</span><span class="p">);</span>
     <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
-        <span class="nb">hash</span> <span class="o">*=</span> <span class="n">UINT64_C</span><span class="p">(</span><span class="mi">1099511628211</span><span class="p">);</span>
-        <span class="nb">hash</span> <span class="o">^=</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
+        <span class="n">hash</span> <span class="o">*=</span> <span class="n">UINT64_C</span><span class="p">(</span><span class="mi">1099511628211</span><span class="p">);</span>
+        <span class="n">hash</span> <span class="o">^=</span> <span class="o">*</span><span class="n">p</span><span class="p">;</span>
         <span class="o">++</span><span class="n">p</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="nb">hash</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">hash</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -14678,7 +14678,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">constexpr</span> <span class="n">auto</span> <span class="n">str_hash</span> <span class="o">=</span> <span class="n">fnv64_hash_str</span><span class="p">(</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">auto</span> <span class="n">str_hash</span> <span class="o">=</span> <span class="n">fnv64_hash_str</span><span class="p">(</span><span class="s">&quot;Hello World!&quot;</span><span class="p">);</span>
 </pre></div>
 
      </div>
@@ -14686,18 +14686,34 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="nb">hex</span> <span class="o">&lt;&lt;</span> <span class="n">str_hash</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">hex</span> <span class="o">&lt;&lt;</span> <span class="n">str_hash</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>8e59dd02f68c387c
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div></div></section></section><section><section>
@@ -14722,14 +14738,14 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">struct</span> <span class="n">point</span> <span class="p">{</span>
-    <span class="nb">int</span> <span class="n">_width</span><span class="p">;</span>
-    <span class="nb">int</span> <span class="n">_height</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="nc">point</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_width</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">_height</span><span class="p">;</span>
 
-    <span class="n">constexpr</span> <span class="n">point</span><span class="p">(</span><span class="nb">int</span> <span class="n">w</span><span class="p">,</span> <span class="nb">int</span> <span class="n">h</span><span class="p">)</span> <span class="p">:</span> <span class="n">_width</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">_height</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="k">constexpr</span> <span class="nf">point</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_width</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">_height</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
     
-    <span class="n">friend</span> <span class="n">constexpr</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="n">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">_width</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">_width</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">_height</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">_height</span><span class="p">);</span>
+    <span class="k">friend</span> <span class="k">constexpr</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_width</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_width</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_height</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_height</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
@@ -14745,7 +14761,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">constexpr</span> <span class="n">point</span> <span class="n">origin</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span> <span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="n">point</span> <span class="n">origin</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span> <span class="p">};</span>
 </pre></div>
 
      </div>
@@ -14759,7 +14775,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">static_assert</span><span class="p">(</span><span class="n">origin</span> <span class="o">==</span> <span class="n">point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s2">&quot;mismatch&quot;</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">static_assert</span><span class="p">(</span><span class="n">origin</span> <span class="o">==</span> <span class="n">point</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="s">&quot;mismatch&quot;</span><span class="p">);</span>
 </pre></div>
 
      </div>
@@ -14778,10 +14794,10 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">M</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
-<span class="n">constexpr</span> <span class="n">auto</span> <span class="n">merge</span><span class="p">(</span><span class="n">const</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">M</span><span class="o">&gt;&amp;</span> <span class="n">b</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">M</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge</span><span class="p">(</span><span class="k">const</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">M</span><span class="o">&gt;&amp;</span> <span class="n">b</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">array</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="n">M</span><span class="o">&gt;</span> <span class="n">result</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
-    <span class="n">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">size_t</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">j</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">k</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="k">while</span> <span class="p">(</span><span class="n">j</span> <span class="o">!=</span> <span class="n">N</span> <span class="o">&amp;&amp;</span> <span class="n">k</span> <span class="o">!=</span> <span class="n">M</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">comp</span><span class="p">(</span><span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">b</span><span class="p">[</span><span class="n">k</span><span class="p">]))</span> <span class="p">{</span>
             <span class="n">result</span><span class="p">[</span><span class="n">i</span><span class="o">++</span><span class="p">]</span> <span class="o">=</span> <span class="n">a</span><span class="p">[</span><span class="n">j</span><span class="o">++</span><span class="p">];</span>
@@ -14810,12 +14826,12 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">constexpr</span> <span class="nb">bool</span> <span class="n">strless</span><span class="p">(</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="kt">bool</span> <span class="n">strless</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="o">*</span><span class="n">a</span> <span class="o">==</span> <span class="o">*</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span>
         <span class="o">++</span><span class="n">a</span><span class="p">;</span>
         <span class="o">++</span><span class="n">b</span><span class="p">;</span>
     <span class="p">}</span>
-    <span class="k">return</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">unsigned</span> <span class="n">char</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">static_cast</span><span class="o">&lt;</span><span class="n">unsigned</span> <span class="n">char</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">b</span><span class="p">);</span>
+    <span class="k">return</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">)</span> <span class="o">&lt;</span> <span class="k">static_cast</span><span class="o">&lt;</span><span class="kt">unsigned</span> <span class="kt">char</span><span class="o">&gt;</span><span class="p">(</span><span class="o">*</span><span class="n">b</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -14830,17 +14846,17 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">constexpr</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">a1</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Dave&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Nick&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Sean&quot;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">3</span><span class="o">&gt;</span> <span class="n">a1</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&quot;Dave&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Nick&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Sean&quot;</span>
 <span class="p">};</span>
 
-<span class="n">constexpr</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">const</span> <span class="n">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span> <span class="n">a2</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;Emily&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Olivia&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Ryan&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Seetha&quot;</span>
+<span class="k">constexpr</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span><span class="p">,</span> <span class="mi">4</span><span class="o">&gt;</span> <span class="n">a2</span> <span class="o">=</span> <span class="p">{</span>
+    <span class="s">&quot;Emily&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Olivia&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Ryan&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Seetha&quot;</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14855,7 +14871,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">constexpr</span> <span class="n">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">strless</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">auto</span> <span class="n">result</span> <span class="o">=</span> <span class="n">merge</span><span class="p">(</span><span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">strless</span><span class="p">);</span>
 </pre></div>
 
      </div>
@@ -14863,19 +14879,41 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 </div>
 
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="p">:</span> <span class="n">result</span><span class="p">)</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">result</span><span class="p">)</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Dave
+Emily
+Nick
+Olivia
+Ryan
+Sean
+Seetha
+</pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div></div></section></section><section><section>
@@ -14889,18 +14927,21 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">C</span><span class="o">++</span><span class="mi">14</span> <span class="n">example</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="c1">// C++14 example</span>
+<span class="k">namespace</span> <span class="n">cpp14</span> <span class="p">{</span>
 
-<span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
-<span class="n">constexpr</span> <span class="n">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">typename</span> <span class="n">iterator_traits</span><span class="o">&lt;</span><span class="n">decltype</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">&gt;</span><span class="p">::</span><span class="n">value_type</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="o">*</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="k">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">iterator_traits</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span><span class="o">*</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span>
 <span class="p">}</span>
 
-<span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
-<span class="n">constexpr</span> <span class="n">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">merge_sort</span><span class="p">(</span><span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">{</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)},</span> <span class="n">comp</span><span class="p">),</span>
-        <span class="n">merge_sort</span><span class="p">(</span><span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span> <span class="o">-</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">{</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="p">},</span> <span class="n">comp</span><span class="p">),</span> <span class="n">comp</span><span class="p">);</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="k">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="nf">merge</span><span class="p">(</span><span class="n">merge_sort</span><span class="p">(</span><span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">{</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)},</span> <span class="n">comp</span><span class="p">),</span>
+                 <span class="n">merge_sort</span><span class="p">(</span><span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span> <span class="o">-</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">{</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="p">},</span> <span class="n">comp</span><span class="p">),</span> <span class="n">comp</span><span class="p">);</span>
 <span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace cpp14</span>
 </pre></div>
 
      </div>
@@ -14914,12 +14955,12 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="n">C</span><span class="o">++</span><span class="mi">17</span> <span class="n">example</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="c1">// C++17 example</span>
 
-<span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="n">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
-<span class="n">constexpr</span> <span class="n">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="n">constexpr</span> <span class="p">(</span><span class="n">N</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">array</span><span class="o">&lt;</span><span class="n">typename</span> <span class="n">iterator_traits</span><span class="o">&lt;</span><span class="n">decltype</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">&gt;</span><span class="p">::</span><span class="n">value_type</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="k">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="nf">constexpr</span> <span class="p">(</span><span class="n">N</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">iterator_traits</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span>
             <span class="o">*</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="p">};</span>
     <span class="k">else</span>
@@ -14939,12 +14980,12 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">constexpr</span> <span class="n">const</span> <span class="n">char</span><span class="o">*</span> <span class="n">names</span><span class="p">[]{</span>
-    <span class="s2">&quot;Carole&quot;</span><span class="p">,</span>  <span class="s2">&quot;Cherelle&quot;</span><span class="p">,</span> <span class="s2">&quot;Elene&quot;</span><span class="p">,</span>   <span class="s2">&quot;Ahmad&quot;</span><span class="p">,</span>    <span class="s2">&quot;Janae&quot;</span><span class="p">,</span> <span class="s2">&quot;Stephenie&quot;</span><span class="p">,</span> <span class="s2">&quot;Bill&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Joannie&quot;</span><span class="p">,</span> <span class="s2">&quot;Taylor&quot;</span><span class="p">,</span>   <span class="s2">&quot;Sharice&quot;</span><span class="p">,</span> <span class="s2">&quot;Myrtle&quot;</span><span class="p">,</span>   <span class="s2">&quot;Dara&quot;</span><span class="p">,</span>  <span class="s2">&quot;Manuel&quot;</span><span class="p">,</span>    <span class="s2">&quot;Hayley&quot;</span><span class="p">,</span>
-    <span class="s2">&quot;Odis&quot;</span><span class="p">,</span>    <span class="s2">&quot;Otto&quot;</span><span class="p">,</span>     <span class="s2">&quot;Goldie&quot;</span><span class="p">,</span>  <span class="s2">&quot;Stepanie&quot;</span><span class="p">,</span> <span class="s2">&quot;Nicky&quot;</span><span class="p">,</span> <span class="s2">&quot;Ashley&quot;</span><span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">names</span><span class="p">[]{</span>
+    <span class="s">&quot;Carole&quot;</span><span class="p">,</span>  <span class="s">&quot;Cherelle&quot;</span><span class="p">,</span> <span class="s">&quot;Elene&quot;</span><span class="p">,</span>   <span class="s">&quot;Ahmad&quot;</span><span class="p">,</span>    <span class="s">&quot;Janae&quot;</span><span class="p">,</span> <span class="s">&quot;Stephenie&quot;</span><span class="p">,</span> <span class="s">&quot;Bill&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Joannie&quot;</span><span class="p">,</span> <span class="s">&quot;Taylor&quot;</span><span class="p">,</span>   <span class="s">&quot;Sharice&quot;</span><span class="p">,</span> <span class="s">&quot;Myrtle&quot;</span><span class="p">,</span>   <span class="s">&quot;Dara&quot;</span><span class="p">,</span>  <span class="s">&quot;Manuel&quot;</span><span class="p">,</span>    <span class="s">&quot;Hayley&quot;</span><span class="p">,</span>
+    <span class="s">&quot;Odis&quot;</span><span class="p">,</span>    <span class="s">&quot;Otto&quot;</span><span class="p">,</span>     <span class="s">&quot;Goldie&quot;</span><span class="p">,</span>  <span class="s">&quot;Stepanie&quot;</span><span class="p">,</span> <span class="s">&quot;Nicky&quot;</span><span class="p">,</span> <span class="s">&quot;Ashley&quot;</span><span class="p">};</span>
 
-<span class="n">constexpr</span> <span class="n">auto</span> <span class="nb">sorted</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">make_span</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="n">strless</span><span class="p">);</span>
+<span class="k">constexpr</span> <span class="k">auto</span> <span class="n">sorted</span> <span class="o">=</span> <span class="n">merge_sort</span><span class="p">(</span><span class="n">make_span</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="n">strless</span><span class="p">);</span>
 </pre></div>
 
      </div>
@@ -14952,18 +14993,33 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 </div>
 
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="p">:</span> <span class="nb">sorted</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot; &quot;</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">sorted</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Ahmad Ashley Bill Carole Cherelle Dara Elene Goldie Hayley Janae Joannie Manuel Myrtle Nicky Odis Otto Sharice Stepanie Stephenie Taylor </pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div></div></section></section><section><section>
@@ -14976,8 +15032,8 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">constexpr</span> <span class="n">auto</span> <span class="n">rsorted</span> <span class="o">=</span>
-    <span class="n">merge_sort</span><span class="p">(</span><span class="n">make_span</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="p">[](</span><span class="n">auto</span> <span class="n">a</span><span class="p">,</span> <span class="n">auto</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">strless</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="p">});</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">auto</span> <span class="n">rsorted</span> <span class="o">=</span>
+    <span class="n">merge_sort</span><span class="p">(</span><span class="n">make_span</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="p">[](</span><span class="k">auto</span> <span class="n">a</span><span class="p">,</span> <span class="k">auto</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">strless</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="p">});</span>
 </pre></div>
 
      </div>
@@ -14985,18 +15041,33 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 </div>
 </div>
 
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="n">e</span> <span class="p">:</span> <span class="n">rsorted</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot; &quot;</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">rsorted</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span> <span class="o">&lt;&lt;</span> <span class="s">&quot; &quot;</span><span class="p">;</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>Taylor Stephenie Stepanie Sharice Otto Odis Nicky Myrtle Manuel Joannie Janae Hayley Goldie Elene Dara Cherelle Carole Bill Ashley Ahmad </pre>
+</div>
+</div>
+
+</div>
+
 </div>
 
 </div></div></section></section><section><section>
@@ -15024,20 +15095,6 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 <h3 id="Exercise">Exercise<a class="anchor-link" href="#Exercise">&#182;</a></h3><p>Find something in your product that would be improved using <code>constexpr</code>, either by simplifying the code or by directly improving performance. Measure the results, including compile time impact, and write a summary of what you found.</p>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
 </div></section></section>
 </div>
 </div>
