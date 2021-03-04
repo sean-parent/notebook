@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.0
+      jupytext_version: 1.10.2
   kernelspec:
     display_name: C++17
     language: C++17
@@ -45,8 +45,8 @@ void f() {
 const int& a = 42;
 auto b = a;
     
-type_name<decltype(a)>();
-type_name<decltype(b)>();
+print_type_name<decltype(a)>();
+print_type_name<decltype(b)>();
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -57,8 +57,8 @@ type_name<decltype(b)>();
 const auto c = b;
 const auto& d = b;
 
-type_name<decltype(c)>();
-type_name<decltype(d)>();
+print_type_name<decltype(c)>();
+print_type_name<decltype(d)>();
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -68,7 +68,7 @@ type_name<decltype(d)>();
 ```c++ slideshow={"slide_type": "fragment"}
 decltype(auto) e = a;
 
-type_name<decltype(e)>();
+print_type_name<decltype(e)>();
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -123,7 +123,7 @@ auto r = mixed_add(42, -1);
 ```
 
 ```c++ slideshow={"slide_type": "fragment"}
-type_name<decltype(r)>();
+print_type_name<decltype(r)>();
 cout << r << "\n";
 ```
 
@@ -231,7 +231,7 @@ cout << a << endl;
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
 ```cpp
-type_name<decltype(x)>();
+print_type_name<decltype(x)>();
 ```
 ---
 ```

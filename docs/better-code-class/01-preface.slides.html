@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14389,6 +14389,16 @@ display: block;
   margin-right: auto;
 }
 
+.reveal ::selection {
+  color:#000;
+  background: rgb(200, 255, 200);
+  text-shadow: none;
+}
+
+.reveal blockquote {
+  font-style: normal;
+}
+
   /*
   .reveal pre {
     width: inherit;
@@ -14514,15 +14524,6 @@ display: block;
 </ul>
 
 </div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>Correct</li>
-<li>Efficient</li>
-<li>Reusable</li>
-</ul>
-
-</div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
@@ -14539,6 +14540,171 @@ display: block;
 <ul>
 <li>Not limited to C++</li>
 <li>Language is a constraint</li>
+</ul>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Philosophy">Philosophy<a class="anchor-link" href="#Philosophy">&#182;</a></h2><ul>
+<li><em>Correct</em></li>
+<li><em>Efficient</em><ul>
+<li>On a wide variety of consumer and enterprise hardware</li>
+<li>Balance CPU/GPU/ML/Memory/Storage/Power resources</li>
+</ul>
+</li>
+<li><em>Reusable</em></li>
+<li><em>Scalable</em><ul>
+<li>With large data sets, but primarily on a single machine</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Software-is-Physics">Software is <em>Physics</em><a class="anchor-link" href="#Software-is-Physics">&#182;</a></h3><ul>
+<li>Object are physical entities</li>
+<li>The building block for modern computers is the transistor<ul>
+<li>A transistor is simply an electronically controlled switch, similar to a relay but without moving parts</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src='img/relay.svg' alt='Relay'>
+    <br>
+    <em>Relay</em>
+</center>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>To build a transistor, silicon is doped with a material such as Boron and Phosphorus<ul>
+<li>Silicon + Boron = P, fewer electors, insulator </li>
+<li>Silicon + Phosphorus = N, has <em>free</em> electrons, conductive</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src='img/transistor-silicon.svg' alt='Transistor Construction'>
+    <br>
+    <em>Transistor Construction</em>
+</center>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>We can make a NAND gate by combining two transistors</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src='img/nand-gate.svg' alt='NAND Gate'>
+    <br>
+    <em>NAND Gate</em>
+</center>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>A transistor is fast, but not infinitely fast, so we need a clock to delineate <em>which</em> <code>A</code> and <code>B</code> the result applies to</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src='img/cmos-nand-gate.svg' alt='CMOS NAND Gate'>
+    <br>
+    <em>CMOS NAND Gate</em>
+</center>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Combining two NAND gates with feedback creates a <em>sequential circuit</em> and a simple memory cell, an SR latch</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src='img/sr-latch.svg' alt='SR Latch'>
+    <br>
+    <em>SR Latch</em>
+</center>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Combining SR Latches we can create a register</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src='img/register.svg' alt='Register'>
+    <br>
+    <em>Register</em>
+</center>
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>By combining transistors with a clock to form sequential circuits we can make both memory and a processor<ul>
+<li>A modern CPU contains billions of transistors</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>The transistor count increases the complexity<ul>
+<li>Memory hierarchy</li>
+<li>Parallel execution</li>
+<li>Speculative execution</li>
+<li>Branch prediction</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>The fundamental physics don't change, for performance we want:<ul>
+<li>Simple operations</li>
+<li>Executed sequentially</li>
+<li>Operating on memory <em>near</em> the processor</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Software-is-Mathematics">Software is <em>Mathematics</em><a class="anchor-link" href="#Software-is-Mathematics">&#182;</a></h3>
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Not <em>pure</em> mathematics<ul>
+<li>We are not describing systems on an idealized device that cannot be realized</li>
+<li>We seek to use mathematics to describe what <em>is</em></li>
+</ul>
+</li>
 </ul>
 
 </div>

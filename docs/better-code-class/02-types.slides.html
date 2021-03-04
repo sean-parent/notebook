@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14389,6 +14389,16 @@ display: block;
   margin-right: auto;
 }
 
+.reveal ::selection {
+  color:#000;
+  background: rgb(200, 255, 200);
+  text-shadow: none;
+}
+
+.reveal blockquote {
+  font-style: normal;
+}
+
   /*
   .reveal pre {
     width: inherit;
@@ -14510,7 +14520,7 @@ display: block;
 <blockquote><p>A <em>type</em> is a pattern for storing and modifying objects.</p>
 </blockquote>
 <ul>
-<li>In C++, <code>struct</code> and<code>class</code> are mechanisms for implementing types, but can also be used for other purposes<ul>
+<li>In C++, <code>struct</code> and <code>class</code> are mechanisms for implementing types but can also be used for other purposes<ul>
 <li>Example: as a mechanism to execute a function at the end of a scope</li>
 </ul>
 </li>
@@ -14523,7 +14533,7 @@ display: block;
 <blockquote><p>An <em>object</em> is a representation of an entity as a value in memory.</p>
 </blockquote>
 <ul>
-<li>An object is a <em>physical</em> entity, and as such is imbued with a set of properties<ul>
+<li>An object is a <em>physical</em> entity, and as such, is imbued with a set of properties<ul>
 <li>size</li>
 <li>address</li>
 </ul>
@@ -14556,22 +14566,16 @@ display: block;
 </ul>
 
 </div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>[ Make sure in this chapter I cover other operations such as hash, representational equality, representational ordering, serialization. ]</p>
-
-</div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Regular">Regular<a class="anchor-link" href="#Regular">&#182;</a></h2><blockquote><p>There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to <em>copy objects</em> from one data structure to another. We call types having such a basis <em>regular</em> since their use guarantees regularity of behavior and, therefore, interoperability.<sup>2</sup></p>
+<h2 id="Regular">Regular<a class="anchor-link" href="#Regular">&#182;</a></h2><blockquote><p>There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to <em>copy objects</em> from one data structure to another. We call types having such a basis <em>regular</em> since their use guarantees regularity of behavior and, therefore, interoperability. <em>(Stepanov &amp; McJones 6)</em></p>
 </blockquote>
 <ul>
 <li>The copy operation creates a new object, equal to, and logically disjoint from the original</li>
 </ul>
 \begin{align}
 b &amp; \to a \implies a = b. &amp;&amp; \text{(copies are equal)}
-\end{align}<p><sup>2</sup><em>Elements of Programming</em></p>
-
+\end{align}
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14591,11 +14595,10 @@ b &amp; \to a \implies a = b. &amp;&amp; \text{(copies are equal)}
 <ul>
 <li>Copies are logically disjoint</li>
 </ul>
-<p>For all $op$, which modifies its operand, and $b = c$:
+<p>For all $op$, which modifies its operand, and given $b = c$:</p>
 \begin{align}
 b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies are disjoint)}
-\end{align}</p>
-<ul>
+\end{align}<ul>
 <li>An <em>algebraic structure</em> is a set of connected axioms<ul>
 <li>as with copy and assignment</li>
 </ul>
@@ -14607,11 +14610,11 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Implementing-Copy,-Assignment,-and-Equality">Implementing Copy, Assignment, and Equality<a class="anchor-link" href="#Implementing-Copy,-Assignment,-and-Equality">&#182;</a></h3><ul>
-<li>Copy-constructor is used to implement the copy operation<ul>
+<li>Copy-constructor implements the copy operation<ul>
 <li><strong>The compiler is free to assume the semantics of the copy constructor and may elide the copy</strong></li>
 </ul>
 </li>
-<li>To copy an object, simply copy all the <em>members</em> or <em>parts</em></li>
+<li>To copy an object, copy all the <em>parts</em></li>
 <li>If not defined, the compiler will provide a member-wise copy-constructor</li>
 <li>The copy-constructor can be declared <code>= default</code> to ensure it is present</li>
 </ul>
@@ -14623,7 +14626,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v0</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="c1">// members</span>
@@ -14631,7 +14634,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
     <span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace v1</span>
+<span class="p">}</span> <span class="c1">// namespace v0</span>
 </pre></div>
 
      </div>
@@ -14652,7 +14655,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="c1">// members</span>
@@ -14661,7 +14664,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
     <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace v2</span>
+<span class="p">}</span> <span class="c1">// namespace v1</span>
 </pre></div>
 
      </div>
@@ -14679,7 +14682,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>If the representation of an object is unique, then equality can be implemented as member-wise equality</li>
+<li>If the representation of an object is unique, then equality can be implemented as part-wise equality</li>
 <li><p>C++20 provides member-wise equality (and inequality) by explicitly defaulting <code>operator==()</code></p>
 </li>
 <li><p>For C++17</p>
@@ -14700,7 +14703,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">v3</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
 
 <span class="c1">// C++20</span>
 
@@ -14715,7 +14718,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
     <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace v3</span>
+<span class="p">}</span> <span class="c1">// namespace v2</span>
 </pre></div>
 
 </div>
@@ -14725,7 +14728,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
 
 <span class="c1">// C++17</span>
 
@@ -14745,7 +14748,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
     <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace v3</span>
+<span class="p">}</span> <span class="c1">// namespace v2</span>
 </pre></div>
 
      </div>
@@ -14754,6 +14757,30 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </div>
 
 </div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>If the value representation of an object is unique, then representational equality is equality</li>
+<li>If value equality is not implementable in time proportional to the area of the object then <code>operator==()</code> as representational equality<ul>
+<li>This usually means in terms of <em>identity</em> of the remote parts</li>
+</ul>
+</li>
+<li>Representational equality implies equality (but not the converse) and satisfies the axioms for copy and equality</li>
+<li>Examples include functions and some graph structures</li>
+</ul>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Functions can be compared by identity</li>
+<li>Lambda objects are not equality comparable<ul>
+<li>When stored in an object they usually represent a <em>relationship</em> and will be discussed later</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Semantics-and-Complexity">Semantics and Complexity<a class="anchor-link" href="#Semantics-and-Complexity">&#182;</a></h3><ul>
 <li>We associate semantics with operation names to ascribe meaning to software<ul>
@@ -14791,7 +14818,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Equationally-Complete">Equationally Complete<a class="anchor-link" href="#Equationally-Complete">&#182;</a></h3><ul>
 <li>A type for which equality can be implemented as a non-friend (non-member) function is said to be <em>equationally complete</em></li>
-<li>A type which is both equationally and computationally complete can be copied without the use of the copy-constructor or assignment operator<ul>
+<li>A type that is both equationally and computationally complete can be copied without the use of the copy-constructor or assignment operator<ul>
 <li>Equationally complete implies all the parts are readable</li>
 <li>Computationally complete implies all the values are obtainable</li>
 </ul>
@@ -14804,7 +14831,10 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 <h3 id="Whole-Part-Relationship">Whole-Part Relationship<a class="anchor-link" href="#Whole-Part-Relationship">&#182;</a></h3><ul>
 <li>A common and useful relationship is the <em>whole-part</em> relationship</li>
 <li>An object is a whole, composed of its parts</li>
-<li>A part is <em>local</em> if it is stored directly in the object</li>
+<li>A part is <em>local</em> if it is stored directly in the object<ul>
+<li>i.e. a data member</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -14814,14 +14844,14 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v3</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_val</span><span class="p">;</span> <span class="c1">// local part</span>
     <span class="c1">//...</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace v4</span>
+<span class="p">}</span> <span class="c1">// namespace v3</span>
 </pre></div>
 
      </div>
@@ -14833,7 +14863,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>A part is remote if it is stored elsewhere (such as on the heap)<ul>
-<li>Variable size data (polymorphic or dynamic arrays)</li>
+<li>Variable size data (polymorphic or collections)</li>
 <li>Trade-off in performance of copy vs. <em>move</em></li>
 <li>Sharing of immutable data</li>
 <li>Separation of interface from implementation dependencies (PImpl)</li>
@@ -14846,8 +14876,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Remote parts are expensive<ul>
-<li>You can copy roughly 10K of data in the time it takes to make a small heap allocation (&lt; 1K)</li>
-<li>And 5K of data in the time it takes to make a large heap allocation</li>
+<li>Allocation + deallocation costs as much as copying 4K of data</li>
 <li>Each access is a potential cache miss</li>
 <li>Most objects are never or rarely copied<ul>
 <li>We'll see why soon</li>
@@ -14856,7 +14885,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </ul>
 </li>
 </ul>
-<p>[ Double-check numbers in this section. These may currently be too high - reference IT Hare. ]</p>
+<p>See <a href="http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/"><em>IT Hare</em>, Operation Costs in CPU Clock Cycles</a></p>
 
 </div>
 </div></div></section></section><section><section>
@@ -14888,7 +14917,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="c1">// my_type.hpp</span>
 
-<span class="k">namespace</span> <span class="n">library_v1</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>             <span class="c1">// forward declaration</span>
@@ -14901,7 +14930,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
     <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace library_v1</span>
+<span class="p">}</span> <span class="c1">// namespace v4</span>
 </pre></div>
 
      </div>
@@ -14921,7 +14950,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <span class="c1">// other includes</span>
 
-<span class="k">namespace</span> <span class="n">library_v1</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
@@ -14937,7 +14966,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
     <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace library_v1</span>
+<span class="p">}</span> <span class="c1">// namespace v4</span>
 </pre></div>
 
      </div>
@@ -14954,54 +14983,12 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="std::regular&lt;T&gt;"><code>std::regular&lt;T&gt;</code><a class="anchor-link" href="#std::regular&lt;T&gt;">&#182;</a></h3><p>The C++20 standard defines the <em>concept</em> std::regular<T> to be a type which is copyable, equality comparable, and default constructible. The latter is an odd choice. Default constructible is covered later in this section, and concepts are discussed more in Chapter 3, Algorithms.</p>
+<h3 id="std::regular&lt;T&gt;"><code>std::regular&lt;T&gt;</code><a class="anchor-link" href="#std::regular&lt;T&gt;">&#182;</a></h3><p>The C++20 standard defines the <em>concept</em> std::regular<T> to be copyable, equality-comparable, and default-constructible. Default-constructible is covered later in this section, and concepts are discussed more in Chapter 3, Algorithms.</p>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Efficient-Basis-and-Safety">Efficient Basis and Safety<a class="anchor-link" href="#Efficient-Basis-and-Safety">&#182;</a></h2>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Efficient-Basis">Efficient Basis<a class="anchor-link" href="#Efficient-Basis">&#182;</a></h3><ul>
-<li><p>An operation is <em>efficient</em> if there is no way to implement it to use fewer resources:</p>
-<ul>
-<li>time</li>
-<li>space</li>
-<li>energy</li>
-</ul>
-</li>
-<li><p>Unless otherwise specified, we will use efficiency to mean <em>time efficiency</em></p>
-<ul>
-<li>But in practice, where not all three can be achieved the trade-offs should be considered</li>
-</ul>
-</li>
-<li><p>A type has an <em>efficient basis</em> if any additional operations can be implemented efficiently in terms of the basis operations</p>
-</li>
-</ul>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>Making all data members public ensures an efficient basis, but may be <em>unsafe</em></li>
-<li>In fact, we can prove that some operations cannot be implemented both efficiently and safely</li>
-<li><p>The canonical example is in-situ sort, although it is true of any in-situ permutation</p>
-<ul>
-<li>This is why functional languages do not allow direct in-situ permutations</li>
-</ul>
-</li>
-<li><p>In C++, explicit <code>move</code> is both unsafe and inefficient</p>
-<ul>
-<li>It is less safe than copy</li>
-<li>But more efficient than copy</li>
-</ul>
-</li>
-<li><p>Strive to make operations safe <em>and</em> efficient</p>
-</li>
-<li>Only sacrifice safety for efficiency with good (measurable) reason</li>
-</ul>
-
+<h2 id="Safety-and-Efficient-Basis">Safety and Efficient Basis<a class="anchor-link" href="#Safety-and-Efficient-Basis">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -15024,7 +15011,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 <ul>
 <li>There are different categories of safety<ul>
 <li>i.e. <em>memory safety</em><ul>
-<li>Destroying the correspondence of unrelated objects to an entity ultimately causes the bug</li>
+<li>Destroying the correspondence of unrelated objects to their respective entities by overlapping their representation </li>
 </ul>
 </li>
 </ul>
@@ -15046,20 +15033,187 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p>As a general rule</p>
-<ul>
+<li>As a general rule<ul>
 <li>Only safe operations should be public</li>
 <li>Unsafe operations should be private</li>
 </ul>
 </li>
-<li><p>Moving from an object <em>may</em> leave the object in a "valid but <strong>unspecified</strong>" state</p>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Efficient-Basis">Efficient Basis<a class="anchor-link" href="#Efficient-Basis">&#182;</a></h3><ul>
+<li><p>An operation is <em>efficient</em> if there is no way to implement it to use fewer resources:</p>
 <ul>
-<li><em>Unspecified</em> is without correspondence to an entity</li>
-<li>move is a public unsafe operation, it may leave the moved-from object in a partially formed state</li>
+<li>time</li>
+<li>space</li>
+<li>energy</li>
 </ul>
 </li>
-<li><p>There is a trade-off between safety, and efficiency</p>
+<li><p>Unless otherwise specified, we will use efficiency to mean <em>time efficiency</em></p>
 <ul>
+<li>But in practice, where not all three can be achieved the trade-offs should be considered</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>A basis is <em>efficient</em> if and only if any procedure implemented using it is as efficient as an equivalent procedure written in terms of an alternative basis.</p>
+</blockquote>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Making all data members public ensures an efficient basis, but may be <em>unsafe</em></li>
+<li>In fact, we can prove that some operations cannot be implemented both efficiently and safely</li>
+<li><p>The canonical example is in-situ sort, although it is true of any in-situ permutation</p>
+<ul>
+<li>This is why functional languages do not allow direct in-situ operations</li>
+</ul>
+</li>
+<li><p>In C++, explicit <code>move</code> is both unsafe and inefficient</p>
+<ul>
+<li>It is less safe than copy</li>
+<li>But more efficient than copy</li>
+</ul>
+</li>
+<li><p>Strive to make operations safe <em>and</em> efficient</p>
+</li>
+<li>Only sacrifice safety for efficiency with good (measurable) reason</li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Move">Move<a class="anchor-link" href="#Move">&#182;</a></h3><ul>
+<li>The <em>move</em> operation transfers the value of one object to a new or existing object</li>
+</ul>
+\begin{align}
+a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value preserving)}
+\end{align}
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>This says nothing about the moved from value<ul>
+<li>In this way, move is a <em>weaker</em> form of copy</li>
+</ul>
+</li>
+<li>The expectation is that moving a value does not require additional resources, beyond the local storage, for an object<ul>
+<li>In this way, move is a <em>stronger</em> form of copy</li>
+</ul>
+</li>
+<li>Move is a distinct operation as part of an <em>efficient</em> basis</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>In C++ we implement the move operation in terms of rvalue references.<ul>
+<li>An rvalue is a temporary value</li>
+<li>Any witnesses to remote parts can be maintained without copying the remote part</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>             <span class="c1">// forward declaration</span>
+    <span class="n">implementation</span><span class="o">*</span> <span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// remote part</span>
+<span class="k">public</span><span class="o">:</span>
+    <span class="c1">// declare the basis operations - implementation is in a .cpp file</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">my_type</span><span class="p">();</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+
+    <span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}</span> <span class="p">{</span> <span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="p">}</span> <span class="c1">// namespace v5</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+
+<span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">_y</span><span class="p">;</span>
+    <span class="c1">//...</span>
+<span class="p">};</span>
+
+<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">}}</span> <span class="p">{}</span>
+<span class="n">my_type</span><span class="o">::~</span><span class="n">my_type</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span> <span class="p">}</span>
+<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}}</span> <span class="p">{}</span>
+<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span><span class="n">_remote</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
+    <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span>
+    <span class="n">_remote</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
+    <span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v5</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>The requirements in the C++ standard are that we must leave the moved from object <em>"valid but unspecified"</em> state<ul>
+<li><em>Unspecified</em> is without correspondence to an entity</li>
+<li>explicit move is a public unsafe operation, it may leave the moved-from object in a partially formed state</li>
+</ul>
+</li>
+<li>Some operations <em>must</em> be valid on the otherwise unspecified state<ul>
+<li>destruction</li>
+<li>copy and move assigning to the object (to establish a new value)</li>
+<li>self move assignment (for self-swap)</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput  celltag_exercise" data-mime-type="text/markdown">
+<p><strong>Exercise:</strong> <code>my_type</code> contains a bug. Find the bug. Fix it using at least two different approaches. What are the trade-offs?</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>There is a trade-off between safety, and efficiency<ul>
 <li>Not every operation can be implemented to be both safe, and efficient (provably)</li>
 </ul>
 </li>
@@ -15079,10 +15233,8 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">0.0</span><span class="o">/</span><span class="mf">0.0</span><span class="p">;</span> <span class="c1">// explicitly undefined</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">double</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">/</span> <span class="mf">0.0</span><span class="p">;</span> <span class="c1">// explicitly undefined</span>
+<span class="n">x</span>
 </pre></div>
 
      </div>
@@ -15096,10 +15248,12 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <div class="jp-OutputArea-child">
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>nan
-</pre>
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>nan</pre>
 </div>
+
 </div>
 
 </div>
@@ -15114,7 +15268,7 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
     <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// unspecified</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="c1">// undefined behavior!</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -15129,10 +15283,12 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <div class="jp-OutputArea-child">
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>21866
-</pre>
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>21999</pre>
 </div>
+
 </div>
 
 </div>
@@ -15145,11 +15301,9 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">string</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;hello world&quot;</span><span class="p">;</span>
-    <span class="n">string</span> <span class="n">y</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="c1">// unspecified</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">string</span> <span class="n">x</span> <span class="o">=</span> <span class="s">&quot;hello world&quot;</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">y</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="c1">// unspecified</span>
+<span class="n">x</span>
 </pre></div>
 
      </div>
@@ -15163,31 +15317,50 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 
 <div class="jp-OutputArea-child">
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>
-</pre>
-</div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>&#34;&#34;</pre>
 </div>
 
 </div>
 
 </div>
 
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
-    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="c1">// safe! x is guaranteed to be == nullptr</span>
-<span class="p">}</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="c1">// safe. x is guaranteed to be == nullptr</span>
+<span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
+<pre>true</pre>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div></div></section></section><section><section>
@@ -15222,135 +15395,6 @@ b &amp; \to a, op(a) \implies a \neq b \wedge b = c.  &amp;&amp; \text{(copies a
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Move">Move<a class="anchor-link" href="#Move">&#182;</a></h3><ul>
-<li>The <em>move</em> operation transfers the value of one object to a new or existing object</li>
-</ul>
-\begin{align}
-a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value preserving)}
-\end{align}
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>This says nothing about the moved from value<ul>
-<li>In this way, move is a <em>weaker</em> form of copy</li>
-</ul>
-</li>
-<li>The expectation is that moving a value does not require additional resources, beyond the local storage, for an object<ul>
-<li>In this way, move is a <em>stronger</em> form of copy</li>
-</ul>
-</li>
-<li>Move is a distinct operation as part of an <em>efficient</em> basis</li>
-</ul>
-
-</div>
-</div></div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p>A basis is <em>efficient</em> if and only if any procedure implemented using it is as efficient as an equivalent procedure written in terms of an alternative basis.</p>
-</blockquote>
-
-</div>
-</div><div class="fragment">
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>In C++ we implement the move operation in terms of rvalue references.<ul>
-<li>An rvalue is a temporary value</li>
-<li>Any witnesses to remote parts can be maintained without copying the remote part</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">library2</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
-    <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>             <span class="c1">// forward declaration</span>
-    <span class="n">implementation</span><span class="o">*</span> <span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="c1">// remote part</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="c1">// declare the basis operations - implementation is in a .cpp file</span>
-    <span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span>
-    <span class="o">~</span><span class="n">my_type</span><span class="p">();</span>
-    <span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-    <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-
-    <span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}</span> <span class="p">{</span> <span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span> <span class="p">}</span>
-    <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace library</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">library2</span> <span class="p">{</span>
-
-<span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
-    <span class="kt">int</span> <span class="n">_y</span><span class="p">;</span>
-    <span class="c1">//...</span>
-<span class="p">};</span>
-
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">}}</span> <span class="p">{}</span>
-<span class="n">my_type</span><span class="o">::~</span><span class="n">my_type</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span> <span class="p">}</span>
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}}</span> <span class="p">{}</span>
-<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-    <span class="o">*</span><span class="n">_remote</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
-    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
-    <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span>
-    <span class="n">_remote</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
-    <span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">=</span> <span class="k">nullptr</span><span class="p">;</span>
-    <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="p">}</span> <span class="c1">// namespace library</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>The requirements in the C++ standard are that we must leave the moved from object <em>"valid but unspecified"</em> state<ul>
-<li>This is a contradiction</li>
-<li>Because the value is <em>unspecified</em> the object no longer has <em>meaning</em> and not all operations are valid</li>
-</ul>
-</li>
-<li>Some operations <em>must</em> be valid on the otherwise unspecified state<ul>
-<li>destruction</li>
-<li>copy and move assigning to the object (to establish a new value)</li>
-<li>self move assignment (for self-swap)</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput  celltag_exercise" data-mime-type="text/markdown">
-<p><strong>Exercise:</strong> <code>my_type</code> contains a bug. Find the bug. Fix it using at least two different approaches. What are the trade-offs?</p>
-
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Exercises">Exercises<a class="anchor-link" href="#Exercises">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
@@ -15365,7 +15409,7 @@ approaches. What are the trade-offs?</p>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">library3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v6</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>             <span class="c1">// forward declaration</span>
@@ -15381,7 +15425,7 @@ approaches. What are the trade-offs?</p>
     <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace library</span>
+<span class="p">}</span> <span class="c1">// namespace v6</span>
 </pre></div>
 
      </div>
@@ -15395,7 +15439,7 @@ approaches. What are the trade-offs?</p>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">library3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v6</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
@@ -15417,7 +15461,7 @@ approaches. What are the trade-offs?</p>
     <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace library</span>
+<span class="p">}</span> <span class="c1">// namespace v6</span>
 </pre></div>
 
      </div>
@@ -15434,15 +15478,13 @@ approaches. What are the trade-offs?</p>
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">library</span><span class="p">;</span>
+<div class="highlight"><pre><span></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">v6</span><span class="p">;</span>
 
-    <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
-    <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
+<span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
+<span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
 
-    <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
-<span class="p">}</span>
+<span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
 </pre></div>
 
 </div>
@@ -15451,8 +15493,7 @@ approaches. What are the trade-offs?</p>
 
 <pre><code>input_line_9:11:6: warning: null passed to a callee that requires a non-null argument [-Wnonnull]
     *_remote = *a._remote;
-     ^~~~~~~
-Interpreter Exception:</code></pre>
+     ^~~~~~~</code></pre>
 
 </div>
 </div></div></section></section><section><section>
@@ -15497,8 +15538,8 @@ Interpreter Exception:</code></pre>
 <h3 id="Fixes-to-copy-assignment-crash">Fixes to copy-assignment crash<a class="anchor-link" href="#Fixes-to-copy-assignment-crash">&#182;</a></h3><ul>
 <li>We need to be able to assign to our partially formed value<ul>
 <li>Two possible options<ul>
-<li>Change assignment</li>
-<li>Change move</li>
+<li>Change copy-assignment</li>
+<li>Change move-assignment</li>
 </ul>
 </li>
 </ul>
@@ -15512,7 +15553,7 @@ Interpreter Exception:</code></pre>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">lib3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v7</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
@@ -15524,8 +15565,10 @@ Interpreter Exception:</code></pre>
 <span class="n">my_type</span><span class="o">::~</span><span class="n">my_type</span><span class="p">()</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">_remote</span><span class="p">;</span> <span class="p">}</span>
 <span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}}</span> <span class="p">{}</span>
 <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">_remote</span><span class="p">)</span> <span class="o">*</span><span class="n">_remote</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
-    <span class="k">else</span> <span class="n">_remote</span> <span class="o">=</span> <span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">};</span> <span class="c1">// &lt;---</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">_remote</span><span class="p">)</span>
+        <span class="o">*</span><span class="n">_remote</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">_remote</span> <span class="o">=</span> <span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">};</span> <span class="c1">// &lt;---</span>
     <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="p">{</span>
@@ -15535,7 +15578,7 @@ Interpreter Exception:</code></pre>
     <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace lib3</span>
+<span class="p">}</span> <span class="c1">// namespace v7</span>
 </pre></div>
 
      </div>
@@ -15550,7 +15593,7 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib3</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v7</span><span class="p">;</span>
 
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
@@ -15571,7 +15614,7 @@ Interpreter Exception:</code></pre>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">lib4</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v8</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
@@ -15591,7 +15634,7 @@ Interpreter Exception:</code></pre>
     <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace lib4</span>
+<span class="p">}</span> <span class="c1">// namespace v8</span>
 </pre></div>
 
      </div>
@@ -15606,7 +15649,7 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib4</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v8</span><span class="p">;</span>
 
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
@@ -15624,7 +15667,7 @@ Interpreter Exception:</code></pre>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib4</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v8</span><span class="p">;</span>
 
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
@@ -15634,8 +15677,7 @@ Interpreter Exception:</code></pre>
 
 <pre><code>input_line_17:11:6: warning: null passed to a callee that requires a non-null argument [-Wnonnull]
     *_remote = *a._remote;
-     ^~~~~~~
-Interpreter Exception:</code></pre>
+     ^~~~~~~</code></pre>
 
 </div>
 </div></section></section><section><section>
@@ -15648,7 +15690,7 @@ Interpreter Exception:</code></pre>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">lib5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v9</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
@@ -15669,7 +15711,7 @@ Interpreter Exception:</code></pre>
     <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace lib5</span>
+<span class="p">}</span> <span class="c1">// namespace v9</span>
 </pre></div>
 
      </div>
@@ -15684,7 +15726,7 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib5</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v9</span><span class="p">;</span>
 
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
@@ -15692,9 +15734,21 @@ Interpreter Exception:</code></pre>
     <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
 <span class="p">}</span>
+</pre></div>
 
-<span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib5</span><span class="p">;</span>
+     </div>
+</div>
+</div>
+</div>
+
+</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v9</span><span class="p">;</span>
 
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
@@ -15720,7 +15774,7 @@ Interpreter Exception:</code></pre>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">lib6</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v10</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>
@@ -15728,6 +15782,7 @@ Interpreter Exception:</code></pre>
         <span class="kt">void</span> <span class="nf">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span> <span class="k">const</span> <span class="k">noexcept</span><span class="p">;</span> <span class="c1">// &lt;---</span>
     <span class="p">};</span>
     <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span> <span class="n">deleter</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span>
+
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">// declare the basis operations - implementation is in a .cpp file</span>
     <span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span> <span class="c1">// &lt;---</span>
@@ -15739,7 +15794,7 @@ Interpreter Exception:</code></pre>
     <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace lib6</span>
+<span class="p">}</span> <span class="c1">// namespace v10</span>
 </pre></div>
 
      </div>
@@ -15753,7 +15808,7 @@ Interpreter Exception:</code></pre>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">lib6</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v10</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
@@ -15765,7 +15820,7 @@ Interpreter Exception:</code></pre>
 <span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}}</span> <span class="p">{}</span>
 <span class="kt">void</span> <span class="n">my_type</span><span class="o">::</span><span class="n">deleter</span><span class="o">::</span><span class="k">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="k">const</span> <span class="k">noexcept</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">p</span><span class="p">;</span> <span class="p">}</span>
 
-<span class="p">}</span> <span class="c1">// namespace lib6</span>
+<span class="p">}</span> <span class="c1">// namespace v10</span>
 </pre></div>
 
      </div>
@@ -15780,7 +15835,7 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib6</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v10</span><span class="p">;</span>
 
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="mi">12</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
@@ -15790,7 +15845,7 @@ Interpreter Exception:</code></pre>
 <span class="p">}</span>
 
 <span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">lib6</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v10</span><span class="p">;</span>
 
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
@@ -15814,9 +15869,9 @@ Interpreter Exception:</code></pre>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Performance: Faster for in situ case (saves heap allocations)</li>
+<li>Performance: Faster for in-situ case (saves heap allocations)</li>
 <li>Object Lifetime: Not precise</li>
-<li>Exception Safety: Basic Guarantee (not transactional)</li>
+<li>Exception Safety: Basic Guarantee (not transactional, unsafe)</li>
 <li>Implementation: Complex</li>
 </ul>
 
@@ -15834,7 +15889,7 @@ Interpreter Exception:</code></pre>
 <ul>
 <li>Performance: Slower</li>
 <li>Object Lifetime: Precise</li>
-<li>Exception Safety: Strong Guarantee (transactional)</li>
+<li>Exception Safety: Strong Guarantee (transactional, safe)</li>
 <li>Implementation: Simple</li>
 </ul>
 
@@ -15874,6 +15929,8 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v11</span><span class="p">;</span>
+    
     <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">predicate</span><span class="p">())</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
     <span class="k">else</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;World&quot;</span><span class="p">;</span>
@@ -15892,6 +15949,8 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v11</span><span class="p">;</span>
+    
     <span class="n">string</span> <span class="n">s1</span><span class="p">;</span>
     <span class="n">string</span> <span class="n">s2</span><span class="p">;</span>
     <span class="n">tie</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">();</span>
@@ -15917,6 +15976,8 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v11</span><span class="p">;</span>
+    
     <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">predicate</span><span class="p">()</span> <span class="o">?</span> <span class="s">&quot;Hello&quot;</span> <span class="o">:</span> <span class="s">&quot;World&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -15933,6 +15994,8 @@ Interpreter Exception:</code></pre>
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v11</span><span class="p">;</span>
+    
     <span class="k">auto</span> <span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
@@ -15955,8 +16018,8 @@ Interpreter Exception:</code></pre>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>A default constructor value is often overwritten before use<ul>
-<li>As such it is inefficient to allocate memory, or acquire resources, in the default constructor</li>
+<li>A default constructed value is often overwritten before use<ul>
+<li>It is inefficient to allocate memory, or acquire resources, in the default constructor</li>
 </ul>
 </li>
 </ul>
@@ -15984,7 +16047,7 @@ Interpreter Exception:</code></pre>
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">lib7</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v12</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>
@@ -15992,10 +16055,11 @@ Interpreter Exception:</code></pre>
         <span class="kt">void</span> <span class="nf">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span> <span class="k">const</span> <span class="k">noexcept</span><span class="p">;</span> <span class="c1">// &lt;---</span>
     <span class="p">};</span>
     <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span> <span class="n">deleter</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span>
+
 <span class="k">public</span><span class="o">:</span>
     <span class="c1">// declare the basis operations - implementation is in a .cpp file</span>
     <span class="k">constexpr</span> <span class="n">my_type</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// partially formed</span>
-    <span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span> <span class="c1">// &lt;---</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">);</span>                  <span class="c1">// &lt;---</span>
     <span class="o">~</span><span class="n">my_type</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
     <span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span> <span class="c1">// &lt;---</span>
     <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">*</span><span class="k">this</span> <span class="o">=</span> <span class="n">my_type</span><span class="p">(</span><span class="n">a</span><span class="p">);</span> <span class="p">}</span>
@@ -16004,7 +16068,7 @@ Interpreter Exception:</code></pre>
     <span class="n">my_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">}</span> <span class="c1">// namespace lib7</span>
+<span class="p">}</span> <span class="c1">// namespace v12</span>
 </pre></div>
 
      </div>
@@ -16018,221 +16082,40 @@ Interpreter Exception:</code></pre>
 <li>Recommendation<ul>
 <li>Provide a default-ctor</li>
 <li>Avoid using it unless it has a meaningful zero or empty value</li>
+<li>A similar effect can always be achieved using <code>std::optional&lt;&gt;</code></li>
 </ul>
 </li>
 </ul>
 
 </div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Efficiency-&amp;-Expressiveness">Efficiency &amp; Expressiveness<a class="anchor-link" href="#Efficiency-&amp;-Expressiveness">&#182;</a></h1>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Recap">Recap<a class="anchor-link" href="#Recap">&#182;</a></h2>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Definition-of-Type-and-Regular">Definition of <em>Type</em> and <em>Regular</em><a class="anchor-link" href="#Definition-of-Type-and-Regular">&#182;</a></h3><blockquote><p>A <em>type</em> is a pattern for storing and modifying objects.</p>
-</blockquote>
-<div></div><blockquote><p>There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to <em>copy objects</em> from one data structure to another. We call types having such a basis <em>regular</em> since their use guarantees regularity of behavior and, therefore, interoperability.</p>
-</blockquote>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Semantics-and-Complexity">Semantics and Complexity<a class="anchor-link" href="#Semantics-and-Complexity">&#182;</a></h3><ul>
-<li>Semantics of an operation are defined with axioms derived from the definition. i.e. we can define the semantics of equality as:</li>
-</ul>
-\begin{align}
-(\forall a) a &amp; = a. &amp;&amp; \text{(Reflexivity)} \\
-(\forall a, b) a &amp; = b \implies b = a. &amp;&amp; \text{(Symmetry)} \\
-(\forall a, b, c) a &amp; = b \wedge b = c \implies a = c. &amp;&amp; \text {(Transitivity)} \\
-\end{align}<ul>
-<li>This covers any equivalence relation</li>
-<li><p>Two objects are <em>equal</em> iff their two values represent the same entity</p>
-</li>
-<li><p>The expected complexity of an operation is an important attribute of the operation</p>
-</li>
-<li>i.e. The only thing that separates the concept of <code>ForwardIterator</code> and <code>RandomAccessIterator</code> is the complexity of advancing <code>n</code> steps</li>
-</ul>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Computational-Basis-and-Computationally-Complete">Computational Basis and Computationally Complete<a class="anchor-link" href="#Computational-Basis-and-Computationally-Complete">&#182;</a></h3><blockquote><p>The <em>computational basis</em> for a type is a finite set of procedures that enable the construction of any other procedure on the type</p>
-</blockquote>
-<ul>
-<li>A type which does not implement a <em>computational basis</em> is <em>incomplete</em></li>
-</ul>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Equationally-Complete">Equationally Complete<a class="anchor-link" href="#Equationally-Complete">&#182;</a></h3><ul>
-<li>A type for which equality can be implemented as a non-friend (non-member) function is said to be <em>equationally complete</em></li>
-<li>A type which is both equationally and computationally complete can be copied without the use of the copy-constructor or assignment operator<ul>
-<li>Equationally complete implies all the parts are readable</li>
-<li>Computationally complete implies all the values are obtainable</li>
-</ul>
-</li>
-</ul>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Whole/Part-Relationship">Whole/Part Relationship<a class="anchor-link" href="#Whole/Part-Relationship">&#182;</a></h3><ul>
-<li>An object is a <em>whole</em>, composed of its <em>parts</em></li>
-<li>A part is <em>local</em> if it is stored directly in the object</li>
-<li>A part is <em>remote</em> if it is stored elsewhere (such as on the heap)</li>
-</ul>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Safety">Safety<a class="anchor-link" href="#Safety">&#182;</a></h3><ul>
-<li>Any operation which maintains the correspondence between an object and an entity it represents is <em>safe</em></li>
-<li>An operation which loses the correspondence is <em>unsafe</em></li>
-</ul>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Canonical-Type-with-and-without-Remote-Parts">Canonical Type with and without Remote Parts<a class="anchor-link" href="#Canonical-Type-with-and-without-Remote-Parts">&#182;</a></h3>
-</div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">simple_type</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_members</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">simple_type</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>                         <span class="c1">// default-ctor</span>
-
-    <span class="n">simple_type</span><span class="p">(</span><span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>                <span class="c1">// copy-ctor</span>
-    <span class="n">simple_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>     <span class="c1">// copy-assign</span>
-
-    <span class="n">simple_type</span><span class="p">(</span><span class="n">simple_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>            <span class="c1">// move-ctor</span>
-    <span class="n">simple_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">simple_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// move_assign</span>
-
-    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nf">tie</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_members</span> <span class="cm">/*, ...*/</span><span class="p">)</span> <span class="o">==</span> <span class="n">tie</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">_members</span> <span class="cm">/*, ...*/</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">simple_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">pimpl_type</span> <span class="p">{</span>
-    <span class="k">class</span> <span class="nc">implementation</span><span class="p">;</span>
-    <span class="k">struct</span> <span class="nc">deleter</span> <span class="p">{</span>
-        <span class="kt">void</span> <span class="nf">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span> <span class="k">const</span><span class="p">;</span>
-    <span class="p">};</span>
-    <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span> <span class="n">deleter</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="n">pimpl_type</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>                        <span class="c1">// default-ctor</span>
-    <span class="n">pimpl_type</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span><span class="p">);</span>                          <span class="c1">// copy-ctor</span>
-    <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>            <span class="c1">// copy-assign</span>
-        <span class="k">return</span> <span class="o">*</span><span class="k">this</span> <span class="o">=</span> <span class="n">pimpl_type</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-    <span class="p">}</span>
-    <span class="n">pimpl_type</span><span class="p">(</span><span class="n">pimpl_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>            <span class="c1">// move-ctor</span>
-    <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">pimpl_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// move_assign</span>
-    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span><span class="p">,</span> <span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span><span class="p">);</span>
-    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="o">!</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="c1">// cpp file</span>
-<span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="k">struct</span> <span class="nc">pimpl_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
-    <span class="c1">// a simple type...</span>
-    <span class="kt">int</span> <span class="n">_members</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-    <span class="k">friend</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">implementation</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">implementation</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nf">tie</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_members</span> <span class="cm">/*, ...*/</span><span class="p">)</span> <span class="o">==</span> <span class="n">tie</span><span class="p">(</span><span class="n">b</span><span class="p">.</span><span class="n">_members</span> <span class="cm">/*, ...*/</span><span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="kt">void</span> <span class="n">pimpl_type</span><span class="o">::</span><span class="n">deleter</span><span class="o">::</span><span class="k">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span> <span class="n">a</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span> <span class="k">delete</span> <span class="n">a</span><span class="p">;</span> <span class="p">}</span>
-
-<span class="n">pimpl_type</span><span class="o">::</span><span class="n">pimpl_type</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span>
-    <span class="o">:</span> <span class="n">_remote</span><span class="p">(</span><span class="k">new</span> <span class="n">implementation</span><span class="p">(</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">))</span> <span class="p">{}</span>
-
-<span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">pimpl_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span> <span class="o">==</span> <span class="o">*</span><span class="n">b</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>In both cases the default-dtor is used (not specified)</li>
-<li>We will be covering polymorphic types and containers later in the course</li>
+<li>Default-construction is only include in <code>std::regular&lt;&gt;</code> for historical reasons<ul>
+<li>The classical definition of regular predates <code>move</code> as a basis operation<ul>
+<li>Instead, <code>move</code> was done with default-construction and swap</li>
+</ul>
+</li>
+<li>Default construction is not required by any standard algorithm</li>
+</ul>
+</li>
 </ul>
 
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Prior-Homework">Prior Homework<a class="anchor-link" href="#Prior-Homework">&#182;</a></h2><p><strong>Exercise</strong> Look at the regular operations (copy, assignment, equality, default construction) for a type in the standard library, or a commonly used type within your project. Is the implementation correct? Complete? Efficient?</p>
-
+<h2 id="Expressiveness">Expressiveness<a class="anchor-link" href="#Expressiveness">&#182;</a></h2>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Prior-Homework">Prior Homework<a class="anchor-link" href="#Prior-Homework">&#182;</a></h2><p><strong>Exercise:</strong> Look at the regular operations (copy, assignment, equality, default construction) for ZString (or a commonly used type within your project). Is the implementation correct? Complete? Efficient?</p>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">What Should Be Part of The Public Interface On A Type?<a class="anchor-link" href="#What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">&#182;</a></h2><ul>
+<h3 id="Public-calls-with-private-access">Public calls with private access<a class="anchor-link" href="#Public-calls-with-private-access">&#182;</a></h3><ul>
 <li><p>In general we want the minimum number of public calls with private access to provide a type which is:</p>
 <ul>
 <li>Computationally Complete</li>
 <li>Equationally Complete</li>
+<li>Efficient</li>
+<li>Safe (except as <em>required</em> for efficiency)</li>
+<li>Operations required to be part of the class interface by the language (i.e., you cannot implement a stand-alone assignment operator)</li>
 </ul>
 </li>
 <li><p>Other operations should be implemented in terms of those</p>
@@ -16242,419 +16125,78 @@ Interpreter Exception:</code></pre>
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>Example:</p>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">number</span> <span class="p">{</span>
-    <span class="kt">unsigned</span> <span class="kt">int</span> <span class="n">_data</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="c1">// default standard operations</span>
-    <span class="n">number</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">++</span><span class="p">()</span> <span class="p">{</span>
-        <span class="o">++</span><span class="n">_data</span><span class="p">;</span>
-        <span class="k">return</span> <span class="o">*</span><span class="k">this</span><span class="p">;</span>
-    <span class="p">}</span>
-    <span class="k">friend</span> <span class="kt">unsigned</span> <span class="kt">int</span> <span class="k">operator</span><span class="o">-</span><span class="p">(</span><span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">a</span><span class="p">.</span><span class="n">_data</span> <span class="o">-</span> <span class="n">b</span><span class="p">.</span><span class="n">_data</span><span class="p">;</span> <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><code>number</code> is computationally and equationally complete</li>
+<li>What other operations should be provide?</li>
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
-
-<span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">number</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">b</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">;</span> <span class="p">}</span>
-
-<span class="p">}</span> <span class="c1">// namespace bcc</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>Being correct and complete is not enough:</li>
-</ul>
-
-</div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
-    <span class="c1">// construct the value 3</span>
-    <span class="n">number</span> <span class="n">a</span><span class="p">;</span>
-    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
-    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
-    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
-
-    <span class="c1">// print it</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">-</span> <span class="n">number</span><span class="p">())</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>3
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="Expressive-Basis">Expressive Basis<a class="anchor-link" href="#Expressive-Basis">&#182;</a></h2><blockquote><p>A basis is <em>expressive</em> iff it allows compact and convenient definitions of procedures on the type.</p>
+<h3 id="Expressive-Basis">Expressive Basis<a class="anchor-link" href="#Expressive-Basis">&#182;</a></h3><blockquote><p>A basis is <em>expressive</em> if it allows compact and convenient definitions of procedures on the type.</p>
 </blockquote>
-<p>For example:</p>
 
 </div>
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
-
-    <span class="c1">// construct the value 3</span>
-    <span class="n">number</span> <span class="n">a</span><span class="p">;</span>
-    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
-    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
-    <span class="o">++</span><span class="n">a</span><span class="p">;</span>
-<span class="p">}</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div></div></section></section><section><section>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>As an example, consider the standard operators, given <code>operator&lt;()</code> we don't need the other comparisons:<ul>
+<li><code>(a &gt; b) == (b &lt; a)</code></li>
+<li><code>(a &lt;= b) == !(b &lt; a)</code></li>
+<li><code>(a &gt;= b) == !(a &lt; b)</code></li>
+<li><code>(a == b) == !(a &lt; b || b &lt; a)</code></li>
+<li><code>(a != b) == (a &lt; b || b &lt; a)</code></li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div></div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>However, writing:</p>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="p">(</span><span class="n">a</span> <span class="o">&lt;</span> <span class="n">b</span> <span class="o">||</span> <span class="n">b</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">))</span> <span class="n">some_operation</span><span class="p">();</span>
+</pre></div>
 <p>is not as expressive as:</p>
-
-</div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span> <span class="kt">int</span> <span class="n">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="p">}</span>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span> <span class="n">some_operation</span><span class="p">();</span>
 </pre></div>
 
-     </div>
 </div>
-</div>
-</div>
-
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Especially for common operators you should provide operations in meaningful groups:</li>
-<li>If your provide <code>operator==()</code> (and you should), also provide <code>!=</code></li>
-<li>If you provide <code>operator&lt;()</code>, <em>natural total order</em>, you should provide all comparison operators</li>
-<li>Negation and addition implies subtraction</li>
-<li>etc.</li>
-</ul>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="(Revisited)-What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">(Revisited) What Should Be Part of The Public Interface On A Type?<a class="anchor-link" href="#(Revisited)-What-Should-Be-Part-of-The-Public-Interface-On-A-Type?">&#182;</a></h2><ul>
-<li><p>In general we want the <strong>minimum</strong> number of public calls with private access to provide a type which is:</p>
+<li>Where we have standard operators or other strong conventions, supply those operations</li>
+<li><p>Supply any other operations that are likely to be common</p>
 <ul>
-<li>Computationally Complete</li>
-<li>Equationally Complete</li>
-<li>Efficient</li>
-<li>Safe</li>
-<li>Operations required to be part of the class interface by the language (i.e., you cannot implement a stand-alone assignment operator)</li>
+<li>Unless they can be provided in a generic fashion across types</li>
 </ul>
 </li>
-<li><p>Other operations, including operations that are part of the expressive basis, should be implemented in terms of those operations</p>
-</li>
-<li>This still leaves a fair amount up to the designer to choose how to balance safety and efficiency and what <em>expressive</em> means in the context of the type</li>
-</ul>
-
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Runtime-Polymorphism">Runtime-Polymorphism<a class="anchor-link" href="#Runtime-Polymorphism">&#182;</a></h1>
-</div>
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>The requirement of runtime-polymorphism within a system comes from the need to use objects of different but <em>related</em> types</li>
-<li><em>Inheritance</em> is a mechanism to implement runtime-polymorphism where one class is <em>derived</em> from another class, but overriding all or part of the implementation.</li>
-</ul>
-
-</div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
-<span class="k">using</span> <span class="n">circle</span> <span class="o">=</span> <span class="kt">int</span><span class="p">;</span>
-
-<span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="k">const</span> <span class="n">circle</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="k">using</span> <span class="n">document</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">circle</span><span class="o">&gt;</span><span class="p">;</span>
-
-<span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="k">const</span> <span class="n">document</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&lt;document&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span>
-        <span class="n">draw</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">out</span><span class="p">,</span> <span class="n">position</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
-    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&lt;/document&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-<span class="p">}</span> <span class="c1">// namespace v5</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">shape</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">virtual</span> <span class="o">~</span><span class="n">shape</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">draw</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="k">using</span> <span class="n">document</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">shape</span><span class="o">&gt;&gt;</span><span class="p">;</span>
-
-<span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="k">const</span> <span class="n">document</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span>
-    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&lt;document&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="k">for</span> <span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span>
-        <span class="n">e</span><span class="o">-&gt;</span><span class="n">draw</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">position</span> <span class="o">+</span> <span class="mi">2</span><span class="p">);</span>
-    <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;&lt;/document&gt;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="p">}</span> <span class="c1">// namespace v4</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">circle</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">shape</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_radius</span><span class="p">;</span>
-
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">explicit</span> <span class="n">circle</span><span class="p">(</span><span class="kt">int</span> <span class="n">radius</span><span class="p">)</span> <span class="o">:</span> <span class="n">_radius</span><span class="p">{</span><span class="n">radius</span><span class="p">}</span> <span class="p">{}</span>
-    <span class="kt">void</span> <span class="n">draw</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
-        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;circle: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">_radius</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace v4</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
-
-<span class="k">class</span> <span class="nc">rectangle</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">shape</span> <span class="p">{</span>
-    <span class="kt">int</span> <span class="n">_width</span><span class="p">,</span> <span class="n">_height</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-    <span class="k">explicit</span> <span class="n">rectangle</span><span class="p">(</span><span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span> <span class="o">:</span> <span class="n">_width</span><span class="p">{</span><span class="n">width</span><span class="p">},</span> <span class="n">_height</span><span class="p">{</span><span class="n">height</span><span class="p">}</span> <span class="p">{}</span>
-    <span class="kt">void</span> <span class="n">draw</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span> <span class="k">override</span> <span class="p">{</span>
-        <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;rectangle: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">_width</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;, &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">_height</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
-    <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="p">}</span> <span class="c1">// namespace 4</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v4</span><span class="p">;</span>
-
-    <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
-
-    <span class="n">d</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="k">new</span> <span class="n">circle</span><span class="p">{</span><span class="mi">5</span><span class="p">});</span>
-    <span class="n">d</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="k">new</span> <span class="n">rectangle</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">});</span>
-    <span class="n">draw</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">cout</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>&lt;document&gt;
-  circle: 5
-  rectangle: 10, 42
-&lt;/document&gt;
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<ul>
-<li>This line contains a defect:<div class="highlight"><pre><span></span><span class="n">d</span><span class="p">.</span><span class="n">emplace_back</span><span class="p">(</span><span class="k">new</span> <span class="n">circle</span><span class="p">{</span><span class="mi">5</span><span class="p">});</span>
-</pre></div>
-<ul>
-<li>An instance of <code>circle</code> will be allocated first</li>
-<li>Then the document will grow to make room</li>
-<li>If growing the document throws an exception, the memory from <code>circle</code> is leaked</li>
-</ul>
+<li><p>This still leaves a fair amount up to the designer to choose how to balance safety and efficiency and what <em>expressive</em> means in the context of the type</p>
 </li>
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v4</span><span class="p">;</span>
-
-    <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
-
-    <span class="n">d</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">circle</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">5</span><span class="p">));</span>
-    <span class="n">d</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">make_shared</span><span class="o">&lt;</span><span class="n">rectangle</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">));</span>
-    <span class="n">draw</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">cout</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
-<span class="p">}</span>
-</pre></div>
-
-     </div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Other-Operations">Other Operations<a class="anchor-link" href="#Other-Operations">&#182;</a></h2>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>&lt;document&gt;
-  circle: 5
-  rectangle: 10, 42
-&lt;/document&gt;
-</pre>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Hash">Hash<a class="anchor-link" href="#Hash">&#182;</a></h2>
 </div>
 </div>
-
-</div>
-
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span>
-</pre></div>
-
-     </div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Serialization">Serialization<a class="anchor-link" href="#Serialization">&#182;</a></h2>
 </div>
 </div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Ordering">Ordering<a class="anchor-link" href="#Ordering">&#182;</a></h2>
 </div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Covered in the next section</li>
+</ul>
 
+</div>
 </div></section></section>
 </div>
 </div>

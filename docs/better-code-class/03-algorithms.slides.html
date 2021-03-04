@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14389,6 +14389,16 @@ display: block;
   margin-right: auto;
 }
 
+.reveal ::selection {
+  color:#000;
+  background: rgb(200, 255, 200);
+  text-shadow: none;
+}
+
+.reveal blockquote {
+  font-style: normal;
+}
+
   /*
   .reveal pre {
     width: inherit;
@@ -14502,6 +14512,22 @@ display: block;
 <div class="reveal">
 <div class="slides"><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h1 id="Algorithms">Algorithms<a class="anchor-link" href="#Algorithms">&#182;</a></h1><p><strong>Goal: No raw loops</strong></p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>An <em>Algorithm</em> is a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer.</p>
+</blockquote>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Trivial-vs-Non-Trivial-Algorithms">Trivial vs Non-Trivial Algorithms<a class="anchor-link" href="#Trivial-vs-Non-Trivial-Algorithms">&#182;</a></h2><p>The term <em>algorithm</em> covers all code. If an algorithm does not require iteration or recursion, it is a <em>trivial</em> algorithm. Otherwise it is a non-trivial algorithm. The standard includes trivial algorithms such as <code>std::swap()</code> and <code>std::exchange()</code>, but for this section the focus is on non-trivial algorithms.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Sequences">Sequences<a class="anchor-link" href="#Sequences">&#182;</a></h2><ul>
 <li>For a sequence of <em>n</em> elements their are <em>n + 1</em> positions</li>
 </ul>
@@ -14541,11 +14567,37 @@ display: block;
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
+<li><code>[p, p)</code> represents an empty range, at position <code>p</code><ul>
+<li>All empty ranges are not equal</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
 <li>Think of the positions as the lines between the elements</li>
 </ul>
 
 </div>
 </div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src='img/sequence-1.svg' alt='Sequence 1'>
+    <br>
+    <em>Sequence With Pointers To Objects</em>
+</center>
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src='img/sequence-2.svg' alt='Sequence 2'>
+    <br>
+    <em>Sequence With Pointers Between Objects</em>
+</center>
+</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Limitations of half-open intevals<ul>
@@ -14560,6 +14612,16 @@ display: block;
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>There are different common ways to represent a sequence</li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>A position <code>f</code> in a sequence can be denoted with an index, pointer, or iterator<ul>
+<li>The only requirement is that <code>f</code> be <em>incrementable</em> to obtain the next element in the sequence</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -14587,14 +14649,20 @@ display: block;
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><code>[f, is_sentinel())</code> NTBS</li>
+<li><code>[f, is_sentinel())</code> NTBS<ul>
+<li><code>const char*</code></li>
+</ul>
+</li>
 </ul>
 
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><code>[f, ...)</code> unbounded (dependent on something else)</li>
+<li><code>[f, ...)</code> unbounded (dependent on something else)<ul>
+<li>i.e. range is required to be same or greater length than another range</li>
+</ul>
+</li>
 </ul>
 
 </div>
@@ -14610,64 +14678,52 @@ display: block;
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src='img/sequence-1.svg' alt='Sequence 1'>
-    <br>
-    <em>Sequence With Pointers To Objects</em>
-</center>
-</div>
-</div></section></section><section><section>
-<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<center>
-    <img src='img/sequence-2.svg' alt='Sequence 2'>
-    <br>
-    <em>Sequence With Pointers Between Objects</em>
-</center>
+<section>
+    <iframe data-src="./img/algorithm-slide/index.html"></iframe>
+</section>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <section>
-    <iframe data-src="../keynote-player/KeynoteDHTMLPlayer.html?showUrl=../better-code-class/img/algorithm-slide/assets/" data-preload></iframe>
+    <iframe data-src="./img/algorithm-gather/index.html"></iframe>
 </section>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Common-algorithms-and-their-uses">Common algorithms and their uses<a class="anchor-link" href="#Common-algorithms-and-their-uses">&#182;</a></h2><ul>
-<li>A great resource for finding standard algorithms:</li>
+<li>A great resource for finding standard algorithms:<ul>
+<li><a href="https://en.cppreference.com/w/cpp/algorithm">https://en.cppreference.com/w/cpp/algorithm</a></li>
 </ul>
-<p><a href="https://en.cppreference.com/w/cpp/algorithm">https://en.cppreference.com/w/cpp/algorithm</a>
-<a href="https://en.cppreference.com/w/cpp/numeric">https://en.cppreference.com/w/cpp/numeric</a></p>
+</li>
+</ul>
 
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Non-modifying-sequence-operations">Non-modifying sequence operations<a class="anchor-link" href="#Non-modifying-sequence-operations">&#182;</a></h3><ul>
-<li><code>for_each</code></li>
+<h2 id="Non-modifying-sequence-operations">Non-modifying sequence operations<a class="anchor-link" href="#Non-modifying-sequence-operations">&#182;</a></h2><ul>
 <li><code>find</code></li>
+<li><code>find_if</code></li>
+<li><code>find_if_not</code></li>
 </ul>
 
 </div>
-</div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><code>find</code> returns the position of the first element in the range <code>[f, l)</code> that satisfies the specified criteria.</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">int</span> <span class="n">a</span><span class="p">[]{</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">};</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">for_each</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="p">[](</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">){</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">;</span> <span class="p">});</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">[]{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+    <span class="n">display</span><span class="p">(</span><span class="o">*</span><span class="n">find</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="mi">5</span><span class="p">));</span>
+<span class="p">}</span>
 </pre></div>
 
      </div>
@@ -14681,82 +14737,234 @@ display: block;
 
 <div class="jp-OutputArea-child">
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>123</pre>
-</div>
-</div>
 
-</div>
 
-</div>
-
-</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">a</span><span class="p">)</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">;</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>123</pre>
-</div>
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>5</pre>
 </div>
 
 </div>
 
 </div>
 
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Question:</strong> How do we know <code>find()</code> will <em>find</em> a value?</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Iterator must meet the requirements of <a href="https://en.cppreference.com/w/cpp/named_req/InputIterator"><em>LegacyInputIterator</em></a></li>
+<li><code>[f, l)</code> must form a <em>valid range</em></li>
+<li>the value type must be <a href="https://en.cppreference.com/w/cpp/named_req/EqualityComparable"><em>EqualityComparable</em></a> to the iterator <code>value_type</code></li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Requirements-and-Guarantees">Requirements and Guarantees<a class="anchor-link" href="#Requirements-and-Guarantees">&#182;</a></h2>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>A generic algorithm is specified in terms of a set of <em>requirements</em> on it's arguments. The requirements are a set of <em>concepts</em> and <em>preconditions</em> which, if satisfied, guarantee the algorithm performs as specified</li>
+<li>The C++ standard contains tables of <a href="https://en.cppreference.com/w/cpp/named_req"><em>named requirements</em></a> and <a href="https://en.cppreference.com/w/cpp/header/concepts"><em>concepts</em></a></li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Concepts and Preconditions are closely related and both ideas are rooted in <a href="https://en.wikipedia.org/wiki/Hoare_logic"><em>Hoare Logic</em></a></li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Concept">Concept<a class="anchor-link" href="#Concept">&#182;</a></h3><p>The term <em>concept</em> was coined by</p>
+<blockquote><p>We call the set of axioms satisfied by a data type and a set of operations on it a <em>concept</em>.
+<br> &emsp;&mdash; <em>Fundementals of Generic Programming</em>, James C. Dehnert and Alexander Stepanov</p>
+</blockquote>
+<p>In C++20, a language <em>concept</em> is a set of syntactic requirements with a set of specified, in documentation, semantic and complexity requirements.</p>
+<ul>
+<li>As with spoken language, we associate meaning with words</li>
+<li>Even this is controversial </li>
+</ul>
+<blockquote><p>Names should not be associated with semantics because
+everybody has their own hidden assumptions about what semantics are,
+and they clash, causing comprehension problems without knowing why.
+This is why it's valuable to write code to reflect what code is
+actually doing, rather than what code "means": it's hard to have
+conceptual clashes about what code actually does.
+<br> &emsp;&mdash; Craig Silverstein, personal correspondence</p>
+</blockquote>
+<ul>
+<li><em>LegacyInputIterator</em> and <em>EqualityComparable</em> are concepts</li>
+</ul>
+<h4 id="Model">Model<a class="anchor-link" href="#Model">&#182;</a></h4><blockquote><p>We say that a concept is <em>modeled by</em> specific types, or that the type <em>models</em> the concept, if the requirements are satisfied for these types.</p>
+</blockquote>
+<h3 id="Contracts">Contracts<a class="anchor-link" href="#Contracts">&#182;</a></h3><p><em>Contracts</em>, or <em>Design by Contract</em>, is a systematic approach to ensuring the values passed to, and returned by an operation satisfy specific assertions.</p>
+<blockquote><p>If the execution of a certain task relies on a routine call to handle one of its subtasks, it is necessary to specify the relationship between the client (the call- er) and the supplier (the called routine) as precisely as possible. The mechanisms for expressing such conditions are called assertions. Some assertions. called preconditions and postconditions. apply to individual routines. Others, the class invariants, constrain all the routines of a given class...
+<br> &emsp;&mdash; <em>Applying "Design by Contract"</em>, Bertrand Meyer</p>
+</blockquote>
+<h4 id="Precondition">Precondition<a class="anchor-link" href="#Precondition">&#182;</a></h4><h4 id="Invariant">Invariant<a class="anchor-link" href="#Invariant">&#182;</a></h4><h4 id="Postcondition">Postcondition<a class="anchor-link" href="#Postcondition">&#182;</a></h4><ul>
+<li><p><code>[f, l)</code> must form a valid range is a precondition</p>
+</li>
+<li><p>Concept semantics usually are specified in terms of existential quantifiers ($\forall$, $\exists$)</p>
+</li>
+<li><p>Not all preconditions can be asserted in code</p>
+<ul>
+<li>i.e. <code>f(int* p)</code> with the precondition that <code>p</code> is dereferenceable</li>
+</ul>
+</li>
+<li><p>We must still validate, prove, our code by hand</p>
+</li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>A generic type or operation has a set of requirements on its arguments</li>
+<li>A given type guarantees it satisfies some requirements</li>
+<li>By matching requirements with guarantees we create software which works</li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="Concepts,-Partial-Functions,-and-Domain">Concepts, Partial Functions, and Domain<a class="anchor-link" href="#Concepts,-Partial-Functions,-and-Domain">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Compare the description for the old <a href="http://www.martinbroadhurst.com/stl/LessThanComparable.html">SGI STL LessThanComparable concept</a>:</p>
+<blockquote><p>Expression semantics</p>
+<table>
+<thead><tr>
+<th>Name</th>
+<th>Expression</th>
+<th>Precondition</th>
+<th>Semantics</th>
+<th>Postcondition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Less</td>
+<td><code>x &lt; y</code></td>
+<td><code>x</code> and <code>y</code> are in the domain of <code>&lt;</code></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p>versus the <a href="https://eel.is/c++draft/utility.arg.requirements#tab:cpp17.lessthancomparable">C++17 concept</a>.</p>
+<blockquote><p>Table 28: <em>CppLessThanComparable</em> requirements</p>
+<table>
+<thead><tr>
+<th>Expression</th>
+<th>Return type</th>
+<th>Requirement</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a &lt; b</code></td>
+<td>convertible to <code>bool</code></td>
+<td><code>&lt;</code> is a strict weak ordering relation</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+<p><em>In the SGI STL the requirement of <a href="http://www.martinbroadhurst.com/stl/StrictWeakOrdering.html">strict-weak-ordering</a> was a separate concept.</em></p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Domain is defined in the C++ standard, but in the <a href="https://eel.is/c++draft/iterator.cpp17#input.iterators-2">context of <em>iterators</em></a>. This passage used to refer to the <em>domain of operations</em>, but that has been narrowed to the <em>domain of</em> <code>==</code>:</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>The term <em>the domain of</em> <code>==</code> is used in the ordinary mathematical sense to denote the set of values over which <code>==</code> is (required to be) defined. This set can change over time. Each algorithm places additional requirements on the domain of <code>==</code> for the iterator values it uses. These requirements can be inferred from the uses that algorithm makes of <code>==</code> and <code>!=</code>.</p>
+<table>
+<thead><tr>
+<th>Expression</th>
+<th>Return type</th>
+<th>Operational Semantics</th>
+<th>Assertion/note<br>pre-/post-condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>a != b</code></td>
+<td>contextually convertible to <code>bool</code></td>
+<td><code>!(a == b)</code></td>
+<td><em>Preconditions:</em> (<code>a, b</code>) is in the domain of <code>==</code></td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>What was part of the definition of concepts in general has been weakened to a requirement for a single operation on iterators.</p>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Modifying-sequence-operations">Modifying sequence operations<a class="anchor-link" href="#Modifying-sequence-operations">&#182;</a></h2><ul>
+<li><code>copy</code></li>
+<li><code>move</code></li>
+<li><code>fill</code></li>
+<li><code>transform</code></li>
+<li><code>generate</code></li>
+<li><code>iota</code></li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h3 id="OutputIterators">OutputIterators<a class="anchor-link" href="#OutputIterators">&#182;</a></h3>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>OutputIterators are isomorphic with a function object<ul>
+<li>Function objects are simpler to write with lambda expressions</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><code>std::iota()</code> and <code>std::generate</code> would be better expressed with functions</li>
+</ul>
+
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="nc">subrange</span> <span class="p">{</span>
-    <span class="n">I</span> <span class="n">_f</span><span class="p">;</span>
-    <span class="n">I</span> <span class="n">_l</span><span class="p">;</span>
-<span class="p">};</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="o">&gt;</span>
-<span class="n">I</span> <span class="n">begin</span><span class="p">(</span><span class="n">subrange</span><span class="o">&lt;</span><span class="n">I</span><span class="o">&gt;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="n">_f</span><span class="p">;</span> <span class="p">}</span>
-
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="o">&gt;</span>
-<span class="n">I</span> <span class="n">end</span><span class="p">(</span><span class="n">subrange</span><span class="o">&lt;</span><span class="n">I</span><span class="o">&gt;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="n">_l</span><span class="p">;</span> <span class="p">}</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
-</div>
-
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">library</span> <span class="p">{</span>
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="c1">// I models InputIterator</span>
-          <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span> <span class="c1">// value_type(I) is convertible to T</span>
-<span class="n">subrange</span><span class="o">&lt;</span><span class="n">I</span><span class="o">&gt;</span> <span class="n">find</span><span class="p">(</span><span class="n">I</span> <span class="n">f</span><span class="p">,</span> <span class="n">I</span> <span class="n">l</span><span class="p">,</span> <span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">,</span> <span class="n">x</span><span class="p">);</span>
-    <span class="k">return</span> <span class="p">{</span><span class="n">p</span><span class="p">,</span> <span class="p">(</span><span class="n">p</span> <span class="o">==</span> <span class="n">l</span><span class="p">)</span> <span class="o">?</span> <span class="nl">p</span> <span class="p">:</span> <span class="n">std</span><span class="o">::</span><span class="n">next</span><span class="p">(</span><span class="n">p</span><span class="p">)};</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
+<span class="k">constexpr</span> <span class="kt">void</span> <span class="n">iota</span><span class="p">(</span><span class="n">T</span> <span class="n">first</span><span class="p">,</span> <span class="n">T</span> <span class="n">last</span><span class="p">,</span> <span class="n">F</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">for</span> <span class="p">(;</span> <span class="n">first</span> <span class="o">!=</span> <span class="n">last</span><span class="p">;</span> <span class="o">++</span><span class="n">first</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">out</span><span class="p">(</span><span class="n">first</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">}</span>
-<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace bcc</span>
 </pre></div>
 
      </div>
@@ -14770,7 +14978,13 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">library</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="mi">2</span><span class="p">))</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
+
+    <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>
+    <span class="n">bcc</span><span class="o">::</span><span class="n">iota</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="p">});</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
+<span class="p">}</span>
 </pre></div>
 
      </div>
@@ -14784,39 +14998,21 @@ display: block;
 
 <div class="jp-OutputArea-child">
 
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>2</pre>
-</div>
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>{ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 }</pre>
 </div>
 
 </div>
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
-<div class="jp-Cell-inputWrapper">
-<div class="jp-InputArea jp-Cell-inputArea">
-
-<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
-     <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">for</span><span class="p">(</span><span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="nl">e</span> <span class="p">:</span> <span class="n">library</span><span class="o">::</span><span class="n">find</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">e</span><span class="p">;</span>
-</pre></div>
-
-     </div>
-</div>
-</div>
 </div>
 
-</div></div></section></section><section><section>
+</div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h3 id="Modifying-sequence-operations">Modifying sequence operations<a class="anchor-link" href="#Modifying-sequence-operations">&#182;</a></h3><ul>
-<li><code>copy</code></li>
-<li><code>move</code></li>
-<li><code>fill</code></li>
-<li><code>transform</code></li>
-<li><code>generate</code></li>
-</ul>
-
+<h2 id="Permutations">Permutations<a class="anchor-link" href="#Permutations">&#182;</a></h2>
 </div>
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14828,15 +15024,54 @@ display: block;
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Comparison function must be a strict-weak ordering:</li>
+<li>Comparison function is required to be a <em>strict-weak ordering</em>:</li>
 </ul>
-<blockquote><p>Two object, $a$ and $b$, are <em>equivalent</em>, $\equiv$, iff $(a \nprec b) \wedge (b \nprec a)$.</p>
+<blockquote><p>An ordering relation, $\prec$, is a <em>strict-weak</em> ordering iff</p>
 </blockquote>
 \begin{align}
 (a &amp; \nprec a). &amp;&amp; \text{(Irreflexivity)} \\
 (a &amp; \prec b) \wedge (b \prec c) \implies a \prec c. &amp;&amp; \text {(Transitivity)} \\
 (a &amp; \equiv b) \wedge (b \equiv c) \implies a \equiv c. &amp;&amp; \text {(Equivalence Transitivity)}\\
-\end{align}
+\end{align}<blockquote><p>Where $a$ and $b$, are <em>equivalent</em>, $\equiv$, iff $(a \nprec b) \wedge (b \nprec a)$.</p>
+</blockquote>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>The default is to user <code>operator&lt;()</code></li>
+<li>On a type, the expectation is that <code>operator&lt;()</code> is a <em>total ordering</em><ul>
+<li>Which is consistent with other operations on the type</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>A <em>total ordering</em> is a strict-weak ordering where the defined equivalence is equality</p>
+</blockquote>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li><code>operator&lt;()</code> is not defined on <code>std::complex&lt;&gt;</code> because there is no definition consistent with multiplication<ul>
+<li>For example, both $i &gt; 0$ and $i &lt; 0$ imply that $0 &lt; i^2$, however, $i^2 = -1$</li>
+</ul>
+</li>
+</ul>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>Despite <code>nan</code> values, both <code>float</code> and <code>double</code> are totally-ordered because <code>nan</code> is explicitly outside the value domain for floating point types. <code>nan</code> is <em>not a number</em></li>
+<li>A floating point object containing <code>nan</code> is partially formed</li>
+<li>Don't try and sort a sequence containing <code>nan</code> values with <code>operator&lt;()</code><ul>
+<li>The result is UB and will likely crash</li>
+</ul>
+</li>
+</ul>
+<blockquote><p>_C++20 defines the ordering on floating-point types as a <code>std::partial_ordering</code> because of <code>nan</code> values. I find this complicates matters unnecessarily, and means the requirements of the comparison operator cannot be defined with a <em>concept</em> but require a precondition._</p>
+</blockquote>
+
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
@@ -14850,6 +15085,169 @@ display: block;
 <p><strong>Exercise:</strong> Review list of standard algorithms.</p>
 
 </div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">[]{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+
+    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">remove_if</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="p">[</span><span class="n">_n</span> <span class="o">=</span> <span class="mi">0</span><span class="p">](</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">mutable</span> <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">_n</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">_n</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">);</span>
+        <span class="o">++</span><span class="n">_n</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="n">display</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>{ 0, 1, 3, 4, 7, 8, 9, 7, 8, 9 }</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span> <span class="nc">P</span><span class="o">&gt;</span>
+<span class="n">F</span> <span class="n">remove_if</span><span class="p">(</span><span class="n">F</span> <span class="n">first</span><span class="p">,</span> <span class="n">F</span> <span class="n">last</span><span class="p">,</span> <span class="n">P</span> <span class="n">pred</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">first</span> <span class="o">=</span> <span class="n">find_if</span><span class="p">(</span><span class="n">first</span><span class="p">,</span> <span class="n">last</span><span class="p">,</span> <span class="n">pred</span><span class="p">);</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">first</span> <span class="o">==</span> <span class="n">last</span><span class="p">)</span> <span class="k">return</span> <span class="n">first</span><span class="p">;</span>
+
+    <span class="n">F</span> <span class="n">p</span> <span class="o">=</span> <span class="n">first</span><span class="p">;</span>
+    <span class="k">while</span> <span class="p">(</span><span class="o">++</span><span class="n">p</span> <span class="o">!=</span> <span class="n">last</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">pred</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">))</span> <span class="p">{</span>
+            <span class="o">*</span><span class="n">first</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">);</span>
+            <span class="o">++</span><span class="n">first</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="k">return</span> <span class="n">first</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="kt">int</span> <span class="n">a</span><span class="p">[]{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">9</span><span class="p">};</span>
+
+    <span class="kt">int</span> <span class="n">n</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
+    <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">remove_if</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="k">const</span> <span class="kt">int</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span>
+        <span class="kt">bool</span> <span class="n">r</span> <span class="o">=</span> <span class="p">(</span><span class="mi">2</span> <span class="o">&lt;=</span> <span class="n">n</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">4</span><span class="p">);</span>
+        <span class="o">++</span><span class="n">n</span><span class="p">;</span>
+        <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
+    <span class="p">});</span>
+
+    <span class="n">display</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>{ 0, 1, 4, 5, 6, 7, 8, 9, 8, 9 }</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Question:</strong> Does the above code fix the issue?</p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>The requirement is that <code>pred</code> is a regular function although the standard wording is a <a href="https://eel.is/c++draft/algorithms#requirements-7">obtuse</a>:</li>
+</ul>
+<blockquote><p>Given a glvalue <code>u</code> of type (possibly <code>const</code>) <code>T</code> that designates the same object as <code>*first</code>, <code>pred(u)</code> shall be a valid expression that is equal to <code>pred(*first)</code>.</p>
+</blockquote>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>[</p>
+<ul>
+<li>discuss (show graph) of O(1), O(log(N)), O(N), O(N log(N)</li>
+<li>where does the below code go?
+]</li>
+</ul>
+
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="kt">double</span> <span class="n">a</span> <span class="o">=</span> <span class="n">numeric_limits</span><span class="o">&lt;</span><span class="kt">double</span><span class="o">&gt;::</span><span class="n">quiet_NaN</span><span class="p">();</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">a</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>false</pre>
+</div>
+
+</div>
+
+</div>
+
+</div>
+
 </div></section></section>
 </div>
 </div>

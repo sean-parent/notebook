@@ -3,7 +3,8 @@
     "cmake.configureOnOpen": false,
     "files.associations": {
         "ratio": "cpp",
-        "chrono": "cpp"
+        "chrono": "cpp",
+        "functional": "cpp"
     },
     "grammarly.userWords": [
         "equationally",

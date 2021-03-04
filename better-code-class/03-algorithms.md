@@ -6,430 +6,28 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.0
+      jupytext_version: 1.10.2
   kernelspec:
     display_name: C++17
     language: C++17
     name: xcpp17
 ---
 
-```c++ jupyter={"source_hidden": true} slideshow={"slide_type": "skip"}
+```c++ slideshow={"slide_type": "skip"}
 #include "../common.hpp"
 ```
 
-<!-- #region jupyter={"source_hidden": true} slideshow={"slide_type": "skip"} -->
-## Prior Homework
+# Algorithms
 
-**Exercise:** Look at the API and implementation for ZString (or a commonly used class in your own project). What does a ZString represent? What would be a good set of basis operations? What operations would be better implemented externally? Are there operations that should be removed?
-<!-- #endregion -->
+**Goal: No raw loops**
 
-<!-- #region jupyter={"source_hidden": true} slideshow={"slide_type": "skip"} -->
-```cpp
 
-class ZString {
-public:
-    static ZString RomanizationOf(int32 num, int16_t minWidth = 0);
-    static ZString FixedRomanizationOf(int32 value,
-                                       int16_t places,
-                                       bool trim,
-                                       bool isSigned = false);
+> An _Algorithm_ is a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer.
 
-    [[ deprecated ]] int32 AsInteger() const; // Use HasInteger
-    bool AsBool() const;
 
-    typedef enum _t_Base { any = 0, decimal = 10, hex = 16, octal = 8 } Base;
+## Trivial vs Non-Trivial Algorithms
 
-    bool HasInteger(int32& value,
-                    Base base = decimal,
-                    ZString* rest = NULL,
-                    bool skip_whitespace_for_rest = true) const;
-    bool HasFloat(nativeFloat& value,
-                  ZString* rest = NULL,
-                  bool skip_whitespace_for_rest = true,
-                  bool from_user_interface = true) const;
-
-    void TrimEllipsis();
-    void TrimBlanks();
-    void TrimWhiteSpace();
-
-    bool TruncateToLength(uint32_t maxLength);
-    ZString MakeSubString(uint32 startPos, uint32_t exactLength) const;
-
-#if INSIDE_PHOTOSHOP
-    enum TrimFromLocation { tflBeginning, tflMiddle, tflEnd };
-
-    bool TrimToWidth(const PSFont& font,
-                     nativeFloat maxWidth,
-                     TrimFromLocation trimFromLoc = tflEnd);
-
-    bool TrimToWidth(ZStringWidthProc& inWidthProc,
-                     nativeFloat maxWidth,
-                     TrimFromLocation trimFromLoc = tflEnd);
-
-    bool TrimLongNameToWidthFromMiddle(const PSFont& font, nativeFloat maxWidth);
-#endif
-    bool TruncateFilename(uint32_t maxLength = 31);
-
-    void RemoveAccelerators(bool removeParentheticalHotkeysOnWindows = false,
-                            bool removeDoubleAmpersandOnWindows = false);
-
-    void DoubleAmpersand();
-    bool StripAmpersand(void);
-
-    unsigned short GetAccelerator() const;
-
-    bool SplitZStringAtAmpersand(ZString& preZstr,
-                                 ZString& accelZstr,
-                                 ZString& postZstr) const;
-
-    unsigned short GetFirstCharacterForShortcut() const;
-
-    void ReplaceCharacters(const unsigned short* matchChars,
-                           const unsigned short* replacementChars,
-                           uint32 numChars);
-
-    void EscapeCharacters(const unsigned short* charsToEscape,
-                          const unsigned short* escapeChars,
-                          uint32 numChars);
-
-#if MSWindows
-    void RemoveDirectionalityMarkers();
-#endif
-    void SplitZString(ZString& prePart,
-                      ZString& postPart,
-                      const ZString& splitter) const;
-
-    void ReverseSplitZString(ZString& prePart,
-                             ZString& postPart,
-                             const ZString& splitter) const;
-
-    bool IsAllWhiteSpace() const;
-    bool ContainsWhiteSpace() const;
-    uint32 CountWhiteSpaceCharacters() const;
-    bool IsEmpty() const;
-
-    bool InitialMatch(const ZString& substring, const uint32 count) const;
-
-    bool StartsWith(const ZString& subString, bool caseSensitive = true) const;
-    bool EndsWith(const ZString& subString, bool caseSensitive = true) const;
-
-    bool Contains(const ZString& subString, bool caseSensitive = true) const;
-
-    bool ContainsNonRomanCharacters(CharsDistribution* charsDist = NULL) const;
-
-    void operator=(const ZString& x);
-    ZString& operator=(ZString&& x) noexcept;
-
-    ZString operator+(const ZString& x) const;
-    ZString& operator+=(const ZString& x);
-
-    bool operator==(const ZString& x) const;
-    bool operator!=(const ZString& x) const { return !(*this == x); }
-
-    bool operator<(const ZString&) const;
-
-    int32 CompareAgainst(const ZString& other,
-                         bool forEquivalence,
-                         bool localizedCompare,
-                         bool caseSensitive,
-                         bool diacriticalSensitive,
-                         bool digitsAsNumber = false) const;
-
-    void RemoveBadFileNameCharacters();
-
-    void PathToSegments(ZString& server,
-                        ZString& volume,
-                        ZString& driveLetter,
-                        std::vector<ZString>& segments,
-                        ZString& fileName) const;
-
-    static void SegmentsToPath(const ZString& server,
-                               const ZString& volume,
-                               const ZString& driveLetter,
-                               const std::vector<ZString>& segments,
-                               const ZString& fileName,
-                               ZString& fullPath);
-
-    void PathGetLastSegment(ZString& file) const;
-
-    void PathGetLastSegmentMacOrWin(ZString& file) const;
-
-    void FileNameExtension(ZString& base, ZString& extension) const;
-
-    void EnsureTrailingSeparator();
-    void RemoveTrailingSeparator();
-
-    void RemoveFileOrPathSegment();
-
-    ZString GetProperPathSplitter(void) const;
-
-    bool SearchString(const photoshop::utf16_t* wSubStr,
-                      uint32 startPos,
-                      uint32& foundPostion) const;
-
-    void Delete(uint32 position, uint32 length);
-
-    void InsertUnicodeCString(const photoshop::utf16_t* wInsStr, uint32 position);
-
-    void AppendPathSegment(const ZString&);
-
-    void SplitPostScriptFontName(ZString& familyPart, ZString& stylePart) const;
-
-    void MapCommonSymbolsToLowASCIIEquivalents();
-
-    ZString();
-    ZString(const ZString& x);
-    ZString(ZString&& x);
-
-    ZString(const char cKey[],
-            const int32 maxBufferSize = -1,
-            ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-
-#if Macintosh
-#if INSIDE_PHOTOSHOP
-    ZString(ConstHFSUniStr255Param key,
-            ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-#endif // INSIDE_PHOTOSHOP
-#endif // Macintosh
-
-    ZString(const unsigned short* ucKey,
-            const int32 maxBufferSize = -1,
-            ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-
-    explicit ZString(const unsigned char pKey[],
-                     const uint32 maxLength = 255,
-                     ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-
-    explicit ZString(const wchar_t* utf32Key,
-                     const int32 maxBufferSize = -1,
-                     ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-
-#if INSIDE_PHOTOSHOP
-    explicit ZString(const std::string& asl_string);
-    explicit ZString(const adobe::name_t& asl_name);
-#endif // INSIDE_PHOTOSHOP
-
-#if INSIDE_PHOTOSHOP
-    explicit ZString(const CStr31& key,
-                     ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-    explicit ZString(const CStr32& key,
-                     ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-    explicit ZString(const CStr63& key,
-                     ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-    explicit ZString(const CStr255& key,
-                     ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-#endif
-
-    ~ZString();
-
-    static ZString Make(
-        const char cKey[],
-        const int32 maxBufferSize = -1,
-        ZStringDictionary* dictionary = TheOneTrueDefaultDictionary());
-
-    void InitPathSeparators();
-
-    void Clear(); // Set to the empty string.
-
-    bool WillReplace(const uint32 index) const;
-
-    void Replace(const uint32 index,
-                 const ZString& replacement,
-                 const bool useAlternativeDelimiter = false);
-
-    void ReplaceWithAlternatives(const uint32 index,
-                                 const ZString& replacement,
-                                 const bool useAlternativeDelimiter = false);
-
-#if Macintosh
-protected:
-    friend class ACFStringRef;
-    operator CFStringRef() const;
-
-public:
-    NSString* AsAutoreleasedNSString() const;
-#endif
-
-public:
-    bool AllCharactersInLocalCodePage() const;
-
-    uint32 LengthAsUnicodeCString() const;
-    void AsUnicodeCString(unsigned short ucstr[],
-                          int32 ucstrBufferSize,
-                          bool warnAboutBufferOverflow = true) const;
-
-#if INSIDE_PHOTOSHOP
-    uint32 LengthAsUniStr255() const;
-
-    void AsUniStr255(HFSUniStr255* uniStr,
-                     bool warnAboutBufferOverflow = true) const;
-#endif
-
-    uint32 LengthAsWideCharCString() const;
-
-    void AsWideCharCString(photoshop::utf16_t wccstr[],
-                           int32 wccstrBufferSize,
-                           bool warnAboutBufferOverflow = true) const;
-
-    uint32 LengthAsCString() const;
-    
-    void AsCString(char cstr[],
-                   int32 cstrBufferSize,
-                   bool warnAboutBufferOverflow = true) const;
-
-    uint32 LengthAsUTF8String() const;
-    void AsUTF8String(unsigned char utf8_cstr[],
-                      int32 utf8BufferSize,
-                      bool warnAboutBufferOverflow = true) const;
-
-    photoshop::utf16_string as_wstring() const;
-
-#if INSIDE_PHOTOSHOP
-    std::string as_utf8_string() const;
-
-    operator std::string() const { return as_utf8_string(); }
-#endif
-    bool HasEnglishPartOfKey(std::string* englishPart = nullptr) const;
-
-    uint32 LengthAsLowAsciiCString() const;
-
-    void AsLowAsciiCString(char cstr[],
-                           int32 cstrBufferSize,
-                           bool warnAboutBufferOverflow = true) const;
-
-    uint32 LengthAsCStringForMacScriptCodePage(const short macScript) const;
-
-    void AsCStringForMacScriptCodePage(const short macScript,
-                                       char cstr[],
-                                       int32 cstrBufferSize,
-                                       bool warnAboutBufferOverflow = true) const;
-
-#if MSWindows
-    uint32 LengthAsCStringForWindowsCodePage(
-        const short windowsCodePage,
-        bool retryWithDefaultCodePage = false,
-        bool useSpecialFunkySubstitutions = false) const;
-
-    void AsCStringForWindowsCodePage(
-        const short windowsCodePage,
-        char cstr[],
-        int32 cstrBufferSize,
-        bool warnAboutBufferOverflow = true,
-        bool retryWithDefaultCodePage = false,
-        bool useSpecialFunkySubstitutions = false) const;
-
-#endif
-
-    uint32 LengthAsPascalString() const; // NOTE:  may return greater than 255
-
-    void AsPascalString(unsigned char pstr[],
-                        unsigned char maxLength,
-                        bool warnAboutBufferOverflow = true) const;
-
-#if INSIDE_PHOTOSHOP
-    void AsPascalString(CStr31& pstr, bool warnAboutBufferOverflow = true) const;
-    void AsPascalString(CStr32& pstr, bool warnAboutBufferOverflow = true) const;
-    void AsPascalString(CStr63& pstr, bool warnAboutBufferOverflow = true) const;
-    void AsPascalString(CStr255& pstr, bool warnAboutBufferOverflow = true) const;
-#endif
-
-    uint32 LengthAsPascalStringForMacScriptCodePage(const short macScript) const;
-
-    void AsPascalStringForMacScriptCodePage(
-        const short macScript,
-        unsigned char pstr[],
-        unsigned char maxLength,
-        bool warnAboutBufferOverflow = true) const;
-
-#if INSIDE_PHOTOSHOP
-    void AsPascalStringForMacScriptCodePage(
-        const short macScript,
-        CStr31& pstr,
-        bool warnAboutBufferOverflow = true) const;
-    void AsPascalStringForMacScriptCodePage(
-        const short macScript,
-        CStr32& pstr,
-        bool warnAboutBufferOverflow = true) const;
-    void AsPascalStringForMacScriptCodePage(
-        const short macScript,
-        CStr63& pstr,
-        bool warnAboutBufferOverflow = true) const;
-    void AsPascalStringForMacScriptCodePage(
-        const short macScript,
-        CStr255& pstr,
-        bool warnAboutBufferOverflow = true) const;
-
-#if MSWindows
-
-    uint32 LengthAsPascalStringForWindowsCodePage(
-        const short windowsCodePage) const;
-
-    void AsPascalStringForWindowsCodePage(
-        const short windowsCodePage,
-        unsigned char pstr[],
-        unsigned char maxLength,
-        bool warnAboutBufferOverflow = true) const;
-
-    void AsPascalStringForWindowsCodePage(
-        const short windowsCodePage,
-        CStr31& pstr,
-        bool warnAboutBufferOverflow = true) const;
-    void AsPascalStringForWindowsCodePage(
-        const short windowsCodePage,
-        CStr32& pstr,
-        bool warnAboutBufferOverflow = true) const;
-    void AsPascalStringForWindowsCodePage(
-        const short windowsCodePage,
-        CStr63& pstr,
-        bool warnAboutBufferOverflow = true) const;
-    void AsPascalStringForWindowsCodePage(
-        const short windowsCodePage,
-        CStr255& pstr,
-        bool warnAboutBufferOverflow = true) const;
-
-#endif
-#endif
-
-    void GetSegments(std::vector<ZString>& segments,
-                     const unsigned short delimiter) const;
-
-    void GetSegments(std::vector<ZString>& segments,
-                     const unsigned short* delimiters,
-                     uint32 numDelimiters) const;
-
-    void SetFromSegments(const std::vector<ZString>& segments,
-                         const unsigned short delimiter);
-
-    uint32 CountLines() const;
-
-#if qZStringLogging
-    static void DumpHashProfiles(void);
-#endif
-
-#if qAssertions
-    bool IsPrivate() const { return fIsPrivate; }
-    void SetPrivate(bool isPrivate) { fIsPrivate = isPrivate; }
-#endif
-    enum FindFromLocation { tflFromBeginning, tflFromEnd };
-
-    bool FindFirstNonMatchingCharacterPosition(
-        const unsigned short* matchChars,
-        uint32 numChars,
-        uint32& position,
-        FindFromLocation findFromLoc = tflFromBeginning) const;
-
-    ZString RemoveCharactersFromBeginningAndEnd(const unsigned short* charsToRemove,
-                                                uint32 numChars) const;
-
-#if qAssertions && INSIDE_PHOTOSHOP
-protected:
-    friend class TShowAnyZStringDialog;
-    ZString ZStringFromZStringKey();
-    static ZString ZStringFromDictionaryEntryKey(ZStringDictionaryEntry* entry);
-#endif // qAssertions && INSIDE_PHOTOSHOP
-};
-```
-<!-- #endregion -->
+The term _algorithm_ covers all code. If an algorithm does not require iteration or recursion, it is a _trivial_ algorithm. Otherwise it is a non-trivial algorithm. The standard includes trivial algorithms such as `std::swap()` and `std::exchange()`, but for this section the focus is on non-trivial algorithms.
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 ## Sequences
@@ -454,42 +52,11 @@ protected:
     - By strong convention we are open on the right
 <!-- #endregion -->
 
+- `[p, p)` represents an empty range, at position `p`
+    - All empty ranges are not equal
+
+
 - Think of the positions as the lines between the elements
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- Limitations of half-open intevals
-    - If there is not _next element_ then a half open interval cannot express a single element
-    - If there is a finite number of elements, the last (or first) cannot be included
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- There are different common ways to represent a sequence
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- `[f, l)`
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- `[f, f + n) _n`
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- `[f, predicate()) _until`
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- `[f, is_sentinel())` NTBS
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- `[f, ...)` unbounded (dependent on something else)
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- For a variable `a` in C and C++, it is guaranteed that `&a + 1` yields a valid, but not dereferenceable, pointer
-    - `[&a, &a + 1)` is a valid range
-<!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 <center>
@@ -507,13 +74,59 @@ protected:
 </center>
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
+- Limitations of half-open intevals
+    - If there is not _next element_ then a half open interval cannot express a single element
+    - If there is a finite number of elements, the last (or first) cannot be included
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- There are different common ways to represent a sequence
+<!-- #endregion -->
+
+- A position `f` in a sequence can be denoted with an index, pointer, or iterator
+    - The only requirement is that `f` be _incrementable_ to obtain the next element in the sequence
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- `[f, l)`
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- `[f, f + n) _n`
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- `[f, predicate()) _until`
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- `[f, is_sentinel())` NTBS
+    - `const char*`
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- `[f, ...)` unbounded (dependent on something else)
+    - i.e. range is required to be same or greater length than another range
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- For a variable `a` in C and C++, it is guaranteed that `&a + 1` yields a valid, but not dereferenceable, pointer
+    - `[&a, &a + 1)` is a valid range
+<!-- #endregion -->
+
 <!-- #region slideshow={"slide_type": "skip"} -->
-**_Next cell is algorithm-slide keynote_**
+**_Next two cells are algorithm-slide keynote_**
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 <section>
-    <iframe data-src="../keynote-player/KeynoteDHTMLPlayer.html?showUrl=../better-code-class/img/algorithm-slide/assets/" data-preload></iframe>
+    <iframe data-src="./img/algorithm-slide/index.html"></iframe>
+</section>
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+<section>
+    <iframe data-src="./img/algorithm-gather/index.html"></iframe>
 </section>
 <!-- #endregion -->
 
@@ -521,72 +134,178 @@ protected:
 ## Common algorithms and their uses
 
 - A great resource for finding standard algorithms:
-
-https://en.cppreference.com/w/cpp/algorithm
-https://en.cppreference.com/w/cpp/numeric
+  - https://en.cppreference.com/w/cpp/algorithm
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-### Non-modifying sequence operations
+## Non-modifying sequence operations
 
-- `for_each`
 - `find`
+- `find_if`
+- `find_if_not`
 <!-- #endregion -->
 
-```c++ slideshow={"slide_type": "slide"}
-int a[]{1, 2, 3};
-```
-
-```c++ slideshow={"slide_type": "fragment"}
-for_each(begin(a), end(a), [](const auto& e){ cout << e; });
-```
-
-```c++ slideshow={"slide_type": "fragment"}
-for(const auto& e : a) cout << e;
-```
+- `find` returns the position of the first element in the range `[f, l)` that satisfies the specified criteria.
 
 ```c++
-template <class I>
-struct subrange {
-    I _f;
-    I _l;
-};
-
-template <class I>
-I begin(subrange<I>& x) { return x._f; }
-
-template <class I>
-I end(subrange<I>& x) { return x._l; }
-```
-
-```c++
-namespace library {
-template <class I, // I models InputIterator
-          class T> // value_type(I) is convertible to T
-subrange<I> find(I f, I l, const T& x) {
-    auto p = std::find(f, l, x);
-    return {p, (p == l) ? p : std::next(p)};
-}
+{
+    int a[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    display(*find(begin(a), end(a), 5));
 }
 ```
 
-```c++
-for(const auto& e : library::find(begin(a), end(a), 2)) cout << e;
-```
+**Question:** How do we know `find()` will _find_ a value?
 
-```c++
-for(const auto& e : library::find(begin(a), end(a), 0)) cout << e;
-```
+
+- Iterator must meet the requirements of [_LegacyInputIterator_](https://en.cppreference.com/w/cpp/named_req/InputIterator)
+- `[f, l)` must form a _valid range_
+- the value type must be [_EqualityComparable_](https://en.cppreference.com/w/cpp/named_req/EqualityComparable) to the iterator `value_type`
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-### Modifying sequence operations
+## Requirements and Guarantees
+<!-- #endregion -->
+- A generic algorithm is specified in terms of a set of _requirements_ on it's arguments. The requirements are a set of _concepts_ and _preconditions_ which, if satisfied, guarantee the algorithm performs as specified
+- The C++ standard contains tables of [_named requirements_](https://en.cppreference.com/w/cpp/named_req) and [_concepts_](https://en.cppreference.com/w/cpp/header/concepts)
+
+
+- Concepts and Preconditions are closely related and both ideas are rooted in [_Hoare Logic_](https://en.wikipedia.org/wiki/Hoare_logic)
+
+
+
+
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+### Concept
+
+The term _concept_ was coined by
+
+> We call the set of axioms satisfied by a data type and a set of operations on it a _concept_.
+<br> &emsp;&mdash; _Fundementals of Generic Programming_, James C. Dehnert and Alexander Stepanov
+
+In C++20, a language _concept_ is a set of syntactic requirements with a set of specified, in documentation, semantic and complexity requirements.
+
+- As with spoken language, we associate meaning with words
+- Even this is controversial 
+
+> Names should not be associated with semantics because
+everybody has their own hidden assumptions about what semantics are,
+and they clash, causing comprehension problems without knowing why.
+This is why it's valuable to write code to reflect what code is
+actually doing, rather than what code "means": it's hard to have
+conceptual clashes about what code actually does.
+<br> &emsp;&mdash; Craig Silverstein, personal correspondence
+
+- _LegacyInputIterator_ and _EqualityComparable_ are concepts
+
+#### Model
+
+> We say that a concept is _modeled by_ specific types, or that the type _models_ the concept, if the requirements are satisfied for these types.
+
+### Contracts
+
+_Contracts_, or _Design by Contract_, is a systematic approach to ensuring the values passed to, and returned by an operation satisfy specific assertions.
+
+> If the execution of a certain task relies on a routine call to handle one of its subtasks, it is necessary to specify the relationship between the client (the call- er) and the supplier (the called routine) as precisely as possible. The mechanisms for expressing such conditions are called assertions. Some assertions. called preconditions and postconditions. apply to individual routines. Others, the class invariants, constrain all the routines of a given class...
+<br> &emsp;&mdash; _Applying "Design by Contract"_, Bertrand Meyer
+
+#### Precondition
+#### Invariant
+#### Postcondition
+
+- `[f, l)` must form a valid range is a precondition
+
+- Concept semantics usually are specified in terms of existential quantifiers ($\forall$, $\exists$)
+- Not all preconditions can be asserted in code
+    - i.e. `f(int* p)` with the precondition that `p` is dereferenceable
+    
+- We must still validate, prove, our code by hand
+<!-- #endregion -->
+
+- A generic type or operation has a set of requirements on its arguments
+- A given type guarantees it satisfies some requirements
+- By matching requirements with guarantees we create software which works
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+### Concepts, Partial Functions, and Domain
+<!-- #endregion -->
+
+Compare the description for the old [SGI STL LessThanComparable concept](http://www.martinbroadhurst.com/stl/LessThanComparable.html):
+
+> Expression semantics
+>
+>| Name | Expression | Precondition                         | Semantics | Postcondition |
+ | -    | -          | -                                    | -         | -             |
+ | Less | `x < y`    | `x` and `y` are in the domain of `<` |           |               |
+ 
+versus the [C++17 concept](https://eel.is/c++draft/utility.arg.requirements#tab:cpp17.lessthancomparable).
+
+> Table 28: _CppLessThanComparable_ requirements
+>
+> | Expression | Return type           | Requirement                            |
+> | -          | -                     | -                                      |
+> | `a < b`    | convertible to `bool` | `<` is a strict weak ordering relation |
+
+_In the SGI STL the requirement of [strict-weak-ordering](http://www.martinbroadhurst.com/stl/StrictWeakOrdering.html) was a separate concept._
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+Domain is defined in the C++ standard, but in the [context of _iterators_](https://eel.is/c++draft/iterator.cpp17#input.iterators-2). This passage used to refer to the _domain of operations_, but that has been narrowed to the _domain of_ `==`:
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+> The term _the domain of_ `==` is used in the ordinary mathematical sense to denote the set of values over which `==` is (required to be) defined. This set can change over time. Each algorithm places additional requirements on the domain of `==` for the iterator values it uses. These requirements can be inferred from the uses that algorithm makes of `==` and `!=`.
+>
+> | Expression | Return type | Operational Semantics | Assertion/note<br>pre-/post-condition |
+> | - | - | - | - |
+> | `a != b` | contextually convertible to `bool` | `!(a == b)` | _Preconditions:_ (`a, b`) is in the domain of `==` |
+
+<!-- #endregion -->
+
+What was part of the definition of concepts in general has been weakened to a requirement for a single operation on iterators.
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+## Modifying sequence operations
 
 - `copy`
 - `move`
 - `fill`
 - `transform`
 - `generate`
+- `iota`
 <!-- #endregion -->
+
+### OutputIterators
+
+
+- OutputIterators are isomorphic with a function object
+    - Function objects are simpler to write with lambda expressions
+
+
+- `std::iota()` and `std::generate` would be better expressed with functions
+
+```c++
+namespace bcc {
+
+template <class T, class F>
+constexpr void iota(T first, T last, F out) {
+    for (; first != last; ++first) {
+        out(first);
+    }
+}
+
+} // namespace bcc
+```
+
+```c++
+{
+    using namespace bcc;
+
+    vector<int> v;
+    bcc::iota(0, 10, [&](int n) { v.push_back(n); });
+    display(v);
+}
+```
+
+## Permutations
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 ### Sorting operations
@@ -595,16 +314,36 @@ for(const auto& e : library::find(begin(a), end(a), 0)) cout << e;
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- Comparison function must be a strict-weak ordering:
+- Comparison function is required to be a _strict-weak ordering_:
 
-> Two object, $a$ and $b$, are _equivalent_, $\equiv$, iff $(a \nprec b) \wedge (b \nprec a)$.
+> An ordering relation, $\prec$, is a _strict-weak_ ordering iff
 
 \begin{align}
 (a & \nprec a). && \text{(Irreflexivity)} \\
 (a & \prec b) \wedge (b \prec c) \implies a \prec c. && \text {(Transitivity)} \\
 (a & \equiv b) \wedge (b \equiv c) \implies a \equiv c. && \text {(Equivalence Transitivity)}\\
 \end{align}
+
+> Where $a$ and $b$, are _equivalent_, $\equiv$, iff $(a \nprec b) \wedge (b \nprec a)$.
 <!-- #endregion -->
+
+- The default is to user `operator<()`
+- On a type, the expectation is that `operator<()` is a _total ordering_
+    - Which is consistent with other operations on the type
+
+> A _total ordering_ is a strict-weak ordering where the defined equivalence is equality
+
+
+- `operator<()` is not defined on `std::complex<>` because there is no definition consistent with multiplication
+    - For example, both $i > 0$ and $i < 0$ imply that $0 < i^2$, however, $i^2 = -1$
+
+
+- Despite `nan` values, both `float` and `double` are totally-ordered because `nan` is explicitly outside the value domain for floating point types. `nan` is _not a number_
+- A floating point object containing `nan` is partially formed
+- Don't try and sort a sequence containing `nan` values with `operator<()`
+    - The result is UB and will likely crash
+    
+> _C++20 defines the ordering on floating-point types as a `std::partial_ordering` because of `nan` values. I find this complicates matters unnecessarily, and means the requirements of the comparison operator cannot be defined with a _concept_ but require a precondition._
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 ### Binary search operation
@@ -620,7 +359,7 @@ for(const auto& e : library::find(begin(a), end(a), 0)) cout << e;
 **Exercise:** Find a _raw loop_ in the ZString implementation. Claim it on the wiki https://git.corp.adobe.com/better-code/class/wiki/class-04-registration. Improve the code, create a pull-request, and assign me as the reviewer. The PR should include a http://quick-bench.com/ benchmark of the relevant code for comparison.
 <!-- #endregion -->
 
-<!-- #region jupyter={"source_hidden": true} slideshow={"slide_type": "skip"} -->
+<!-- #region slideshow={"slide_type": "skip"} -->
 <!--- stopped here --->
 
 ## More advanced algorithms
@@ -643,3 +382,69 @@ for(const auto& e : library::find(begin(a), end(a), 0)) cout << e;
 
 ## Output iterators vs sink functions
 <!-- #endregion -->
+
+```c++
+{
+    int a[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    auto p = remove_if(begin(a), end(a), [_n = 0](const int&) mutable {
+        bool r = (2 <= _n) && (_n < 4);
+        ++_n;
+        return r;
+    });
+
+    display(a);
+}
+```
+
+```cpp
+template <class F, class P>
+F remove_if(F first, F last, P pred) {
+    first = find_if(first, last, pred);
+    if (first == last) return first;
+
+    F p = first;
+    while (++p != last) {
+        if (!pred(*p)) {
+            *first = move(*p);
+            ++first;
+        }
+    }
+    return first;
+}
+```
+
+```c++
+{
+    int a[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+
+    int n{0};
+    auto p = remove_if(begin(a), end(a), [&](const int&) {
+        bool r = (2 <= n) && (n < 4);
+        ++n;
+        return r;
+    });
+
+    display(a);
+}
+```
+
+**Question:** Does the above code fix the issue?
+
+
+- The requirement is that `pred` is a regular function although the standard wording is a [obtuse](https://eel.is/c++draft/algorithms#requirements-7):
+
+> Given a glvalue `u` of type (possibly `const`) `T` that designates the same object as `*first`, `pred(u)` shall be a valid expression that is equal to `pred(*first)`.
+
+
+[
+- discuss (show graph) of O(1), O(log(N)), O(N), O(N log(N)
+- where does the below code go?
+]
+
+```c++ tags=[]
+{
+    double a = numeric_limits<double>::quiet_NaN();
+    display(a == a);
+}
+```

@@ -4,17 +4,29 @@ FROM ubuntu:latest AS base
 # Install items requiring root access
 
 ARG DEBIAN_FRONTEND=noninteractive
-RUN apt-get update && apt-get install --no-install-recommends -y \
+RUN apt-get update && apt-get install -y \
     apt-utils \
+    curl \
     fswatch \
     g++ \
     git \
     libreadline-dev \
+    libtbb-dev \
     make \
     npm \
     rbenv \
-    wget \
-    zlib1g-dev
+    wget
+
+# https://stackoverflow.com/questions/62464422/facing-issue-while-installing-ruby-2-7-1
+# RUN apt-get install -y software-properties-common
+# RUN add-apt-repository --remove ppa:sethj/silentcast
+
+# https://nodejs.org/en/download/package-manager/#debian-and-ubuntu-based-linux-distributions
+# RUN curl -fsSL https://deb.nodesource.com/setup_15.x | bash -
+# RUN apt-get install -y nodejs
+
+RUN npm install -g n
+RUN n latest
 
 RUN npm install -g npm@latest
 RUN npm install -g browser-sync

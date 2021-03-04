@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.0
+      jupytext_version: 1.10.2
   kernelspec:
     display_name: C++17
     language: C++17
@@ -23,7 +23,7 @@ jupyter:
 > Engineering is making informed trade-offs to find the best solution given a set of constraints.
 
 
-> My hope is that this workshop is generally applicable, but the choices I've made are colored by my experience.
+> My hope is that this workshop is generally applicable, but my experience colors the choices I've made.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -35,17 +35,6 @@ jupyter:
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-## Philosophy
-
-- _Correct_
-- _Performant_
-    - On a wide variety of consumer and enterprise hardware
-    - Balance CPU/GPU/ML/Memory/Storage/Power resources
-- _Scalable_
-    - With large data sets, but primarily on a single machine
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
 ## Course Outline
 
 - Introduction
@@ -53,17 +42,58 @@ jupyter:
 - Types - Goal: Write _complete_, _expressive_, and _efficient_ types
 - Algorithms - Goal: No _raw_ loops
 - Data Structures - Goal: No _incidental_ data structures
+- Runtime Polymorphism - Goal: No pointers in interfaces
 - Concurrency - Goal: No _raw_ synchronization
 - Relationships - Goal: No contradictions
 - Epilogue
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "skip"} -->
-Find a place:
-Requirements vs. Guarantees (Algorithms)
-Physical nature of machine - transistors (Preface)
-Keep philosophy - redundant with preface?
+## Use of Jupyter w/Xeus-Cling
 
+
+- Currently limited to C++17
+    - I will provide some C++20 examples
+- `using std;` is implied
+- Definitions wrapped in a `namespace`
+- Namespaces are often versions so I can refine implementations
+
+```c++
+namespace v0 {
+    
+int f() { return 42; }
+    
+} // namespace v0
+```
+
+
+- Often code is wrapped in a scope so it doesn't interfere with other code
+- If the last line doesn't have a semi-colon it is displayed
+    - calling `display(value);` has the same effect
+
+```c++
+v0::f()
+```
+
+```c++
+{
+    using namespace v0;
+    
+    display(f());
+}
+```
+
+- Operations can be timed with `%%timeit`
+    - This is not a substitute for benchmarks but gives some information to compare
+
+```c++
+%%timeit
+{
+    int a[] = { 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 };
+    sort(begin(a), end(a));
+}
+```
+
+<!-- #region slideshow={"slide_type": "skip"} -->
 Story Arc -
 - Types - task
 - Algorithms - heaps

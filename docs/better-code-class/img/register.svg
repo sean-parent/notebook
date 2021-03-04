@@ -1,0 +1,537 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="361 984 624.5625 302" width="624.5625" height="302">
+  <defs>
+    <font-face font-family="Helvetica Neue" font-size="16" panose-1="2 0 5 3 0 0 0 2 0 4" units-per-em="1000" underline-position="-100" underline-thickness="50" slope="0" x-height="517" cap-height="714" ascent="951.9958" descent="-212.99744" font-weight="400">
+      <font-face-src>
+        <font-face-name name="HelveticaNeue"/>
+      </font-face-src>
+    </font-face>
+    <font-face font-family="Helvetica Neue" font-size="9" panose-1="2 0 5 3 0 0 0 2 0 4" units-per-em="1000" underline-position="-100" underline-thickness="50" slope="0" x-height="517" cap-height="714" ascent="951.9958" descent="-212.99744" font-weight="400">
+      <font-face-src>
+        <font-face-name name="HelveticaNeue"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.18.3\n2016-10-04 03:00:01 +0000</metadata>
+  <g id="Canvas_1" stroke="none" stroke-dasharray="none" fill="none" fill-opacity="1" stroke-opacity="1">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Group_1427">
+        <g id="Group_1572">
+          <g id="Group_1583">
+            <g id="Group_1585">
+              <g id="Graphic_1589">
+                <path d="M 495 1170 L 495 1192.5 C 495 1203.75 499.5 1215 513 1215 C 526.5 1215 531 1203.75 531 1192.5 L 531 1170 Z" fill="white"/>
+                <path d="M 495 1170 L 495 1192.5 C 495 1203.75 499.5 1215 513 1215 C 526.5 1215 531 1203.75 531 1192.5 L 531 1170 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+              </g>
+              <g id="Line_1588">
+                <line x1="513" y1="1215" x2="513" y2="1233" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1587">
+                <line x1="522" y1="1152" x2="521.94804" y2="1169.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1586">
+                <line x1="504" y1="1152" x2="504" y2="1170" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+            </g>
+            <g id="Graphic_1584">
+              <ellipse cx="512.93645" cy="1218.9562" rx="3.56355318023281" ry="3.54378066260457" fill="white"/>
+              <ellipse cx="512.93645" cy="1218.9562" rx="3.56355318023281" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Group_1576">
+            <g id="Group_1578">
+              <g id="Graphic_1582">
+                <path d="M 423 1170 L 423 1192.5 C 423 1203.75 427.5 1215 441 1215 C 454.5 1215 459 1203.75 459 1192.5 L 459 1170 Z" fill="white"/>
+                <path d="M 423 1170 L 423 1192.5 C 423 1203.75 427.5 1215 441 1215 C 454.5 1215 459 1203.75 459 1192.5 L 459 1170 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+              </g>
+              <g id="Line_1581">
+                <line x1="441" y1="1215" x2="441" y2="1233" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1580">
+                <line x1="450" y1="1152" x2="449.94804" y2="1169.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1579">
+                <line x1="432" y1="1152" x2="432" y2="1170" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+            </g>
+            <g id="Graphic_1577">
+              <ellipse cx="440.93645" cy="1218.9562" rx="3.56355318023278" ry="3.54378066260457" fill="white"/>
+              <ellipse cx="440.93645" cy="1218.9562" rx="3.56355318023278" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Line_1575">
+            <path d="M 450 1152 L 468 1152 L 495 1233 L 513 1233" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1574">
+            <path d="M 504 1152 L 486 1152 L 478.73925 1173.7822 C 473.5215 1172.043 470.043 1182.4785 475.26075 1184.2178 L 459 1233 L 441 1233" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1573">
+            <line x1="513" y1="1233" x2="513" y2="1251" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1565">
+          <g id="Group_1567">
+            <g id="Graphic_1571">
+              <path d="M 504 1089 L 504 1111.5 C 504 1122.75 508.5 1134 522 1134 C 535.5 1134 540 1122.75 540 1111.5 L 540 1089 Z" fill="white"/>
+              <path d="M 504 1089 L 504 1111.5 C 504 1122.75 508.5 1134 522 1134 C 535.5 1134 540 1122.75 540 1111.5 L 540 1089 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+            <g id="Line_1570">
+              <line x1="522" y1="1134" x2="522" y2="1152" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1569">
+              <line x1="531.3984" y1="1071" x2="530.9681" y2="1088.5002" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1568">
+              <line x1="513" y1="1071" x2="513" y2="1089" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Graphic_1566">
+            <ellipse cx="521.93645" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" fill="white"/>
+            <ellipse cx="521.93645" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1558">
+          <g id="Group_1560">
+            <g id="Graphic_1564">
+              <path d="M 414 1089 L 414 1111.5 C 414 1122.75 418.5 1134 432 1134 C 445.5 1134 450 1122.75 450 1111.5 L 450 1089 Z" fill="white"/>
+              <path d="M 414 1089 L 414 1111.5 C 414 1122.75 418.5 1134 432 1134 C 445.5 1134 450 1122.75 450 1111.5 L 450 1089 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+            <g id="Line_1563">
+              <line x1="432" y1="1134" x2="432" y2="1152" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1562">
+              <line x1="441" y1="1071" x2="440.94804" y2="1088.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1561">
+              <line x1="423" y1="1071" x2="423" y2="1089" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Graphic_1559">
+            <ellipse cx="431.93645" cy="1137.9562" rx="3.56355318023277" ry="3.54378066260463" fill="white"/>
+            <ellipse cx="431.93645" cy="1137.9562" rx="3.56355318023277" ry="3.54378066260463" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Graphic_1557">
+          <ellipse cx="423.0221" cy="1085.4562" rx="3.5635531802328" ry="3.54378066260457" fill="white"/>
+          <ellipse cx="423.0221" cy="1085.4562" rx="3.5635531802328" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1556">
+          <path d="M 441 1071 L 477 1071 L 513 1071" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1555">
+          <path d="M 423 1071 L 423 1035 L 531 1035" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1554">
+          <line x1="531" y1="1035" x2="531" y2="1017" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1553">
+          <line x1="531.3984" y1="1071" x2="531" y2="1035" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Group_1535">
+          <g id="Group_1546">
+            <g id="Group_1548">
+              <g id="Graphic_1552">
+                <path d="M 639 1170 L 639 1192.5 C 639 1203.75 643.5 1215 657 1215 C 670.5 1215 675 1203.75 675 1192.5 L 675 1170 Z" fill="white"/>
+                <path d="M 639 1170 L 639 1192.5 C 639 1203.75 643.5 1215 657 1215 C 670.5 1215 675 1203.75 675 1192.5 L 675 1170 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+              </g>
+              <g id="Line_1551">
+                <line x1="657" y1="1215" x2="657" y2="1233" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1550">
+                <line x1="666" y1="1152" x2="665.948" y2="1169.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1549">
+                <line x1="648" y1="1152" x2="648" y2="1170" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+            </g>
+            <g id="Graphic_1547">
+              <ellipse cx="656.93645" cy="1218.9562" rx="3.56355318023281" ry="3.54378066260457" fill="white"/>
+              <ellipse cx="656.93645" cy="1218.9562" rx="3.56355318023281" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Group_1539">
+            <g id="Group_1541">
+              <g id="Graphic_1545">
+                <path d="M 567 1170 L 567 1192.5 C 567 1203.75 571.5 1215 585 1215 C 598.5 1215 603 1203.75 603 1192.5 L 603 1170 Z" fill="white"/>
+                <path d="M 567 1170 L 567 1192.5 C 567 1203.75 571.5 1215 585 1215 C 598.5 1215 603 1203.75 603 1192.5 L 603 1170 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+              </g>
+              <g id="Line_1544">
+                <line x1="585" y1="1215" x2="585" y2="1233" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1543">
+                <line x1="594" y1="1152" x2="593.94804" y2="1169.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1542">
+                <line x1="576" y1="1152" x2="576" y2="1170" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+            </g>
+            <g id="Graphic_1540">
+              <ellipse cx="584.93645" cy="1218.9562" rx="3.56355318023284" ry="3.54378066260457" fill="white"/>
+              <ellipse cx="584.93645" cy="1218.9562" rx="3.56355318023284" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Line_1538">
+            <path d="M 594 1152 L 612 1152 L 639 1233 L 657 1233" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1537">
+            <path d="M 648 1152 L 630 1152 L 622.73925 1173.7822 C 617.5215 1172.043 614.043 1182.4785 619.26075 1184.2178 L 603 1233 L 585 1233" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1536">
+            <line x1="657" y1="1233" x2="657" y2="1251" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1528">
+          <g id="Group_1530">
+            <g id="Graphic_1534">
+              <path d="M 648 1089 L 648 1111.5 C 648 1122.75 652.5 1134 666 1134 C 679.5 1134 684 1122.75 684 1111.5 L 684 1089 Z" fill="white"/>
+              <path d="M 648 1089 L 648 1111.5 C 648 1122.75 652.5 1134 666 1134 C 679.5 1134 684 1122.75 684 1111.5 L 684 1089 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+            <g id="Line_1533">
+              <line x1="666" y1="1134" x2="666" y2="1152" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1532">
+              <line x1="675.3984" y1="1071" x2="674.9681" y2="1088.5002" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1531">
+              <line x1="657" y1="1071" x2="657" y2="1089" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Graphic_1529">
+            <ellipse cx="665.93645" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" fill="white"/>
+            <ellipse cx="665.93645" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1521">
+          <g id="Group_1523">
+            <g id="Graphic_1527">
+              <path d="M 558 1089 L 558 1111.5 C 558 1122.75 562.5 1134 576 1134 C 589.5 1134 594 1122.75 594 1111.5 L 594 1089 Z" fill="white"/>
+              <path d="M 558 1089 L 558 1111.5 C 558 1122.75 562.5 1134 576 1134 C 589.5 1134 594 1122.75 594 1111.5 L 594 1089 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+            <g id="Line_1526">
+              <line x1="576" y1="1134" x2="576" y2="1152" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1525">
+              <line x1="585" y1="1071" x2="584.94804" y2="1088.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1524">
+              <line x1="567" y1="1071" x2="567" y2="1089" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Graphic_1522">
+            <ellipse cx="575.93645" cy="1137.9562" rx="3.56355318023284" ry="3.54378066260463" fill="white"/>
+            <ellipse cx="575.93645" cy="1137.9562" rx="3.56355318023284" ry="3.54378066260463" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Graphic_1520">
+          <ellipse cx="567.0221" cy="1085.4562" rx="3.56355318023281" ry="3.54378066260457" fill="white"/>
+          <ellipse cx="567.0221" cy="1085.4562" rx="3.56355318023281" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1519">
+          <path d="M 585 1071 L 621 1071 L 657 1071" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1518">
+          <path d="M 567 1071 L 567 1035 L 675 1035" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1517">
+          <line x1="675" y1="1035" x2="675" y2="1017" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1516">
+          <line x1="675.3984" y1="1071" x2="675" y2="1035" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Group_1498">
+          <g id="Group_1509">
+            <g id="Group_1511">
+              <g id="Graphic_1515">
+                <path d="M 783 1170 L 783 1192.5 C 783 1203.75 787.5 1215 801 1215 C 814.5 1215 819 1203.75 819 1192.5 L 819 1170 Z" fill="white"/>
+                <path d="M 783 1170 L 783 1192.5 C 783 1203.75 787.5 1215 801 1215 C 814.5 1215 819 1203.75 819 1192.5 L 819 1170 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+              </g>
+              <g id="Line_1514">
+                <line x1="801" y1="1215" x2="801" y2="1233" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1513">
+                <line x1="810" y1="1152" x2="809.948" y2="1169.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1512">
+                <line x1="792" y1="1152" x2="792" y2="1170" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+            </g>
+            <g id="Graphic_1510">
+              <ellipse cx="800.9365" cy="1218.9562" rx="3.56355318023291" ry="3.54378066260457" fill="white"/>
+              <ellipse cx="800.9365" cy="1218.9562" rx="3.56355318023291" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Group_1502">
+            <g id="Group_1504">
+              <g id="Graphic_1508">
+                <path d="M 711 1170 L 711 1192.5 C 711 1203.75 715.5 1215 729 1215 C 742.5 1215 747 1203.75 747 1192.5 L 747 1170 Z" fill="white"/>
+                <path d="M 711 1170 L 711 1192.5 C 711 1203.75 715.5 1215 729 1215 C 742.5 1215 747 1203.75 747 1192.5 L 747 1170 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+              </g>
+              <g id="Line_1507">
+                <line x1="729" y1="1215" x2="729" y2="1233" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1506">
+                <line x1="738" y1="1152" x2="737.948" y2="1169.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1505">
+                <line x1="720" y1="1152" x2="720" y2="1170" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+            </g>
+            <g id="Graphic_1503">
+              <ellipse cx="728.93645" cy="1218.9562" rx="3.56355318023278" ry="3.54378066260457" fill="white"/>
+              <ellipse cx="728.93645" cy="1218.9562" rx="3.56355318023278" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Line_1501">
+            <path d="M 738 1152 L 756 1152 L 783 1233 L 801 1233" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1500">
+            <path d="M 792 1152 L 774 1152 L 766.73925 1173.7822 C 761.5215 1172.043 758.043 1182.4785 763.26075 1184.2178 L 747 1233 L 729 1233" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1499">
+            <line x1="801" y1="1233" x2="801" y2="1251" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1491">
+          <g id="Group_1493">
+            <g id="Graphic_1497">
+              <path d="M 792 1089 L 792 1111.5 C 792 1122.75 796.5 1134 810 1134 C 823.5 1134 828 1122.75 828 1111.5 L 828 1089 Z" fill="white"/>
+              <path d="M 792 1089 L 792 1111.5 C 792 1122.75 796.5 1134 810 1134 C 823.5 1134 828 1122.75 828 1111.5 L 828 1089 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+            <g id="Line_1496">
+              <line x1="810" y1="1134" x2="810" y2="1152" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1495">
+              <line x1="819.3984" y1="1071" x2="818.9681" y2="1088.5002" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1494">
+              <line x1="801" y1="1071" x2="801" y2="1089" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Graphic_1492">
+            <ellipse cx="809.9365" cy="1137.9562" rx="3.56355318023284" ry="3.54378066260463" fill="white"/>
+            <ellipse cx="809.9365" cy="1137.9562" rx="3.56355318023284" ry="3.54378066260463" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1484">
+          <g id="Group_1486">
+            <g id="Graphic_1490">
+              <path d="M 702 1089 L 702 1111.5 C 702 1122.75 706.5 1134 720 1134 C 733.5 1134 738 1122.75 738 1111.5 L 738 1089 Z" fill="white"/>
+              <path d="M 702 1089 L 702 1111.5 C 702 1122.75 706.5 1134 720 1134 C 733.5 1134 738 1122.75 738 1111.5 L 738 1089 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+            <g id="Line_1489">
+              <line x1="720" y1="1134" x2="720" y2="1152" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1488">
+              <line x1="729" y1="1071" x2="728.948" y2="1088.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1487">
+              <line x1="711" y1="1071" x2="711" y2="1089" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Graphic_1485">
+            <ellipse cx="719.93645" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" fill="white"/>
+            <ellipse cx="719.93645" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Graphic_1483">
+          <ellipse cx="711.0221" cy="1085.4562" rx="3.56355318023284" ry="3.54378066260457" fill="white"/>
+          <ellipse cx="711.0221" cy="1085.4562" rx="3.56355318023284" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1482">
+          <path d="M 729 1071 L 765.0865 1071.3085 L 801 1071" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1481">
+          <path d="M 711 1071 L 711 1035 L 819 1035" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1480">
+          <line x1="819" y1="1035" x2="819" y2="1017" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1479">
+          <line x1="819.3984" y1="1071" x2="819" y2="1035" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Group_1461">
+          <g id="Group_1472">
+            <g id="Group_1474">
+              <g id="Graphic_1478">
+                <path d="M 927 1170 L 927 1192.5 C 927 1203.75 931.5 1215 945 1215 C 958.5 1215 963 1203.75 963 1192.5 L 963 1170 Z" fill="white"/>
+                <path d="M 927 1170 L 927 1192.5 C 927 1203.75 931.5 1215 945 1215 C 958.5 1215 963 1203.75 963 1192.5 L 963 1170 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+              </g>
+              <g id="Line_1477">
+                <line x1="945" y1="1215" x2="945" y2="1233" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1476">
+                <line x1="954" y1="1152" x2="953.948" y2="1169.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1475">
+                <line x1="936" y1="1152" x2="936" y2="1170" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+            </g>
+            <g id="Graphic_1473">
+              <ellipse cx="944.9365" cy="1218.9562" rx="3.56355318023281" ry="3.54378066260457" fill="white"/>
+              <ellipse cx="944.9365" cy="1218.9562" rx="3.56355318023281" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Group_1465">
+            <g id="Group_1467">
+              <g id="Graphic_1471">
+                <path d="M 855 1170 L 855 1192.5 C 855 1203.75 859.5 1215 873 1215 C 886.5 1215 891 1203.75 891 1192.5 L 891 1170 Z" fill="white"/>
+                <path d="M 855 1170 L 855 1192.5 C 855 1203.75 859.5 1215 873 1215 C 886.5 1215 891 1203.75 891 1192.5 L 891 1170 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+              </g>
+              <g id="Line_1470">
+                <line x1="873" y1="1215" x2="873" y2="1233" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1469">
+                <line x1="882" y1="1152" x2="881.948" y2="1169.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+              <g id="Line_1468">
+                <line x1="864" y1="1152" x2="864" y2="1170" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+              </g>
+            </g>
+            <g id="Graphic_1466">
+              <ellipse cx="872.9365" cy="1218.9562" rx="3.56355318023281" ry="3.54378066260457" fill="white"/>
+              <ellipse cx="872.9365" cy="1218.9562" rx="3.56355318023281" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Line_1464">
+            <path d="M 882 1152 L 900 1152 L 927 1233 L 945 1233" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1463">
+            <path d="M 936 1152 L 918 1152 L 910.7393 1173.7822 C 905.5215 1172.043 902.043 1182.4785 907.2607 1184.2178 L 891 1233 L 873 1233" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1462">
+            <line x1="945" y1="1233" x2="945" y2="1251" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1454">
+          <g id="Group_1456">
+            <g id="Graphic_1460">
+              <path d="M 936 1089 L 936 1111.5 C 936 1122.75 940.5 1134 954 1134 C 967.5 1134 972 1122.75 972 1111.5 L 972 1089 Z" fill="white"/>
+              <path d="M 936 1089 L 936 1111.5 C 936 1122.75 940.5 1134 954 1134 C 967.5 1134 972 1122.75 972 1111.5 L 972 1089 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+            <g id="Line_1459">
+              <line x1="954" y1="1134" x2="954" y2="1152" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1458">
+              <line x1="963.3984" y1="1071" x2="962.9681" y2="1088.5002" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1457">
+              <line x1="945" y1="1071" x2="945" y2="1089" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Graphic_1455">
+            <ellipse cx="953.9365" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" fill="white"/>
+            <ellipse cx="953.9365" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1447">
+          <g id="Group_1449">
+            <g id="Graphic_1453">
+              <path d="M 846 1089 L 846 1111.5 C 846 1122.75 850.5 1134 864 1134 C 877.5 1134 882 1122.75 882 1111.5 L 882 1089 Z" fill="white"/>
+              <path d="M 846 1089 L 846 1111.5 C 846 1122.75 850.5 1134 864 1134 C 877.5 1134 882 1122.75 882 1111.5 L 882 1089 Z" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+            </g>
+            <g id="Line_1452">
+              <line x1="864" y1="1134" x2="864" y2="1152" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1451">
+              <line x1="873" y1="1071" x2="872.948" y2="1088.5" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+            <g id="Line_1450">
+              <line x1="855" y1="1071" x2="855" y2="1089" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+            </g>
+          </g>
+          <g id="Graphic_1448">
+            <ellipse cx="863.9365" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" fill="white"/>
+            <ellipse cx="863.9365" cy="1137.9562" rx="3.56355318023281" ry="3.54378066260463" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Graphic_1446">
+          <ellipse cx="855.0221" cy="1085.4562" rx="3.56355318023281" ry="3.54378066260457" fill="white"/>
+          <ellipse cx="855.0221" cy="1085.4562" rx="3.56355318023281" ry="3.54378066260457" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1445">
+          <path d="M 873 1071 L 909 1071 L 945 1071" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1444">
+          <path d="M 855 1071 L 855 1035 L 963 1035" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1443">
+          <line x1="963" y1="1035" x2="963" y2="1017" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1442">
+          <line x1="963.3984" y1="1071" x2="963" y2="1035" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1441">
+          <path d="M 405 1053 L 417.5 1053 C 417.5 1047.5 428.5 1047.5 428.5 1053 L 525.6992 1053 C 525.6992 1047.5 536.6992 1047.5 536.6992 1053 L 561.5 1053 C 561.5 1047.5 572.5 1047.5 572.5 1053 L 621 1053 L 669.6998 1053.0507 C 669.70555 1047.5507 680.70555 1047.5621 680.6998 1053.0621 L 705.5 1053.0879 C 705.5057 1047.5879 716.5057 1047.5994 716.5 1053.0994 L 765.0865 1053.1499 L 813.7002 1053.0993 C 813.6945 1047.5993 824.6945 1047.5878 824.7002 1053.0878 L 849.5 1053.062 C 849.4943 1047.562 860.4943 1047.5505 860.5 1053.0505 L 909 1053" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1440">
+          <line x1="477" y1="1053" x2="477" y2="1071" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1439">
+          <line x1="621" y1="1053" x2="621" y2="1071" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1438">
+          <line x1="765.0865" y1="1053.1499" x2="765.0865" y2="1071.3085" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1437">
+          <line x1="909" y1="1053" x2="909" y2="1071" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Graphic_1436">
+          <text transform="translate(522.9285 998)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="14210855e-21" y="15">D</tspan>
+            <tspan font-family="Helvetica Neue" font-size="9" font-weight="400" fill="black" y="19">3</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1435">
+          <text transform="translate(666.9285 998)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="14210855e-21" y="15">D</tspan>
+            <tspan font-family="Helvetica Neue" font-size="9" font-weight="400" fill="black" y="19">2</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1434">
+          <text transform="translate(810.9285 998)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="14210855e-21" y="15">D</tspan>
+            <tspan font-family="Helvetica Neue" font-size="9" font-weight="400" fill="black" y="19">1</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1433">
+          <text transform="translate(954.9285 998)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="14210855e-21" y="15">D</tspan>
+            <tspan font-family="Helvetica Neue" font-size="9" font-weight="400" fill="black" y="19">0</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1432">
+          <text transform="translate(504.4805 1250)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="3339551e-19" y="15">Q</tspan>
+            <tspan font-family="Helvetica Neue" font-size="9" font-weight="400" fill="black" y="19">3</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1431">
+          <text transform="translate(648.4805 1250)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="3339551e-19" y="15">Q</tspan>
+            <tspan font-family="Helvetica Neue" font-size="9" font-weight="400" fill="black" y="19">2</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1430">
+          <text transform="translate(792.4805 1250)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="3339551e-19" y="15">Q</tspan>
+            <tspan font-family="Helvetica Neue" font-size="9" font-weight="400" fill="black" y="19">1</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1429">
+          <text transform="translate(936.4805 1250)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="3339551e-19" y="15">Q</tspan>
+            <tspan font-family="Helvetica Neue" font-size="9" font-weight="400" fill="black" y="19">0</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1428">
+          <text transform="translate(375.204 1043)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="27711167e-20" y="15">WE</tspan>
+          </text>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

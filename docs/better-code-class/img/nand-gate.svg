@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" version="1.1" xmlns:dc="http://purl.org/dc/elements/1.1/" viewBox="81 1104.262 243 258.1" width="243" height="258.1">
+  <defs>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="black">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+    <font-face font-family="Helvetica Neue" font-size="16" panose-1="2 0 5 3 0 0 0 2 0 4" units-per-em="1000" underline-position="-100" underline-thickness="50" slope="0" x-height="517" cap-height="714" ascent="951.9958" descent="-212.99744" font-weight="400">
+      <font-face-src>
+        <font-face-name name="HelveticaNeue"/>
+      </font-face-src>
+    </font-face>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.18.3\n2016-10-04 03:00:01 +0000</metadata>
+  <g id="Canvas_1" stroke="none" stroke-dasharray="none" fill="none" fill-opacity="1" stroke-opacity="1">
+    <title>Canvas 1</title>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Group_1183">
+        <g id="Group_1216">
+          <g id="Graphic_1223">
+            <circle cx="210" cy="1197.562" r="27.0000431433513" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1222">
+            <line x1="201" y1="1179.562" x2="201" y2="1215.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </g>
+          <g id="Line_1221">
+            <line x1="201" y1="1197.3367" x2="165" y2="1197.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1220">
+            <line x1="201" y1="1188.3882" x2="219" y2="1170.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1219">
+            <line x1="201" y1="1206.9741" x2="211.91905" y2="1217.6432" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1218">
+            <line x1="219" y1="1170.562" x2="219" y2="1152.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1217">
+            <line x1="219" y1="1224.562" x2="219" y2="1242.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1208">
+          <g id="Graphic_1215">
+            <circle cx="210" cy="1287.562" r="27.0000431433513" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1214">
+            <line x1="201" y1="1269.562" x2="201" y2="1305.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+          </g>
+          <g id="Line_1213">
+            <line x1="201" y1="1287.3367" x2="165" y2="1287.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1212">
+            <line x1="201" y1="1278.3882" x2="219" y2="1260.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1211">
+            <line x1="201" y1="1296.9741" x2="211.91905" y2="1307.6432" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1210">
+            <line x1="219" y1="1260.562" x2="219" y2="1242.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+          <g id="Line_1209">
+            <line x1="219" y1="1314.562" x2="219" y2="1332.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Graphic_1207">
+          <text transform="translate(95.316 1187.562)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="0" y="15">A</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1206">
+          <text transform="translate(95.02 1277.562)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="0" y="15">B</tspan>
+          </text>
+        </g>
+        <g id="Graphic_1205">
+          <text transform="translate(257.132 1151.562)" fill="black">
+            <tspan font-family="Helvetica Neue" font-size="16" font-weight="400" fill="black" x="3907985e-19" y="15">!(A &amp; B)</tspan>
+          </text>
+        </g>
+        <g id="Line_1204">
+          <line x1="219" y1="1161.562" x2="249" y2="1161.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Graphic_1203">
+          <circle cx="219" cy="1161.562" r="3.54376816258486" fill="black"/>
+          <circle cx="219" cy="1161.562" r="3.54376816258486" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Group_1198">
+          <g id="Line_1202">
+            <path d="M 208.99203 1339.3092 L 218.97103 1339.5024 L 228.99203 1339.3092" stroke="#00193f" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+          </g>
+          <g id="Line_1201">
+            <line x1="212.38803" y1="1344.1856" x2="225.21903" y2="1344.1856" stroke="#00193f" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+          </g>
+          <g id="Line_1200">
+            <line x1="215.78403" y1="1349.062" x2="221.82203" y2="1349.062" stroke="#00193f" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+          </g>
+          <g id="Line_1199">
+            <line x1="218.97103" y1="1332.2402" x2="218.97103" y2="1339.5024" stroke="black" stroke-linecap="butt" stroke-linejoin="round" stroke-width="1"/>
+          </g>
+        </g>
+        <g id="Group_1195">
+          <g id="Line_1197">
+            <path d="M 129.562 1287.151 L 133.106 1294.241 L 136.65 1280.062 L 140.193 1294.241 L 143.737 1280.062 L 147.281 1294.241 L 150.825 1280.062 L 154.368 1294.241 L 157.912 1280.062 L 161.456 1294.241 L 165 1287.151" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+          </g>
+          <g id="Graphic_1196"/>
+        </g>
+        <g id="Group_1192">
+          <g id="Line_1194">
+            <path d="M 129.562 1197.151 L 133.106 1204.241 L 136.65 1190.062 L 140.193 1204.241 L 143.737 1190.062 L 147.281 1204.241 L 150.825 1190.062 L 154.368 1204.241 L 157.912 1190.062 L 161.456 1204.241 L 165 1197.151" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+          </g>
+          <g id="Graphic_1193"/>
+        </g>
+        <g id="Graphic_1191">
+          <circle cx="248.7" cy="1161.562" r="3.54376816258488" fill="white"/>
+          <circle cx="248.7" cy="1161.562" r="3.54376816258488" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1190">
+          <line x1="129.562" y1="1287.1515" x2="111" y2="1287.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Graphic_1189">
+          <circle cx="111.18562" cy="1287.5579" r="3.54376816258484" fill="white"/>
+          <circle cx="111.18562" cy="1287.5579" r="3.54376816258484" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Line_1188">
+          <line x1="129.562" y1="1197.1515" x2="111" y2="1197.562" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Graphic_1187">
+          <circle cx="111.18562" cy="1197.5579" r="3.54376816258484" fill="white"/>
+          <circle cx="111.18562" cy="1197.5579" r="3.54376816258484" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+        </g>
+        <g id="Group_1184">
+          <g id="Line_1186">
+            <path d="M 217.91 1116.562 L 225 1120.106 L 210.821 1123.65 L 225 1127.193 L 210.821 1130.737 L 225 1134.281 L 210.821 1137.825 L 225 1141.3675 L 210.821 1144.9115 L 225 1148.4555 L 217.91 1151.9995" stroke="black" stroke-linecap="butt" stroke-linejoin="miter" stroke-width="1"/>
+          </g>
+          <g id="Graphic_1185"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

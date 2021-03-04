@@ -1,4 +1,5 @@
 #include <algorithm>
+#include <chrono>
 #include <cstdlib>
 #include <iostream>
 #include <iterator>
@@ -11,16 +12,35 @@
 #include <vector>
 
 #include <cxxabi.h>
+#include <xcpp/xdisplay.hpp>
 
 using namespace std;
+using namespace xcpp;
+
+string find_replace_all(string s, const char* sub, const char* replace) {
+    const auto replace_len = strlen(replace);
+    for (string::size_type n = 0; true; n += replace_len) {
+        n = s.find(sub, n);
+        if (n == std::string::npos) break;
+        s.replace(n, strlen(sub), replace, replace_len);
+    }
+    return s;
+}
 
 template <class T>
-void type_name() {
+string type_name() {
     typedef typename std::remove_reference<T>::type TR;
-    std::unique_ptr<char, void (*)(void*)> own(
-        abi::__cxa_demangle(typeid(TR).name(), nullptr, nullptr, nullptr),
-        std::free);
-    std::string r = own != nullptr ? own.get() : typeid(TR).name();
+    int status;
+    struct free_ {
+        void operator()(void* p) const { free(p); }
+    };
+    std::unique_ptr<char[], free_> own(
+        abi::__cxa_demangle(typeid(TR).name(), nullptr, nullptr, &status));
+    std::string r = own ? own.get() : typeid(TR).name();
+    
+    r = find_replace_all(move(r), "__cxx11::", "");
+    r = find_replace_all(move(r), "std::basic_string<char, std::char_traits<char>, std::allocator<char> >", "std::string");
+    
     if (std::is_const<TR>::value) r += " const";
     if (std::is_volatile<TR>::value) r += " volatile";
     if (std::is_lvalue_reference<T>::value)
@@ -28,7 +48,12 @@ void type_name() {
     else if (std::is_rvalue_reference<T>::value)
         r += "&&";
 
-    std::cout << r << '\n';
+    return r;
+}
+
+template <class T>
+void print_type_name() {
+    cout << type_name<T>() << "\n";
 }
 
 struct annotate {
