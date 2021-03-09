@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xl="http://www.w3.org/1999/xlink" xmlns:dc="http://purl.org/dc/elements/1.1/" version="1.1" viewBox="215.5 -1080.5 577 361" width="577" height="361">
+  <defs>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-1 -4 10 8" markerWidth="10" markerHeight="8" color="black">
+      <g>
+        <path d="M 8 0 L 0 -3 L 0 3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+    <marker orient="auto" overflow="visible" markerUnits="strokeWidth" id="FilledArrow_Marker_2" stroke-linejoin="miter" stroke-miterlimit="10" viewBox="-9 -4 10 8" markerWidth="10" markerHeight="8" color="black">
+      <g>
+        <path d="M -8 0 L 0 3 L 0 -3 Z" fill="currentColor" stroke="currentColor" stroke-width="1"/>
+      </g>
+    </marker>
+  </defs>
+  <metadata> Produced by OmniGraffle 7.18.3\n2021-03-09 01:13:19 +0000</metadata>
+  <g id="Canvas_1" fill-opacity="1" stroke-opacity="1" stroke="none" stroke-dasharray="none" fill="none">
+    <title>Canvas 1</title>
+    <rect fill="white" x="215.5" y="-1080.5" width="577" height="361"/>
+    <g id="Canvas_1_Layer_1">
+      <title>Layer 1</title>
+      <g id="Graphic_1335">
+        <rect x="216" y="-936" width="72" height="72" fill="white"/>
+        <rect x="216" y="-936" width="72" height="72" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1336">
+        <rect x="288" y="-936" width="72" height="72" fill="white"/>
+        <rect x="288" y="-936" width="72" height="72" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1337">
+        <rect x="360" y="-936" width="72" height="72" fill="white"/>
+        <rect x="360" y="-936" width="72" height="72" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1338">
+        <rect x="432" y="-936" width="72" height="72" fill="white"/>
+        <rect x="432" y="-936" width="72" height="72" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1340">
+        <rect x="504" y="-936" width="72" height="72" fill="white"/>
+        <rect x="504" y="-936" width="72" height="72" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1341">
+        <rect x="576" y="-936" width="72" height="72" fill="white"/>
+        <rect x="576" y="-936" width="72" height="72" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1342">
+        <rect x="648" y="-936" width="72" height="72" fill="white"/>
+        <rect x="648" y="-936" width="72" height="72" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Graphic_1343">
+        <rect x="720" y="-936" width="72" height="72" fill="white"/>
+        <rect x="720" y="-936" width="72" height="72" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_1344">
+        <path d="M 252 -936 C 252 -936 325.21428 -1080 468 -1080 C 592.0172 -1080 717.8665 -971.3682 748.8083 -942.81" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_1345">
+        <path d="M 324 -936 C 324 -936 366.0102 -1044 468 -1044 C 554.6017 -1044 649.8702 -966.1313 676.6467 -942.6338" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_1346">
+        <path d="M 396 -936 C 396 -936 406.8061 -1008 468 -1008 C 518.03675 -1008 582.5233 -959.8613 604.3749 -942.3075" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_1347">
+        <path d="M 468 -936 C 468 -936 483.60204 -972 504 -972 C 517.8204 -972 529.4392 -955.4739 535.4954 -944.8158" marker-end="url(#FilledArrow_Marker)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_1348">
+        <path d="M 328.047 -854.9704 C 343.08344 -823.4194 400.28115 -720 504 -720 C 626.38776 -720 756 -864 756 -864" marker-start="url(#FilledArrow_Marker_2)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_1349">
+        <path d="M 398.8173 -854.5104 C 407.4855 -828.1564 437.30823 -756 504 -756 C 585.59184 -756 684 -864 684 -864" marker-start="url(#FilledArrow_Marker_2)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_1350">
+        <path d="M 470.6091 -854.4453 C 476.1621 -836.8262 491.23573 -801 522 -801 C 562.7959 -801 612 -864 612 -864" marker-start="url(#FilledArrow_Marker_2)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+      <g id="Line_1353">
+        <path d="M 257.7213 -855.9266 C 276.2046 -830.8536 337.0732 -756 405 -756 C 486.59184 -756 540 -864 540 -864" marker-start="url(#FilledArrow_Marker_2)" stroke="black" stroke-linecap="round" stroke-linejoin="round" stroke-width="1"/>
+      </g>
+    </g>
+  </g>
+</svg>

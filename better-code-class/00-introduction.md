@@ -18,6 +18,10 @@ jupyter:
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
+# Better Code Workshop : Sean Parent
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
 # Introduction
 
 > _Engineering_ is making informed trade-offs to find the best solution given a set of constraints.

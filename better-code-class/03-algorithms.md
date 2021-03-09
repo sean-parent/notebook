@@ -569,6 +569,14 @@ F remove_if(F first, F last, P pred) {
 </center>
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
+<center>
+    <img src='img/03-algorithms-swirl-even.svg' alt='Swirl (Even)'>
+    <br>
+    <em>Swirl (Even)</em>
+</center>
+<!-- #endregion -->
+
 ```c++ slideshow={"slide_type": "slide"}
 namespace v0 {
 
@@ -588,9 +596,10 @@ void swirl(I f, I l) {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace v0;
-    int a[]{ 0, 1, 2, 3, 4, 5, 6, 7, 8 };
+
+    int a[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
     swirl(begin(a), end(a));
-    
+
     display(a);
 }
 ```
@@ -599,8 +608,79 @@ void swirl(I f, I l) {
 **Question:** What are the requirements for `I`, `f`, and `l`?
 <!-- #endregion -->
 
+```c++ slideshow={"slide_type": "slide"}
+namespace v1 {
+
+template <class I>
+void swirl(I f, I l) {
+    reverse(f, l);
+    auto m = next(f, distance(f, l) / 2);
+    if (m == l) return;
+    rotate(f, m, next(m));
+}
+
+} // namespace v1
+```
+
+```c++ slideshow={"slide_type": "fragment"}
+{
+    using namespace v1;
+
+    int a[]{0, 1, 2, 3, 4, 5, 6, 7, 8};
+    swirl(begin(a), end(a));
+
+    display(a);
+}
+```
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- As a general rule, an algorithm should not throw away information it calculated that the caller can't easily (small constant time) reconstruct.
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- `swirl` computes the mid-point, so it is a good thing to return
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- (Unfortunately, `std::reverse` throws it away!)
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "fragment"}
+namespace v2 {
+
+template <class I>
+I swirl(I f, I l) {
+    reverse(f, l);
+    auto m = next(f, distance(f, l) / 2);
+    if (m == l) return;
+    rotate(f, m, next(m));
+    return m;
+}
+
+} // namespace v1
+```
+
 <!-- #region slideshow={"slide_type": "fragment"} -->
 **Homework:** Implement `swirl` with the minimum number of moves
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+## Predicate Permutations
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- `partition` & `stable_partition`
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+_Predicate permutations_ use a predicate function to determine ordering. These algorithms partition the set into two sets. A _stable_partition_ algorithm preserves the relative order of the elements in each set.
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+<center>
+    <iframe data-src="./img/algorithm-gather/index.html"></iframe>
+    <em>Gather Algorithm</em>
+</center>
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -609,7 +689,7 @@ void swirl(I f, I l) {
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
 - `sort`, `stable_sort`, & `partial_sort`
-- `partition` & `nth_element`
+- `nth_element`
 - `make_heap`
 <!-- #endregion -->
 
@@ -654,6 +734,40 @@ _Comparison permutations_ use a comparison function to map an ordering of the va
 C++20 defines the ordering on floating-point types as a `std::partial_ordering` because of `nan` values. I find this complicates matters unnecessarily, and means the requirements of the comparison operator cannot be defined with a _concept_ but require a precondition. See prior discussion of domain of an operation.
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
+- The `sort` and `nth element` operations establish a direct relationship between the order of elements and their position in the sequence.
+- `make_heap` orders the elements as a _max heap_ 
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+<center>
+    <img src='img/03-algorithms-max-heap.svg' alt='Max Heap'>
+    <br>
+    <em>Max Heap</em>
+    <br>
+    <small >&mdash; <a href="https://commons.wikimedia.org/w/index.php?curid=12251273">By Ermishin - Own work, CC BY-SA 3.0</a></small>
+</center>
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- `make_heap`, and the related heap operation are included in the standard library because they are used by `sort`
+- `sort` in the standard library is an _introsort_, which is an introspective quicksort that switches to _heap sort_ when the recursion depths exceeds a level $k \cdot log(n)$
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- `nth_element` sorts a sequence _enough_ so that the specified element is in the correct location
+- A postcondition of `nth_element` is that the sequence is partitions such that every element before the nth element is less than or equal to it, and every element after is greater than or equal.
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- With `nth_element` and `partial_sort` you can sort a subrange of a sequence as if the entire range where sorted
+- This has the same time complexity as a full sort, $n \cdot log(n)$, but can be considerably faster
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- This is very useful when you want to sort a "window" view into a large sequence
+<!-- #endregion -->
+
 ```c++ slideshow={"slide_type": "slide"}
 template <class I> // I models RandomAccessIterator
 void sort_subrange_0(I f, I l, I sf, I sl) {
@@ -679,51 +793,118 @@ void sort_subrange(I f, I l, I sf, I sl) {
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-<center>
-    <iframe data-src="./img/algorithm-gather/index.html"></iframe>
-    <em>Gather Algorithm</em>
-</center>
-<!-- #endregion -->
-
-### Projections
-
-<!-- #region slideshow={"slide_type": "slide"} -->
 ## Operations on sorted sequences
 
 - `lower_bound`, `upper_bound`, `equal_range`, `binary_search`
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "skip"} -->
-<!--- stopped here --->
-
-## More advanced algorithms
+- `merge`
 
 
-## Position Based Algorithms
-  - All non-modifying sequence operations taking a predicate
-  
-## Strict Weak Order
+- `includes`, `set_difference`, `set_intersection`, `set_symmetric_difference`, `set_union`
 
-## Iterator hierarchy (and why you probably shouldn't care)
 
-## Writing a custom algorithm
-- what to return
+- `lower_bound` should is the most commonly used way to do a binary search for an element in a sequence
 
-## Composition vs. multi-pass
-
-## Generators vs input iterator
-
-## Output iterators vs sink functions
-<!-- #endregion -->
-
-[
-- discuss (show graph) of O(1), O(log(N)), O(N), O(N log(N)
-- where does the below code go?
-]
-
-```c++ tags=[]
+```c++
 {
-    double a = numeric_limits<double>::quiet_NaN();
-    display(a == a);
+    int a[]{ 0, 1, 2, 3, 3, 3, 4, 4, 5, 6 };
+    auto p = lower_bound(begin(a), end(a), 3);
+    display(a);
+    cout << string(distance(begin(a), p) * 3 + 1, ' ') << "^\n";
 }
 ```
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+### Projections
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- The range algorithms in C++20 contain projection arguments
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- Projections are very useful with the comparison permutations and operations on sorted sequences to provide symmetry
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"}
+{
+    struct employee {
+        string _first;
+        string _last;
+    };
+
+    employee a[]{{"Joe", "Zimmer"}, {"Frank", "Berse"}};
+
+    sort(begin(a), end(a), [](const employee& a, const employee& b) {
+        return a._last < b._last;
+    });
+    auto p = lower_bound(begin(a), end(a), "Zimmer"s, [](const employee& a, const string& b) {
+        return a._last < b;
+    });
+    
+    display(p->_first);
+}
+```
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+```cpp
+{
+    struct employee {
+        string _first;
+        string _last;
+    };
+
+    employee a[]{{"Joe", "Zimmer"}, {"Frank", "Berse"}};
+
+    ranges::sort(a, less<>(), &employee::_last);
+    auto p = ranges::lower_bound(a, "Zimmer"s, less<>(), &employee::_last);
+   
+    display(p->_first);
+}
+```
+
+```
+"Joe"
+```
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+## Iterator hierarchy (and why you probably shouldn't care)
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+## Composition vs. multi-pass
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+## Generators vs input iterator
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+## Heap operations
+
+- `make_heap`, `push_heap`, `pop_heap`, `sort_heap`
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- `priority_queue`
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+**Exercise:** Create a `priority_queue` of `my_type`.
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- Can you move out the top element?
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+**Exercise:** Create a new `priority_queue` adapter that supports move using the heap operations.
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "notes"} -->
+\[
+- discuss (show graph) of O(1), O(log(N)), O(N), O(N log(N)
+\]
+<!-- #endregion -->
