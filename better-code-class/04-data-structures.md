@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.2
+      jupytext_version: 1.10.0
   kernelspec:
     display_name: C++17
     language: C++17
@@ -173,30 +173,6 @@ include iota implementation in algorithm section
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 ## Problem
-<!-- #endregion -->
-
-```c++ slideshow={"slide_type": "slide"}
-template <class I> // I models RandomAccessIterator
-void sort_subrange_0(I f, I l, I sf, I sl) {
-    std::sort(f, l);
-}
-
-template <class I> // I models RandomAccessIterator
-void sort_subrange(I f, I l, I sf, I sl) {
-    if (f != sf && sf != l) {
-        std::nth_element(f, sf, l); // partition [f, l) at sf
-        ++sf;
-    }
-    std::partial_sort(sf, sl, l);
-}
-```
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-<center>
-    <img src='img/sort-v-sort-subrange.png' alt='Sort v Sort Subrange'>
-    <br>
-    <em><a href='http://quick-bench.com/C0fww_d39OVBvCnoNrXUN5XU0nE'>Benchmark Code</a></em>
-</center>
 <!-- #endregion -->
 
 ```c++

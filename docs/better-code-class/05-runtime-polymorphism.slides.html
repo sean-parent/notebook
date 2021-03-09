@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14399,6 +14399,10 @@ display: block;
   font-style: normal;
 }
 
+.speaker-controls-time.hidden, .speaker-controls-notes.hidden {
+    display: block;
+}
+
   /*
   .reveal pre {
     width: inherit;
@@ -14516,7 +14520,24 @@ display: block;
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><strong>Goal: No pointers in interfaces</strong></p>
+<p><strong>Goal: No <em>raw pointers</em></strong></p>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Definitions">Definitions<a class="anchor-link" href="#Definitions">&#182;</a></h2>
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<blockquote><p>A <em>raw pointer</em> is any type with owning pointer semantics including:</p>
+<ul>
+<li><code>T*</code></li>
+<li><code>shared_ptr&lt;T&gt;</code></li>
+<li><code>unique_ptr&lt;T&gt;</code></li>
+<li><code>weak_ptr&lt;T&gt;</code></li>
+</ul>
+<p>It does not include <em>iterators</em>, even if the iterator is a pointer type, or a pointer used to represent an optional reference</p>
+</blockquote>
 
 </div>
 </div></div><div class="fragment">
@@ -14524,6 +14545,10 @@ display: block;
 <blockquote><p><em>Polymorphism</em> is the provision of a single interface to entities of different types.</p>
 </blockquote>
 
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h2>
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">

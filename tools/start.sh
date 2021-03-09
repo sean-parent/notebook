@@ -80,7 +80,7 @@ BKPIDS+=($!)
 BKPIDS+=($!)
 {
     cd ./docs
-    bundle exec jekyll build --baseurl "" --watch --incremental
+    bundle exec jekyll build --watch --incremental
 } &
 BKPIDS+=($!)
 

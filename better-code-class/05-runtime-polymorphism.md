@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.2
+      jupytext_version: 1.10.0
   kernelspec:
     display_name: C++17
     language: C++17
@@ -20,12 +20,25 @@ jupyter:
 # Runtime Polymorphism
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-**Goal: No pointers in interfaces**
+**Goal: No _raw pointers_**
 <!-- #endregion -->
+
+## Definitions
+
+
+> A _raw pointer_ is any type with owning pointer semantics including:
+> - `T*`
+> - `shared_ptr<T>`
+> - `unique_ptr<T>`
+> - `weak_ptr<T>`
+>
+> It does not include _iterators_, even if the iterator is a pointer type, or a pointer used to represent an optional reference
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
 > _Polymorphism_ is the provision of a single interface to entities of different types.
 <!-- #endregion -->
+
+## Motivation
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
 In C++, runtime polymorphism is typically achieved with _subtyping_ using _inheritance_.

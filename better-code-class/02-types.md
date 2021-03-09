@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.2
+      jupytext_version: 1.10.0
   kernelspec:
     display_name: C++17
     language: C++17
@@ -40,7 +40,7 @@ jupyter:
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- All type have common, _basis_, operations
+- All types have common, _basis_, operations
   - constructible
   - destructible
   - copyable<sup>1</sup>
@@ -55,20 +55,21 @@ jupyter:
 - A type which implements a _computational basis_ is _computationally complete_
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "skip"} -->
-\[ Make sure in this chapter I cover other operations such as hash, representational equality, representational ordering, serialization. \]
-<!-- #endregion -->
-
 <!-- #region slideshow={"slide_type": "slide"} -->
 ## Regular
 
-> There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to _copy objects_ from one data structure to another. We call types having such a basis _regular_ since their use guarantees regularity of behavior and, therefore, interoperability. _(Stepanov & McJones 6)_
+> There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to _copy objects_ from one data structure to another. We call types having such a basis _regular_ since their use guarantees regularity of behavior and, therefore, interoperability. <br>
+<p style='text-align:right;'><small>&mdash; <em>(Stepanov & McJones 6)</em></small></p>
+<!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
 - The copy operation creates a new object, equal to, and logically disjoint from the original
 
+$$
 \begin{align}
 b & \to a \implies a = b. && \text{(copies are equal)}
 \end{align}
+$$
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -98,10 +99,45 @@ b & \to a, op(a) \implies a \neq b \wedge b = c.  && \text{(copies are disjoint)
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-### Implementing Copy, Assignment, and Equality
+### Implementing Copy and Assignment
 
-- Copy-constructor implements the copy operation
+- A copy-constructor implements the copy operation
     - **The compiler is free to assume the semantics of the copy constructor and may elide the copy**
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "notes"} tags=[] -->
+**Note:** True story, a colleague walked into my office and asked, "I'm writing a class, and need to be able to copy it. Should I call the member function that copies 'copy' or 'clone'?"
+Me: You should use a copy constructor.
+Colleague: "I can't, I'm already using the copy-constructor for something else."
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"} tags=[]
+namespace v0 {
+
+annotate f() {
+    annotate r;
+    return r;
+}
+
+} // namespace v0
+```
+
+<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+**Question:** How many copies? How many moves?
+```cpp
+annotate a = f();
+```
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"}
+{
+    using namespace v0;
+    
+    annotate a = f();
+}
+```
+
+<!-- #region slideshow={"slide_type": "slide"} -->
 - To copy an object, copy all the _parts_
 - If not defined, the compiler will provide a member-wise copy-constructor
 - The copy-constructor can be declared `= default` to ensure it is present
@@ -139,10 +175,14 @@ public:
 - A type which is both copy-constructible and copy-assignable is _copyable_
 
 <!-- #region slideshow={"slide_type": "slide"} -->
+### Implementing Equality
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
 - If the representation of an object is unique, then equality can be implemented as part-wise equality
 - C++20 provides member-wise equality (and inequality) by explicitly defaulting `operator==()`
 
-- For C++17
+- For C++11 until C++20
     - Use `std::tie()` as a simple mechanism to implement equality
     - Declare `operator==()` as a non-member operator
         - Otherwise implicit conversions will apply different for the left and right argument
@@ -196,11 +236,12 @@ public:
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- If the value representation of an object is unique, then representational equality is equality
-- If value equality is not implementable in time proportional to the area of the object then `operator==()` as representational equality
+- If the value representation of an object is unique, then representational equality _is_ value equality
+    - Otherwise representational equality _implies_ value equality, but not the converse
+- Representational equality satisfies the axioms for equality as well as copy
+- If value equality is not implementable in time proportional to the area of the object then implement `operator==()` as representational equality
     - This usually means in terms of _identity_ of the remote parts
-- Representational equality implies equality (but not the converse) and satisfies the axioms for copy and equality
-- Examples include functions and some graph structures
+    - Examples include functions and some graph structures
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
@@ -240,6 +281,10 @@ public:
   - Computationally complete implies all the values are obtainable
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "notes"} -->
+**Note:** Give the example of std::size() for expected complexity.
+<!-- #endregion -->
+
 <!-- #region slideshow={"slide_type": "slide"} -->
 ### Whole-Part Relationship
 
@@ -270,12 +315,23 @@ class my_type {
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
 - Remote parts are expensive
-    - Allocation + deallocation costs as much as copying 4K of data
+    - Allocation + deallocation costs is over 200-500x more expensive than copying a word
     - Each access is a potential cache miss
     - Most objects are never or rarely copied
-        - We'll see why soon
+<!-- #endregion -->
 
-See [_IT Hare_, Operation Costs in CPU Clock Cycles](http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/)
+<!-- #region slideshow={"slide_type": "notes"} -->
+**Note:** I can copy 1.5K - 4K of data in the time it takes for one allocation+ deallocation
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "skip"} tags=[] -->
+_\[The following cell is an iframe for an [ithare infographic](http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/)\]_
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<section>
+<iframe data-src='http://ithare.com/infographics-operation-costs-in-cpu-clock-cycles/'></iframe>
+</section>
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -285,20 +341,18 @@ See [_IT Hare_, Operation Costs in CPU Clock Cycles](http://ithare.com/infograph
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- Here is a common implementation of PImpl
-    - We'll look at this more later
+**Exercise**: Implement a type with a remote part holding a pair of integers.
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-// my_type.hpp
+// 02-types.hpp
 
 namespace v4 {
 
 class my_type {
-    struct implementation;             // forward declaration
-    implementation* _remote = nullptr; // remote part
+    struct implementation;     // forward declaration
+    /* <some_type> _remote; */ // remote part
 public:
-    // declare the basis operations - implementation is in a .cpp file
     my_type(int x, int y);
     ~my_type();
     my_type(const my_type&);
@@ -309,9 +363,9 @@ public:
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
-// my_type.cpp
+// 02-types.cpp
 
-// #include "my_type.hpp" // first include
+// #include "02-types.hpp" // first include
 
 // other includes
 
@@ -320,22 +374,163 @@ namespace v4 {
 struct my_type::implementation {
     int _x;
     int _y;
-    //...
+};
+
+/*
+    Fill in the rest...
+*/
+
+} // namespace v4
+```
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- A major downside of using the PImpl pattern is the amount of forwarding boiler plate that must be written.
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"}
+// 02-types.hpp
+#include <memory>
+
+namespace v41 {
+
+class my_type {
+    struct implementation;              // forward declaration
+    struct deleter {
+        void operator()(implementation*) const;
+    };
+    std::unique_ptr<implementation, deleter> _remote; // remote part
+public:
+    my_type(int x, int y);
+    ~my_type() = default;
+    my_type(const my_type&);
+    my_type& operator=(const my_type&);
+};
+
+} // namespace v4
+```
+
+```c++ slideshow={"slide_type": "slide"}
+// 02-types.cpp
+
+// #include "02-types.hpp" // first include
+
+// other includes
+
+namespace v41 {
+
+struct my_type::implementation {
+    int _x;
+    int _y;
 };
 
 my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
-my_type::~my_type() { delete _remote; }
 my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
 my_type& my_type::operator=(const my_type& a) {
     *_remote = *a._remote;
     return *this;
 }
 
-} // namespace v4
+void my_type::deleter::operator()(implementation* p) const { delete p; }
+
+} // namespace v41
+```
+
+```c++ slideshow={"slide_type": "slide"}
+{
+    using namespace v41;
+    
+    my_type a{10, 20};
+    my_type b = a;
+    a = b;
+}
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- A major downside of using the PImpl pattern is the amount of forwarding boiler plate that must be written.
+- It compiles and runs, what else do we need to make a valid unit test?
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+**Exercise:** Implement `operator==()` on my_type.
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"}
+// 02-types.hpp
+#include <memory>
+
+namespace v42 {
+
+class my_type {
+    struct implementation; // forward declaration
+    struct deleter {
+        void operator()(implementation*) const;
+    };
+    std::unique_ptr<implementation, deleter> _remote; // remote part
+public:
+    my_type(int x, int y);
+    ~my_type() = default;
+    my_type(const my_type&);
+    my_type& operator=(const my_type&);
+
+    friend bool operator==(const my_type&, const my_type&);
+    friend bool operator!=(const my_type& a, const my_type& b) { return !(a == b); }
+};
+
+} // namespace v42
+```
+
+<!-- #region slideshow={"slide_type": "notes"} -->
+**Note:** A bit esoteric, but declaring a free function in a class is not callable either qualified or unqualified, and can only be found by ADL. The advantage of doing this is we improve compile speed by keeping overloads out of the potential overload set for other types.
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"}
+#include <tuple>
+
+namespace v42 {
+
+struct my_type::implementation {
+    int _x;
+    int _y;
+
+    auto underlying() const { return std::tie(_x, _y); }
+};
+
+my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
+my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
+my_type& my_type::operator=(const my_type& a) {
+    *_remote = *a._remote;
+    return *this;
+}
+
+void my_type::deleter::operator()(implementation* p) const { delete p; }
+
+bool operator==(const my_type& a, const my_type& b) {
+    return a._remote->underlying() == b._remote->underlying();
+}
+
+} // namespace v42
+```
+
+```c++ slideshow={"slide_type": "slide"}
+{
+    using namespace v42;
+    
+    my_type a{10, 20};
+    my_type b = a;
+    assert(a == b);
+    b = my_type{5, 30};
+    assert(a != b);
+    a = b;
+    assert(a == b);
+}
+```
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- Equality is important to testing
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+- Being able to reason about a subject in terms of equivalence is known as _equational reasoning_
+    - The notion of equality is critical, not just for testing, but for reasoning about a piece of code
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -367,8 +562,8 @@ The C++20 standard defines the _concept_ std::regular<T> to be copyable, equalit
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- An operation is _operationally safe_ if, when the operation pre-conditions are satisfied, the operation results in objects which are fully formed
-- An operation is _operationally unsafe_ if, when the operation pre-conditions are satisfied, the operation may result in an object which is not fully formed
+- An operation is _operationally safe_ if, when the operation preconditions are satisfied, the operation results in objects which are fully formed
+- An operation is _operationally unsafe_ if, when the operation preconditions are satisfied, the operation may result in an object which is not fully formed
   - From here on, when referring to a _safe_ operation we mean _operationally safe_
 <!-- #endregion -->
 
@@ -391,7 +586,7 @@ The C++20 standard defines the _concept_ std::regular<T> to be copyable, equalit
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-> A basis is _efficient_ if and only if any procedure implemented using it is as efficient as an equivalent procedure written in terms of an alternative basis.
+> A basis is _efficient_ if and only if any procedure can be implemented as efficiently using it as an equivalent procedure written in terms of an alternative basis.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false slideshow={"slide_type": "slide"} -->
@@ -426,70 +621,106 @@ a = b, a & \rightharpoonup c \implies c = b. && \text{(move is value preserving)
 - Move is a distinct operation as part of an _efficient_ basis
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "notes"} -->
+**Note:** The C++ standard does not require that _move_ is `noexcept`, and so doesn't require efficiency
+<!-- #endregion -->
+
 <!-- #region slideshow={"slide_type": "fragment"} -->
 - In C++ we implement the move operation in terms of rvalue references.
     - An rvalue is a temporary value
-    - Any witnesses to remote parts can be maintained without copying the remote part
+    - Any references to remote parts can be maintained without copying the remote part
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+**Exercise:** Implement move-construction and move-assignment operators on `my_type`.
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "slide"}
-namespace v5 {
+namespace v43 {
 
 class my_type {
-    struct implementation;             // forward declaration
-    implementation* _remote = nullptr; // remote part
+    struct implementation; // forward declaration
+    struct deleter {
+        void operator()(implementation*) const;
+    };
+    std::unique_ptr<implementation, deleter> _remote; // remote part
 public:
-    // declare the basis operations - implementation is in a .cpp file
     my_type(int x, int y);
-    ~my_type();
+    ~my_type() = default;
     my_type(const my_type&);
     my_type& operator=(const my_type&);
 
-    my_type(my_type&& a) noexcept : _remote{a._remote} { a._remote = nullptr; }
-    my_type& operator=(my_type&& a) noexcept;
+    my_type(my_type&&) noexcept = default;   // <--
+    my_type& operator=(my_type&&) = default; // <--
+
+    friend bool operator==(const my_type&, const my_type&);
+    friend bool operator!=(const my_type& a, const my_type& b) { return !(a == b); }
 };
 
-} // namespace v5
+} // namespace v43
 ```
 
-```c++ slideshow={"slide_type": "slide"}
-namespace v5 {
-
-struct my_type::implementation {
-    int _x;
-    int _y;
-    //...
-};
-
-my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
-my_type::~my_type() { delete _remote; }
-my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
+<!-- #region slideshow={"slide_type": "slide"} -->
+- Recall our implementation of assignment:
+```cpp
 my_type& my_type::operator=(const my_type& a) {
     *_remote = *a._remote;
     return *this;
 }
-my_type& my_type::operator=(my_type&& a) noexcept {
-    delete _remote;
-    _remote = a._remote;
-    a._remote = nullptr;
+```
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+**Question:** What happens if we assign-to a moved from object?
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"}
+namespace v43 {
+
+struct my_type::implementation {
+    int _x;
+    int _y;
+
+    auto underlying() const { return std::tie(_x, _y); }
+};
+
+my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
+my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
+
+my_type& my_type::operator=(const my_type& a) { // <--
+    if (!_remote) *this = my_type{a};
+    *_remote = *a._remote;
     return *this;
 }
 
-} // namespace v5
+void my_type::deleter::operator()(implementation* p) const { delete p; }
+
+bool operator==(const my_type& a, const my_type& b) {
+    return a._remote->underlying() == b._remote->underlying();
+}
+
+} // namespace v43
+```
+
+```c++ slideshow={"slide_type": "slide"}
+{
+    using namespace v43;
+    
+    my_type a{10, 20};
+    my_type b{move(a)};
+    a = my_type{5, 30};
+    assert((b == my_type{10, 20}));
+    assert((a == my_type{5, 30}));
+}
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- The requirements in the C++ standard are that we must leave the moved from object _"valid but unspecified"_ state
+- The requirements in the C++ standard are that we must leave the moved from object in a _"unspecified"_ state
   - _Unspecified_ is without correspondence to an entity
   - explicit move is a public unsafe operation, it may leave the moved-from object in a partially formed state
-- Some operations _must_ be valid on the otherwise unspecified state
+- Some operations are required on the otherwise unspecified state
     - destruction
     - copy and move assigning to the object (to establish a new value)
-    - self move assignment (for self-swap)
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} tags=["exercise"] -->
-**Exercise:** `my_type` contains a bug. Find the bug. Fix it using at least two different approaches. What are the trade-offs?
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -542,424 +773,51 @@ unique_ptr<int> y = move(x); // safe. x is guaranteed to be == nullptr
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-## Exercises
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} tags=["exercise"] -->
-**Exercise:** `my_type` contains a bug. Find the bug. Fix it using at least two different
-approaches. What are the trade-offs?
-<!-- #endregion -->
-
-```c++ slideshow={"slide_type": "slide"}
-namespace v6 {
-
-class my_type {
-    struct implementation;             // forward declaration
-    implementation* _remote = nullptr; // remote part
-public:
-    // declare the basis operations - implementation is in a .cpp file
-    my_type(int x, int y);
-    ~my_type();
-    my_type(const my_type&);
-    my_type& operator=(const my_type&);
-
-    my_type(my_type&& a) noexcept : _remote{a._remote} { a._remote = nullptr; }
-    my_type& operator=(my_type&& a) noexcept;
-};
-
-} // namespace v6
-```
-
-```c++ slideshow={"slide_type": "slide"}
-namespace v6 {
-
-struct my_type::implementation {
-    int _x;
-    int _y;
-    //...
-};
-
-my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
-my_type::~my_type() { delete _remote; }
-my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
-my_type& my_type::operator=(const my_type& a) {
-    *_remote = *a._remote;
-    return *this;
-}
-my_type& my_type::operator=(my_type&& a) noexcept {
-    delete _remote;
-    _remote = a._remote;
-    a._remote = nullptr;
-    return *this;
-}
-
-} // namespace v6
-```
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- What bug?
+### Explicit Move
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-```cpp
-using namespace v6;
-
-my_type a{10, 20};
-my_type b{12, 30};
-
-b = move(a);
-a = b;
-```
+- A _sink_ argument is an argument that will be stored or returned from a function.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-```
-input_line_9:11:6: warning: null passed to a callee that requires a non-null argument [-Wnonnull]
-    *_remote = *a._remote;
-     ^~~~~~~
-```
+- Pass sink arguments by universal reference or value and `forward<>` or `move()` them into place.
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} -->
-```cpp
-// b = move(a);
-
-my_type& my_type::operator=(my_type&& a) noexcept {
-    delete _remote;
-    _remote = a._remote;
-    a._remote = nullptr; // <--
-    return *this;
-}
-```
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- This is the most common usage where an explicit move is required for efficiency. Try to avoid other uses by transforming the code into a functional form.
 <!-- #endregion -->
 
-```cpp
-// a = b;
+```c++ slideshow={"slide_type": "slide"}
+namespace v5 {
 
-my_type& my_type::operator=(const my_type& a) {
-    *_remote = *a._remote;
-//   ^~~~~~~ nullptr dereference
-    return *this;
-}
-```
+class example {
+    string _str;
 
-
-- Some operations _must_ be valid on the otherwise unspecified state
-    - destruction
-    - copy and move assigning to the object (to establish a new value)
-    - self-move assignment (for self-swap)
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-### Fixes to copy-assignment crash
-
-- We need to be able to assign to our partially formed value
-    - Two possible options
-        - Change copy-assignment
-        - Change move-assignment
-<!-- #endregion -->
-
-```c++ slideshow={"slide_type": "skip"}
-namespace v7 {
-
-class my_type {
-    struct implementation;             // forward declaration
-    implementation* _remote = nullptr; // remote part
 public:
-    // declare the basis operations - implementation is in a .cpp file
-    my_type(int x, int y);
-    ~my_type();
-    my_type(const my_type&);
-    my_type& operator=(const my_type&);
-
-    my_type(my_type&& a) noexcept : _remote{a._remote} { a._remote = nullptr; }
-    my_type& operator=(my_type&& a) noexcept;
+    template <class T>
+    example(T&& a) : _str{std::forward<T>(a)} {}
+    // or
+    example(string a) : _str{std::move(a)} {}
 };
 
-} // namespace v7
+} // namespace v5
 ```
-
-```c++ slideshow={"slide_type": "slide"}
-namespace v7 {
-
-struct my_type::implementation {
-    int _x;
-    int _y;
-    //...
-};
-
-my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
-my_type::~my_type() { delete _remote; }
-my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
-my_type& my_type::operator=(const my_type& a) {
-    if (_remote)
-        *_remote = *a._remote;
-    else
-        _remote = new implementation{*a._remote}; // <---
-    return *this;
-}
-my_type& my_type::operator=(my_type&& a) noexcept {
-    delete _remote;
-    _remote = a._remote;
-    a._remote = nullptr;
-    return *this;
-}
-
-} // namespace v7
-```
-
-```c++ slideshow={"slide_type": "slide"}
-{
-    using namespace v7;
-
-    my_type a{10, 20};
-    my_type b{12, 30};
-
-    b = move(a);
-    a = b;
-}
-```
-
-```c++ slideshow={"slide_type": "skip"}
-namespace v8 {
-
-class my_type {
-    struct implementation;             // forward declaration
-    implementation* _remote = nullptr; // remote part
-public:
-    // declare the basis operations - implementation is in a .cpp file
-    my_type(int x, int y);
-    ~my_type();
-    my_type(const my_type&);
-    my_type& operator=(const my_type&);
-
-    my_type(my_type&& a) noexcept : _remote{a._remote} { a._remote = nullptr; }
-    my_type& operator=(my_type&& a) noexcept;
-};
-
-} // namespace v8
-```
-
-```c++ slideshow={"slide_type": "slide"}
-namespace v8 {
-
-struct my_type::implementation {
-    int _x;
-    int _y;
-    //...
-};
-
-my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
-my_type::~my_type() { delete _remote; }
-my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
-my_type& my_type::operator=(const my_type& a) {
-    *_remote = *a._remote;
-    return *this;
-}
-my_type& my_type::operator=(my_type&& a) noexcept {
-    swap(_remote, a._remote); // <----
-    return *this;
-}
-
-} // namespace v8
-```
-
-```c++
-{
-    using namespace v8;
-
-    my_type a{10, 20};
-    my_type b{12, 30};
-
-    b = move(a);
-    a = b;
-}
-```
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-```cpp
-{
-    using namespace v8;
-
-    my_type a{10, 20};
-    my_type b = move(a);
-    a = b;
-}
-```
-```
-input_line_17:11:6: warning: null passed to a callee that requires a non-null argument [-Wnonnull]
-    *_remote = *a._remote;
-     ^~~~~~~
-```
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-### Idiomatic Approach
-<!-- #endregion -->
-
-```c++ slideshow={"slide_type": "skip"}
-namespace v9 {
-
-class my_type {
-    struct implementation;             // forward declaration
-    implementation* _remote = nullptr; // remote part
-public:
-    // declare the basis operations - implementation is in a .cpp file
-    my_type(int x, int y);
-    ~my_type();
-    my_type(const my_type&);
-    my_type& operator=(const my_type&);
-
-    my_type(my_type&& a) noexcept : _remote{a._remote} { a._remote = nullptr; }
-    my_type& operator=(my_type&& a) noexcept;
-};
-
-} // namespace v9
-```
-
-```c++ slideshow={"slide_type": "slide"}
-namespace v9 {
-
-struct my_type::implementation {
-    int _x;
-    int _y;
-    //...
-};
-
-my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
-my_type::~my_type() { delete _remote; }
-my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
-my_type& my_type::operator=(const my_type& a) {
-    return *this = my_type(a); // <--- copy and move
-}
-my_type& my_type::operator=(my_type&& a) noexcept {
-    delete _remote;
-    _remote = a._remote;
-    a._remote = nullptr;
-    return *this;
-}
-
-} // namespace v9
-```
-
-```c++ slideshow={"slide_type": "slide"}
-{
-    using namespace v9;
-
-    my_type a{10, 20};
-    my_type b{12, 30};
-
-    b = move(a);
-    a = b;
-}
-```
-
-```c++ slideshow={"slide_type": "slide"}
-{
-    using namespace v9;
-
-    my_type a{10, 20};
-    my_type b = move(a);
-    a = b;
-}
-```
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- The idomatic solution can work with unique_ptr
-<!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-namespace v10 {
-
-class my_type {
-    struct implementation;
-    struct deleter {
-        void operator()(implementation*) const noexcept; // <---
-    };
-    unique_ptr<implementation, deleter> _remote;
-
-public:
-    // declare the basis operations - implementation is in a .cpp file
-    my_type(int x, int y); // <---
-    ~my_type() = default;
-    my_type(const my_type&); // <---
-    my_type& operator=(const my_type& a) { return *this = my_type(a); }
-
-    my_type(my_type&& a) noexcept = default;
-    my_type& operator=(my_type&& a) noexcept = default;
-};
-
-} // namespace v10
-```
-
-```c++ slideshow={"slide_type": "slide"}
-namespace v10 {
-
-struct my_type::implementation {
-    int _x;
-    int _y;
-    //...
-};
-
-my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
-my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
-void my_type::deleter::operator()(implementation* p) const noexcept { delete p; }
-
-} // namespace v10
-```
-
-```c++ slideshow={"slide_type": "slide"}
 {
-    using namespace v10;
-
-    my_type a{10, 20};
-    my_type b{12, 30};
-
-    b = move(a);
-    a = b;
+    using namespace v5;
+    // Don't
+    string str{"Hello World!"};
+    example item1{move(str)};
+    
+    // Do
+    example item2{"Hello World!"};
 }
-
-{
-    using namespace v10;
-
-    my_type a{10, 20};
-    my_type b = move(a);
-    a = b;
-}
-
 ```
 
-<!-- #region slideshow={"slide_type": "slide"} -->
-### Tradeoffs
-
-- **Copy Assignment: In situ assignment (if available) or copy construct**
-- **Move Assignment: Swap**
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- Performance: Faster for in-situ case (saves heap allocations)
-- Object Lifetime: Not precise
-- Exception Safety: Basic Guarantee (not transactional, unsafe)
-- Implementation: Complex
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- **Copy Assignment: Copy construct and move assign**
-- **Move Assignment: Consume**
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "fragment"} -->
-- Performance: Slower
-- Object Lifetime: Precise
-- Exception Safety: Strong Guarantee (transactional, safe)
-- Implementation: Simple
-<!-- #endregion -->
-
-<!-- #region slideshow={"slide_type": "slide"} -->
-- Recommendation
-    - I prefer the idiomatic, simpler approach
-        - unless I have evidence of a performance issue
-        - or the type is heavily used
-    - Write it correct and simple first
+<!-- #region slideshow={"slide_type": "notes"} -->
+**Note:** I once had a colleague who went through my code and split out every sub-expression and assigned it to a variable, with no moves, and then complained my code was slow.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -1028,8 +886,10 @@ std::pair<std::string, std::string> get_pair() {
     - But not having one can be inconvenient
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "fragment"} -->
 - A default constructed value is often overwritten before use
     - It is inefficient to allocate memory, or acquire resources, in the default constructor
+<!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - A default constructor should:
@@ -1039,31 +899,6 @@ std::pair<std::string, std::string> get_pair() {
     - If the object has a meaningful _zero_ or _empty_ state it should initialize to that state
         - Otherwise it may be partially-formed
 <!-- #endregion -->
-
-```c++ slideshow={"slide_type": "slide"}
-namespace v12 {
-
-class my_type {
-    struct implementation;
-    struct deleter {
-        void operator()(implementation*) const noexcept; // <---
-    };
-    unique_ptr<implementation, deleter> _remote;
-
-public:
-    // declare the basis operations - implementation is in a .cpp file
-    constexpr my_type() noexcept = default; // partially formed
-    my_type(int x, int y);                  // <---
-    ~my_type() = default;
-    my_type(const my_type&); // <---
-    my_type& operator=(const my_type& a) { return *this = my_type(a); }
-
-    my_type(my_type&& a) noexcept = default;
-    my_type& operator=(my_type&& a) noexcept = default;
-};
-
-} // namespace v12
-```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - Recommendation
@@ -1080,14 +915,41 @@ public:
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "skip"} -->
-**Exercise:** Look at the regular operations (copy, assignment, equality, default construction) for a type in the standard library, or a commonly used type within your project. Is the implementation Complete? Expressive? Efficient?
+**Exercise:** Implement a default constructor for `my_type`.
 <!-- #endregion -->
 
-<!-- #region toc-hr-collapsed=false -->
+```c++ slideshow={"slide_type": "slide"}
+namespace v44 {
+
+class my_type {
+    struct implementation; // forward declaration
+    struct deleter {
+        void operator()(implementation*) const;
+    };
+    std::unique_ptr<implementation, deleter> _remote; // remote part
+public:
+    constexpr my_type() noexcept = default; // <--
+
+    my_type(int x, int y);
+    ~my_type() = default;
+    my_type(const my_type&);
+    my_type& operator=(const my_type&);
+
+    my_type(my_type&&) noexcept = default;
+    my_type& operator=(my_type&&) = default;
+
+    friend bool operator==(const my_type&, const my_type&);
+    friend bool operator!=(const my_type& a, const my_type& b) { return !(a == b); }
+};
+
+} // namespace v44
+```
+
+<!-- #region toc-hr-collapsed=false slideshow={"slide_type": "slide"} -->
 ## Expressiveness
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
+<!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false slideshow={"slide_type": "slide"} -->
 ### Public calls with private access
 
 - In general we want the minimum number of public calls with private access to provide a type which is:
@@ -1100,7 +962,9 @@ public:
 - Other operations should be implemented in terms of those
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "fragment"} -->
 - What other operations should be provide?
+<!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false slideshow={"slide_type": "slide"} -->
 ### Expressive Basis
@@ -1117,8 +981,8 @@ public:
     - `(a != b) == (a < b || b < a)`
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "fragment"} -->
-However, writing:
+<!-- #region slideshow={"slide_type": "slide"} -->
+- Writing:
 ```cpp
 if (!(a < b || b < a)) some_operation();
 ```
@@ -1136,16 +1000,128 @@ if (a == b) some_operation();
 - This still leaves a fair amount up to the designer to choose how to balance safety and efficiency and what _expressive_ means in the context of the type
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
 ## Other Operations
+<!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
+### Address-of
+<!-- #endregion -->
 
-## Hash
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- Because every object exists in memory, every object has an address.
+<!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- Even though you can overload `operator&()`, don't.
+<!-- #endregion -->
 
-## Serialization
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- For the paranoid library write, the standard supplies `std::addressof()`.
+<!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
+### Hash
+<!-- #endregion -->
 
-## Ordering
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- Because every object exists in memory, it's representation can be hashed
+- Representationally equal objects imply equal hashes, not the converse
+- the standard allows you to specialize `std::hash<>` for your type
+- The standard does not provide a `hash_combine()` function or a tuple hash
+- [Boost provides both](https://www.boost.org/doc/libs/1_75_0/doc/html/hash.html) which can be used with `std::tie()` to easily provide a hash function
+<!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
+### Serialization
+<!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- Although any equationally complete type can be serialized, the standard doesn't provide a standard serialization format
+- Still, supporting `operator<<()` for ostream is useful for debugging
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"}
+namespace v45 {
+
+class my_type {
+    struct implementation; // forward declaration
+    struct deleter {
+        void operator()(implementation*) const;
+    };
+    std::unique_ptr<implementation, deleter> _remote; // remote part
+public:
+    constexpr my_type() noexcept = default;
+
+    my_type(int x, int y);
+    ~my_type() = default;
+    my_type(const my_type&);
+    my_type& operator=(const my_type&);
+
+    my_type(my_type&&) noexcept = default;
+    my_type& operator=(my_type&&) = default;
+
+    friend bool operator==(const my_type&, const my_type&);
+    friend bool operator!=(const my_type& a, const my_type& b) { return !(a == b); }
+    
+    friend std::ostream& operator<<(std::ostream&, const my_type&);
+};
+
+} // namespace v44
+```
+
+```c++ slideshow={"slide_type": "skip"}
+namespace v45 {
+
+struct my_type::implementation {
+    int _x;
+    int _y;
+
+    auto underlying() const { return std::tie(_x, _y); }
+};
+
+my_type::my_type(int x, int y) : _remote{new implementation{x, y}} {}
+my_type::my_type(const my_type& a) : _remote{new implementation{*a._remote}} {}
+
+my_type& my_type::operator=(const my_type& a) {
+    if (!_remote) *this = my_type{a};
+    *_remote = *a._remote;
+    return *this;
+}
+
+void my_type::deleter::operator()(implementation* p) const { delete p; }
+
+bool operator==(const my_type& a, const my_type& b) {
+    return a._remote->underlying() == b._remote->underlying();
+}
+
+} // namespace v43
+```
+
+```c++ slideshow={"slide_type": "slide"}
+namespace v45 {
+
+ostream& operator<<(ostream& out, const my_type& a) {
+    const auto& self{*a._remote};
+    return out << "{ \"x\": " << self._x << ", \"y\": " << self._y << " }";
+}
+
+} // namespace v45
+```
+
+```c++ slideshow={"slide_type": "fragment"}
+{
+    using namespace v45;
+    
+    my_type a{10, 42};
+    cout << a << "\n";
+}
+```
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+### Ordering
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
 - Covered in the next section
+<!-- #endregion -->

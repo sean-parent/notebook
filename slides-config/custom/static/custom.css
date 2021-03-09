@@ -20,6 +20,10 @@ display: block;
   font-style: normal;
 }
 
+.speaker-controls-time.hidden, .speaker-controls-notes.hidden {
+    display: block;
+}
+
   /*
   .reveal pre {
     width: inherit;

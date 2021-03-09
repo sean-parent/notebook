@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.2
+      jupytext_version: 1.10.0
   kernelspec:
     display_name: C++17
     language: C++17
@@ -38,6 +38,17 @@ jupyter:
 - Language is a constraint
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+## Definitions
+The term _raw_ appears in a couple of goals, and I'll use it frequently throughout this talk.
+
+> The _raw_ usage of a construct means the construct should be considered too low-level and not used outside of a function or class whose primary purpose it to create a safe and efficient, higher level construct that can be used instead.
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} -->
+Throughout these slides I use _word_ to mean a machine word, typically 64 bits on a 64 bit architecture and 32 bits on a 32 bit architecture. I do not mean a Win32 `WORD` type which is 16 bits.
+<!-- #endregion -->
+
 <!-- #region slideshow={"slide_type": "slide"} -->
 ## Philosophy
 
@@ -48,6 +59,11 @@ jupyter:
 - _Reusable_
 - _Scalable_
     - With large data sets, but primarily on a single machine
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "notes"} tags=[] -->
+**Note:** What is not on this list:
+- Readable: Not that I don't think readability is important, I think people put it too high on the list. Code isn't prose, code is math.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -68,7 +84,7 @@ jupyter:
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - To build a transistor, silicon is doped with a material such as Boron and Phosphorus
-    - Silicon + Boron = P, fewer electors, insulator 
+    - Silicon + Boron = P, fewer electrons, insulator 
     - Silicon + Phosphorus = N, has _free_ electrons, conductive
 <!-- #endregion -->
 
@@ -98,7 +114,7 @@ jupyter:
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
 <center>
-    <img src='img/cmos-nand-gate.svg' alt='CMOS NAND Gate'>
+    <img src='img/cmos-nand-gate.svg' alt='CMOS NAND Gate' style='width:25%;height:25%'>
     <br>
     <em>CMOS NAND Gate</em>
 </center>
@@ -134,7 +150,7 @@ jupyter:
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- The transistor count increases the complexity
+- The transistor count increases complexity
     - Memory hierarchy
     - Parallel execution
     - Speculative execution
@@ -155,5 +171,8 @@ jupyter:
 <!-- #region slideshow={"slide_type": "fragment"} -->
 - Not _pure_ mathematics
     - We are not describing systems on an idealized device that cannot be realized
-    - We seek to use mathematics to describe what _is_
+    
+- Mathematics is a tool to describe what _is_ and a tool to reason about code
+    
+- Software is defined on algebraic structures
 <!-- #endregion -->

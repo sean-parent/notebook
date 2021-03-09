@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14399,6 +14399,10 @@ display: block;
   font-style: normal;
 }
 
+.speaker-controls-time.hidden, .speaker-controls-notes.hidden {
+    display: block;
+}
+
   /*
   .reveal pre {
     width: inherit;
@@ -14545,6 +14549,18 @@ display: block;
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Definitions">Definitions<a class="anchor-link" href="#Definitions">&#182;</a></h2><p>The term <em>raw</em> appears in a couple of goals, and I'll use it frequently throughout this talk.</p>
+<blockquote><p>The <em>raw</em> usage of a construct means the construct should be considered too low-level and not used outside of a function or class whose primary purpose it to create a safe and efficient, higher level construct that can be used instead.</p>
+</blockquote>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>Throughout these slides I use <em>word</em> to mean a machine word, typically 64 bits on a 64 bit architecture and 32 bits on a 32 bit architecture. I do not mean a Win32 <code>WORD</code> type which is 16 bits.</p>
+
+</div>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Philosophy">Philosophy<a class="anchor-link" href="#Philosophy">&#182;</a></h2><ul>
 <li><em>Correct</em></li>
 <li><em>Efficient</em><ul>
@@ -14560,7 +14576,17 @@ display: block;
 </ul>
 
 </div>
-</div></section></section><section><section>
+</div><aside class="notes">
+
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p><strong>Note:</strong> What is not on this list:</p>
+<ul>
+<li>Readable: Not that I don't think readability is important, I think people put it too high on the list. Code isn't prose, code is math.</li>
+</ul>
+
+</div>
+</div>
+</aside></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Software-is-Physics">Software is <em>Physics</em><a class="anchor-link" href="#Software-is-Physics">&#182;</a></h3><ul>
 <li>Object are physical entities</li>
@@ -14583,7 +14609,7 @@ display: block;
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>To build a transistor, silicon is doped with a material such as Boron and Phosphorus<ul>
-<li>Silicon + Boron = P, fewer electors, insulator </li>
+<li>Silicon + Boron = P, fewer electrons, insulator </li>
 <li>Silicon + Phosphorus = N, has <em>free</em> electrons, conductive</li>
 </ul>
 </li>
@@ -14623,7 +14649,7 @@ display: block;
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
-    <img src='img/cmos-nand-gate.svg' alt='CMOS NAND Gate'>
+    <img src='img/cmos-nand-gate.svg' alt='CMOS NAND Gate' style='width:25%;height:25%'>
     <br>
     <em>CMOS NAND Gate</em>
 </center>
@@ -14671,7 +14697,7 @@ display: block;
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>The transistor count increases the complexity<ul>
+<li>The transistor count increases complexity<ul>
 <li>Memory hierarchy</li>
 <li>Parallel execution</li>
 <li>Speculative execution</li>
@@ -14700,10 +14726,14 @@ display: block;
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Not <em>pure</em> mathematics<ul>
+<li><p>Not <em>pure</em> mathematics</p>
+<ul>
 <li>We are not describing systems on an idealized device that cannot be realized</li>
-<li>We seek to use mathematics to describe what <em>is</em></li>
 </ul>
+</li>
+<li><p>Mathematics is a tool to describe what <em>is</em> and a tool to reason about code</p>
+</li>
+<li><p>Software is defined on algebraic structures</p>
 </li>
 </ul>
 

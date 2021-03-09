@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
-td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
+td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14399,6 +14399,10 @@ display: block;
   font-style: normal;
 }
 
+.speaker-controls-time.hidden, .speaker-controls-notes.hidden {
+    display: block;
+}
+
   /*
   .reveal pre {
     width: inherit;
@@ -14512,12 +14516,16 @@ display: block;
 <div class="reveal">
 <div class="slides"><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><blockquote><p>Engineering is making informed trade-offs to find the best solution given a set of constraints.</p>
-<p>My hope is that this workshop is generally applicable, but my experience colors the choices I've made.</p>
+<h1 id="Introduction">Introduction<a class="anchor-link" href="#Introduction">&#182;</a></h1><blockquote><p><em>Engineering</em> is making informed trade-offs to find the best solution given a set of constraints.</p>
 </blockquote>
 
 </div>
-</div></section></section><section><section>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>My hope is that this workshop is generally applicable, but my experience colors the choices I've made.</p>
+
+</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Career-Background">Career Background<a class="anchor-link" href="#Career-Background">&#182;</a></h2>
 </div>
@@ -14531,10 +14539,10 @@ display: block;
 <li>Introduction</li>
 <li>Preface</li>
 <li>Types - Goal: Write <em>complete</em>, <em>expressive</em>, and <em>efficient</em> types</li>
-<li>Algorithms - Goal: No <em>raw</em> loops</li>
-<li>Data Structures - Goal: No <em>incidental</em> data structures</li>
-<li>Runtime Polymorphism - Goal: No pointers in interfaces</li>
-<li>Concurrency - Goal: No <em>raw</em> synchronization</li>
+<li>Algorithms - Goal: No <em>raw loops</em></li>
+<li>Data Structures - Goal: No <em>incidental data structures</em></li>
+<li>Runtime Polymorphism - Goal: No <em>raw pointers</em></li>
+<li>Concurrency - Goal: No <em>raw synchronization primitives</em></li>
 <li>Relationships - Goal: No contradictions</li>
 <li>Epilogue</li>
 </ul>
@@ -14542,9 +14550,17 @@ display: block;
 </div>
 </div>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<h2 id="Materials">Materials<a class="anchor-link" href="#Materials">&#182;</a></h2><ul>
+<li>Slides: <a href="https://sean-parent.stlab.cc/notebook">https://sean-parent.stlab.cc/notebook</a></li>
+<li>Exercises: <a href="https://github.com/sean-parent/better-code-class">https://github.com/sean-parent/better-code-class</a></li>
+</ul>
+
+</div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Use-of-Jupyter-w/Xeus-Cling">Use of Jupyter w/Xeus-Cling<a class="anchor-link" href="#Use-of-Jupyter-w/Xeus-Cling">&#182;</a></h2>
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Currently limited to C++17<ul>
@@ -14557,7 +14573,7 @@ display: block;
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
@@ -14575,7 +14591,7 @@ display: block;
 </div>
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Often code is wrapped in a scope so it doesn't interfere with other code</li>
@@ -14586,7 +14602,7 @@ display: block;
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
@@ -14618,7 +14634,7 @@ display: block;
 
 </div>
 
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
@@ -14654,7 +14670,7 @@ display: block;
 
 </div>
 
-</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>Operations can be timed with <code>%%timeit</code><ul>
@@ -14664,7 +14680,7 @@ display: block;
 </ul>
 
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
@@ -14689,7 +14705,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>300 ns +- 3.69 ns per loop (mean +- std. dev. of 7 runs 1000000 loops each)
+<pre>236 ns +- 3.17 ns per loop (mean +- std. dev. of 7 runs 1000000 loops each)
 </pre>
 </div>
 </div>
@@ -14698,7 +14714,54 @@ display: block;
 
 </div>
 
-</div></section></section>
+</div></div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<ul>
+<li>I use an <code>annotate</code> class which prints common operations</li>
+</ul>
+
+</div>
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
+    <span class="n">annotate</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">annotate</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+
+     </div>
+</div>
+</div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
+<pre>annotate ctor
+annotate ctor
+annotate assign
+annotate move-assign
+annotate dtor
+annotate dtor
+</pre>
+</div>
+</div>
+
+</div>
+
+</div>
+
+</div></div></section></section>
 </div>
 </div>
 </body>

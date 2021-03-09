@@ -11,6 +11,9 @@
 #include <utility>
 #include <vector>
 
+#undef NDEBUG
+#include <cassert>
+
 #include <cxxabi.h>
 #include <xcpp/xdisplay.hpp>
 
