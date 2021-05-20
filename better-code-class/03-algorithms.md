@@ -297,9 +297,9 @@ Compare the description for the old [SGI STL LessThanComparable concept](http://
 
 > Expression semantics
 >
->| Name | Expression | Precondition                         | Semantics | Postcondition |
- | -    | -          | -                                    | -         | -             |
- | Less | `x < y`    | `x` and `y` are in the domain of `<` |           |               |
+> | Name | Expression | Precondition                         | Semantics | Postcondition |
+> | -    | -          | -                                    | -         | -             |
+> | Less | `x < y`    | `x` and `y` are in the domain of `<` |           |               |
  
 versus the [C++17 concept](https://eel.is/c++draft/utility.arg.requirements#tab:cpp17.lessthancomparable).
 
