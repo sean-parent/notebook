@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.0
+      jupytext_version: 1.11.2
   kernelspec:
     display_name: C++17
     language: C++17
@@ -23,9 +23,11 @@ jupyter:
 **Goal: No _raw pointers_**
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
 ## Definitions
+<!-- #endregion -->
 
-
+<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
 > A _raw pointer_ is any type with owning pointer semantics including:
 > - `T*`
 > - `shared_ptr<T>`
@@ -33,12 +35,15 @@ jupyter:
 > - `weak_ptr<T>`
 >
 > It does not include _iterators_, even if the iterator is a pointer type, or a pointer used to represent an optional reference
+<!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "fragment"} -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 > _Polymorphism_ is the provision of a single interface to entities of different types.
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
 ## Motivation
+<!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
 In C++, runtime polymorphism is typically achieved with _subtyping_ using _inheritance_.
@@ -205,8 +210,8 @@ Pointers create incidental data structures
 ### Imposes additional requirement on the client
 
 - Inheritance is intrusive, now our rectangle has become logically part of the system using it
-    - But there a _a lot_ of other uses for rectangle besides a shape in our document
-- Forces the client to allocate and manage memory and efficiency
+    - But there are _a lot_ of other uses for rectangle besides a shape in our document
+- Forces the client to allocate and manage memory
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -223,7 +228,7 @@ sizeof(shared_ptr<int>) / sizeof(void*)
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 <center>
-    <img src='img/document-full.svg' alt='Document Structure'>
+    <img style='height:400px;' src='img/document-full.svg' alt='Document Structure'>
     <br>
     <em>Document Structure</em>
 </center>
@@ -238,7 +243,7 @@ sizeof(shared_ptr<int>) / sizeof(void*)
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- The number of allocations and application makes is a good indicator of the applications performance
+- The number of allocations an application makes is a good indicator of the applications performance
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
@@ -379,7 +384,6 @@ namespace v5 {
 class rectangle {
     int _width, _height;
     
-    auto underlying() const { return tie(_width, _height); }
 public:
     explicit rectangle(int width, int height) : _width{width}, _height{height} {}
 
@@ -462,7 +466,7 @@ void draw(const document& a, ostream& out, size_t position) {
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 <center>
-    <img src='img/document-full.svg' alt='Document Structure'>
+    <img  style='height:400px;' src='img/document-full.svg' alt='Document Structure'>
     <br>
     <em>Document Structure</em>
 </center>
@@ -476,7 +480,7 @@ void draw(const document& a, ostream& out, size_t position) {
 **Exercise:** Read the documentation for `std::function<>`, write a similar class that supports move-only invocable objects.
 <!-- #endregion -->
 
-```c++ slideshow={"slide_type": "fragment"}
+```c++ slideshow={"slide_type": "fragment"} tags=[]
 ?std::function
 ```
 
@@ -487,26 +491,24 @@ void draw(const document& a, ostream& out, size_t position) {
 ```c++ slideshow={"slide_type": "fragment"}
 namespace v1 {
 
-template <class>
-class task;
+template <class> class task;
 
 template <class R, class... Args>
 class task<R(Args...)> {
     struct concept_t;
-    template <class F>
-    struct model_t;
-    
+    template <class F> struct model_t;
+
     unique_ptr<concept_t> _model;
 public:
     template <class F>
     task(F&&); // <-- (1)
-    
+
     constexpr task() noexcept = default;
-    
+
     task(task&&) noexcept = default;
     task& operator=(task&&) noexcept = default;
 
-    R operator()(Args...);  // <-- (2)
+    R operator()(Args...); // <-- (2)
 };
 
 } // namespace v1
@@ -524,8 +526,8 @@ struct task<R(Args...)>::concept_t {
     virtual ~concept_t() = default; // <-- (1)
     virtual R invoke_(Args...) = 0; // <-- (2)
 };
-    
-}
+
+} // namespace v1
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
@@ -583,14 +585,12 @@ R task<R(Args...)>::operator()(Args... args) {
 ```c++ slideshow={"slide_type": "slide"}
 namespace v2 {
 
-template <class>
-class task;
+template <class> class task;
 
 template <class R, class... Args>
 class task<R(Args...)> {
     struct concept_t;
-    template <class F, bool Small>
-    struct model_t;
+    template <class F, bool Small> struct model_t;
 
     static constexpr size_t max_align = alignof(max_align_t);
     static constexpr size_t small_size =
@@ -599,14 +599,12 @@ class task<R(Args...)> {
 
     const concept_t* _concept{&empty};
     aligned_storage_t<small_size> _model;
-
 public:
     template <class F>
     task(F&&); // <-- (1)
     ~task();   // <-- (2)
 
     constexpr task() noexcept = default;
-
     task(task&&) noexcept;            // <-- (3)
     task& operator=(task&&) noexcept; // <-- (4)
 
@@ -739,6 +737,18 @@ R task<R(Args...)>::operator()(Args... args) { // <-- (5)
     display(*payload());
     display(payload() == nullptr);
 }
+```
+
+<!-- #region slideshow={"slide_type": "slide"} -->
+<center>
+    <img src='img/05-runtime-polymorphism-hand-vtable.svg' alt='Document Structure'>
+    <br>
+    <em>Document with Custom vTable</em>
+</center>
+<!-- #endregion -->
+
+```c++
+
 ```
 
 <!-- #region slideshow={"slide_type": "skip"} -->

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.0
+      jupytext_version: 1.11.2
   kernelspec:
     display_name: C++17
     language: C++17
@@ -70,7 +70,7 @@ TLB is _Translation Look-aside Buffer_ - or _cache miss_
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - A data structure is created anytime a relationship is established between objects
-- To avoid confusion we will reserve the term _data structure_ to refer to types with a set of invariants which insure a set of relationship are maintained. i.e. standard containers
+- To avoid confusion we will reserve the term _data structure_ to refer to types with a set of invariants which insure a set of relationships are maintained. i.e. standard containers
 - More transient data structures will be referred to as _structured data_
 <!-- #endregion -->
 
@@ -88,6 +88,12 @@ TLB is _Translation Look-aside Buffer_ - or _cache miss_
 
 
 
+
+<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+\[
+    Everything from here down is notes...
+\]
+<!-- #endregion -->
 
 ```c++
 namespace bcc {
@@ -157,7 +163,7 @@ bcc::iota(0, 1'000'000, [&](int n){ _vector.push_back(n); });
 - `std::list<>` only makes since when you are externally indexing and hence require iterator stability
 
 <!-- #region slideshow={"slide_type": "skip"} -->
-[
+\[
 
 Show performance difference with std::list.
 Discuss how big O() advantages are frequently lost.
@@ -168,7 +174,7 @@ Almost every major application sits on just one, or a very small number of data-
 
 include iota implementation in algorithm section
 
-]
+\]
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->

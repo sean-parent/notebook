@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14587,7 +14587,7 @@ display: block;
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
 <li>A data structure is created anytime a relationship is established between objects</li>
-<li>To avoid confusion we will reserve the term <em>data structure</em> to refer to types with a set of invariants which insure a set of relationship are maintained. i.e. standard containers</li>
+<li>To avoid confusion we will reserve the term <em>data structure</em> to refer to types with a set of invariants which insure a set of relationships are maintained. i.e. standard containers</li>
 <li>More transient data structures will be referred to as <em>structured data</em></li>
 </ul>
 
@@ -14617,13 +14617,20 @@ display: block;
 </ul>
 
 </div>
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>[
+    Everything from here down is notes...
+]</p>
+
+</div>
 </div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">O</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="n">iota</span><span class="p">(</span><span class="n">T</span> <span class="n">f</span><span class="p">,</span> <span class="n">T</span> <span class="n">l</span><span class="p">,</span> <span class="n">O</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
@@ -14666,7 +14673,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>95.5 ms +- 1.41 ms per loop (mean +- std. dev. of 7 runs 10 loops each)
+<pre>103 ms +- 2.2 ms per loop (mean +- std. dev. of 7 runs 10 loops each)
 </pre>
 </div>
 </div>
@@ -14700,7 +14707,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>12.8 ms +- 999 us per loop (mean +- std. dev. of 7 runs 100 loops each)
+<pre>15.4 ms +- 2.21 ms per loop (mean +- std. dev. of 7 runs 100 loops each)
 </pre>
 </div>
 </div>
@@ -14745,7 +14752,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>7.1 ms +- 483 us per loop (mean +- std. dev. of 7 runs 100 loops each)
+<pre>7.78 ms +- 222 us per loop (mean +- std. dev. of 7 runs 100 loops each)
 </pre>
 </div>
 </div>
@@ -14775,7 +14782,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>2.96 ms +- 127 us per loop (mean +- std. dev. of 7 runs 100 loops each)
+<pre>3.21 ms +- 270 us per loop (mean +- std. dev. of 7 runs 100 loops each)
 </pre>
 </div>
 </div>
@@ -14805,7 +14812,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>7.21 ms +- 347 us per loop (mean +- std. dev. of 7 runs 100 loops each)
+<pre>7.35 ms +- 125 us per loop (mean +- std. dev. of 7 runs 100 loops each)
 </pre>
 </div>
 </div>
@@ -14835,7 +14842,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>3.15 ms +- 318 us per loop (mean +- std. dev. of 7 runs 100 loops each)
+<pre>3.3 ms +- 216 us per loop (mean +- std. dev. of 7 runs 100 loops each)
 </pre>
 </div>
 </div>
@@ -14865,7 +14872,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>92.4 ns +- 4.35 ns per loop (mean +- std. dev. of 7 runs 1000 loops each)
+<pre>103 ns +- 13.2 ns per loop (mean +- std. dev. of 7 runs 1000 loops each)
 </pre>
 </div>
 </div>
@@ -14895,7 +14902,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>112 us +- 9.16 us per loop (mean +- std. dev. of 7 runs 1000 loops each)
+<pre>120 us +- 6.8 us per loop (mean +- std. dev. of 7 runs 1000 loops each)
 </pre>
 </div>
 </div>

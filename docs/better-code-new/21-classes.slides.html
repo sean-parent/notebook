@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14642,7 +14642,7 @@ input_line_11:2:10: note: overridden virtual function is here
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">derived4</span> <span class="o">:</span> <span class="k">public</span> <span class="n">base</span> <span class="p">{</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">member</span><span class="p">()</span> <span class="k">const</span><span class="p">;</span> <span class="c1">// no error or warning</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -15039,7 +15039,7 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc</span> <span class="p">{</span>
     
 <span class="k">struct</span> <span class="nc">example7</span> <span class="p">{</span>
     <span class="k">static</span> <span class="kt">int</span> <span class="n">x</span><span class="p">;</span> <span class="c1">// declaration</span>
@@ -15199,7 +15199,7 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>0x7fda2e614000
+<pre>0x7f5982a80000
 </pre>
 </div>
 </div>

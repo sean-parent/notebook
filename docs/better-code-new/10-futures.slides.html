@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14540,14 +14540,14 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v0</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v0</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">shared_pool</span> <span class="p">{</span>
         <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
         <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_pool</span><span class="p">;</span>
 
-        <span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">insert</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="nf">insert</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
             <span class="k">return</span> <span class="o">&amp;*</span><span class="n">_pool</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">).</span><span class="n">first</span><span class="p">;</span>
         <span class="p">}</span>
@@ -14586,7 +14586,7 @@ display: block;
     <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_pool</span><span class="p">;</span>
     <span class="n">sequential_process</span> <span class="n">_process</span><span class="p">;</span>
 
-    <span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">insert</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="nf">insert</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">_process</span><span class="p">.</span><span class="n">async</span><span class="p">([</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">_a</span> <span class="o">=</span> <span class="n">a</span><span class="p">]{</span>
             <span class="n">_pool</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">).</span><span class="n">first</span><span class="p">;</span>
         <span class="p">});</span>
@@ -14666,7 +14666,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v1</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">interned_string</span> <span class="p">{</span>
     <span class="c1">// struct shared_pool</span>
@@ -14712,7 +14712,7 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v1</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v1</span><span class="p">;</span>
 
     <span class="n">interned_string</span><span class="o">::</span><span class="n">make</span><span class="p">(</span>
         <span class="s">&quot;Hello World&quot;</span><span class="n">s</span><span class="p">,</span> <span class="p">[](</span><span class="k">const</span> <span class="n">interned_string</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">)</span> <span class="p">{</span> <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">s</span><span class="p">.</span><span class="n">str</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="p">});</span>
@@ -14869,7 +14869,7 @@ cout &lt;&lt; "answer: " &lt;&lt; result.get() &lt;&lt; '\n';
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">sequential_process::async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">);</span>
 </pre></div>
 
 </div>

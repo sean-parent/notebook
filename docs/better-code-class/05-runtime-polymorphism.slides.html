@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14523,11 +14523,11 @@ display: block;
 <p><strong>Goal: No <em>raw pointers</em></strong></p>
 
 </div>
-</div>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Definitions">Definitions<a class="anchor-link" href="#Definitions">&#182;</a></h2>
 </div>
-</div>
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <blockquote><p>A <em>raw pointer</em> is any type with owning pointer semantics including:</p>
 <ul>
@@ -14540,17 +14540,17 @@ display: block;
 </blockquote>
 
 </div>
-</div></div><div class="fragment">
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <blockquote><p><em>Polymorphism</em> is the provision of a single interface to entities of different types.</p>
 </blockquote>
 
 </div>
-</div>
+</div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Motivation">Motivation<a class="anchor-link" href="#Motivation">&#182;</a></h2>
 </div>
-</div></div><div class="fragment">
+</div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>In C++, runtime polymorphism is typically achieved with <em>subtyping</em> using <em>inheritance</em>.</p>
 <ul>
@@ -14571,7 +14571,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v3</span> <span class="p">{</span>
     
 <span class="k">using</span> <span class="n">circle</span> <span class="o">=</span> <span class="kt">int</span><span class="p">;</span>
 
@@ -14603,7 +14603,7 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v3</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v3</span><span class="p">;</span>
 
     <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
 
@@ -14651,12 +14651,12 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v4</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">shape</span> <span class="p">{</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">virtual</span> <span class="o">~</span><span class="n">shape</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">draw</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">,</span> <span class="kt">size_t</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="k">using</span> <span class="n">document</span> <span class="o">=</span> <span class="n">vector</span><span class="o">&lt;</span><span class="n">shared_ptr</span><span class="o">&lt;</span><span class="n">shape</span><span class="o">&gt;&gt;</span><span class="p">;</span>
@@ -14682,7 +14682,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v4</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">circle</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">shape</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_radius</span><span class="p">;</span>
@@ -14708,7 +14708,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v4</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">rectangle</span> <span class="k">final</span> <span class="o">:</span> <span class="k">public</span> <span class="n">shape</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_width</span><span class="p">,</span> <span class="n">_height</span><span class="p">;</span>
@@ -14734,7 +14734,7 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v4</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v4</span><span class="p">;</span>
 
     <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
 
@@ -14794,7 +14794,7 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v4</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v4</span><span class="p">;</span>
 
     <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
 
@@ -14859,10 +14859,10 @@ display: block;
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Imposes-additional-requirement-on-the-client">Imposes additional requirement on the client<a class="anchor-link" href="#Imposes-additional-requirement-on-the-client">&#182;</a></h3><ul>
 <li>Inheritance is intrusive, now our rectangle has become logically part of the system using it<ul>
-<li>But there a <em>a lot</em> of other uses for rectangle besides a shape in our document</li>
+<li>But there are <em>a lot</em> of other uses for rectangle besides a shape in our document</li>
 </ul>
 </li>
-<li>Forces the client to allocate and manage memory and efficiency</li>
+<li>Forces the client to allocate and manage memory</li>
 </ul>
 
 </div>
@@ -14910,7 +14910,7 @@ display: block;
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
-    <img src='img/document-full.svg' alt='Document Structure'>
+    <img style='height:400px;' src='img/document-full.svg' alt='Document Structure'>
     <br>
     <em>Document Structure</em>
 </center>
@@ -14926,7 +14926,7 @@ display: block;
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>The number of allocations and application makes is a good indicator of the applications performance</li>
+<li>The number of allocations an application makes is a good indicator of the applications performance</li>
 </ul>
 
 </div>
@@ -14964,7 +14964,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">shape</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">concept_t</span><span class="p">;</span>
@@ -14982,7 +14982,7 @@ display: block;
     <span class="n">shape</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span> <span class="n">shape</span><span class="o">&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
     <span class="n">shape</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">shape</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 
-    <span class="k">friend</span> <span class="kt">void</span> <span class="n">draw</span><span class="p">(</span><span class="k">const</span> <span class="n">shape</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">);</span> <span class="c1">// &lt;-- (2)</span>
+    <span class="k">friend</span> <span class="kt">void</span> <span class="nf">draw</span><span class="p">(</span><span class="k">const</span> <span class="n">shape</span><span class="o">&amp;</span> <span class="n">s</span><span class="p">,</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">);</span> <span class="c1">// &lt;-- (2)</span>
 <span class="p">};</span>
 
 <span class="p">}</span> <span class="c1">// namespace v5</span>
@@ -14999,7 +14999,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
 
 <span class="k">using</span> <span class="n">document</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">shape</span><span class="o">&gt;</span><span class="p">;</span>
 
@@ -15024,11 +15024,11 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">shape</span><span class="o">::</span><span class="n">concept_t</span> <span class="p">{</span>
     <span class="k">virtual</span> <span class="o">~</span><span class="n">concept_t</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="kt">void</span> <span class="n">draw_</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// &lt;-- (2)</span>
+    <span class="k">virtual</span> <span class="kt">void</span> <span class="nf">draw_</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="k">const</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// &lt;-- (2)</span>
 <span class="p">};</span>
 
 <span class="p">}</span> <span class="c1">// namespace v5</span>
@@ -15052,7 +15052,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="n">draw</span><span class="p">(</span><span class="k">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">position</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// &lt;-- (2)</span>
         <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="n">string</span><span class="p">(</span><span class="n">position</span><span class="p">,</span> <span class="sc">&#39; &#39;</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">type_name</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;: &quot;</span> <span class="o">&lt;&lt;</span> <span class="n">x</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
@@ -15071,7 +15071,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nc">shape</span><span class="o">::</span><span class="n">model_t</span> <span class="k">final</span> <span class="o">:</span> <span class="n">concept_t</span> <span class="p">{</span>
@@ -15099,7 +15099,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="n">shape</span><span class="o">::</span><span class="n">shape</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">s</span><span class="p">)</span>
@@ -15123,7 +15123,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
     
 <span class="k">class</span> <span class="nc">circle</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_radius</span><span class="p">;</span>
@@ -15150,12 +15150,11 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
     
 <span class="k">class</span> <span class="nc">rectangle</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_width</span><span class="p">,</span> <span class="n">_height</span><span class="p">;</span>
     
-    <span class="k">auto</span> <span class="nf">underlying</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tie</span><span class="p">(</span><span class="n">_width</span><span class="p">,</span> <span class="n">_height</span><span class="p">);</span> <span class="p">}</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">explicit</span> <span class="n">rectangle</span><span class="p">(</span><span class="kt">int</span> <span class="n">width</span><span class="p">,</span> <span class="kt">int</span> <span class="n">height</span><span class="p">)</span> <span class="o">:</span> <span class="n">_width</span><span class="p">{</span><span class="n">width</span><span class="p">},</span> <span class="n">_height</span><span class="p">{</span><span class="n">height</span><span class="p">}</span> <span class="p">{}</span>
 
@@ -15179,7 +15178,7 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v5</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v5</span><span class="p">;</span>
 
     <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
 
@@ -15220,7 +15219,7 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v5</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v5</span><span class="p">;</span>
 
     <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
 
@@ -15263,7 +15262,7 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v5</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v5</span><span class="p">;</span>
 
     <span class="n">document</span> <span class="n">d</span><span class="p">;</span>
 
@@ -15309,7 +15308,7 @@ display: block;
 <ul>
 <li>To review our definition of a document, it inherits from nothing</li>
 </ul>
-<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
 
 <span class="k">using</span> <span class="n">document</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">shape</span><span class="o">&gt;</span><span class="p">;</span>
 
@@ -15343,7 +15342,7 @@ display: block;
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <center>
-    <img src='img/document-full.svg' alt='Document Structure'>
+    <img  style='height:400px;' src='img/document-full.svg' alt='Document Structure'>
     <br>
     <em>Document Structure</em>
 </center>
@@ -15357,7 +15356,7 @@ display: block;
 <p><strong>Exercise:</strong> Read the documentation for <code>std::function&lt;&gt;</code>, write a similar class that supports move-only invocable objects.</p>
 
 </div>
-</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+</div><div class="fragment"><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 
@@ -15369,6 +15368,38 @@ display: block;
      </div>
 </div>
 </div>
+</div>
+
+<div class="jp-Cell-outputWrapper">
+
+<div class="jp-OutputArea jp-Cell-outputArea">
+
+<div class="jp-OutputArea-child">
+
+
+<div class="jp-RenderedHTMLCommon jp-RenderedHTML jp-OutputArea-output " data-mime-type="text/html">
+<style>
+            #pager-container {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+            }
+            .xcpp-iframe-pager {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+                height: 100%;
+                border: none;
+            }
+            </style>
+            <iframe class="xcpp-iframe-pager" src="https://en.cppreference.com/w/cpp/utility/functional/function?action=purge"></iframe>
+</div>
+
+</div>
+
+</div>
+
 </div>
 
 </div></div></section></section><section><section>
@@ -15384,28 +15415,26 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v1</span> <span class="p">{</span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="nc">task</span><span class="p">;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">task</span><span class="p">;</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">class</span> <span class="nc">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">concept_t</span><span class="p">;</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
-    <span class="k">struct</span> <span class="nc">model_t</span><span class="p">;</span>
-    
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span> <span class="k">struct</span> <span class="nc">model_t</span><span class="p">;</span>
+
     <span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">concept_t</span><span class="o">&gt;</span> <span class="n">_model</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
     <span class="n">task</span><span class="p">(</span><span class="n">F</span><span class="o">&amp;&amp;</span><span class="p">);</span> <span class="c1">// &lt;-- (1)</span>
-    
-    <span class="k">constexpr</span> <span class="nf">task</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    
+
+    <span class="k">constexpr</span> <span class="n">task</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
+
     <span class="n">task</span><span class="p">(</span><span class="n">task</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
     <span class="n">task</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">task</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
 
-    <span class="n">R</span> <span class="nf">operator</span><span class="p">()(</span><span class="n">Args</span><span class="p">...);</span>  <span class="c1">// &lt;-- (2)</span>
+    <span class="n">R</span> <span class="nf">operator</span><span class="p">()(</span><span class="n">Args</span><span class="p">...);</span> <span class="c1">// &lt;-- (2)</span>
 <span class="p">};</span>
 
 <span class="p">}</span> <span class="c1">// namespace v1</span>
@@ -15429,15 +15458,15 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v1</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nc">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="n">concept_t</span> <span class="p">{</span>
     <span class="k">virtual</span> <span class="o">~</span><span class="n">concept_t</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span> <span class="c1">// &lt;-- (1)</span>
-    <span class="k">virtual</span> <span class="n">R</span> <span class="n">invoke_</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// &lt;-- (2)</span>
+    <span class="k">virtual</span> <span class="n">R</span> <span class="nf">invoke_</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// &lt;-- (2)</span>
 <span class="p">};</span>
-    
-<span class="p">}</span>
+
+<span class="p">}</span> <span class="c1">// namespace v1</span>
 </pre></div>
 
      </div>
@@ -15451,7 +15480,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v1</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
@@ -15461,7 +15490,7 @@ display: block;
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">G</span> <span class="o">=</span> <span class="n">F</span><span class="o">&gt;</span>
     <span class="n">model_t</span><span class="p">(</span><span class="n">G</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="o">:</span> <span class="n">_f</span><span class="p">{</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">G</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)}</span> <span class="p">{}</span> <span class="c1">// &lt;-- (1)</span>
 
-    <span class="n">R</span> <span class="n">invoke_</span><span class="p">(</span><span class="n">Args</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">invoke</span><span class="p">(</span><span class="n">_f</span><span class="p">,</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span> <span class="p">}</span> <span class="c1">// &lt;-- (2)</span>
+    <span class="n">R</span> <span class="n">invoke_</span><span class="p">(</span><span class="n">Args</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">invoke</span><span class="p">(</span><span class="n">_f</span><span class="p">,</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span> <span class="p">}</span> <span class="c1">// &lt;-- (2)</span>
 <span class="p">};</span>
 
 <span class="p">}</span> <span class="c1">// namespace v1</span>
@@ -15478,7 +15507,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v1</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
@@ -15504,11 +15533,11 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v1</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v1</span><span class="p">;</span>
 
     <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
 
-    <span class="n">task</span><span class="o">&lt;</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">payload</span><span class="p">{[</span><span class="n">_p</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">p</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">_p</span><span class="p">);</span> <span class="p">}};</span>
+    <span class="n">task</span><span class="o">&lt;</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">payload</span><span class="p">{[</span><span class="n">_p</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">p</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span> <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_p</span><span class="p">);</span> <span class="p">}};</span>
 
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">*</span><span class="n">payload</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">payload</span><span class="p">()</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
@@ -15555,16 +15584,14 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v2</span> <span class="p">{</span>
 
-<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span><span class="o">&gt;</span>
-<span class="k">class</span> <span class="nc">task</span><span class="p">;</span>
+<span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span><span class="o">&gt;</span> <span class="k">class</span> <span class="nc">task</span><span class="p">;</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">class</span> <span class="nc">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">concept_t</span><span class="p">;</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">Small</span><span class="o">&gt;</span>
-    <span class="k">struct</span> <span class="nc">model_t</span><span class="p">;</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">Small</span><span class="o">&gt;</span> <span class="k">struct</span> <span class="nc">model_t</span><span class="p">;</span>
 
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">max_align</span> <span class="o">=</span> <span class="k">alignof</span><span class="p">(</span><span class="n">max_align_t</span><span class="p">);</span>
     <span class="k">static</span> <span class="k">constexpr</span> <span class="kt">size_t</span> <span class="n">small_size</span> <span class="o">=</span>
@@ -15573,14 +15600,12 @@ display: block;
 
     <span class="k">const</span> <span class="n">concept_t</span><span class="o">*</span> <span class="n">_concept</span><span class="p">{</span><span class="o">&amp;</span><span class="n">empty</span><span class="p">};</span>
     <span class="n">aligned_storage_t</span><span class="o">&lt;</span><span class="n">small_size</span><span class="o">&gt;</span> <span class="n">_model</span><span class="p">;</span>
-
 <span class="k">public</span><span class="o">:</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
     <span class="n">task</span><span class="p">(</span><span class="n">F</span><span class="o">&amp;&amp;</span><span class="p">);</span> <span class="c1">// &lt;-- (1)</span>
     <span class="o">~</span><span class="n">task</span><span class="p">();</span>   <span class="c1">// &lt;-- (2)</span>
 
-    <span class="k">constexpr</span> <span class="nf">task</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-
+    <span class="k">constexpr</span> <span class="n">task</span><span class="p">()</span> <span class="k">noexcept</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
     <span class="n">task</span><span class="p">(</span><span class="n">task</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span>            <span class="c1">// &lt;-- (3)</span>
     <span class="n">task</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">task</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="k">noexcept</span><span class="p">;</span> <span class="c1">// &lt;-- (4)</span>
 
@@ -15601,7 +15626,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v2</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nc">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="n">concept_t</span> <span class="p">{</span>
@@ -15624,7 +15649,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v2</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
@@ -15637,7 +15662,7 @@ display: block;
         <span class="k">new</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">model_t</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">model_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">self</span><span class="p">)));</span>
     <span class="p">}</span>
     <span class="k">static</span> <span class="n">R</span> <span class="n">_invoke</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">self</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nf">invoke</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">model_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">_f</span><span class="p">,</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+        <span class="k">return</span> <span class="n">invoke</span><span class="p">(</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">model_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">_f</span><span class="p">,</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
     <span class="p">}</span>
 
     <span class="k">static</span> <span class="k">constexpr</span> <span class="n">concept_t</span> <span class="n">vtable</span><span class="p">{</span><span class="n">_dtor</span><span class="p">,</span> <span class="n">_move</span><span class="p">,</span> <span class="n">_invoke</span><span class="p">};</span>
@@ -15659,7 +15684,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v2</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
@@ -15672,7 +15697,7 @@ display: block;
         <span class="k">new</span> <span class="p">(</span><span class="n">p</span><span class="p">)</span> <span class="n">model_t</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">model_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">self</span><span class="p">)));</span>
     <span class="p">}</span>
     <span class="k">static</span> <span class="n">R</span> <span class="n">_invoke</span><span class="p">(</span><span class="kt">void</span><span class="o">*</span> <span class="n">self</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nf">invoke</span><span class="p">(</span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">model_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">_p</span><span class="p">,</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
+        <span class="k">return</span> <span class="n">invoke</span><span class="p">(</span><span class="o">*</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">model_t</span><span class="o">*&gt;</span><span class="p">(</span><span class="n">self</span><span class="p">)</span><span class="o">-&gt;</span><span class="n">_p</span><span class="p">,</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
     <span class="p">}</span>
 
     <span class="k">static</span> <span class="k">constexpr</span> <span class="n">concept_t</span> <span class="n">vtable</span><span class="p">{</span><span class="n">_dtor</span><span class="p">,</span> <span class="n">_move</span><span class="p">,</span> <span class="n">_invoke</span><span class="p">};</span>
@@ -15694,7 +15719,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v2</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
@@ -15728,7 +15753,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v2</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="n">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="n">task</span><span class="p">(</span><span class="n">task</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">_concept</span><span class="p">{</span><span class="n">x</span><span class="p">.</span><span class="n">_concept</span><span class="p">}</span> <span class="p">{</span> <span class="c1">// &lt;-- (3)</span>
@@ -15764,11 +15789,11 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v2</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v2</span><span class="p">;</span>
 
     <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
 
-    <span class="n">task</span><span class="o">&lt;</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">payload</span><span class="p">{[</span><span class="n">_p</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">p</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">_p</span><span class="p">);</span> <span class="p">}};</span>
+    <span class="n">task</span><span class="o">&lt;</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">()</span><span class="o">&gt;</span> <span class="n">payload</span><span class="p">{[</span><span class="n">_p</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">p</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span> <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_p</span><span class="p">);</span> <span class="p">}};</span>
         
     <span class="n">display</span><span class="p">(</span><span class="o">*</span><span class="n">payload</span><span class="p">());</span>
     <span class="n">display</span><span class="p">(</span><span class="n">payload</span><span class="p">()</span> <span class="o">==</span> <span class="k">nullptr</span><span class="p">);</span>
@@ -15806,6 +15831,28 @@ display: block;
 
 </div>
 
+</div>
+
+</div></section></section><section><section>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<center>
+    <img src='img/05-runtime-polymorphism-hand-vtable.svg' alt='Document Structure'>
+    <br>
+    <em>Document with Custom vTable</em>
+</center>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-InputArea jp-Cell-inputArea">
+
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+     <div class="CodeMirror cm-s-jupyter">
+<div class=" highlight hl-c++"><pre><span></span>
+</pre></div>
+
+     </div>
+</div>
+</div>
 </div>
 
 </div></section></section>

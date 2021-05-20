@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14643,7 +14643,7 @@ Colleague: "I can't, I'm already using the copy-constructor for something else."
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v0</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v0</span> <span class="p">{</span>
 
 <span class="n">annotate</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">annotate</span> <span class="n">r</span><span class="p">;</span>
@@ -14672,7 +14672,7 @@ Colleague: "I can't, I'm already using the copy-constructor for something else."
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v0</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v0</span><span class="p">;</span>
     
     <span class="n">annotate</span> <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="p">();</span>
 <span class="p">}</span>
@@ -14715,7 +14715,7 @@ annotate dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v0</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v0</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="c1">// members</span>
@@ -14744,7 +14744,7 @@ annotate dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v1</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="c1">// members</span>
@@ -14796,7 +14796,7 @@ annotate dtor
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="k">namespace</span> <span class="nn">v2</span> <span class="p">{</span>
 
 <span class="c1">// C++20</span>
 
@@ -14821,7 +14821,7 @@ annotate dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v2</span> <span class="p">{</span>
 
 <span class="c1">// C++17</span>
 
@@ -14829,7 +14829,7 @@ annotate dtor
     <span class="kt">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">_b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 
-    <span class="k">auto</span> <span class="nf">underlying</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">);</span> <span class="p">}</span>
+    <span class="k">auto</span> <span class="n">underlying</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">);</span> <span class="p">}</span>
 
 <span class="k">public</span><span class="o">:</span>
     <span class="n">my_type</span><span class="p">(</span><span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
@@ -14947,7 +14947,7 @@ annotate dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v3</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_val</span><span class="p">;</span> <span class="c1">// local part</span>
@@ -15024,7 +15024,7 @@ annotate dtor
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="c1">// 02-types.hpp</span>
 
-<span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="nn">v4</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>     <span class="c1">// forward declaration</span>
@@ -15056,7 +15056,7 @@ annotate dtor
 
 <span class="c1">// other includes</span>
 
-<span class="k">namespace</span> <span class="n">v4</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="nn">v4</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
@@ -15091,7 +15091,7 @@ annotate dtor
 <div class=" highlight hl-c++"><pre><span></span><span class="c1">// 02-types.hpp</span>
 <span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">v41</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="nn">v41</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>              <span class="c1">// forward declaration</span>
@@ -15126,7 +15126,7 @@ annotate dtor
 
 <span class="c1">// other includes</span>
 
-<span class="k">namespace</span> <span class="n">v41</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="nn">v41</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
@@ -15157,7 +15157,7 @@ annotate dtor
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v41</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v41</span><span class="p">;</span>
     
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
@@ -15191,7 +15191,7 @@ annotate dtor
 <div class=" highlight hl-c++"><pre><span></span><span class="c1">// 02-types.hpp</span>
 <span class="cp">#include</span> <span class="cpf">&lt;memory&gt;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">v42</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="nn">v42</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span> <span class="c1">// forward declaration</span>
@@ -15232,13 +15232,13 @@ annotate dtor
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;tuple&gt;</span><span class="cp"></span>
 
-<span class="k">namespace</span> <span class="n">v42</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="nn">v42</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">_y</span><span class="p">;</span>
 
-    <span class="k">auto</span> <span class="nf">underlying</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">);</span> <span class="p">}</span>
+    <span class="k">auto</span> <span class="n">underlying</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">}}</span> <span class="p">{}</span>
@@ -15269,7 +15269,7 @@ annotate dtor
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v42</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v42</span><span class="p">;</span>
     
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
@@ -15315,15 +15315,16 @@ annotate dtor
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h3 id="Safety">Safety<a class="anchor-link" href="#Safety">&#182;</a></h3><ul>
-<li>An object which represents an entity is <em>fully formed</em>.</li>
-<li>An object which does not represent an entity is <em>partially formed</em>.</li>
+<li>An object which represents an entity is <em>fully-formed</em>, or <em>well-formed</em></li>
+<li>An object which does not represent an entity, but may be modified (i.e. through assignment) to establish a correspondence with an entity, or destroyed, is <em>partially-formed</em>.</li>
+<li>An object which does not represent an entity and cannot be safely modified to represent an entity, or destroyed, is <em>ill-formed</em>.</li>
 </ul>
 
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Any operation which maintains the correspondence between an object and an entity it represents is <em>safe</em></li>
+<li>Any operation which preserves the correspondence between an object and an entity it represents is <em>safe</em></li>
 <li>An operation which loses the correspondence is <em>unsafe</em></li>
 </ul>
 
@@ -15331,11 +15332,22 @@ annotate dtor
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>There are different categories of safety<ul>
-<li>i.e. <em>memory safety</em><ul>
-<li>Destroying the correspondence of unrelated objects to their respective entities by overlapping their representation </li>
+<li><p>There are different categories of safety:</p>
+</li>
+<li><p><em>memory safety</em></p>
+<ul>
+<li>A memory safe operation preserves the correspondence of unrelated objects to their respective entities. For example, writing through a deleted pointer is a not a memory safe operation as it may leave an unrelated object ill-formed.</li>
 </ul>
 </li>
+<li><p><em>thread safety</em></p>
+<ul>
+<li>A thread safe operation may be executed concurrently with other operations on the same object(s) without the possibility of a race condition (data or logical race) resulting an an object which is not full-formed.</li>
+</ul>
+</li>
+<li><p><em>exception safety</em></p>
+<ul>
+<li>An exception safe operation is one which after an exception any objects being operated on are in a <em>fully-formed</em> state. C++ refers to this as the <em>strong exception guarantee</em>.</li>
+<li>An operation satisfying the <em>basic exception guarantee</em> ensures that after an exception any objects being operated on are partially-formed.</li>
 </ul>
 </li>
 </ul>
@@ -15344,8 +15356,9 @@ annotate dtor
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>An operation is <em>operationally safe</em> if, when the operation preconditions are satisfied, the operation results in objects which are fully formed</li>
-<li>An operation is <em>operationally unsafe</em> if, when the operation preconditions are satisfied, the operation may result in an object which is not fully formed<ul>
+<li><em>operational safety</em><ul>
+<li>An operation is operationally safe if, when the operation preconditions are satisfied, the operation results in objects which are fully-formed</li>
+<li>An operation is operationally unsafe if, when the operation preconditions are satisfied, the operation may result in an object which is partially-formed</li>
 <li>From here on, when referring to a <em>safe</em> operation we mean <em>operationally safe</em></li>
 </ul>
 </li>
@@ -15462,7 +15475,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v43</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v43</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span> <span class="c1">// forward declaration</span>
@@ -15514,13 +15527,13 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v43</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v43</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_x</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">_y</span><span class="p">;</span>
 
-    <span class="k">auto</span> <span class="nf">underlying</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">);</span> <span class="p">}</span>
+    <span class="k">auto</span> <span class="n">underlying</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">,</span> <span class="kt">int</span> <span class="n">y</span><span class="p">)</span> <span class="o">:</span> <span class="n">_remote</span><span class="p">{</span><span class="k">new</span> <span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">}}</span> <span class="p">{}</span>
@@ -15553,7 +15566,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v43</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v43</span><span class="p">;</span>
     
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
     <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span>
@@ -15597,7 +15610,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>There are many examples of unsafe operations with the built in types:</li>
+<li>There are many examples of unsafe operations with the built-in types:</li>
 </ul>
 
 </div>
@@ -15660,7 +15673,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre>22083</pre>
+<pre>22096</pre>
 </div>
 
 </div>
@@ -15743,7 +15756,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 <li>After an unsafe operation where an object is left partially formed<ul>
 <li>Subsequent operations are required to restore the fully formed state prior to use<ul>
 <li>If the partially formed state is <em>explicit</em> it may by used in subsequent operation but those operations must yield explicitly undefined values for later detection and handling</li>
-<li>i.e. NaN, expected, maybe-monad pattern</li>
+<li>i.e. NaN, <a href="https://wg21.link/P0323">expected</a>, maybe-monad pattern</li>
 </ul>
 </li>
 <li>Or the object must be destroyed</li>
@@ -15798,7 +15811,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v5</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">example</span> <span class="p">{</span>
     <span class="n">string</span> <span class="n">_str</span><span class="p">;</span>
@@ -15825,7 +15838,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v5</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v5</span><span class="p">;</span>
     <span class="c1">// Don&#39;t</span>
     <span class="n">string</span> <span class="n">str</span><span class="p">{</span><span class="s">&quot;Hello World!&quot;</span><span class="p">};</span>
     <span class="n">example</span> <span class="n">item1</span><span class="p">{</span><span class="n">move</span><span class="p">(</span><span class="n">str</span><span class="p">)};</span>
@@ -15867,7 +15880,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v11</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v11</span><span class="p">;</span>
     
     <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
     <span class="k">if</span> <span class="p">(</span><span class="n">predicate</span><span class="p">())</span> <span class="n">s</span> <span class="o">=</span> <span class="s">&quot;Hello&quot;</span><span class="p">;</span>
@@ -15887,7 +15900,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v11</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v11</span><span class="p">;</span>
     
     <span class="n">string</span> <span class="n">s1</span><span class="p">;</span>
     <span class="n">string</span> <span class="n">s2</span><span class="p">;</span>
@@ -15914,7 +15927,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v11</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v11</span><span class="p">;</span>
     
     <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">predicate</span><span class="p">()</span> <span class="o">?</span> <span class="s">&quot;Hello&quot;</span> <span class="o">:</span> <span class="s">&quot;World&quot;</span><span class="p">;</span>
 <span class="p">}</span>
@@ -15932,7 +15945,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v11</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v11</span><span class="p">;</span>
     
     <span class="k">auto</span> <span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">();</span>
 <span class="p">}</span>
@@ -15994,7 +16007,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Default-construction is only include in <code>std::regular&lt;&gt;</code> for historical reasons<ul>
+<li>Default-construction is only included in <code>std::regular&lt;&gt;</code> for historical reasons<ul>
 <li>The classical definition of regular predates <code>move</code> as a basis operation<ul>
 <li>Instead, <code>move</code> was done with default-construction and swap</li>
 </ul>
@@ -16011,7 +16024,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v44</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v44</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span> <span class="c1">// forward declaration</span>
@@ -16140,7 +16153,7 @@ is not as expressive as:<div class="highlight"><pre><span></span><span class="k"
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>For the paranoid library write, the standard supplies <code>std::addressof()</code>.</li>
+<li>For the paranoid library writeer, the standard supplies <code>std::addressof()</code>.</li>
 </ul>
 
 </div>
@@ -16153,7 +16166,7 @@ is not as expressive as:<div class="highlight"><pre><span></span><span class="k"
 <ul>
 <li>Because every object exists in memory, it's representation can be hashed</li>
 <li>Representationally equal objects imply equal hashes, not the converse</li>
-<li>the standard allows you to specialize <code>std::hash&lt;&gt;</code> for your type</li>
+<li>The standard allows you to specialize <code>std::hash&lt;&gt;</code> for your type</li>
 <li>The standard does not provide a <code>hash_combine()</code> function or a tuple hash</li>
 <li><a href="https://www.boost.org/doc/libs/1_75_0/doc/html/hash.html">Boost provides both</a> which can be used with <code>std::tie()</code> to easily provide a hash function</li>
 </ul>
@@ -16177,7 +16190,7 @@ is not as expressive as:<div class="highlight"><pre><span></span><span class="k"
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v45</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v45</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span> <span class="c1">// forward declaration</span>
@@ -16216,7 +16229,7 @@ is not as expressive as:<div class="highlight"><pre><span></span><span class="k"
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v45</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v45</span> <span class="p">{</span>
 
 <span class="n">ostream</span><span class="o">&amp;</span> <span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="k">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">const</span> <span class="k">auto</span><span class="o">&amp;</span> <span class="n">self</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">};</span>
@@ -16238,7 +16251,7 @@ is not as expressive as:<div class="highlight"><pre><span></span><span class="k"
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v45</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v45</span><span class="p">;</span>
     
     <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">};</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>

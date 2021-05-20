@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -15060,7 +15060,7 @@ operator|(const typename _Expr::value_type&amp; __x, const _Expr&amp; __y)
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">auto</span> <span class="nf">stlab_enable_bitmask_enum</span><span class="p">(</span><span class="n">merge_layer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">true_type</span><span class="p">;</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">auto</span> <span class="n">stlab_enable_bitmask_enum</span><span class="p">(</span><span class="n">merge_layer</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">std</span><span class="o">::</span><span class="n">true_type</span><span class="p">;</span>
 
 <span class="p">{</span>
     <span class="k">auto</span> <span class="n">flags</span> <span class="o">=</span> <span class="n">merge_layer</span><span class="o">::</span><span class="n">use_sheet_mask</span> <span class="o">|</span> <span class="n">merge_layer</span><span class="o">::</span><span class="n">use_vector_mask</span><span class="p">;</span>
@@ -15248,7 +15248,7 @@ operator|(const typename _Expr::value_type&amp; __x, const _Expr&amp; __y)
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">cpp98</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">cpp98</span> <span class="p">{</span>
 
 <span class="k">typedef</span> <span class="kt">int</span> <span class="n">some_type</span><span class="p">;</span>
 
@@ -15287,9 +15287,9 @@ operator|(const typename _Expr::value_type&amp; __x, const _Expr&amp; __y)
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">cpp98</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">cpp98</span> <span class="p">{</span>
 
-<span class="k">typedef</span> <span class="nf">int</span> <span class="p">(</span><span class="o">*</span><span class="n">some_func</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>
+<span class="k">typedef</span> <span class="kt">int</span> <span class="p">(</span><span class="o">*</span><span class="n">some_func</span><span class="p">)(</span><span class="kt">int</span><span class="p">);</span>
 
 <span class="p">}</span>
 </pre></div>
@@ -15381,7 +15381,7 @@ operator|(const typename _Expr::value_type&amp; __x, const _Expr&amp; __y)
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">cpp98</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">cpp98</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="o">&gt;</span>
 <span class="k">auto</span> <span class="n">distance</span><span class="p">(</span><span class="n">I</span> <span class="n">f</span><span class="p">,</span> <span class="n">I</span> <span class="n">l</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">typename</span> <span class="nc">iterator_traits</span><span class="o">&lt;</span><span class="n">I</span><span class="o">&gt;::</span><span class="n">difference_type</span><span class="p">;</span>
@@ -15545,7 +15545,7 @@ operator|(const typename _Expr::value_type&amp; __x, const _Expr&amp; __y)
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="c1">// header.hpp</span>
 
-<span class="k">namespace</span> <span class="n">library</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="nn">library</span> <span class="p">{</span>
     
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="k">class</span> <span class="nc">my_wizzy_type</span> <span class="p">{</span>
@@ -15577,7 +15577,7 @@ operator|(const typename _Expr::value_type&amp; __x, const _Expr&amp; __y)
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">library</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">library</span> <span class="p">{</span>
     
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="n">my_wizzy_type</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">member_function</span><span class="p">()</span> <span class="p">{</span>

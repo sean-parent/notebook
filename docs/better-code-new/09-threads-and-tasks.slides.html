@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14639,7 +14639,7 @@ display: block;
 <span class="k">public</span><span class="o">:</span>
     <span class="kt">size_t</span> <span class="n">lookup</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">const</span> <span class="p">{</span>
         <span class="k">if</span> <span class="p">(</span><span class="n">_cache</span> <span class="o">&amp;&amp;</span> <span class="o">*</span><span class="n">_cache</span> <span class="o">==</span> <span class="n">x</span><span class="p">)</span> <span class="k">return</span> <span class="n">_cache</span> <span class="o">-</span> <span class="n">begin</span><span class="p">(</span><span class="n">_names</span><span class="p">);</span>
-        <span class="k">return</span> <span class="nf">lower_bound</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">_names</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">_names</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">begin</span><span class="p">(</span><span class="n">_names</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">lower_bound</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">_names</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">_names</span><span class="p">),</span> <span class="n">x</span><span class="p">)</span> <span class="o">-</span> <span class="n">begin</span><span class="p">(</span><span class="n">_names</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
@@ -14736,8 +14736,8 @@ display: block;
 
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="kr">thread</span> <span class="nf">t</span><span class="p">([]{</span>
-    <span class="n">interned_string</span> <span class="n">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
+<div class="highlight"><pre><span></span><span class="kr">thread</span> <span class="n">t</span><span class="p">([]{</span>
+    <span class="n">interned_string</span> <span class="nf">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
 <span class="p">});</span>
 
 <span class="n">interned_string</span> <span class="nf">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
@@ -14831,7 +14831,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
         <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
         <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_pool</span><span class="p">;</span>
 
-        <span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">insert</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="nf">insert</span><span class="p">(</span><span class="k">const</span> <span class="n">string</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
             <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
             <span class="k">return</span> <span class="o">&amp;*</span><span class="n">_pool</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">a</span><span class="p">).</span><span class="n">first</span><span class="p">;</span>
         <span class="p">}</span>
@@ -14860,8 +14860,8 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="kr">thread</span> <span class="nf">t</span><span class="p">([]{</span>
-    <span class="n">interned_string</span> <span class="n">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="kr">thread</span> <span class="n">t</span><span class="p">([]{</span>
+    <span class="n">interned_string</span> <span class="nf">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
 <span class="p">});</span>
 
 <span class="n">interned_string</span> <span class="nf">str</span><span class="p">(</span><span class="s">&quot;Hello&quot;</span><span class="n">s</span><span class="p">);</span>
@@ -14921,7 +14921,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
     <span class="k">using</span> <span class="n">task</span> <span class="o">=</span> <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">()</span><span class="o">&gt;</span><span class="p">;</span>
@@ -14954,7 +14954,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc</span> <span class="p">{</span>
 
 <span class="n">sequential_process</span><span class="o">::~</span><span class="n">sequential_process</span><span class="p">()</span> <span class="p">{</span>
     <span class="p">{</span>
@@ -14979,9 +14979,9 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc</span> <span class="p">{</span>
 
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">sequential_process::async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
     <span class="p">{</span>
         <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
         <span class="n">_queue</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">));</span>
@@ -15003,9 +15003,9 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc</span> <span class="p">{</span>
 
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">run_loop</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">sequential_process::run_loop</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">task</span> <span class="n">work</span><span class="p">;</span>
         <span class="p">{</span>
@@ -15067,13 +15067,13 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
 <pre>p1-begin
+p1-step_1
+p1-step_2
+p1-end
   p2-begin
   p2-step_1
   p2-step_2
   p2-end
-p1-step_1
-p1-step_2
-p1-end
 </pre>
 </div>
 </div>

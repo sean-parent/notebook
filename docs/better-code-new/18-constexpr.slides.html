@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14569,7 +14569,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 <div class="highlight"><pre><span></span><span class="c1">// code.cpp</span>
 <span class="cp">#include</span> <span class="cpf">&quot;header.hpp&quot;</span><span class="cp"></span>
 
-<span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">local_address</span><span class="p">()</span> <span class="p">{</span>
+<span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">local_address</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="o">&amp;</span><span class="n">variable</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -14577,7 +14577,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 <div class="highlight"><pre><span></span><span class="c1">// main.cpp</span>
 <span class="cp">#include</span> <span class="cpf">&quot;header.hpp&quot;</span><span class="cp"></span>
 
-<span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">local_address</span><span class="p">();</span>
+<span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">local_address</span><span class="p">();</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">variable</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
@@ -14607,7 +14607,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 <div class="highlight"><pre><span></span><span class="c1">// code.cpp</span>
 <span class="cp">#include</span> <span class="cpf">&quot;header.hpp&quot;</span><span class="cp"></span>
 
-<span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">local_address</span><span class="p">()</span> <span class="p">{</span>
+<span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">local_address</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="o">&amp;</span><span class="n">variable</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
@@ -14615,7 +14615,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 <div class="highlight"><pre><span></span><span class="c1">// main.cpp</span>
 <span class="cp">#include</span> <span class="cpf">&quot;header.hpp&quot;</span><span class="cp"></span>
 
-<span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="n">local_address</span><span class="p">();</span>
+<span class="k">const</span> <span class="kt">void</span><span class="o">*</span> <span class="nf">local_address</span><span class="p">();</span>
 
 <span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="o">&amp;</span><span class="n">variable</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
@@ -14670,7 +14670,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="n">fnv64_hash_str</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="kt">uint64_t</span> <span class="nf">fnv64_hash_str</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">uint64_t</span> <span class="n">hash</span> <span class="o">=</span> <span class="n">UINT64_C</span><span class="p">(</span><span class="mi">14695981039346656037</span><span class="p">);</span>
     <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">hash</span> <span class="o">*=</span> <span class="n">UINT64_C</span><span class="p">(</span><span class="mi">1099511628211</span><span class="p">);</span>
@@ -14756,7 +14756,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
     <span class="kt">int</span> <span class="n">_width</span><span class="p">;</span>
     <span class="kt">int</span> <span class="n">_height</span><span class="p">;</span>
 
-    <span class="k">constexpr</span> <span class="nf">point</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_width</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">_height</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="k">constexpr</span> <span class="n">point</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">,</span> <span class="kt">int</span> <span class="n">h</span><span class="p">)</span> <span class="o">:</span> <span class="n">_width</span><span class="p">(</span><span class="n">w</span><span class="p">),</span> <span class="n">_height</span><span class="p">(</span><span class="n">h</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
     
     <span class="k">friend</span> <span class="k">constexpr</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">point</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">return</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_width</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_width</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">_height</span> <span class="o">==</span> <span class="n">b</span><span class="p">.</span><span class="n">_height</span><span class="p">);</span>
@@ -14840,7 +14840,7 @@ input_line_9:2:20: note: non-constexpr function 'rand' cannot be used in a const
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="kt">bool</span> <span class="n">strless</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="kt">bool</span> <span class="nf">strless</span><span class="p">(</span><span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="kt">char</span><span class="o">*</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">while</span> <span class="p">(</span><span class="o">*</span><span class="n">a</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="o">*</span><span class="n">a</span> <span class="o">==</span> <span class="o">*</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span>
         <span class="o">++</span><span class="n">a</span><span class="p">;</span>
         <span class="o">++</span><span class="n">b</span><span class="p">;</span>
@@ -14942,7 +14942,7 @@ Seetha
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="c1">// C++14 example</span>
-<span class="k">namespace</span> <span class="n">cpp14</span> <span class="p">{</span>
+<span class="k">namespace</span> <span class="nn">cpp14</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
 <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="k">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
@@ -14951,7 +14951,7 @@ Seetha
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
 <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="k">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nf">merge</span><span class="p">(</span><span class="n">merge_sort</span><span class="p">(</span><span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">{</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)},</span> <span class="n">comp</span><span class="p">),</span>
+    <span class="k">return</span> <span class="n">merge</span><span class="p">(</span><span class="n">merge_sort</span><span class="p">(</span><span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">{</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)},</span> <span class="n">comp</span><span class="p">),</span>
                  <span class="n">merge_sort</span><span class="p">(</span><span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span> <span class="o">-</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="o">&gt;</span><span class="p">{</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span> <span class="o">+</span> <span class="n">N</span> <span class="o">/</span> <span class="mi">2</span><span class="p">},</span> <span class="n">comp</span><span class="p">),</span> <span class="n">comp</span><span class="p">);</span>
 <span class="p">}</span>
 
@@ -14973,7 +14973,7 @@ Seetha
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="p">,</span> <span class="kt">size_t</span> <span class="n">N</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Comp</span><span class="o">&gt;</span>
 <span class="k">constexpr</span> <span class="k">auto</span> <span class="n">merge_sort</span><span class="p">(</span><span class="k">const</span> <span class="n">span</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span> <span class="n">N</span><span class="o">&gt;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">Comp</span> <span class="n">comp</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">if</span> <span class="nf">constexpr</span> <span class="p">(</span><span class="n">N</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="k">if</span> <span class="k">constexpr</span> <span class="p">(</span><span class="n">N</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">array</span><span class="o">&lt;</span><span class="k">typename</span> <span class="nc">iterator_traits</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="o">&gt;::</span><span class="n">value_type</span><span class="p">,</span> <span class="mi">1</span><span class="o">&gt;</span><span class="p">{</span>
             <span class="o">*</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
         <span class="p">};</span>
@@ -15047,7 +15047,7 @@ Seetha
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">constexpr</span> <span class="k">auto</span> <span class="n">rsorted</span> <span class="o">=</span>
-    <span class="n">merge_sort</span><span class="p">(</span><span class="n">make_span</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="p">[](</span><span class="k">auto</span> <span class="n">a</span><span class="p">,</span> <span class="k">auto</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">strless</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="p">});</span>
+    <span class="n">merge_sort</span><span class="p">(</span><span class="n">make_span</span><span class="p">(</span><span class="n">names</span><span class="p">),</span> <span class="p">[](</span><span class="k">auto</span> <span class="n">a</span><span class="p">,</span> <span class="k">auto</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">strless</span><span class="p">(</span><span class="n">b</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="p">});</span>
 </pre></div>
 
      </div>

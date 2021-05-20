@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14604,8 +14604,8 @@ display: block;
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Limitations of half-open intevals<ul>
-<li>If there is not <em>next element</em> then a half open interval cannot express a single element</li>
+<li>Limitations of half-open intervals<ul>
+<li>If there is not a <em>next element</em> then a half open interval cannot express a single element</li>
 <li>If there is a finite number of elements, the last (or first) cannot be included</li>
 </ul>
 </li>
@@ -15150,7 +15150,7 @@ conceptual clashes about what code actually does.
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><code>std::fill</code>, <code>std::iota()</code> and <code>std::generate</code> would be better expressed with output iterators and sink function forms:</li>
+<li><code>std::fill()</code>, <code>std::iota()</code> and <code>std::generate()</code> would be better expressed with output iterators and sink function forms:</li>
 </ul>
 
 </div>
@@ -15160,7 +15160,7 @@ conceptual clashes about what code actually does.
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">F</span><span class="o">&gt;</span>
 <span class="k">constexpr</span> <span class="kt">void</span> <span class="n">iota</span><span class="p">(</span><span class="n">T</span> <span class="n">first</span><span class="p">,</span> <span class="n">T</span> <span class="n">last</span><span class="p">,</span> <span class="n">F</span> <span class="n">out</span><span class="p">)</span> <span class="p">{</span>
@@ -15184,8 +15184,6 @@ conceptual clashes about what code actually does.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">bcc</span><span class="p">;</span>
-
     <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span><span class="p">;</span>
     <span class="n">bcc</span><span class="o">::</span><span class="n">iota</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="p">[</span><span class="o">&amp;</span><span class="p">](</span><span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span> <span class="n">v</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">n</span><span class="p">);</span> <span class="p">});</span>
     <span class="n">display</span><span class="p">(</span><span class="n">v</span><span class="p">);</span>
@@ -15218,7 +15216,7 @@ conceptual clashes about what code actually does.
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>Every algorithm using a output iterator should have a corresponding form with a sink function</li>
+<li>Every algorithm using an output iterator should have a corresponding form with a sink function</li>
 </ul>
 
 </div>
@@ -15473,7 +15471,7 @@ conceptual clashes about what code actually does.
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v0</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v0</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="n">swirl</span><span class="p">(</span><span class="n">I</span> <span class="n">f</span><span class="p">,</span> <span class="n">I</span> <span class="n">l</span><span class="p">)</span> <span class="p">{</span>
@@ -15500,7 +15498,7 @@ conceptual clashes about what code actually does.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v0</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v0</span><span class="p">;</span>
 
     <span class="kt">int</span> <span class="n">a</span><span class="p">[]{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
     <span class="n">swirl</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
@@ -15543,7 +15541,7 @@ conceptual clashes about what code actually does.
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v1</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v1</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="o">&gt;</span>
 <span class="kt">void</span> <span class="n">swirl</span><span class="p">(</span><span class="n">I</span> <span class="n">f</span><span class="p">,</span> <span class="n">I</span> <span class="n">l</span><span class="p">)</span> <span class="p">{</span>
@@ -15568,7 +15566,7 @@ conceptual clashes about what code actually does.
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">v1</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v1</span><span class="p">;</span>
 
     <span class="kt">int</span> <span class="n">a</span><span class="p">[]{</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">};</span>
     <span class="n">swirl</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
@@ -15617,7 +15615,7 @@ conceptual clashes about what code actually does.
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>(Unfortunately, <code>std::reverse</code> throws it away!)</li>
+<li>(Unfortunately, <code>std::reverse()</code> throws it away!)</li>
 </ul>
 
 </div>
@@ -15627,13 +15625,13 @@ conceptual clashes about what code actually does.
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">v2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v2</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">I</span><span class="o">&gt;</span>
 <span class="n">I</span> <span class="n">swirl</span><span class="p">(</span><span class="n">I</span> <span class="n">f</span><span class="p">,</span> <span class="n">I</span> <span class="n">l</span><span class="p">)</span> <span class="p">{</span>
     <span class="n">reverse</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">);</span>
     <span class="k">auto</span> <span class="n">m</span> <span class="o">=</span> <span class="n">next</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">distance</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">l</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">);</span>
-    <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">==</span> <span class="n">l</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">m</span> <span class="o">==</span> <span class="n">l</span><span class="p">)</span> <span class="k">return</span> <span class="n">m</span><span class="p">;</span>
     <span class="n">rotate</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">m</span><span class="p">,</span> <span class="n">next</span><span class="p">(</span><span class="n">m</span><span class="p">));</span>
     <span class="k">return</span> <span class="n">m</span><span class="p">;</span>
 <span class="p">}</span>
@@ -15664,7 +15662,7 @@ conceptual clashes about what code actually does.
 </div>
 </div></div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p><em>Predicate permutations</em> use a predicate function to determine ordering. These algorithms partition the set into two sets. A _stable<em>partition</em> algorithm preserves the relative order of the elements in each set.</p>
+<p><em>Predicate permutations</em> use a predicate function to determine ordering. These algorithms partition the set into two sets. A <em>stable partition</em> algorithm preserves the relative order of the elements in each set.</p>
 
 </div>
 </div></div></section></section><section><section>
@@ -15710,7 +15708,7 @@ conceptual clashes about what code actually does.
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>The default is to user <code>operator&lt;()</code></li>
+<li>The default is to use <code>operator&lt;()</code></li>
 <li>On a type, the expectation is that <code>operator&lt;()</code> is a <em>total ordering</em><ul>
 <li>Which is consistent with other operations on the type</li>
 </ul>

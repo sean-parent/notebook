@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14531,7 +14531,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
     <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
@@ -14615,7 +14615,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc2</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
     <span class="n">mutex</span> <span class="n">_mutex</span><span class="p">;</span>
@@ -14653,9 +14653,9 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc2</span> <span class="p">{</span>
 
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">resume</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">sequential_process::resume</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">task</span> <span class="n">work</span><span class="p">;</span>
     <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
         <span class="p">{</span>
@@ -14693,9 +14693,9 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc2</span> <span class="p">{</span>
 
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">sequential_process::async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">running</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">{</span>
         <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
@@ -14737,7 +14737,7 @@ display: block;
 
     <span class="n">process</span><span class="p">.</span><span class="n">async</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">task_future</span><span class="p">.</span><span class="n">first</span><span class="p">));</span>
 
-    <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">task_future</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
+    <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">task_future</span><span class="p">.</span><span class="n">second</span><span class="p">);</span>
 <span class="p">}</span>
     
 <span class="p">}</span> <span class="c1">// namespace</span>
@@ -14760,7 +14760,7 @@ display: block;
     <span class="n">unordered_set</span><span class="o">&lt;</span><span class="n">string</span><span class="o">&gt;</span> <span class="n">_pool</span><span class="p">;</span>
     <span class="n">sequential_process</span> <span class="n">_process</span><span class="p">;</span>
 
-    <span class="k">auto</span> <span class="nf">insert</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">*&gt;</span> <span class="p">{</span>
+    <span class="k">auto</span> <span class="n">insert</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">*&gt;</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">async_packaged</span><span class="p">(</span>
             <span class="n">_process</span><span class="p">,</span> <span class="p">[</span><span class="k">this</span><span class="p">,</span> <span class="n">_a</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)]()</span> <span class="k">mutable</span> <span class="p">{</span>
                 <span class="k">return</span> <span class="o">&amp;*</span><span class="n">_pool</span><span class="p">.</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">_a</span><span class="p">)).</span><span class="n">first</span><span class="p">;</span>
@@ -14796,7 +14796,7 @@ display: block;
     <span class="n">interned_string</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_string</span><span class="p">(</span><span class="n">pool</span><span class="p">().</span><span class="n">insert</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)))</span> <span class="p">{}</span>
 
     <span class="k">auto</span> <span class="n">str</span><span class="p">()</span> <span class="k">const</span> <span class="o">-&gt;</span> <span class="n">stlab</span><span class="o">::</span><span class="n">future</span><span class="o">&lt;</span><span class="n">reference_wrapper</span><span class="o">&lt;</span><span class="k">const</span> <span class="n">string</span><span class="o">&gt;&gt;</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="n">_string</span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">cref</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">);</span> <span class="p">});</span>
+        <span class="k">return</span> <span class="n">_string</span><span class="p">.</span><span class="n">then</span><span class="p">([](</span><span class="k">const</span> <span class="n">string</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">cref</span><span class="p">(</span><span class="o">*</span><span class="n">p</span><span class="p">);</span> <span class="p">});</span>
     <span class="p">}</span>
 <span class="p">};</span>
     
@@ -14881,7 +14881,7 @@ display: block;
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+<div class="highlight"><pre><span></span><span class="kt">void</span> <span class="nf">sequential_process::async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">running</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">{</span>
         <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>

@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.0
+      jupytext_version: 1.11.2
   kernelspec:
     display_name: C++17
     language: C++17
@@ -53,10 +53,12 @@ My hope is that this workshop is generally applicable, but my experience colors 
 - Epilogue
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
 ## Materials
 
 - Slides: https://sean-parent.stlab.cc/notebook
 - Exercises: https://github.com/sean-parent/better-code-class
+<!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} tags=[] -->
 ## Use of Jupyter w/Xeus-Cling

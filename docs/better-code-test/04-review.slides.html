@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14753,7 +14753,7 @@ display: block;
 <span class="k">struct</span> <span class="nc">model</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 0 flags partially formed</span>
 
-    <span class="k">explicit</span> <span class="nf">model</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="o">++</span><span class="n">_counters</span><span class="p">.</span><span class="n">_ctor</span><span class="p">;</span> <span class="p">}</span>
+    <span class="k">explicit</span> <span class="n">model</span><span class="p">(</span><span class="kt">int</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="o">++</span><span class="n">_counters</span><span class="p">.</span><span class="n">_ctor</span><span class="p">;</span> <span class="p">}</span>
     <span class="n">model</span><span class="p">(</span><span class="n">model</span><span class="o">&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="k">noexcept</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">moveable</span><span class="p">);</span>
         <span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>

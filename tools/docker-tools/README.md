@@ -75,7 +75,7 @@ To build the Docker image, first, update the VERSION variable below (please use 
 
 #### Linux, WSL 2, MacOS
 ```
-VERSION="1.0.12"
+VERSION="1.0.15"
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 
 # The ruby version should match what GitHub Pages requires: https://pages.github.com/versions/
@@ -127,3 +127,5 @@ docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
 - 1.0.2 - Rebuilding without lock files
 - 1.0.3 - offline notebook extension added
 - 1.0.12 - adding tbb support for parallel algorithms
+- 1.0.13 - adding keyboard shortcuts for slides
+- 1.0.14 - updating tools

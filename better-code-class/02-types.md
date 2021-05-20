@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.0
+      jupytext_version: 1.11.2
   kernelspec:
     display_name: C++17
     language: C++17
@@ -546,24 +546,34 @@ The C++20 standard defines the _concept_ std::regular<T> to be copyable, equalit
 <!-- #region slideshow={"slide_type": "slide"} -->
 ### Safety
 
-- An object which represents an entity is _fully formed_.
-- An object which does not represent an entity is _partially formed_.
+- An object which represents an entity is _fully-formed_, or _well-formed_
+- An object which does not represent an entity, but may be modified (i.e. through assignment) to establish a correspondence with an entity, or destroyed, is _partially-formed_.
+- An object which does not represent an entity and cannot be safely modified to represent an entity, or destroyed, is _ill-formed_.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- Any operation which maintains the correspondence between an object and an entity it represents is _safe_
+- Any operation which preserves the correspondence between an object and an entity it represents is _safe_
 - An operation which loses the correspondence is _unsafe_
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- There are different categories of safety
-  - i.e. _memory safety_
-    - Destroying the correspondence of unrelated objects to their respective entities by overlapping their representation 
+- There are different categories of safety:
+
+- _memory safety_
+  - A memory safe operation preserves the correspondence of unrelated objects to their respective entities. For example, writing through a deleted pointer is a not a memory safe operation as it may leave an unrelated object ill-formed.
+  
+- _thread safety_
+ - A thread safe operation may be executed concurrently with other operations on the same object(s) without the possibility of a race condition (data or logical race) resulting an an object which is not full-formed.
+
+- _exception safety_
+ - An exception safe operation is one which after an exception any objects being operated on are in a _fully-formed_ state. C++ refers to this as the _strong exception guarantee_.
+ - An operation satisfying the _basic exception guarantee_ ensures that after an exception any objects being operated on are partially-formed.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- An operation is _operationally safe_ if, when the operation preconditions are satisfied, the operation results in objects which are fully formed
-- An operation is _operationally unsafe_ if, when the operation preconditions are satisfied, the operation may result in an object which is not fully formed
+- _operational safety_
+  - An operation is operationally safe if, when the operation preconditions are satisfied, the operation results in objects which are fully-formed
+  - An operation is operationally unsafe if, when the operation preconditions are satisfied, the operation may result in an object which is partially-formed
   - From here on, when referring to a _safe_ operation we mean _operationally safe_
 <!-- #endregion -->
 
@@ -729,7 +739,7 @@ bool operator==(const my_type& a, const my_type& b) {
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- There are many examples of unsafe operations with the built in types:
+- There are many examples of unsafe operations with the built-in types:
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
@@ -760,7 +770,7 @@ unique_ptr<int> y = move(x); // safe. x is guaranteed to be == nullptr
 - After an unsafe operation where an object is left partially formed
   - Subsequent operations are required to restore the fully formed state prior to use
     - If the partially formed state is _explicit_ it may by used in subsequent operation but those operations must yield explicitly undefined values for later detection and handling
-    - i.e. NaN, expected, maybe-monad pattern
+    - i.e. NaN, [expected](https://wg21.link/P0323), maybe-monad pattern
   - Or the object must be destroyed
 <!-- #endregion -->
 
@@ -908,7 +918,7 @@ std::pair<std::string, std::string> get_pair() {
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- Default-construction is only include in `std::regular<>` for historical reasons
+- Default-construction is only included in `std::regular<>` for historical reasons
     - The classical definition of regular predates `move` as a basis operation
         - Instead, `move` was done with default-construction and swap
     - Default construction is not required by any standard algorithm
@@ -1017,7 +1027,7 @@ if (a == b) some_operation();
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- For the paranoid library write, the standard supplies `std::addressof()`.
+- For the paranoid library writeer, the standard supplies `std::addressof()`.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -1027,7 +1037,7 @@ if (a == b) some_operation();
 <!-- #region slideshow={"slide_type": "fragment"} -->
 - Because every object exists in memory, it's representation can be hashed
 - Representationally equal objects imply equal hashes, not the converse
-- the standard allows you to specialize `std::hash<>` for your type
+- The standard allows you to specialize `std::hash<>` for your type
 - The standard does not provide a `hash_combine()` function or a tuple hash
 - [Boost provides both](https://www.boost.org/doc/libs/1_75_0/doc/html/hash.html) which can be used with `std::tie()` to easily provide a hash function
 <!-- #endregion -->

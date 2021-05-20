@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.0
+      jupytext_version: 1.11.2
   kernelspec:
     display_name: C++17
     language: C++17
@@ -82,8 +82,8 @@ The term _algorithm_ covers all code. If an algorithm does not require iteration
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- Limitations of half-open intevals
-    - If there is not _next element_ then a half open interval cannot express a single element
+- Limitations of half-open intervals
+    - If there is not a _next element_ then a half open interval cannot express a single element
     - If there is a finite number of elements, the last (or first) cannot be included
 <!-- #endregion -->
 
@@ -403,7 +403,7 @@ What was part of the definition of concepts in general has been weakened to a re
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- `std::fill`, `std::iota()` and `std::generate` would be better expressed with output iterators and sink function forms:
+- `std::fill()`, `std::iota()` and `std::generate()` would be better expressed with output iterators and sink function forms:
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "slide"}
@@ -421,8 +421,6 @@ constexpr void iota(T first, T last, F out) {
 
 ```c++ slideshow={"slide_type": "fragment"}
 {
-    using namespace bcc;
-
     vector<int> v;
     bcc::iota(0, 10, [&](int n) { v.push_back(n); });
     display(v);
@@ -430,7 +428,7 @@ constexpr void iota(T first, T last, F out) {
 ```
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- Every algorithm using a output iterator should have a corresponding form with a sink function
+- Every algorithm using an output iterator should have a corresponding form with a sink function
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -642,7 +640,7 @@ void swirl(I f, I l) {
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- (Unfortunately, `std::reverse` throws it away!)
+- (Unfortunately, `std::reverse()` throws it away!)
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
@@ -652,7 +650,7 @@ template <class I>
 I swirl(I f, I l) {
     reverse(f, l);
     auto m = next(f, distance(f, l) / 2);
-    if (m == l) return;
+    if (m == l) return m;
     rotate(f, m, next(m));
     return m;
 }
@@ -673,7 +671,7 @@ I swirl(I f, I l) {
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-_Predicate permutations_ use a predicate function to determine ordering. These algorithms partition the set into two sets. A _stable_partition_ algorithm preserves the relative order of the elements in each set.
+_Predicate permutations_ use a predicate function to determine ordering. These algorithms partition the set into two sets. A _stable partition_ algorithm preserves the relative order of the elements in each set.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -712,7 +710,7 @@ _Comparison permutations_ use a comparison function to map an ordering of the va
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- The default is to user `operator<()`
+- The default is to use `operator<()`
 - On a type, the expectation is that `operator<()` is a _total ordering_
     - Which is consistent with other operations on the type
 

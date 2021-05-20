@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14756,7 +14756,7 @@ annotate dtor
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="p">{</span>
     
 <span class="kt">int</span> <span class="nf">function_a</span><span class="p">();</span>
-<span class="k">auto</span> <span class="nf">function_b</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="p">;</span> <span class="c1">// same signature as function_a</span>
+<span class="k">auto</span> <span class="n">function_b</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="kt">int</span><span class="p">;</span> <span class="c1">// same signature as function_a</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
 <span class="k">auto</span> <span class="n">add</span><span class="p">(</span><span class="n">T</span> <span class="n">a</span><span class="p">,</span> <span class="n">U</span> <span class="n">b</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="k">decltype</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
@@ -14845,7 +14845,7 @@ annotate dtor
     
 <span class="n">vector</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">v</span> <span class="o">=</span> <span class="p">{</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span> <span class="p">};</span>
 
-<span class="kr">inline</span> <span class="nf">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span> <span class="n">back</span><span class="p">()</span> <span class="p">{</span>
+<span class="kr">inline</span> <span class="k">decltype</span><span class="p">(</span><span class="k">auto</span><span class="p">)</span> <span class="n">back</span><span class="p">()</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">v</span><span class="p">.</span><span class="n">back</span><span class="p">();</span>
 <span class="p">}</span>
     
@@ -14884,7 +14884,7 @@ annotate dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">cpp14</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">cpp14</span> <span class="p">{</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="n">T</span> <span class="n">N</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nc">integral_constant</span> <span class="p">{</span>
@@ -15118,7 +15118,7 @@ annotate dtor
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="recommendations-for-auto-function-results">recommendations for auto function results<a class="anchor-link" href="#recommendations-for-auto-function-results">&#182;</a></h2><ul>
-<li>Use trailing result types except for <code>bool</code> and <code>void</code><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="nf">some_function</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">some_type</span><span class="p">;</span>
+<li>Use trailing result types except for <code>bool</code> and <code>void</code><div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">some_function</span><span class="p">()</span> <span class="o">-&gt;</span> <span class="n">some_type</span><span class="p">;</span>
 <span class="kt">bool</span> <span class="nf">is_something</span><span class="p">();</span>
 <span class="kt">void</span> <span class="nf">got_nothin</span><span class="p">();</span>
 </pre></div>
@@ -15127,7 +15127,7 @@ annotate dtor
 <li>avoids having trailing result types breaking the style when required</li>
 </ul>
 </li>
-<li>Don't use auto results unless required, or naming the type adds nothing<div class="highlight"><pre><span></span><span class="k">auto</span> <span class="nf">some_function</span><span class="p">()</span> <span class="p">{</span>
+<li>Don't use auto results unless required, or naming the type adds nothing<div class="highlight"><pre><span></span><span class="k">auto</span> <span class="n">some_function</span><span class="p">()</span> <span class="p">{</span>
   <span class="c1">//...</span>
   <span class="k">return</span> <span class="n">f</span><span class="p">(</span><span class="n">g</span><span class="p">(</span><span class="n">a</span> <span class="o">+</span> <span class="n">y</span><span class="p">));</span> <span class="c1">// don&#39;t make me figure out this type!</span>
 <span class="p">}</span>

@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14874,7 +14874,7 @@ display: block;
     <span class="n">string</span> <span class="n">_b</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">_c</span><span class="p">;</span>
 
-    <span class="k">auto</span> <span class="nf">as_tuple</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">,</span> <span class="n">_c</span><span class="p">);</span> <span class="p">}</span>
+    <span class="k">auto</span> <span class="n">as_tuple</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">,</span> <span class="n">_c</span><span class="p">);</span> <span class="p">}</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">example1</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">c</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">_c</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
     
@@ -15410,7 +15410,7 @@ Hello!
     <span class="k">auto</span> <span class="n">product</span> <span class="o">=</span> <span class="p">[](</span><span class="n">initializer_list</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
         <span class="c1">// should use reduce but not implemented in libstdc++</span>
         <span class="c1">// return (args * ...);</span>
-        <span class="k">return</span> <span class="nf">accumulate</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">multiplies</span><span class="p">());</span>
+        <span class="k">return</span> <span class="n">accumulate</span><span class="p">(</span><span class="n">begin</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="n">end</span><span class="p">(</span><span class="n">args</span><span class="p">),</span> <span class="mi">1</span><span class="p">,</span> <span class="n">multiplies</span><span class="p">());</span>
     <span class="p">};</span>
 
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">product</span><span class="p">({</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">})</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
@@ -15643,7 +15643,7 @@ Hello!
 <span class="k">constexpr</span> <span class="n">F</span> <span class="n">for_each_element</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">Tuple</span><span class="o">&amp;&amp;</span> <span class="n">t</span><span class="p">)</span> <span class="p">{</span>
     <span class="k">return</span> <span class="n">std</span><span class="o">::</span><span class="n">apply</span><span class="p">(</span>
         <span class="p">[</span><span class="n">_f</span> <span class="o">=</span> <span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">f</span><span class="p">)](</span><span class="k">auto</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-            <span class="k">return</span> <span class="nf">for_each_argument</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">),</span>
+            <span class="k">return</span> <span class="n">for_each_argument</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">),</span>
                                      <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">args</span><span class="p">)</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
         <span class="p">},</span>
         <span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Tuple</span><span class="o">&gt;</span><span class="p">(</span><span class="n">t</span><span class="p">));</span>
@@ -15713,7 +15713,7 @@ Hello!
     <span class="n">string</span> <span class="n">_b</span><span class="p">;</span>
     <span class="kt">bool</span> <span class="n">_c</span><span class="p">;</span>
 
-    <span class="k">auto</span> <span class="nf">as_tuple</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">,</span> <span class="n">_c</span><span class="p">);</span> <span class="p">}</span>
+    <span class="k">auto</span> <span class="n">as_tuple</span><span class="p">()</span> <span class="k">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">,</span> <span class="n">_c</span><span class="p">);</span> <span class="p">}</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="n">example2</span><span class="p">(</span><span class="kt">int</span> <span class="n">a</span><span class="p">,</span> <span class="n">string</span> <span class="n">b</span><span class="p">,</span> <span class="kt">bool</span> <span class="n">c</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">)),</span> <span class="n">_c</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">c</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
     
@@ -15827,7 +15827,7 @@ true
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">struct</span> <span class="nc">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="k">concept</span> <span class="p">{</span>
     <span class="k">virtual</span> <span class="o">~</span><span class="k">concept</span><span class="p">()</span> <span class="o">=</span> <span class="k">default</span><span class="p">;</span>
-    <span class="k">virtual</span> <span class="n">R</span> <span class="n">invoke</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="k">virtual</span> <span class="n">R</span> <span class="nf">invoke</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...)</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
 <span class="p">};</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">R</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
@@ -15835,7 +15835,7 @@ true
 <span class="k">struct</span> <span class="nc">task</span><span class="o">&lt;</span><span class="n">R</span><span class="p">(</span><span class="n">Args</span><span class="p">...)</span><span class="o">&gt;::</span><span class="n">model</span> <span class="k">final</span> <span class="o">:</span> <span class="k">concept</span> <span class="p">{</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">G</span><span class="o">&gt;</span>
     <span class="k">explicit</span> <span class="n">model</span><span class="p">(</span><span class="n">G</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">)</span> <span class="o">:</span> <span class="n">_f</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">G</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">))</span> <span class="p">{}</span>
-    <span class="n">R</span> <span class="n">invoke</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span> <span class="p">}</span>
+    <span class="n">R</span> <span class="n">invoke</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span> <span class="n">args</span><span class="p">)</span> <span class="k">override</span> <span class="p">{</span> <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span> <span class="p">}</span>
 
     <span class="n">F</span> <span class="n">_f</span><span class="p">;</span>
 <span class="p">};</span>
@@ -15858,7 +15858,7 @@ true
     <span class="n">task</span><span class="o">&lt;</span><span class="n">string</span><span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">f</span><span class="p">;</span>
 
     <span class="n">f</span> <span class="o">=</span> <span class="p">[</span><span class="n">_prefix</span> <span class="o">=</span> <span class="s">&quot;Hello &quot;</span><span class="n">s</span><span class="p">](</span><span class="kt">int</span> <span class="n">suffix</span><span class="p">)</span> <span class="k">mutable</span> <span class="p">{</span>
-        <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">_prefix</span><span class="p">)</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">suffix</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_prefix</span><span class="p">)</span> <span class="o">+</span> <span class="n">to_string</span><span class="p">(</span><span class="n">suffix</span><span class="p">);</span>
     <span class="p">};</span>
 
     <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">f</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>

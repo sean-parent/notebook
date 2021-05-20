@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14399,6 +14399,10 @@ display: block;
   font-style: normal;
 }
 
+.speaker-controls-time.hidden, .speaker-controls-notes.hidden {
+    display: block;
+}
+
   /*
   .reveal pre {
     width: inherit;
@@ -14522,8 +14526,8 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-    <span class="k">using</span> <span class="k">namespace</span> <span class="n">stlab</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">std</span><span class="p">;</span>
+    <span class="k">using</span> <span class="k">namespace</span> <span class="nn">stlab</span><span class="p">;</span>
     
     <span class="k">auto</span> <span class="n">p</span> <span class="o">=</span> <span class="n">async</span><span class="p">(</span><span class="n">default_executor</span><span class="p">,</span> <span class="p">[]</span> <span class="p">{</span> <span class="k">return</span> <span class="mi">42</span><span class="p">;</span> <span class="p">});</span>
 
@@ -14546,7 +14550,7 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="o">%%</span><span class="n">timeit</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="o">%%</span><span class="n">timeit</span> <span class="o">-</span><span class="n">n</span> <span class="mi">100</span>
 <span class="n">main</span><span class="p">();</span>
 </pre></div>
 
@@ -14562,7 +14566,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>181 us +- 5.75 us per loop (mean +- std. dev. of 7 runs 1000 loops each)
+<pre>166 us +- 8.63 us per loop (mean +- std. dev. of 7 runs 100 loops each)
 </pre>
 </div>
 </div>

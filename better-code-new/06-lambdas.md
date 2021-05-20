@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.10.0
+      jupytext_version: 1.11.2
   kernelspec:
     display_name: C++17
     language: C++17
@@ -153,9 +153,9 @@ cout << return_n() << '\n';
 - `[=]` capture-default any referenced local variable by value (copy)
 - `[&]` capture-default any referenced local variable by reference
 - `[x]` captures x by value
-- `[&x]` captures x by referece
+- `[&x]` captures x by reference
 - `[_x = expression]` capture `_x` as the value of expression
-- `[=, &x, _x = expression]` defaults can be miexed with other captures
+- `[=, &x, _x = expression]` defaults can be mixed with other captures
 
 
 - captured values are fixed when lambda is created, not at invocation

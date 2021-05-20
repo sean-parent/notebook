@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -15207,7 +15207,7 @@ annotate dtor
 
 
 <div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>@0x7fee51513090</pre>
+<pre>@0x7f3128989090</pre>
 </div>
 
 </div>
@@ -15317,7 +15317,7 @@ annotate dtor
     <span class="n">annotate</span> <span class="n">_name</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">name</span><span class="p">()</span> <span class="k">const</span><span class="o">&amp;</span> <span class="p">{</span> <span class="k">return</span> <span class="n">_name</span><span class="p">;</span> <span class="p">}</span>
-    <span class="n">annotate</span> <span class="n">name</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">_name</span><span class="p">);</span> <span class="p">}</span>
+    <span class="n">annotate</span> <span class="n">name</span><span class="p">()</span> <span class="o">&amp;&amp;</span> <span class="p">{</span> <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_name</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 
 <span class="k">auto</span> <span class="n">name_02</span> <span class="o">=</span> <span class="n">example_06</span><span class="p">().</span><span class="n">name</span><span class="p">();</span>
@@ -15368,7 +15368,7 @@ annotate dtor
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">example_07</span><span class="p">;</span> <span class="c1">// forward declaration</span>
 
-<span class="k">const</span> <span class="n">example_07</span><span class="o">&amp;</span> <span class="n">function_01</span><span class="p">(</span><span class="k">const</span> <span class="n">example_07</span><span class="o">&amp;</span><span class="p">);</span> <span class="c1">// You know this works</span>
+<span class="k">const</span> <span class="n">example_07</span><span class="o">&amp;</span> <span class="nf">function_01</span><span class="p">(</span><span class="k">const</span> <span class="n">example_07</span><span class="o">&amp;</span><span class="p">);</span> <span class="c1">// You know this works</span>
 </pre></div>
 
      </div>

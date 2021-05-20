@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14534,9 +14534,9 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc</span> <span class="p">{</span>
 
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">sequential_process::async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">running</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">{</span>
         <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
@@ -14706,7 +14706,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc2</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
     <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">task</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">_executor</span><span class="p">;</span>
@@ -14750,7 +14750,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc2</span> <span class="p">{</span>
 
 <span class="n">sequential_process</span><span class="o">::~</span><span class="n">sequential_process</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
@@ -14781,9 +14781,9 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc2</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc2</span> <span class="p">{</span>
 
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">resume</span><span class="p">()</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">sequential_process::resume</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">task</span> <span class="n">work</span><span class="p">;</span>
     <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
         <span class="p">{</span>
@@ -14868,7 +14868,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc3</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>
@@ -14902,7 +14902,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc3</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">sequential_process</span><span class="o">::</span><span class="nl">implementation</span>
     <span class="p">:</span> <span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">implementation</span><span class="o">&gt;</span> <span class="p">{</span> <span class="c1">// &lt;---</span>
@@ -14935,9 +14935,9 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc3</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc3</span> <span class="p">{</span>
 
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">sequential_process::implementation::async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">running</span> <span class="o">=</span> <span class="nb">true</span><span class="p">;</span>
     <span class="p">{</span>
         <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
@@ -14995,7 +14995,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc4</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc4</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>
@@ -15032,7 +15032,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc4</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc4</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">sequential_process</span><span class="o">::</span><span class="nl">implementation</span>
     <span class="p">:</span> <span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">implementation</span><span class="o">&gt;</span> <span class="p">{</span>
@@ -15139,7 +15139,7 @@ End
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc5</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">sequential_process</span> <span class="p">{</span>
     <span class="k">struct</span> <span class="nc">implementation</span><span class="p">;</span>
@@ -15183,7 +15183,7 @@ End
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc5</span> <span class="p">{</span>
 
 <span class="k">struct</span> <span class="nc">sequential_process</span><span class="o">::</span><span class="nl">implementation</span> <span class="p">:</span> <span class="n">enable_shared_from_this</span><span class="o">&lt;</span><span class="n">implementation</span><span class="o">&gt;</span> <span class="p">{</span>
     <span class="n">function</span><span class="o">&lt;</span><span class="kt">void</span><span class="p">(</span><span class="n">task</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">_executor</span><span class="p">;</span>
@@ -15220,9 +15220,9 @@ End
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="n">bcc5</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">bcc5</span> <span class="p">{</span>
 
-<span class="kt">void</span> <span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
+<span class="kt">void</span> <span class="nf">sequential_process::implementation::async</span><span class="p">(</span><span class="n">task</span> <span class="n">f</span><span class="p">)</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">was_idle</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
     <span class="p">{</span>
         <span class="n">lock_guard</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>
@@ -15260,7 +15260,7 @@ End
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">bcc5</span><span class="o">::</span><span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">resume</span><span class="p">()</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="nf">bcc5::sequential_process::implementation::resume</span><span class="p">()</span> <span class="p">{</span>
     <span class="n">task</span> <span class="n">work</span><span class="p">;</span>
     <span class="k">while</span> <span class="p">(</span><span class="nb">true</span><span class="p">)</span> <span class="p">{</span>
         <span class="p">{</span>
@@ -15308,7 +15308,7 @@ End
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="n">bcc5</span><span class="o">::</span><span class="n">sequential_process</span><span class="o">::</span><span class="n">implementation</span><span class="o">::</span><span class="n">wait</span><span class="p">()</span> <span class="p">{</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="kt">void</span> <span class="nf">bcc5::sequential_process::implementation::wait</span><span class="p">()</span> <span class="p">{</span>
     <span class="kt">bool</span> <span class="n">was_queued</span> <span class="o">=</span> <span class="nb">false</span><span class="p">;</span>
     <span class="p">{</span>
         <span class="n">unique_lock</span><span class="o">&lt;</span><span class="n">mutex</span><span class="o">&gt;</span> <span class="n">lock</span><span class="p">(</span><span class="n">_mutex</span><span class="p">);</span>

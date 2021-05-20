@@ -66,9 +66,9 @@ if( window.location.search.match( /print-pdf/gi ) ) {
 
 <style type="text/css">
     pre { line-height: 125%; }
-td.linenos pre { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-span.linenos { color: #000000; background-color: #f0f0f0; padding-left: 5px; padding-right: 5px; }
-td.linenos pre.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
+td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
+td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .highlight .hll { background-color: var(--jp-cell-editor-active-background) }
 .highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
@@ -14774,9 +14774,9 @@ display: block;
 <li><code>[=]</code> capture-default any referenced local variable by value (copy)</li>
 <li><code>[&amp;]</code> capture-default any referenced local variable by reference</li>
 <li><code>[x]</code> captures x by value</li>
-<li><code>[&amp;x]</code> captures x by referece</li>
+<li><code>[&amp;x]</code> captures x by reference</li>
 <li><code>[_x = expression]</code> capture <code>_x</code> as the value of expression</li>
-<li><code>[=, &amp;x, _x = expression]</code> defaults can be miexed with other captures</li>
+<li><code>[=, &amp;x, _x = expression]</code> defaults can be mixed with other captures</li>
 </ul>
 <ul>
 <li>captured values are fixed when lambda is created, not at invocation</li>
@@ -15303,12 +15303,12 @@ Hello
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">auto</span> <span class="n">bind_once</span><span class="p">(</span><span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
-    <span class="k">return</span> <span class="nf">bind</span><span class="p">([</span><span class="n">_f</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)](</span><span class="k">auto</span><span class="o">&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="k">mutable</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">bind</span><span class="p">([</span><span class="n">_f</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">)](</span><span class="k">auto</span><span class="o">&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="k">mutable</span> <span class="p">{</span>
         <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">move</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
     <span class="p">},</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span>
 <span class="p">}</span>
 
-<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sink</span><span class="p">(</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="p">}</span>
+<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span> <span class="n">sink</span><span class="p">(</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;&amp;&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="p">}</span>
 </pre></div>
 
      </div>
@@ -15355,7 +15355,7 @@ Hello
 <li>This would allow <code>bind_once()</code> to be expressed as:<div class="highlight"><pre><span></span><span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span><span class="p">...</span> <span class="n">Args</span><span class="o">&gt;</span>
 <span class="k">auto</span> <span class="n">bind_once</span><span class="p">(</span><span class="n">F</span><span class="o">&amp;&amp;</span> <span class="n">f</span><span class="p">,</span> <span class="n">Args</span><span class="o">&amp;&amp;</span> <span class="p">...</span><span class="n">args</span><span class="p">)</span> <span class="p">{</span>
   <span class="k">return</span> <span class="p">[</span><span class="n">_f</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">F</span><span class="o">&gt;</span><span class="p">(</span><span class="n">f</span><span class="p">),</span> <span class="n">_args</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">Args</span><span class="o">&gt;</span><span class="p">(</span><span class="n">args</span><span class="p">)...]</span> <span class="p">()</span> <span class="k">mutable</span> <span class="p">{</span>
-      <span class="k">return</span> <span class="nf">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">move</span><span class="p">(</span><span class="n">_args</span><span class="p">)...);</span>
+      <span class="k">return</span> <span class="n">move</span><span class="p">(</span><span class="n">_f</span><span class="p">)(</span><span class="n">move</span><span class="p">(</span><span class="n">_args</span><span class="p">)...);</span>
   <span class="p">};</span>
 <span class="p">}</span>
 </pre></div>
