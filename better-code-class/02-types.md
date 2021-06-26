@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.2
+      jupytext_version: 1.11.3
   kernelspec:
     display_name: C++17
     language: C++17
@@ -82,6 +82,7 @@ $$
 (\forall a, b) a & = b \implies b = a. && \text{(Symmetry)} \\
 (\forall a, b, c) a & = b \wedge b = c \implies a = c. && \text {(Transitivity)} \\
 \end{align}
+
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->

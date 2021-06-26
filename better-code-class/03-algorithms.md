@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.2
+      jupytext_version: 1.11.3
   kernelspec:
     display_name: C++17
     language: C++17
@@ -293,7 +293,7 @@ Is a postcondition of `find()`.
 ### Concepts, Partial Functions, and Domain
 <!-- #endregion -->
 
-Compare the description for the old [SGI STL LessThanComparable concept](http://www.martinbroadhurst.com/stl/LessThanComparable.html):
+Compare the description for the old [SGI STL LessThanComparable concept](https://www.boost.org/sgi/stl/LessThanComparable.html):
 
 > Expression semantics
 >
@@ -309,7 +309,7 @@ versus the [C++17 concept](https://eel.is/c++draft/utility.arg.requirements#tab:
 > | -          | -                     | -                                      |
 > | `a < b`    | convertible to `bool` | `<` is a strict weak ordering relation |
 
-_In the SGI STL the requirement of [strict-weak-ordering](http://www.martinbroadhurst.com/stl/StrictWeakOrdering.html) was a separate concept._
+_In the SGI STL the requirement of [strict-weak-ordering](https://www.boost.org/sgi/stl/StrictWeakOrdering.html) was a separate concept._
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 Domain is defined in the C++ standard, but in the [context of _iterators_](https://eel.is/c++draft/iterator.cpp17#input.iterators-2). This passage used to refer to the _domain of operations_, but that has been narrowed to the _domain of_ `==`:
@@ -435,22 +435,18 @@ constexpr void iota(T first, T last, F out) {
 ### Algorithm Semantics
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} -->
-- The following code attempts to remove two elements, `[2, 4)`, from the sequence
-<!-- #endregion -->
+- The following code attempts to remove the first odd element from a sequence
 
 ```c++
 {
-    int a[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
+    vector a{0, 1, 2, 3, 4, 5};
 
-    auto p = remove_if(begin(a), end(a), [_n = 0](const int&) mutable {
-        bool r = (2 <= _n) && (_n < 4);
-        ++_n;
-        return r;
+    auto p = remove_if(begin(a), end(a), [n = 0](int x) mutable {
+        return (x & 1) && !n++;
     });
-    
+
+    a.erase(p, end(a));
     display(a);
-    cout << string(distance(begin(a), p) * 3 + 1, ' ') << "^\n";
 }
 ```
 
@@ -461,35 +457,30 @@ constexpr void iota(T first, T last, F out) {
 <!-- #region slideshow={"slide_type": "slide"} -->
 ```cpp
 template <class F, class P>
-F remove_if(F first, F last, P pred) {
-    first = find_if(first, last, pred);
-    if (first == last) return first;
+auto remove_if(F f, F l, P pred) {
+    f = find_if(f, l, pred); // <-- pred is passed by value
 
-    F p = first;
-    while (++p != last) {
-        if (!pred(*p)) {
-            *first = move(*p);
-            ++first;
-        }
+    if (f == l) return f;
+
+    for (auto p = next(f); p != l; ++p) {
+        if (!pred(*p)) *f++ = move(*p);
     }
-    return first;
+    return f;
 }
 ```
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "slide"}
 {
-    int a[]{0, 1, 2, 3, 4, 5, 6, 7, 8, 9};
-
-    int n{0};
-    auto p = remove_if(begin(a), end(a), [&](const int&) {
-        bool r = (2 <= n) && (n < 4);
-        ++n;
-        return r;
-    });
-
+    vector<int> a{0, 1, 2, 3, 4, 5};
+    
+    int n = 0;
+    auto first_is_odd = [&n](int x) {
+        return (x & 1) && !n++;
+    };
+    
+    a.erase(remove_if(begin(a), end(a), first_is_odd), end(a));
     display(a);
-    cout << string(distance(begin(a), p) * 3 + 1, ' ') << "^\n";
 }
 ```
 

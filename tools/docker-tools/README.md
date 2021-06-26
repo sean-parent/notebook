@@ -24,9 +24,10 @@ docker pull docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest
 To run the docker image, execute the following.
 
 ```
+# This remaps the web page to avoid conflicting with my other site...
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 docker run --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive \
-    --publish 3000:3000 --publish 3001:3001 --publish 8888:8888 $VOLUME bash
+    --publish 4000:3000 --publish 4001:3001 --publish 8888:8888 $VOLUME bash
 ```
 
 This should leave you at a bash prompt that looks like:
@@ -35,11 +36,11 @@ This should leave you at a bash prompt that looks like:
 app@fc7590a63ba3:~$
 ```
 
-The hex number is the docker image container ID and may be different. Going forward I refer to this as the _docker_ prompt to distinguish it from the _local_ prompt.
+The hex number is the docker image container ID and may be different. As we advance I refer to this as the _docker_ prompt to distinguish it from the _local_ prompt.
 
 ### Build the documentation site
 
-To build or rebuild the complete documentation site locally execute the following from the docker prompt:
+To build or rebuild the complete documentation site locally, execute the following from the docker prompt:
 
 ```
 cd /mnt/host
@@ -75,12 +76,13 @@ To build the Docker image, first, update the VERSION variable below (please use 
 
 #### Linux, WSL 2, MacOS
 ```
-VERSION="1.0.15"
+VERSION="1.0.17"
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 
 # The ruby version should match what GitHub Pages requires: https://pages.github.com/versions/
-RUBY_VERSION=2.7.1
+RUBY_VERSION=2.7.3
 
+echo $RUBY_VERSION > ./.ruby-version
 echo $VERSION > ./tools/docker-tools/VERSION
 
 # build the base image, no-cache is used, so the latest tools are installed
@@ -129,3 +131,6 @@ docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
 - 1.0.12 - adding tbb support for parallel algorithms
 - 1.0.13 - adding keyboard shortcuts for slides
 - 1.0.14 - updating tools
+- 1.0.15 - updating tools
+- 1.0.16 - updating tools
+- 1.0.17 - updating tools
