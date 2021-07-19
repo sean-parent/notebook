@@ -14423,7 +14423,7 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>231 ns +- 6.31 ns per loop (mean +- std. dev. of 7 runs 1000000 loops each)
+<pre>243 ns +- 7.21 ns per loop (mean +- std. dev. of 7 runs 1000000 loops each)
 </pre>
 </div>
 </div>
@@ -14435,7 +14435,7 @@ display: block;
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li>I use an <code>annotate</code> class which prints common operations</li>
+<li>I use an <code>instrumented</code> class which prints common operations</li>
 </ul>
 
 </div>
@@ -14446,8 +14446,8 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="n">annotate</span> <span class="n">a</span><span class="p">;</span>
-    <span class="n">annotate</span> <span class="n">b</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">b</span><span class="p">;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
     <span class="n">a</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">);</span>
 <span class="p">}</span>
@@ -14465,12 +14465,12 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate ctor
-annotate assign
-annotate move-assign
-annotate dtor
-annotate dtor
+<pre>instrumented ctor
+instrumented ctor
+instrumented assign
+instrumented move-assign
+instrumented dtor
+instrumented dtor
 </pre>
 </div>
 </div>

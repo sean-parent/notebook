@@ -119,12 +119,12 @@ namespace {
 
 static size_t _equality;
 
-struct annotate_1 {
+struct instrumented_1 {
     int _value{0};
 
-    annotate_1(int value) : _value(value) {}
+    instrumented_1(int value) : _value(value) {}
 
-    friend inline bool operator==(const annotate_1& x, const annotate_1& y) {
+    friend inline bool operator==(const instrumented_1& x, const instrumented_1& y) {
         ++_equality;
         return x._value == y._value;
     }
@@ -166,24 +166,24 @@ void test_equality_4(const T& a) {
 ```c++ slideshow={"slide_type": "slide"}
 struct {
     int tag;
-    std::vector<annotate_1> value;
+    std::vector<instrumented_1> value;
 } vec_rep_1[]{
-    {0, make_vector<annotate_1>({}, 0)},
-    {0, make_vector<annotate_1>({}, 1)},
-    {0, make_vector<annotate_1>({}, 2)},
+    {0, make_vector<instrumented_1>({}, 0)},
+    {0, make_vector<instrumented_1>({}, 1)},
+    {0, make_vector<instrumented_1>({}, 2)},
 
-    {1, make_vector<annotate_1>({0}, 0)},
-    {1, make_vector<annotate_1>({0}, 1)},
-    {1, make_vector<annotate_1>({0}, 2)},
+    {1, make_vector<instrumented_1>({0}, 0)},
+    {1, make_vector<instrumented_1>({0}, 1)},
+    {1, make_vector<instrumented_1>({0}, 2)},
 
-    {2, make_vector<annotate_1>({{0}, {1}}, 0)},
-    {2, make_vector<annotate_1>({{0}, {1}}, 0)},
+    {2, make_vector<instrumented_1>({{0}, {1}}, 0)},
+    {2, make_vector<instrumented_1>({{0}, {1}}, 0)},
 
-    {3, make_vector<annotate_1>({{0}, {2}}, 0)},
-    {3, make_vector<annotate_1>({{0}, {2}}, 0)},
+    {3, make_vector<instrumented_1>({{0}, {2}}, 0)},
+    {3, make_vector<instrumented_1>({{0}, {2}}, 0)},
 
-    {4, make_vector<annotate_1>({{1}, {2}}, 0)},
-    {4, make_vector<annotate_1>({{1}, {2}}, 0)},
+    {4, make_vector<instrumented_1>({{1}, {2}}, 0)},
+    {4, make_vector<instrumented_1>({{1}, {2}}, 0)},
 };
 ```
 
@@ -198,7 +198,7 @@ struct {
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-> **Exercise 2.1**  Add a counter to `annotate_1` for copy and a test case for copy and assignment complexity.
+> **Exercise 2.1**  Add a counter to `instrumented_1` for copy and a test case for copy and assignment complexity.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -394,7 +394,7 @@ void test_copy_and_assignment_failure(const T& v) {
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-> **Exercise 2.2**  Add a `_copy_limit` to `annotate_1` from _exercise 2.1_ and add a destructor counter. Extend the above test to ensure the all `annotate_1` objects are correctely destructed in the event of an exception from the allocator or from copying the `annotate_1` object.
+> **Exercise 2.2**  Add a `_copy_limit` to `instrumented_1` from _exercise 2.1_ and add a destructor counter. Extend the above test to ensure the all `instrumented_1` objects are correctely destructed in the event of an exception from the allocator or from copying the `instrumented_1` object.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -536,16 +536,16 @@ namespace {
 enum operations { copy_constructible = 1 << 0, equality_comparable = 1 << 1 };
 
 template <operations Ops>
-struct annotate_2 {
+struct instrumented_2 {
     int _value{0};
 
-    annotate_2(int value) : _value(value) {}
+    instrumented_2(int value) : _value(value) {}
 
-    annotate_2(const annotate_2& x) : _value{x._value} {
+    instrumented_2(const instrumented_2& x) : _value{x._value} {
         static_assert(Ops & copy_constructible);
     }
 
-    friend inline bool operator==(const annotate_2& x, const annotate_2& y) {
+    friend inline bool operator==(const instrumented_2& x, const instrumented_2& y) {
         static_assert(Ops & equality_comparable);
         ++_equality;
         return x._value == y._value;
@@ -558,10 +558,10 @@ struct annotate_2 {
 ```c++ slideshow={"slide_type": "slide"}
 {
     
-using annotate_t = annotate_2<copy_constructible>;
+using instrumented_t = instrumented_2<copy_constructible>;
 
-vector<annotate_t> x;
-x.push_back(annotate_t(42));
+vector<instrumented_t> x;
+x.push_back(instrumented_t(42));
 
 }
 ```
@@ -570,9 +570,9 @@ x.push_back(annotate_t(42));
 ```cpp
 {
     
-using annotate_t = annotate_2<copy_constructible>;
+using instrumented_t = instrumented_2<copy_constructible>;
 
-vector<annotate_t> a, b;
+vector<instrumented_t> a, b;
 
 cout << (a == b) << endl;
 
@@ -589,20 +589,20 @@ input_line_30:11:9: error: static_assert failed
     bool operator()(const _T1& __x, const _T1& __y) const {return __x == __y;}
                                                                       ^
 /Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/algorithm:1337:19: note: in instantiation of function template specialization 'std::__1::equal<std::__1::__wrap_iter<const (anonymous
-      namespace)::annotate_2<(anonymous namespace)::operations::copy_constructible> *>, std::__1::__wrap_iter<const
-      (anonymous namespace)::annotate_2<(anonymous namespace)::operations::copy_constructible> *>,
-      std::__1::__equal_to<(anonymous namespace)::annotate_2<(anonymous namespace)::operations::copy_constructible>,
-      (anonymous namespace)::annotate_2<(anonymous namespace)::operations::copy_constructible> > >' requested here
+      namespace)::instrumented_2<(anonymous namespace)::operations::copy_constructible> *>, std::__1::__wrap_iter<const
+      (anonymous namespace)::instrumented_2<(anonymous namespace)::operations::copy_constructible> *>,
+      std::__1::__equal_to<(anonymous namespace)::instrumented_2<(anonymous namespace)::operations::copy_constructible>,
+      (anonymous namespace)::instrumented_2<(anonymous namespace)::operations::copy_constructible> > >' requested here
     return _VSTD::equal(__first1, __last1, __first2, __equal_to<__v1, __v2>());
                   ^
 /Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/vector:3301:41: note: in instantiation of function template specialization 'std::__1::equal<std::__1::__wrap_iter<const (anonymous
-      namespace)::annotate_2<(anonymous namespace)::operations::copy_constructible> *>, std::__1::__wrap_iter<const
-      (anonymous namespace)::annotate_2<(anonymous namespace)::operations::copy_constructible> *> >' requested here
+      namespace)::instrumented_2<(anonymous namespace)::operations::copy_constructible> *>, std::__1::__wrap_iter<const
+      (anonymous namespace)::instrumented_2<(anonymous namespace)::operations::copy_constructible> *> >' requested here
     return __sz == __y.size() && _VSTD::equal(__x.begin(), __x.end(), __y.begin());
                                         ^
 input_line_32:6:12: note: in instantiation of function template specialization 'std::__1::operator==<(anonymous
-      namespace)::annotate_2<(anonymous namespace)::operations::copy_constructible>, std::__1::allocator<(anonymous
-      namespace)::annotate_2<(anonymous namespace)::operations::copy_constructible> > >' requested here
+      namespace)::instrumented_2<(anonymous namespace)::operations::copy_constructible>, std::__1::allocator<(anonymous
+      namespace)::instrumented_2<(anonymous namespace)::operations::copy_constructible> > >' requested here
 cout << (a == b) << endl;
            ^
 Interpreter Error: 
@@ -613,6 +613,6 @@ Interpreter Error:
 ## Homework
 
 - Do the exercises
-- Write a program that can iterate through the combinations of operations for `annotate_2` and only test those operations
+- Write a program that can iterate through the combinations of operations for `instrumented_2` and only test those operations
     - Hint: this is going to require metaprogramming and/or constexpr
 <!-- #endregion -->

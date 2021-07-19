@@ -79,8 +79,8 @@ print_type_name<decltype(e)>();
 ```c++ slideshow={"slide_type": "fragment"}
 namespace {
 
-annotate some_function() { return annotate(); }
-void some_sink(annotate) { }
+instrumented some_function() { return instrumented(); }
+void some_sink(instrumented) { }
     
 } // namespace
 ```
@@ -273,7 +273,7 @@ cout << x << endl;
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-vector<annotate> w(5);
+vector<instrumented> w(5);
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
