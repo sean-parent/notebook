@@ -15673,8 +15673,8 @@ true
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">auto</span> <span class="n">print</span> <span class="o">=</span> <span class="n">bind_all_1</span><span class="p">([](</span><span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{},</span> <span class="n">annotate</span><span class="p">(),</span>
-                            <span class="n">annotate</span><span class="p">());</span>
+    <span class="k">auto</span> <span class="n">print</span> <span class="o">=</span> <span class="n">bind_all_1</span><span class="p">([](</span><span class="k">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{},</span> <span class="n">instrumented</span><span class="p">(),</span>
+                            <span class="n">instrumented</span><span class="p">());</span>
 
     <span class="n">print</span><span class="p">();</span>
 <span class="p">}</span>
@@ -15692,14 +15692,14 @@ true
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate ctor
-annotate copy-ctor
-annotate copy-ctor
-annotate dtor
-annotate dtor
-annotate dtor
-annotate dtor
+<pre>instrumented ctor
+instrumented ctor
+instrumented copy-ctor
+instrumented copy-ctor
+instrumented dtor
+instrumented dtor
+instrumented dtor
+instrumented dtor
 </pre>
 </div>
 </div>
@@ -15740,8 +15740,8 @@ annotate dtor
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-    <span class="k">auto</span> <span class="n">print</span> <span class="o">=</span> <span class="n">bind_all_2</span><span class="p">([](</span><span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{},</span> <span class="n">annotate</span><span class="p">(),</span>
-                            <span class="n">annotate</span><span class="p">());</span>
+    <span class="k">auto</span> <span class="n">print</span> <span class="o">=</span> <span class="n">bind_all_2</span><span class="p">([](</span><span class="k">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{},</span> <span class="n">instrumented</span><span class="p">(),</span>
+                            <span class="n">instrumented</span><span class="p">());</span>
 
     <span class="n">print</span><span class="p">();</span>
 <span class="p">}</span>
@@ -15759,14 +15759,14 @@ annotate dtor
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate ctor
-annotate move-ctor
-annotate move-ctor
-annotate dtor
-annotate dtor
-annotate dtor
-annotate dtor
+<pre>instrumented ctor
+instrumented ctor
+instrumented move-ctor
+instrumented move-ctor
+instrumented dtor
+instrumented dtor
+instrumented dtor
+instrumented dtor
 </pre>
 </div>
 </div>

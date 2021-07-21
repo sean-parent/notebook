@@ -115,8 +115,8 @@ Colleague: "I can't, I'm already using the copy-constructor for something else."
 ```c++ slideshow={"slide_type": "slide"} tags=[]
 namespace v0 {
 
-annotate f() {
-    annotate r;
+instrumented f() {
+    instrumented r;
     return r;
 }
 
@@ -126,7 +126,7 @@ annotate f() {
 <!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
 **Question:** How many copies? How many moves?
 ```cpp
-annotate a = f();
+instrumented a = f();
 ```
 <!-- #endregion -->
 
@@ -134,7 +134,7 @@ annotate a = f();
 {
     using namespace v0;
     
-    annotate a = f();
+    instrumented a = f();
 }
 ```
 

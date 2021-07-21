@@ -14337,12 +14337,12 @@ complexity \approx performance
 
 <span class="k">static</span> <span class="kt">size_t</span> <span class="n">_equality</span><span class="p">;</span>
 
-<span class="k">struct</span> <span class="nc">annotate_1</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="nc">instrumented_1</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_value</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 
-    <span class="n">annotate_1</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="n">instrumented_1</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{}</span>
 
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate_1</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate_1</span><span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">instrumented_1</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">instrumented_1</span><span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
         <span class="o">++</span><span class="n">_equality</span><span class="p">;</span>
         <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">y</span><span class="p">.</span><span class="n">_value</span><span class="p">;</span>
     <span class="p">}</span>
@@ -14414,24 +14414,24 @@ complexity \approx performance
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">struct</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">tag</span><span class="p">;</span>
-    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span> <span class="n">value</span><span class="p">;</span>
+    <span class="n">std</span><span class="o">::</span><span class="n">vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span> <span class="n">value</span><span class="p">;</span>
 <span class="p">}</span> <span class="n">vec_rep_1</span><span class="p">[]{</span>
-    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">1</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">2</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">1</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">0</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({},</span> <span class="mi">2</span><span class="p">)},</span>
 
-    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">1</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">2</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">1</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">1</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({</span><span class="mi">0</span><span class="p">},</span> <span class="mi">2</span><span class="p">)},</span>
 
-    <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">2</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">1</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
 
-    <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">3</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">0</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
 
-    <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
-    <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">annotate_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
+    <span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="n">make_vector</span><span class="o">&lt;</span><span class="n">instrumented_1</span><span class="o">&gt;</span><span class="p">({{</span><span class="mi">1</span><span class="p">},</span> <span class="p">{</span><span class="mi">2</span><span class="p">}},</span> <span class="mi">0</span><span class="p">)},</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14462,7 +14462,7 @@ complexity \approx performance
 </div>
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p><strong>Exercise 2.1</strong>  Add a counter to <code>annotate_1</code> for copy and a test case for copy and assignment complexity.</p>
+<blockquote><p><strong>Exercise 2.1</strong>  Add a counter to <code>instrumented_1</code> for copy and a test case for copy and assignment complexity.</p>
 </blockquote>
 
 </div>
@@ -14779,7 +14779,7 @@ complexity \approx performance
 
 </div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<blockquote><p><strong>Exercise 2.2</strong>  Add a <code>_copy_limit</code> to <code>annotate_1</code> from <em>exercise 2.1</em> and add a destructor counter. Extend the above test to ensure the all <code>annotate_1</code> objects are correctely destructed in the event of an exception from the allocator or from copying the <code>annotate_1</code> object.</p>
+<blockquote><p><strong>Exercise 2.2</strong>  Add a <code>_copy_limit</code> to <code>instrumented_1</code> from <em>exercise 2.1</em> and add a destructor counter. Extend the above test to ensure the all <code>instrumented_1</code> objects are correctely destructed in the event of an exception from the allocator or from copying the <code>instrumented_1</code> object.</p>
 </blockquote>
 
 </div>
@@ -14990,16 +14990,16 @@ Interpreter Error:</code></pre>
 <span class="k">enum</span> <span class="nc">operations</span> <span class="p">{</span> <span class="n">copy_constructible</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">0</span><span class="p">,</span> <span class="n">equality_comparable</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">&lt;&lt;</span> <span class="mi">1</span> <span class="p">};</span>
 
 <span class="k">template</span> <span class="o">&lt;</span><span class="n">operations</span> <span class="n">Ops</span><span class="o">&gt;</span>
-<span class="k">struct</span> <span class="nc">annotate_2</span> <span class="p">{</span>
+<span class="k">struct</span> <span class="nc">instrumented_2</span> <span class="p">{</span>
     <span class="kt">int</span> <span class="n">_value</span><span class="p">{</span><span class="mi">0</span><span class="p">};</span>
 
-    <span class="n">annotate_2</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{}</span>
+    <span class="n">instrumented_2</span><span class="p">(</span><span class="kt">int</span> <span class="n">value</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="p">{}</span>
 
-    <span class="n">annotate_2</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate_2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">{</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span><span class="p">}</span> <span class="p">{</span>
+    <span class="n">instrumented_2</span><span class="p">(</span><span class="k">const</span> <span class="n">instrumented_2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">)</span> <span class="o">:</span> <span class="n">_value</span><span class="p">{</span><span class="n">x</span><span class="p">.</span><span class="n">_value</span><span class="p">}</span> <span class="p">{</span>
         <span class="k">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">copy_constructible</span><span class="p">);</span>
     <span class="p">}</span>
 
-    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate_2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate_2</span><span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">friend</span> <span class="kr">inline</span> <span class="kt">bool</span> <span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span> <span class="n">instrumented_2</span><span class="o">&amp;</span> <span class="n">x</span><span class="p">,</span> <span class="k">const</span> <span class="n">instrumented_2</span><span class="o">&amp;</span> <span class="n">y</span><span class="p">)</span> <span class="p">{</span>
         <span class="k">static_assert</span><span class="p">(</span><span class="n">Ops</span> <span class="o">&amp;</span> <span class="n">equality_comparable</span><span class="p">);</span>
         <span class="o">++</span><span class="n">_equality</span><span class="p">;</span>
         <span class="k">return</span> <span class="n">x</span><span class="p">.</span><span class="n">_value</span> <span class="o">==</span> <span class="n">y</span><span class="p">.</span><span class="n">_value</span><span class="p">;</span>
@@ -15022,10 +15022,10 @@ Interpreter Error:</code></pre>
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
     
-<span class="k">using</span> <span class="n">annotate_t</span> <span class="o">=</span> <span class="n">annotate_2</span><span class="o">&lt;</span><span class="n">copy_constructible</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">instrumented_t</span> <span class="o">=</span> <span class="n">instrumented_2</span><span class="o">&lt;</span><span class="n">copy_constructible</span><span class="o">&gt;</span><span class="p">;</span>
 
-<span class="n">vector</span><span class="o">&lt;</span><span class="n">annotate_t</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">;</span>
-<span class="n">x</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">annotate_t</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">instrumented_t</span><span class="o">&gt;</span> <span class="n">x</span><span class="p">;</span>
+<span class="n">x</span><span class="p">.</span><span class="n">push_back</span><span class="p">(</span><span class="n">instrumented_t</span><span class="p">(</span><span class="mi">42</span><span class="p">));</span>
 
 <span class="p">}</span>
 </pre></div>
@@ -15039,9 +15039,9 @@ Interpreter Error:</code></pre>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <div class="highlight"><pre><span></span><span class="p">{</span>
 
-<span class="k">using</span> <span class="n">annotate_t</span> <span class="o">=</span> <span class="n">annotate_2</span><span class="o">&lt;</span><span class="n">copy_constructible</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="k">using</span> <span class="n">instrumented_t</span> <span class="o">=</span> <span class="n">instrumented_2</span><span class="o">&lt;</span><span class="n">copy_constructible</span><span class="o">&gt;</span><span class="p">;</span>
 
-<span class="n">vector</span><span class="o">&lt;</span><span class="n">annotate_t</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
+<span class="n">vector</span><span class="o">&lt;</span><span class="n">instrumented_t</span><span class="o">&gt;</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">;</span>
 
 <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">)</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 
@@ -15059,20 +15059,20 @@ Interpreter Error:</code></pre>
     bool operator()(const _T1&amp; __x, const _T1&amp; __y) const {return __x == __y;}
                                                                       ^
 /Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/algorithm:1337:19: note: in instantiation of function template specialization 'std::__1::equal&lt;std::__1::__wrap_iter&lt;const (anonymous
-      namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt;, std::__1::__wrap_iter&lt;const
-      (anonymous namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt;,
-      std::__1::__equal_to&lt;(anonymous namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt;,
-      (anonymous namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; &gt; &gt;' requested here
+      namespace)::instrumented_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt;, std::__1::__wrap_iter&lt;const
+      (anonymous namespace)::instrumented_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt;,
+      std::__1::__equal_to&lt;(anonymous namespace)::instrumented_2&lt;(anonymous namespace)::operations::copy_constructible&gt;,
+      (anonymous namespace)::instrumented_2&lt;(anonymous namespace)::operations::copy_constructible&gt; &gt; &gt;' requested here
     return _VSTD::equal(__first1, __last1, __first2, __equal_to&lt;__v1, __v2&gt;());
                   ^
 /Users/sean-parent/miniconda3/envs/notebook/include/c++/v1/vector:3301:41: note: in instantiation of function template specialization 'std::__1::equal&lt;std::__1::__wrap_iter&lt;const (anonymous
-      namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt;, std::__1::__wrap_iter&lt;const
-      (anonymous namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt; &gt;' requested here
+      namespace)::instrumented_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt;, std::__1::__wrap_iter&lt;const
+      (anonymous namespace)::instrumented_2&lt;(anonymous namespace)::operations::copy_constructible&gt; *&gt; &gt;' requested here
     return __sz == __y.size() &amp;&amp; _VSTD::equal(__x.begin(), __x.end(), __y.begin());
                                         ^
 input_line_32:6:12: note: in instantiation of function template specialization 'std::__1::operator==&lt;(anonymous
-      namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt;, std::__1::allocator&lt;(anonymous
-      namespace)::annotate_2&lt;(anonymous namespace)::operations::copy_constructible&gt; &gt; &gt;' requested here
+      namespace)::instrumented_2&lt;(anonymous namespace)::operations::copy_constructible&gt;, std::__1::allocator&lt;(anonymous
+      namespace)::instrumented_2&lt;(anonymous namespace)::operations::copy_constructible&gt; &gt; &gt;' requested here
 cout &lt;&lt; (a == b) &lt;&lt; endl;
            ^
 Interpreter Error:</code></pre>
@@ -15082,7 +15082,7 @@ Interpreter Error:</code></pre>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Homework">Homework<a class="anchor-link" href="#Homework">&#182;</a></h2><ul>
 <li>Do the exercises</li>
-<li>Write a program that can iterate through the combinations of operations for <code>annotate_2</code> and only test those operations<ul>
+<li>Write a program that can iterate through the combinations of operations for <code>instrumented_2</code> and only test those operations<ul>
 <li>Hint: this is going to require metaprogramming and/or constexpr</li>
 </ul>
 </li>
