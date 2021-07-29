@@ -76,7 +76,7 @@ To build the Docker image, first, update the VERSION variable below (please use 
 
 #### Linux, WSL 2, MacOS
 ```
-VERSION="1.0.17"
+VERSION="1.0.18"
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 
 # The ruby version should match what GitHub Pages requires: https://pages.github.com/versions/
@@ -134,3 +134,4 @@ docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
 - 1.0.15 - updating tools
 - 1.0.16 - updating tools
 - 1.0.17 - updating tools
+- 1.0.18 - updating tools
