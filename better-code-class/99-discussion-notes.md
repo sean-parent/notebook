@@ -3,7 +3,7 @@
 Distilled from discussions between Sean and Dave
 
 # Introduction
-  * This is a course/book on engineering
+This is a course/book on engineering
   
 ## Definition of Engineering:
 
@@ -35,8 +35,51 @@ said to be the essence of the activity.
 
 ## Instructor/Author Bias
 
-We come from a set of experiences that will color what we think is important.
-However we've attempted to be responsible for 
+We hope this course/book is generally applicable, but of course we come from a
+set of experiences that will color what we think is important.  We've attempted
+to be responsible for our biases.  In full disclosure, you can read our
+backgrounds from the overleaf/here they are.
+
+## Truth
+
+One thing we both believe is that in grappling with problems, if you apply
+yourself, you can discover deep platonic truths.  This course/book is about
+finding deep truths about programming.
+
+## Better Code
+
+This is a course/book about producing better code.  To do that, we need to
+understand what good code is, and to do it together we need to agree on that
+definition.  Rather than try to list these properties up front, we're going to
+discover the properties of good code as we go along, by looking at real
+examples.
+
+## What to expect
+### Programming Language
+
+The principles of this course are not specific to any one programming language,
+Often we'll talk about some programming idea and then talk about the best way to
+render that idea in a given language. The fit will not always be elegant; this
+is an engineering reality (tradeoffs!)
+
+### Structure of the Course
+- Goals [should be positive things, e.g. not “no _________”]
+### Conventions used throughout
+### Pointers to materials
+### Useful tools
+
+# Algorithms
+
+- Let's honor what computers are actually all about: computation.  Algorithms
+  are an abstraction of computation. Doing so has consequences:
+  - Naming
+  - Documentation
+  - Complexity analysis
+- Doing so serves:
+  - efficiency
+  - maintainability
+  - local reasoning
+  
 
 # Miscellaneous
 
@@ -50,7 +93,7 @@ However we've attempted to be responsible for
   - What are its observable parts?
   - What is its value?
 
--
+
 ## Necessary ingredients for Scalable/Sustainable Software
 
 If we can make this list long enough, it could be a theme threaded through the
