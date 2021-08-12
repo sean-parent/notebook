@@ -14249,14 +14249,14 @@ display: block;
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">c_2</span> <span class="p">{</span>
-    <span class="n">annotate</span> <span class="n">_a</span><span class="p">;</span>
-    <span class="n">annotate</span> <span class="n">_b</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_b</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="n">c_2</span><span class="p">(</span><span class="n">annotate</span> <span class="n">a</span><span class="p">,</span> <span class="n">annotate</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">c_2</span><span class="p">(</span><span class="n">instrumented</span> <span class="n">a</span><span class="p">,</span> <span class="n">instrumented</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">annotate</span> <span class="n">v_2</span><span class="p">;</span>
-<span class="n">c_2</span> <span class="n">v_3</span><span class="p">{</span><span class="n">v_2</span><span class="p">,</span> <span class="n">annotate</span><span class="p">()};</span>
+<span class="n">instrumented</span> <span class="n">v_2</span><span class="p">;</span>
+<span class="n">c_2</span> <span class="n">v_3</span><span class="p">{</span><span class="n">v_2</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">()};</span>
 </pre></div>
 
      </div>
@@ -14271,13 +14271,13 @@ display: block;
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate copy-ctor
-annotate ctor
-annotate move-ctor
-annotate move-ctor
-annotate dtor
-annotate dtor
+<pre>instrumented ctor
+instrumented copy-ctor
+instrumented ctor
+instrumented move-ctor
+instrumented move-ctor
+instrumented dtor
+instrumented dtor
 </pre>
 </div>
 </div>
@@ -14295,15 +14295,15 @@ annotate dtor
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">example_03</span> <span class="p">{</span>
 
 <span class="k">class</span> <span class="nc">type</span> <span class="p">{</span>
-    <span class="n">annotate</span> <span class="n">_a</span><span class="p">;</span>
-    <span class="n">annotate</span> <span class="n">_b</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_b</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
     <span class="n">type</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">U</span><span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
     
-<span class="n">annotate</span> <span class="n">value</span><span class="p">;</span>
-<span class="n">type</span> <span class="nf">instance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">annotate</span><span class="p">());</span>
+<span class="n">instrumented</span> <span class="n">value</span><span class="p">;</span>
+<span class="n">type</span> <span class="nf">instance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">());</span>
     
 
 <span class="p">}</span> <span class="c1">// namespace</span>
@@ -14321,11 +14321,11 @@ annotate dtor
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate ctor
-annotate copy-ctor
-annotate move-ctor
-annotate dtor
+<pre>instrumented ctor
+instrumented ctor
+instrumented copy-ctor
+instrumented move-ctor
+instrumented dtor
 </pre>
 </div>
 </div>
@@ -14346,14 +14346,14 @@ annotate dtor
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">c_4</span> <span class="p">{</span>
-    <span class="n">annotate</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="kt">void</span> <span class="n">set</span><span class="p">(</span><span class="n">annotate</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">void</span> <span class="n">set</span><span class="p">(</span><span class="n">instrumented</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
         <span class="n">_a</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
     <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">annotate</span> <span class="n">v_5</span><span class="p">;</span>
+<span class="n">instrumented</span> <span class="n">v_5</span><span class="p">;</span>
 <span class="n">c_4</span> <span class="n">v_6</span><span class="p">;</span>
 <span class="n">v_6</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">v_5</span><span class="p">);</span>
 </pre></div>
@@ -14370,11 +14370,11 @@ annotate dtor
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate ctor
-annotate copy-ctor
-annotate move-assign
-annotate dtor
+<pre>instrumented ctor
+instrumented ctor
+instrumented copy-ctor
+instrumented move-assign
+instrumented dtor
 </pre>
 </div>
 </div>
@@ -14390,7 +14390,7 @@ annotate dtor
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">c_7</span> <span class="p">{</span>
-    <span class="n">annotate</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
     <span class="kt">void</span> <span class="n">set</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
@@ -14398,7 +14398,7 @@ annotate dtor
     <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">annotate</span> <span class="n">v_11</span><span class="p">;</span>
+<span class="n">instrumented</span> <span class="n">v_11</span><span class="p">;</span>
 <span class="n">c_7</span> <span class="n">v_12</span><span class="p">;</span>
 <span class="n">v_12</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">v_11</span><span class="p">);</span>
 </pre></div>
@@ -14415,9 +14415,9 @@ annotate dtor
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate ctor
-annotate assign
+<pre>instrumented ctor
+instrumented ctor
+instrumented assign
 </pre>
 </div>
 </div>
@@ -14437,16 +14437,16 @@ annotate assign
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">c_3</span> <span class="p">{</span>
-    <span class="n">annotate</span> <span class="n">_a</span><span class="p">;</span>
-    <span class="n">annotate</span> <span class="n">_b</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_b</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="n">c_3</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">_b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="n">c_3</span><span class="p">(</span><span class="n">annotate</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="n">c_3</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">annotate</span><span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
-    <span class="n">c_3</span><span class="p">(</span><span class="n">annotate</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">annotate</span><span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">c_3</span><span class="p">(</span><span class="k">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">_b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">c_3</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="k">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">c_3</span><span class="p">(</span><span class="k">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">instrumented</span><span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">c_3</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">instrumented</span><span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">c_3</span> <span class="n">v_4</span><span class="p">{</span><span class="n">v_2</span><span class="p">,</span> <span class="n">annotate</span><span class="p">()};</span>
+<span class="n">c_3</span> <span class="n">v_4</span><span class="p">{</span><span class="n">v_2</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">()};</span>
 </pre></div>
 
      </div>
@@ -14461,10 +14461,10 @@ annotate assign
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate copy-ctor
-annotate move-ctor
-annotate dtor
+<pre>instrumented ctor
+instrumented copy-ctor
+instrumented move-ctor
+instrumented dtor
 </pre>
 </div>
 </div>
@@ -14584,10 +14584,10 @@ annotate dtor
     <span class="n">f</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Arg</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">));</span>
 <span class="p">};</span>
 
-<span class="kt">void</span> <span class="nf">f_01</span><span class="p">(</span><span class="n">annotate</span><span class="p">){</span> <span class="p">};</span>         <span class="c1">// pass by value</span>
-<span class="kt">void</span> <span class="nf">f_02</span><span class="p">(</span><span class="k">const</span> <span class="n">annotate</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span> <span class="c1">// pass by const lvalue reference</span>
-<span class="kt">void</span> <span class="nf">f_03</span><span class="p">(</span><span class="n">annotate</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>       <span class="c1">// pass by lvalue reference</span>
-<span class="kt">void</span> <span class="nf">f_04</span><span class="p">(</span><span class="n">annotate</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>      <span class="c1">// pass by rvalue reference</span>
+<span class="kt">void</span> <span class="nf">f_01</span><span class="p">(</span><span class="n">instrumented</span><span class="p">){</span> <span class="p">};</span>         <span class="c1">// pass by value</span>
+<span class="kt">void</span> <span class="nf">f_02</span><span class="p">(</span><span class="k">const</span> <span class="n">instrumented</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span> <span class="c1">// pass by const lvalue reference</span>
+<span class="kt">void</span> <span class="nf">f_03</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>       <span class="c1">// pass by lvalue reference</span>
+<span class="kt">void</span> <span class="nf">f_04</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>      <span class="c1">// pass by rvalue reference</span>
 
 <span class="p">}</span> <span class="c1">// namespace</span>
 </pre></div>
@@ -14603,16 +14603,16 @@ annotate dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">annotate</span> <span class="n">v_03</span><span class="p">;</span> <span class="c1">// lvalue</span>
+<div class=" highlight hl-c++"><pre><span></span><span class="n">instrumented</span> <span class="n">v_03</span><span class="p">;</span> <span class="c1">// lvalue</span>
 
 <span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_01</span><span class="p">,</span> <span class="n">v_03</span><span class="p">);</span>          <span class="c1">// call with lvalue - copy</span>
-<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_01</span><span class="p">,</span> <span class="n">annotate</span><span class="p">());</span>    <span class="c1">// call with rvalue - move</span>
+<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_01</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">());</span>    <span class="c1">// call with rvalue - move</span>
 <span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_02</span><span class="p">,</span> <span class="n">v_03</span><span class="p">);</span>          <span class="c1">// call with lvalue</span>
-<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_02</span><span class="p">,</span> <span class="n">annotate</span><span class="p">());</span>    <span class="c1">// call with rvalue</span>
+<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_02</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">());</span>    <span class="c1">// call with rvalue</span>
 <span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_03</span><span class="p">,</span> <span class="n">v_03</span><span class="p">);</span>          <span class="c1">// call with lvalue</span>
-<span class="c1">// wrapper_04(f_03, annotate()); // call with rvalue - error</span>
+<span class="c1">// wrapper_04(f_03, instrumented()); // call with rvalue - error</span>
 <span class="c1">// wrapper_04(f_04, v_03);       // call with lvalue - error</span>
-<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_04</span><span class="p">,</span> <span class="n">annotate</span><span class="p">());</span>    <span class="c1">// call with rvalue</span>
+<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_04</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">());</span>    <span class="c1">// call with rvalue</span>
 </pre></div>
 
      </div>
@@ -14627,17 +14627,17 @@ annotate dtor
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate copy-ctor
-annotate dtor
-annotate ctor
-annotate move-ctor
-annotate dtor
-annotate dtor
-annotate ctor
-annotate dtor
-annotate ctor
-annotate dtor
+<pre>instrumented ctor
+instrumented copy-ctor
+instrumented dtor
+instrumented ctor
+instrumented move-ctor
+instrumented dtor
+instrumented dtor
+instrumented ctor
+instrumented dtor
+instrumented ctor
+instrumented dtor
 </pre>
 </div>
 </div>
@@ -14802,13 +14802,13 @@ annotate dtor
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">c_5</span> <span class="p">{</span>
-    <span class="n">annotate</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
     <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
     <span class="n">c_5</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">c_5</span> <span class="n">v_7</span><span class="p">{</span><span class="n">annotate</span><span class="p">()};</span>
+<span class="n">c_5</span> <span class="n">v_7</span><span class="p">{</span><span class="n">instrumented</span><span class="p">()};</span>
 </pre></div>
 
      </div>
@@ -14823,9 +14823,9 @@ annotate dtor
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate move-ctor
-annotate dtor
+<pre>instrumented ctor
+instrumented move-ctor
+instrumented dtor
 </pre>
 </div>
 </div>
@@ -14852,14 +14852,14 @@ input_line_22:2:6: note: in instantiation of function template specialization 'c
      ^
 ./../common.hpp:5:5: note: candidate constructor not viable: no known conversion from 'c_5' to
       'const annotate' for 1st argument
-    annotate(const annotate&amp;) { std::cout &lt;&lt; "annotate copy-ctor" &lt;&lt; std...
+    instrumented(const instrumented&amp;) { std::cout &lt;&lt; "instrumented copy-ctor" &lt;&lt; std...
     ^
 ./../common.hpp:6:5: note: candidate constructor not viable: no known conversion from 'c_5' to 'annotate'
       for 1st argument
-    annotate(annotate&amp;&amp;) noexcept { std::cout &lt;&lt; "annotate move-ctor" &lt;...
+    instrumented(instrumented&amp;&amp;) noexcept { std::cout &lt;&lt; "instrumented move-ctor" &lt;...
     ^
 ./../common.hpp:4:5: note: candidate constructor not viable: requires 0 arguments, but 1 was provided
-    annotate() { std::cout &lt;&lt; "annotate ctor" &lt;&lt; std::endl; }</code></pre>
+    instrumented() { std::cout &lt;&lt; "instrumented ctor" &lt;&lt; std::endl; }</code></pre>
 
 </div>
 </div></div></section></section><section><section><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
@@ -14869,13 +14869,13 @@ input_line_22:2:6: note: in instantiation of function template specialization 'c
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">class</span> <span class="nc">c_6</span> <span class="p">{</span>
-    <span class="n">annotate</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
 <span class="k">public</span><span class="o">:</span>
-    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="o">=</span> <span class="n">enable_if_t</span><span class="o">&lt;</span><span class="n">is_convertible</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">annotate</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;&gt;</span>
+    <span class="k">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="o">=</span> <span class="n">enable_if_t</span><span class="o">&lt;</span><span class="n">is_convertible</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">instrumented</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;&gt;</span>
     <span class="n">c_6</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="o">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">c_6</span> <span class="n">v_9</span><span class="p">{</span><span class="n">annotate</span><span class="p">()};</span>
+<span class="n">c_6</span> <span class="n">v_9</span><span class="p">{</span><span class="n">instrumented</span><span class="p">()};</span>
 <span class="n">c_6</span> <span class="n">v_10</span><span class="p">{</span><span class="n">v_9</span><span class="p">};</span>
 </pre></div>
 
@@ -14891,10 +14891,10 @@ input_line_22:2:6: note: in instantiation of function template specialization 'c
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate move-ctor
-annotate dtor
-annotate copy-ctor
+<pre>instrumented ctor
+instrumented move-ctor
+instrumented dtor
+instrumented copy-ctor
 </pre>
 </div>
 </div>

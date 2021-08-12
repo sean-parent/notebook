@@ -113,13 +113,13 @@ v0::f()
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-- I use an `annotate` class which prints common operations
+- I use an `instrumented` class which prints common operations
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
 {
-    annotate a;
-    annotate b;
+    instrumented a;
+    instrumented b;
     a = b;
     a = move(b);
 }

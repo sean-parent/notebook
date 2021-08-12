@@ -35,29 +35,29 @@ using namespace std::string_literals;
 
 ```c++ slideshow={"slide_type": "-"}
 class c_2 {
-    annotate _a;
-    annotate _b;
+    instrumented _a;
+    instrumented _b;
 public:
-    c_2(annotate a, annotate b) : _a(move(a)), _b(move(b)) { }
+    c_2(instrumented a, instrumented b) : _a(move(a)), _b(move(b)) { }
 };
 
-annotate v_2;
-c_2 v_3{v_2, annotate()};
+instrumented v_2;
+c_2 v_3{v_2, instrumented()};
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
 namespace example_03 {
 
 class type {
-    annotate _a;
-    annotate _b;
+    instrumented _a;
+    instrumented _b;
 public:
     template <class T, class U>
     type(T&& a, U&& b) : _a(forward<T>(a)), _b(forward<U>(b)) { }
 };
     
-annotate value;
-type instance(value, annotate());
+instrumented value;
+type instance(value, instrumented());
     
 
 } // namespace
@@ -71,21 +71,21 @@ Copy followed by move assignment can be more expensive than copy assignment.
 
 ```c++ slideshow={"slide_type": "slide"}
 class c_4 {
-    annotate _a;
+    instrumented _a;
 public:
-    void set(annotate a) {
+    void set(instrumented a) {
         _a = move(a);
     }
 };
 
-annotate v_5;
+instrumented v_5;
 c_4 v_6;
 v_6.set(v_5);
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
 class c_7 {
-    annotate _a;
+    instrumented _a;
 public:
     template <class T>
     void set(T&& a) {
@@ -93,7 +93,7 @@ public:
     }
 };
 
-annotate v_11;
+instrumented v_11;
 c_7 v_12;
 v_12.set(v_11);
 ```
@@ -104,16 +104,16 @@ v_12.set(v_11);
 
 ```c++ slideshow={"slide_type": "-"}
 class c_3 {
-    annotate _a;
-    annotate _b;
+    instrumented _a;
+    instrumented _b;
 public:
-    c_3(const annotate& a, const annotate& b) : _a(a), _b(b) { }
-    c_3(annotate&& a, const annotate& b) : _a(move(a)), _b(b) { }
-    c_3(const annotate& a, annotate&& b) : _a(a), _b(move(b)) { }
-    c_3(annotate&& a, annotate&& b) : _a(move(a)), _b(move(b)) { }
+    c_3(const instrumented& a, const instrumented& b) : _a(a), _b(b) { }
+    c_3(instrumented&& a, const instrumented& b) : _a(move(a)), _b(b) { }
+    c_3(const instrumented& a, instrumented&& b) : _a(a), _b(move(b)) { }
+    c_3(instrumented&& a, instrumented&& b) : _a(move(a)), _b(move(b)) { }
 };
 
-c_3 v_4{v_2, annotate()};
+c_3 v_4{v_2, instrumented()};
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -196,10 +196,10 @@ void wrapper_04(F f, T&& arg) {
     f(forward<T>(arg)); // forward does the right thing
 }
 
-void f_01(annotate){ }         // pass by value
-void f_02(const annotate&) { } // pass by const lvalue reference
-void f_03(annotate&) { }       // pass by lvalue reference
-void f_04(annotate&&) { }      // pass by rvalue reference
+void f_01(instrumented){ }         // pass by value
+void f_02(const instrumented&) { } // pass by const lvalue reference
+void f_03(instrumented&) { }       // pass by lvalue reference
+void f_04(instrumented&&) { }      // pass by rvalue reference
 ```
 <!-- #endregion -->
 
@@ -212,25 +212,25 @@ void wrapper_04(F f, Arg&& arg) {
     f(std::forward<Arg>(arg));
 };
 
-void f_01(annotate){ };         // pass by value
-void f_02(const annotate&) { }; // pass by const lvalue reference
-void f_03(annotate&) { };       // pass by lvalue reference
-void f_04(annotate&&) { };      // pass by rvalue reference
+void f_01(instrumented){ };         // pass by value
+void f_02(const instrumented&) { }; // pass by const lvalue reference
+void f_03(instrumented&) { };       // pass by lvalue reference
+void f_04(instrumented&&) { };      // pass by rvalue reference
 
 } // namespace
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
-annotate v_03; // lvalue
+instrumented v_03; // lvalue
 
 wrapper_04(f_01, v_03);          // call with lvalue - copy
-wrapper_04(f_01, annotate());    // call with rvalue - move
+wrapper_04(f_01, instrumented());    // call with rvalue - move
 wrapper_04(f_02, v_03);          // call with lvalue
-wrapper_04(f_02, annotate());    // call with rvalue
+wrapper_04(f_02, instrumented());    // call with rvalue
 wrapper_04(f_03, v_03);          // call with lvalue
-// wrapper_04(f_03, annotate()); // call with rvalue - error
+// wrapper_04(f_03, instrumented()); // call with rvalue - error
 // wrapper_04(f_04, v_03);       // call with lvalue - error
-wrapper_04(f_04, annotate());    // call with rvalue
+wrapper_04(f_04, instrumented());    // call with rvalue
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -312,13 +312,13 @@ if (is_lvalue_reference<decltype(v_1)>::value) {
 
 ```c++ slideshow={"slide_type": "fragment"}
 class c_5 {
-    annotate _a;
+    instrumented _a;
 public:
     template <class T>
     c_5(T&& a) : _a(forward<T>(a)) { }
 };
 
-c_5 v_7{annotate()};
+c_5 v_7{instrumented()};
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -338,26 +338,26 @@ input_line_22:2:6: note: in instantiation of function template specialization 'c
      ^
 ./../common.hpp:5:5: note: candidate constructor not viable: no known conversion from 'c_5' to
       'const annotate' for 1st argument
-    annotate(const annotate&) { std::cout << "annotate copy-ctor" << std...
+    instrumented(const instrumented&) { std::cout << "instrumented copy-ctor" << std...
     ^
 ./../common.hpp:6:5: note: candidate constructor not viable: no known conversion from 'c_5' to 'annotate'
       for 1st argument
-    annotate(annotate&&) noexcept { std::cout << "annotate move-ctor" <...
+    instrumented(instrumented&&) noexcept { std::cout << "instrumented move-ctor" <...
     ^
 ./../common.hpp:4:5: note: candidate constructor not viable: requires 0 arguments, but 1 was provided
-    annotate() { std::cout << "annotate ctor" << std::endl; }
+    instrumented() { std::cout << "instrumented ctor" << std::endl; }
 ```
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "slide"}
 class c_6 {
-    annotate _a;
+    instrumented _a;
 public:
-    template <class T, class = enable_if_t<is_convertible<T, annotate>::value>>
+    template <class T, class = enable_if_t<is_convertible<T, instrumented>::value>>
     c_6(T&& a) : _a(forward<T>(a)) { }
 };
 
-c_6 v_9{annotate()};
+c_6 v_9{instrumented()};
 c_6 v_10{v_9};
 ```
 

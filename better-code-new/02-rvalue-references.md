@@ -70,12 +70,12 @@ public:
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-annotate f() {
-    annotate x;
+instrumented f() {
+    instrumented x;
     return x;
 }
 
-annotate y = f();
+instrumented y = f();
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -84,7 +84,7 @@ annotate y = f();
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-void g(annotate x) { }
+void g(instrumented x) { }
 g(f());
 ```
 
@@ -94,11 +94,11 @@ g(f());
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-annotate h(annotate x) {
+instrumented h(instrumented x) {
     return x;
 }
 
-annotate z = h(f());
+instrumented z = h(f());
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -219,24 +219,24 @@ Class Break - resume here 2018-02-07
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "fragment"}
-void output_01(annotate& out) {
-    annotate tmp;
+void output_01(instrumented& out) {
+    instrumented tmp;
     // fill in tmp
     out = tmp;
 }
 
-annotate a1;
+instrumented a1;
 output_01(a1);
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
-annotate output_02() {
-    annotate tmp;
+instrumented output_02() {
+    instrumented tmp;
     // fill in tmp
     return tmp;
 }
 
-annotate a2 = output_02();
+instrumented a2 = output_02();
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -261,22 +261,22 @@ string append(string str, const char* suffix) {
 ```
 
 ```c++ slideshow={"slide_type": "fragment"}
-annotate append(annotate str) {
+instrumented append(instrumented str) {
     // modify str
     return str;
 }
 
-auto str = append(annotate());
+auto str = append(instrumented());
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
 class example_03 {
-    annotate _member;
+    instrumented _member;
 public:
-    explicit example_03(annotate data) : _member(move(data)) { }
+    explicit example_03(instrumented data) : _member(move(data)) { }
 };
 
-example_03 e_03{annotate()};
+example_03 e_03{instrumented()};
 ```
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
@@ -285,12 +285,12 @@ example_03 e_03{annotate()};
 
 ```c++ slideshow={"slide_type": "slide"}
 class example_04 {
-    annotate* _member;
+    instrumented* _member;
 public:
-    example_04() : _member(new annotate()) { }
+    example_04() : _member(new instrumented()) { }
     ~example_04() { delete _member; }
     
-    example_04(const example_04& x) : _member(new annotate(*x._member)) { }
+    example_04(const example_04& x) : _member(new instrumented(*x._member)) { }
     example_04(example_04&& x) : _member(x._member) { x._member = nullptr; }
     
     // this assignment handles both move and copy
@@ -337,9 +337,9 @@ e41 = move(e42);
 
 ```c++ slideshow={"slide_type": "fragment"}
 class example_05 {
-    annotate _name;
+    instrumented _name;
 public:
-    const annotate& name() const { return _name; }
+    const instrumented& name() const { return _name; }
 };
 
 auto name_01 = example_05().name();
@@ -347,10 +347,10 @@ auto name_01 = example_05().name();
 
 ```c++ slideshow={"slide_type": "slide"}
 class example_06 {
-    annotate _name;
+    instrumented _name;
 public:
-    const annotate& name() const& { return _name; }
-    annotate name() && { return move(_name); }
+    const instrumented& name() const& { return _name; }
+    instrumented name() && { return move(_name); }
 };
 
 auto name_02 = example_06().name();
@@ -383,8 +383,8 @@ example_07 function_02(example_07); // This works also!
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "skip"}
-annotate g1(annotate x) { return x; }
-annotate x;
+instrumented g1(instrumented x) { return x; }
+instrumented x;
 ```
 
 ```c++ slideshow={"slide_type": "fragment"}

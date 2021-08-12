@@ -59,26 +59,26 @@ void print_type_name() {
     cout << type_name<T>() << "\n";
 }
 
-struct annotate {
-    annotate() { std::cout << "annotate ctor" << std::endl; }
-    annotate(const annotate&) { std::cout << "annotate copy-ctor" << std::endl; }
-    annotate(annotate&&) noexcept {
-        std::cout << "annotate move-ctor" << std::endl;
+struct instrumented {
+    instrumented() { std::cout << "instrumented ctor" << std::endl; }
+    instrumented(const instrumented&) { std::cout << "instrumented copy-ctor" << std::endl; }
+    instrumented(instrumented&&) noexcept {
+        std::cout << "instrumented move-ctor" << std::endl;
     }
-    annotate& operator=(const annotate&) {
-        std::cout << "annotate assign" << std::endl;
+    instrumented& operator=(const instrumented&) {
+        std::cout << "instrumented assign" << std::endl;
         return *this;
     }
-    annotate& operator=(annotate&&) noexcept {
-        std::cout << "annotate move-assign" << std::endl;
+    instrumented& operator=(instrumented&&) noexcept {
+        std::cout << "instrumented move-assign" << std::endl;
         return *this;
     }
-    ~annotate() { std::cout << "annotate dtor" << std::endl; }
-    friend inline void swap(annotate&, annotate&) {
-        std::cout << "annotate swap" << std::endl;
+    ~instrumented() { std::cout << "instrumented dtor" << std::endl; }
+    friend inline void swap(instrumented&, instrumented&) {
+        std::cout << "instrumented swap" << std::endl;
     }
-    friend inline bool operator==(const annotate&, const annotate&) { return true; }
-    friend inline bool operator!=(const annotate&, const annotate&) {
+    friend inline bool operator==(const instrumented&, const instrumented&) { return true; }
+    friend inline bool operator!=(const instrumented&, const instrumented&) {
         return false;
     }
 };

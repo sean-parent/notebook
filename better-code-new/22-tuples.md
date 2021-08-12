@@ -601,8 +601,8 @@ auto bind_all_1(F f, Args&&... args) {
 
 ```c++ slideshow={"slide_type": "fragment"}
 {
-    auto print = bind_all_1([](const annotate& a, const annotate& b) {}, annotate(),
-                            annotate());
+    auto print = bind_all_1([](const instrumented& a, const instrumented& b) {}, instrumented(),
+                            instrumented());
 
     print();
 }
@@ -622,8 +622,8 @@ auto bind_all_2(F f, Args&&... args) {
 
 ```c++ slideshow={"slide_type": "slide"}
 {
-    auto print = bind_all_2([](const annotate& a, const annotate& b) {}, annotate(),
-                            annotate());
+    auto print = bind_all_2([](const instrumented& a, const instrumented& b) {}, instrumented(),
+                            instrumented());
 
     print();
 }

@@ -14359,8 +14359,8 @@ Colleague: "I can't, I'm already using the copy-constructor for something else."
      <div class="CodeMirror cm-s-jupyter">
 <div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span> <span class="nn">v0</span> <span class="p">{</span>
 
-<span class="n">annotate</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">annotate</span> <span class="n">r</span><span class="p">;</span>
+<span class="n">instrumented</span> <span class="nf">f</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">instrumented</span> <span class="n">r</span><span class="p">;</span>
     <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
 <span class="p">}</span>
 
@@ -14375,7 +14375,7 @@ Colleague: "I can't, I'm already using the copy-constructor for something else."
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Question:</strong> How many copies? How many moves?</p>
-<div class="highlight"><pre><span></span><span class="n">annotate</span> <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="p">();</span>
+<div class="highlight"><pre><span></span><span class="n">instrumented</span> <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="p">();</span>
 </pre></div>
 
 </div>
@@ -14388,7 +14388,7 @@ Colleague: "I can't, I'm already using the copy-constructor for something else."
 <div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
     <span class="k">using</span> <span class="k">namespace</span> <span class="nn">v0</span><span class="p">;</span>
     
-    <span class="n">annotate</span> <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="p">();</span>
+    <span class="n">instrumented</span> <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -14404,8 +14404,8 @@ Colleague: "I can't, I'm already using the copy-constructor for something else."
 <div class="jp-OutputArea-child">
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>annotate ctor
-annotate dtor
+<pre>instrumented ctor
+instrumented dtor
 </pre>
 </div>
 </div>
@@ -15387,7 +15387,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre>21926</pre>
+<pre>22041</pre>
 </div>
 
 </div>
