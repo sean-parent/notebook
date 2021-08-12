@@ -2,8 +2,55 @@
 
 Distilled from discussions between Sean and Dave
 
+# Introduction
+  * This is a course/book on engineering
+  
+## Definition of Engineering:
+
+> The creative application of scientific principles to design or develop
+> structures, machines, apparatus, or manufacturing processes, or works
+> utilizing them singly or in combination; or to construct or operate the same
+> with full cognizance of their design; or to forecast their behavior under
+> specific operating conditions; all as respects an intended function, economics
+> of operation and safety to life and property.
+
+—American Engineers' Council for Professional Development, according to
+https://en.wikipedia.org/wiki/Engineering.
+
+But that's a bit wordy and vague. Boiling it down to its essence,
+1. It's designing and building stuff
+2. It's subject to real-world constraints, e.g.
+    * Shipping dates
+    * Available tooling
+    * Hardware available for deployment
+    * Laws of physics
+
+And as engineers we have to juggle all of this and make a set of informed
+tradeoffs to find the best solution.  Real-world constraints mean engineers will
+always confront trade-offs, so much so that making these trade-offs could be
+said to be the essence of the activity.
+
+> Engineering is making informed tradeoffs to produce the best design or
+> artifact possible given a set of constraints.
+
+## Instructor/Author Bias
+
+We come from a set of experiences that will color what we think is important.
+However we've attempted to be responsible for 
+
 # Miscellaneous
 
+## Computational and efficient bases
+
+- Must be measured relative to an intended abstraction.  A type with just
+  zero, increment, and is_odd is a computationally complete boolean but not a
+  computationally complete integer.
+- Raises the questions:
+  - What *is* this thing you're building (to its clients)?
+  - What are its observable parts?
+  - What is its value?
+
+-
 ## Necessary ingredients for Scalable/Sustainable Software
 
 If we can make this list long enough, it could be a theme threaded through the
