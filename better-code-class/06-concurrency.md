@@ -46,7 +46,7 @@ jupyter:
 <!-- #region slideshow={"slide_type": "slide"} tags=[] -->
 ## Challenge
 
-_Amdahl's Law_ provides an equation that limits the speedup that can be expected based on how much of our application is serialized.
+_Amdahl's Law_ provides an equation that limits the expected speedup based on how much of an application is serialized.
 
 $$ S_{latency}(s) = { 1 \over{(1 - p) + {p \over{s}}}} $$
 
