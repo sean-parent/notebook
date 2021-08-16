@@ -54,6 +54,12 @@ definition.  Rather than try to list these properties up front, we're going to
 discover the properties of good code as we go along, by looking at real
 examples.
 
+- we're trying to get to some some universal truths about about good
+  programming.
+- We believe these truths exist, but they are always manifest within some system
+  of real-world constraints.
+- It's important to distinguish situational compromises from universal truth.
+  
 ## What to expect
 ### Programming Language
 
@@ -65,6 +71,22 @@ is an engineering reality (tradeoffs!)
 ### Structure of the Course
 - Goals [should be positive things, e.g. not “no _________”]
 ### Conventions used throughout
+#### Unscalable constructs
+[This is what we were calling “raw.”  Unscalable is far from a perfect word.
+“Raw” connotes “unencapsulated” or “exposed” but Sean was also trying to get at
+a word for the property that causes us to *want* to encapsulate these things,
+which are two separate ideas.  Unscalable is my approximation]
+
+- There are easily-applied constructs that undermine local reasoning and thus
+  quickly lead to chaos unless encapsulated.
+- These will break your relationship to your code if not carefully managed.
+
+- Synchronization primitives
+- Loops
+- Pointers
+- incidental data structures
+- incidental algorithms
+
 ### Pointers to materials
 ### Useful tools
 
@@ -79,7 +101,6 @@ is an engineering reality (tradeoffs!)
   - efficiency
   - maintainability
   - local reasoning
-  
 
 # Miscellaneous
 
@@ -92,7 +113,8 @@ is an engineering reality (tradeoffs!)
   - What *is* this thing you're building (to its clients)?
   - What are its observable parts?
   - What is its value?
-
+- DWA: given that efficiency matters, is computational completeness, on its own,
+  an interesting distinction?
 
 ## Necessary ingredients for Scalable/Sustainable Software
 
