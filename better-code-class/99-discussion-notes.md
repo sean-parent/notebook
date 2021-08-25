@@ -59,7 +59,34 @@ examples.
 - We believe these truths exist, but they are always manifest within some system
   of real-world constraints.
 - It's important to distinguish situational compromises from universal truth.
-  
+
+DWA: Now we have a slide with a list of some properties of good code, which we
+said we weren't going to do.  Which is it?
+
+## On Readabilty
+
+Readability is often misunderstood as meaning “use of a primitive vocabulary.”
+This is like saying, “instead of calling `sort()` in the code, use loops,
+iterate the elements, and place each one in the right place.”  Problems:
+
+1. Meaning is lost: reader must derive that the code sorts rather than plainly
+   seeing it, i.e. it's less readable.
+2. It's probably less efficient.
+3. It's probably not correct.
+
+Although it contributes to scalability, readability can't reasonably take
+priority over most other properties of good code, such as correctness or
+efficiency.  With sufficient time, readability and these other factors need not
+be mutually exclusive.
+
+## Software is Physics
+
+- Your code is (part of) a physical system
+- It is constrained by the laws of physics
+- The laws of physics are how we explain to ourself that the machine works
+- We have to discover/document the laws of our code in order to explain that it
+  works.
+
 ## What to expect
 ### Programming Language
 
@@ -86,6 +113,9 @@ which are two separate ideas.  Unscalable is my approximation]
 - Pointers
 - incidental data structures
 - incidental algorithms
+- shared state
+
+- House of cards makes a good metaphor.
 
 ### Pointers to materials
 ### Useful tools
@@ -187,3 +217,6 @@ this operation the same way as an ordinary assignment.  Thus, in addition to the
 destructor, copy- and move-assignment operators must be written to deal with
 moved-from states.  Every other public operation can depend on invariants being
 satisfied, but not these three.
+
+
+- A Big-O difference means “in practice it matters.”
