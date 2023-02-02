@@ -30,4 +30,4 @@ fi
 
 cd -
 
-git submodule update --recursive --remote
+git submodule update --recursive

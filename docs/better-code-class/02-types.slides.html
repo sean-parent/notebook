@@ -14252,8 +14252,9 @@ display: block;
 </blockquote>
 <ul>
 <li>An object is a <em>physical</em> entity, and as such, is imbued with a set of properties<ul>
-<li>size</li>
-<li>address</li>
+<li>memory footprint</li>
+<li>location</li>
+<li>lifetime</li>
 </ul>
 </li>
 </ul>
@@ -14262,33 +14263,39 @@ display: block;
 </div><div class="fragment">
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <ul>
-<li><p>All types have common, <em>basis</em>, operations</p>
-<ul>
-<li>constructible</li>
-<li>destructible</li>
-<li>copyable<sup>1</sup></li>
-<li>equality comparable<sup>1</sup></li>
+<li>To understand any type you must consider these fundamental operations, which are components of what we call a <em>regular</em> type.<ul>
+<li>construction</li>
+<li>destruction</li>
+<li>copy</li>
+<li>equality</li>
 </ul>
-</li>
-<li><p><sup>1</sup>Well defined, but may be problematic to implement</p>
 </li>
 </ul>
 
 </div>
 </div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
+<p>In addition, for a given type there are other essential operations</p>
+
+</div>
+</div><div class="fragment">
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <blockquote><p>The <em>computational basis</em> for a type is a finite set of procedures that enable the construction of any other procedure on the type</p>
 </blockquote>
 <ul>
-<li>A type which implements a <em>computational basis</em> is <em>computationally complete</em></li>
+<li>A type that implements a <em>computational basis</em> is <em>computationally complete</em></li>
 </ul>
 
 </div>
-</div></section></section><section><section>
+</div></div></section></section><section><section>
 <div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <h2 id="Regular">Regular<a class="anchor-link" href="#Regular">&#182;</a></h2><blockquote><p>There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to <em>copy objects</em> from one data structure to another. We call types having such a basis <em>regular</em> since their use guarantees regularity of behavior and, therefore, interoperability. <br></p>
-<p style='text-align:right;'><small>&mdash; <em>(Stepanov & McJones 6)</em></small></p>
+<p style='text-align:right;'><small>&mdash; <em>(Stepanov & McJones)</em></small></p>
 </blockquote>
+
+</div>
+</div>
+<div class="jp-Cell-inputWrapper"><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 
 </div>
 </div></section></section><section><section>
@@ -15387,7 +15394,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 
 <div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre>22041</pre>
+<pre>21874</pre>
 </div>
 
 </div>

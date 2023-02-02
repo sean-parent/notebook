@@ -6,7 +6,7 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.11.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -35,32 +35,37 @@ jupyter:
 > An _object_ is a representation of an entity as a value in memory.
 
 - An object is a _physical_ entity, and as such, is imbued with a set of properties
-  - size
-  - address
+  - memory footprint
+  - location
+  - lifetime
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- All types have common, _basis_, operations
-  - constructible
-  - destructible
-  - copyable<sup>1</sup>
-  - equality comparable<sup>1</sup>
-
-- <sup>1</sup>Well defined, but may be problematic to implement
+- To understand any type you must consider these fundamental operations, which are components of what we call a _regular_ type.
+  - construction
+  - destruction
+  - copy
+  - equality
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+In addition, for a given type there are other essential operations
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
 > The _computational basis_ for a type is a finite set of procedures that enable the construction of any other procedure on the type
 
-- A type which implements a _computational basis_ is _computationally complete_
+- A type that implements a _computational basis_ is _computationally complete_
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
 ## Regular
 
 > There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to _copy objects_ from one data structure to another. We call types having such a basis _regular_ since their use guarantees regularity of behavior and, therefore, interoperability. <br>
-<p style='text-align:right;'><small>&mdash; <em>(Stepanov & McJones 6)</em></small></p>
+<p style='text-align:right;'><small>&mdash; <em>(Stepanov & McJones)</em></small></p>
 <!-- #endregion -->
+
+
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - The copy operation creates a new object, equal to, and logically disjoint from the original
