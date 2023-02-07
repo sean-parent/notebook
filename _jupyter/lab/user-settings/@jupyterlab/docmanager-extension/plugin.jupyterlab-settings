@@ -1,0 +1,10 @@
+{
+    "autosave": true,
+    "autosaveInterval": 120,
+    "confirmClosingDocument": false,
+    "lastModifiedCheckMargin": 500,
+    "defaultViewers": {
+        "markdown": "Jupytext Notebook"
+    },
+    "renameUntitledFileOnSave": true
+}

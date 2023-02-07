@@ -6,6 +6,8 @@ while [[ $# -gt 0 ]]
 do
 key="$1"
 
+SLIDE=YES
+
 case $key in
     -l|--lab)
         LAB=YES
@@ -13,6 +15,10 @@ case $key in
     ;;
     -n|--notebook)
         LAB=NO
+        shift
+    ;;
+    -n|--no-slides)
+        SLIDES=NO
         shift
     ;;
     -s|--server)
@@ -56,32 +62,39 @@ conda activate notebook
 
 # fswatch --print0 --event=Updated --extended --exclude=".*" --include="^[^~]*\.ipynb$" "./$1" \
 
-function generate_slides {
-    fswatch --print0 --event=Updated ./$1/*.ipynb \
+if [[ $SLIDES = YES ]]; then
+    fswatch --print0 --event=Updated --extended --exclude=".*" --include="^[^~]*\.ipynb$" . \
         | xargs -0 -I % jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js \
-            --output-dir="./docs/$1" --config=./slides-config/slides_config.py
-}
+            --output-dir="./docs" --config=./slides-config/slides_config.py
 
-{
-    generate_slides "better-code-test"
-} &
-BKPIDS=($!)
-{
-    generate_slides "better-code-class"
-} &
-BKPIDS+=($!)
-{
-    generate_slides "better-code-new"
-} &
-BKPIDS+=($!)
-{
-    generate_slides "notes"
-} &
-BKPIDS+=($!)
-{
-    cd ./docs
-    bundle exec jekyll build --watch --incremental
-} &
-BKPIDS+=($!)
+    function generate_slides {
+        fswatch --print0 --event=Updated ./$1/*.ipynb \
+            | xargs -0 -I % jupyter nbconvert % --to=slides --reveal-prefix=../reveal.js \
+                --output-dir="./docs/$1" --config=./slides-config/slides_config.py
+    }
 
-browser-sync start --config bs-config.js
+    {
+        generate_slides "better-code-test"
+    } &
+    BKPIDS=($!)
+    {
+        generate_slides "better-code-class"
+    } &
+    BKPIDS+=($!)
+    {
+        generate_slides "better-code-new"
+    } &
+    BKPIDS+=($!)
+    {
+        generate_slides "notes"
+    } &
+    BKPIDS+=($!)
+    {
+        cd ./docs
+        bundle exec jekyll build --watch --incremental
+    } &
+    BKPIDS+=($!)
+
+    browser-sync start --config bs-config.js
+
+fi

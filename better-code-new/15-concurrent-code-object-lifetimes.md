@@ -6,16 +6,17 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.4
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
     name: xcpp17
 ---
 
-```c++ slideshow={"slide_type": "skip"}
+```c++ tags=[] slideshow={"slide_type": "skip"}
 #include <future>
 #include <iostream>
+#include <deque>
 #include <memory>
 #include <string>
 
@@ -24,7 +25,7 @@ using namespace std;
 { cout << boolalpha; }
 ```
 
-```c++ run_control={"marked": true} slideshow={"slide_type": "skip"}
+```c++ tags=[] run_control={"marked": true} slideshow={"slide_type": "skip"}
 namespace bcc {
 
 class task {

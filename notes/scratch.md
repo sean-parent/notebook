@@ -6,14 +6,14 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.4
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
     name: xcpp17
 ---
 
-```c++ slideshow={"slide_type": "skip"}
+```c++ slideshow={"slide_type": "skip"} tags=[]
 #include <pthread.h>
 #include <stdint.h>
 #include <stdlib.h>
@@ -188,3 +188,5 @@ extern "C" void* __emutls_get_address(__emutls_control* control) {
     return array->data[index - 1];
 }
 ```
+
+

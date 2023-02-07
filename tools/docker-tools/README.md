@@ -26,7 +26,11 @@ To run the docker image, execute the following.
 ```
 # This remaps the web page to avoid conflicting with my other site...
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
-docker run --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive \
+
+PLATFORM="linux/amd64"
+# PLATFORM="linux/arm64"
+
+docker run --platform=$PLATFORM --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive \
     --publish 4000:3000 --publish 4001:3001 --publish 8888:8888 $VOLUME bash
 ```
 
@@ -53,10 +57,11 @@ Once the site has been prepared, you can run it to see how it looks. From the Do
 
 ```
 cd /mnt/host
-./tools/start.sh --lab --server --no-token
+./tools/start.sh --lab --server --no-token --no-slides
 ```
 
-To view the site, open a browser to `http://localhost:3000`. The site will auto rebuild and refresh as files are changed. The [Atom editor](https://atom.io/) has a nice [language package for markdown](https://atom.io/packages/language-markdown) that understand the YAML front matter that Jekyll uses, as well as a core package for markdown previews that uses the GitHub style (great for editing readme files).
+To view the site, open a browser to `http://localhost:4000/notebook/`. The site will auto rebuild and refresh as files are changed.
+Jupyter Lab can be accessed at `http://localhost:8888`.
 
 ## Tips
 
@@ -77,6 +82,11 @@ To build the Docker image, first, update the VERSION variable below (please use 
 #### Linux, WSL 2, MacOS
 ```
 VERSION="1.0.19"
+
+# At this time cling only supports x86
+PLATFORM="linux/amd64"
+# PLATFORM="linux/arm64"
+
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 
 # The ruby version should match what GitHub Pages requires: https://pages.github.com/versions/
@@ -91,7 +101,7 @@ docker build --no-cache --build-arg RUBY_VERSION=$RUBY_VERSION \
     --file ./tools/docker-tools/Dockerfile --target base --tag $VOLUME .
 
 # update the docs environment
-docker run --mount type=bind,source="$(pwd)",target=/mnt/host --tty --interactive $VOLUME bash
+docker run --platform=$PLATFORM --mount type=bind,source="$(pwd)",target=/mnt/host --tty --interactive $VOLUME bash
 
 # from docker prompt
 cd /mnt/host

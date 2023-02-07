@@ -1,5 +1,5 @@
 # Build from the latest ubuntu release
-FROM ubuntu:focal AS base
+FROM --platform=linux/amd64 ubuntu:latest AS base
 
 # Install items requiring root access
 
@@ -61,7 +61,7 @@ RUN (eval "$(rbenv init -)"; gem install bundler)
 
 # Install conda
 RUN mkdir $HOME/.conda
-RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./miniconda.sh
+RUN wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh -O ./miniconda.sh
 RUN chmod +x ./miniconda.sh
 # https://docs.anaconda.com/anaconda/install/silent-mode/
 RUN bash ./miniconda.sh -b -p ./miniconda3
@@ -86,7 +86,7 @@ RUN (eval "$(rbenv init -)"; \
     rbenv rehash; \
     bundle install)
 
-RUN ~/miniconda3/bin/conda env create
+RUN ~/miniconda3/bin/mamba env create
 
 ENV BASH_ENV ~/.bashrc
 SHELL ["/bin/bash", "-c"]
