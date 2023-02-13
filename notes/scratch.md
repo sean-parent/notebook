@@ -1,7 +1,6 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
@@ -188,5 +187,3 @@ extern "C" void* __emutls_get_address(__emutls_control* control) {
     return array->data[index - 1];
 }
 ```
-
-

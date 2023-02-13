@@ -1,7 +1,6 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
@@ -18,7 +17,7 @@ jupyter:
 
 - Relationships are unavoidable with objects in a space
     - The address of an object is the relationship between the object and the space within which it resides
-    
+
 - For any relationship there is a predicate form
     - Dick and Jane are married (relationship)
     - Are Dick and Jane married? (predicate)
@@ -33,7 +32,7 @@ jupyter:
 - When copying a witness there are three possible outcomes
     - The relationship is maintained
     - The relationship is severed
-    - The witness is invalidated 
+    - The witness is invalidated
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->

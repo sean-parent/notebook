@@ -1,7 +1,6 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
@@ -55,10 +54,10 @@ public:
     template <class T, class U>
     type(T&& a, U&& b) : _a(forward<T>(a)), _b(forward<U>(b)) { }
 };
-    
+
 instrumented value;
 type instance(value, instrumented());
-    
+
 
 } // namespace
 ```
@@ -205,7 +204,7 @@ void f_04(instrumented&&) { }      // pass by rvalue reference
 
 ```c++ slideshow={"slide_type": "slide"}
 namespace {
-    
+
 // auto&& is a forwarding reference, not an rvalue reference
 template <class F, class Arg>
 void wrapper_04(F f, Arg&& arg) {
@@ -240,15 +239,15 @@ These are rvalue references:
 
 ```c++ slideshow={"slide_type": "fragment"}
 namespace {
-    
+
 void f_0(string&&); //rvalue reference
-    
+
 template <class T>
 class c_0 {
 public:
     c_0(T&&); // rvalue reference
 };
-    
+
 } // namespace
 ```
 
@@ -261,7 +260,7 @@ namespace {
 
 template <class T>
 void f_1(T&&); // forwarding reference
-    
+
 class c_1 {
 public:
     template <class T>

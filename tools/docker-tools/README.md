@@ -1,21 +1,26 @@
 # Using the docker image
 
 ## Setup
+
 ### Install Docker
+
 If you don't already have Docker installed, [install Docker](https://docs.docker.com/get-docker/).
 
 ### Login to GitHub package registry
+
 Login to docker with a GitHub token. Generate a token [here](https://github.com/settings/tokens) with read/write/delete permissions for packages.
 
 Copy the generated token and paste it as the password (use your GitHub USERNAME).
-```
+
+```sh
 docker login docker.pkg.github.com --username USERNAME
 ```
+
 ## Running the tools
 
 ### Pull the latest docker image
 
-```
+```sh
 docker pull docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest
 ```
 
@@ -23,12 +28,12 @@ docker pull docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest
 
 To run the docker image, execute the following.
 
-```
+```sh
+
 # This remaps the web page to avoid conflicting with my other site...
 VOLUME="docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest"
 
 PLATFORM="linux/amd64"
-# PLATFORM="linux/arm64"
 
 docker run --platform=$PLATFORM --mount type=bind,source="$(pwd)",target=/mnt/host  --tty --interactive \
     --publish 4000:3000 --publish 4001:3001 --publish 8888:8888 $VOLUME bash
@@ -36,7 +41,7 @@ docker run --platform=$PLATFORM --mount type=bind,source="$(pwd)",target=/mnt/ho
 
 This should leave you at a bash prompt that looks like:
 
-```
+```sh
 app@fc7590a63ba3:~$
 ```
 
@@ -46,7 +51,7 @@ The hex number is the docker image container ID and may be different. As we adva
 
 To build or rebuild the complete documentation site locally, execute the following from the docker prompt:
 
-```
+```sh
 cd /mnt/host
 ./tools/prepare.sh
 ```
@@ -55,33 +60,33 @@ cd /mnt/host
 
 Once the site has been prepared, you can run it to see how it looks. From the Docker prompt enter:
 
-```
+```sh
 cd /mnt/host
-./tools/start.sh --lab --server --no-token --no-slides
+./tools/start.sh --lab --server --no-token
 ```
 
-To view the site, open a browser to `http://localhost:4000/notebook/`. The site will auto rebuild and refresh as files are changed.
+To view the site, open a browser to `http://localhost:4000/notebook/`. The site will auto-rebuild and refresh as files are changed.
 Jupyter Lab can be accessed at `http://localhost:8888`.
 
 ## Tips
 
 If you want to open another terminal on the running image use:
 
-```
+```sh
 docker ps
 docker exec -it <container id> bash
 ```
 
 ## Updating Docker package
 
-
 ### Building the docker image
 
 To build the Docker image, first, update the VERSION variable below (please use semantic versioning). Add a [release note](#release-notes).
 
 #### Linux, WSL 2, MacOS
-```
-VERSION="1.0.19"
+
+```sh
+VERSION="1.0.22"
 
 # At this time cling only supports x86
 PLATFORM="linux/amd64"
@@ -115,14 +120,14 @@ docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/
 
 If you are editing the Dockerfile you might want to build the base image from cache.
 
-```
+```sh
 docker build --build-arg RUBY_VERSION=$RUBY_VERSION --file ./tools/docker-tools/Dockerfile \
     --target base --tag $VOLUME .
 ```
 
 ### Pushing the packages
 
-```
+```sh
 # Tag the image with the version
 docker tag docker.pkg.github.com/sean-parent/notebook/notebook-tools:latest docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
 
@@ -145,3 +150,5 @@ docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
 - 1.0.16 - updating tools
 - 1.0.17 - updating tools
 - 1.0.18 - updating tools
+- 1.0.20 - fixing issues from JuptyerLab update
+- 1.0.22 - fixing issues from browsersync

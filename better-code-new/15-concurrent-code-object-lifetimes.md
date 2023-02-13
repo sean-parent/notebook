@@ -1,7 +1,6 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
@@ -102,19 +101,19 @@ public:
         _condition.notify_one();
     }
 };
-    
+
 template <class F> // F models R()
 auto async_packaged(sequential_process& process, F&& f) {
     using result_t = std::result_of_t<std::decay_t<F>()>;
-    
+
     packaged_task<result_t()> task{std::forward<F>(f)};
     auto result = task.get_future();
-    
+
     process.async(move(task));
-    
+
     return result;
 }
-    
+
 } // namespace bcc
 
 using namespace bcc;
@@ -151,7 +150,7 @@ using namespace bcc;
     auto r = async([_p = move(p)]() mutable { // move object to new context
         *_p += 5;
         return move(_p);
-    }); 
+    });
 
     cout << static_cast<bool>(p) << endl;
     cout << *r.get() << endl;

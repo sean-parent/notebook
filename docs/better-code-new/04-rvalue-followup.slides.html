@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>04-rvalue-followup slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Notebook slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
@@ -14823,13 +14823,13 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">example</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">example</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="p">[[</span><span class="n">deprecated</span><span class="p">]]</span><span class="w"> </span><span class="n">example</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">example</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">example</span><span class="p">(</span><span class="n">example</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="p">[[</span><span class="n">deprecated</span><span class="p">]]</span><span class="w"> </span><span class="n">example</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">example</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">example</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">example</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">example</span> <span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">example</span><span class="p">()</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="p">[[</span><span class="n">deprecated</span><span class="p">]]</span> <span class="n">example</span><span class="p">(</span><span class="n">const</span> <span class="n">example</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">example</span><span class="p">(</span><span class="n">example</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="n">noexcept</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="p">[[</span><span class="n">deprecated</span><span class="p">]]</span> <span class="n">example</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">example</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">example</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">example</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="n">noexcept</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14838,7 +14838,7 @@ display: block;
 </div>
 </div>
 
-</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14846,34 +14846,13 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">example</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
-<span class="n">example</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">x</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">example</span> <span class="n">x</span><span class="p">;</span>
+<span class="n">example</span> <span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre><span class="ansi-bold">input_line_8:3:13: </span><span class="ansi-magenta-intense-fg ansi-bold">warning: </span><span class="ansi-bold">&#39;example&#39; is deprecated [-Wdeprecated-declarations]</span>
-example y = x;
-<span class="ansi-green-intense-fg ansi-bold">            ^
-</span><span class="ansi-bold">input_line_7:4:7: </span><span class="ansi-black-intense-fg ansi-bold">note: </span>&#39;example&#39; has been explicitly marked deprecated here
-    [[deprecated]] example(const example&amp;) = default;
-<span class="ansi-green-intense-fg ansi-bold">      ^
-</span></pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section ><section >
@@ -14901,10 +14880,10 @@ example y = x;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">sink</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">example</span><span class="w"> </span><span class="n">_m</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="n">example</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">sink</span> <span class="p">{</span>
+    <span class="n">example</span> <span class="n">_m</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">void</span> <span class="nb">set</span><span class="p">(</span><span class="n">example</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="n">_m</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">move</span><span class="p">(</span><span class="n">e</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
 
@@ -14913,7 +14892,7 @@ example y = x;
 </div>
 </div>
 
-</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14921,8 +14900,8 @@ example y = x;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">sink</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
-<span class="n">s</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sink</span> <span class="n">s</span><span class="p">;</span>
+<span class="n">s</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
 </pre></div>
 
      </div>
@@ -14930,28 +14909,7 @@ example y = x;
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre><span class="ansi-bold">input_line_10:3:7: </span><span class="ansi-magenta-intense-fg ansi-bold">warning: </span><span class="ansi-bold">&#39;example&#39; is deprecated [-Wdeprecated-declarations]</span>
-s.set(x);
-<span class="ansi-green-intense-fg ansi-bold">      ^
-</span><span class="ansi-bold">input_line_7:4:7: </span><span class="ansi-black-intense-fg ansi-bold">note: </span>&#39;example&#39; has been explicitly marked deprecated here
-    [[deprecated]] example(const example&amp;) = default;
-<span class="ansi-green-intense-fg ansi-bold">      ^
-</span></pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14959,38 +14917,17 @@ s.set(x);
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">sink2</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">example</span><span class="w"> </span><span class="n">_m</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">example</span><span class="o">&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">e</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="n">example</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">e</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">_m</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">e</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">sink2</span> <span class="p">{</span>
+    <span class="n">example</span> <span class="n">_m</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">void</span> <span class="nb">set</span><span class="p">(</span><span class="n">const</span> <span class="n">example</span><span class="o">&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="n">_m</span> <span class="o">=</span> <span class="n">e</span><span class="p">;</span> <span class="p">}</span>
+    <span class="n">void</span> <span class="nb">set</span><span class="p">(</span><span class="n">example</span><span class="o">&amp;&amp;</span> <span class="n">e</span><span class="p">)</span> <span class="p">{</span> <span class="n">_m</span> <span class="o">=</span> <span class="n">std</span><span class="p">::</span><span class="n">move</span><span class="p">(</span><span class="n">e</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre><span class="ansi-bold">input_line_11:4:37: </span><span class="ansi-magenta-intense-fg ansi-bold">warning: </span><span class="ansi-bold">&#39;operator=&#39; is deprecated [-Wdeprecated-declarations]</span>
-    void set(const example&amp; e) { _m = e; }
-<span class="ansi-green-intense-fg ansi-bold">                                    ^
-</span><span class="ansi-bold">input_line_7:6:7: </span><span class="ansi-black-intense-fg ansi-bold">note: </span>&#39;operator=&#39; has been explicitly marked deprecated here
-    [[deprecated]] example&amp; operator=(const example&amp;) = default;
-<span class="ansi-green-intense-fg ansi-bold">      ^
-</span></pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
@@ -15001,8 +14938,8 @@ s.set(x);
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">sink2</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
-<span class="n">s</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">sink2</span> <span class="n">s</span><span class="p">;</span>
+<span class="n">s</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">x</span><span class="p">);</span>
 </pre></div>
 
      </div>

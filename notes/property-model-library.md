@@ -1,7 +1,6 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
@@ -16,4 +15,3 @@ jupyter:
 Collection of related properties
 forms a bipartite graph
     `[value] --- (relation) --- [vlaue]`
-

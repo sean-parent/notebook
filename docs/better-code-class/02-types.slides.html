@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>02-types slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Notebook slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
@@ -15006,14 +15006,14 @@ Colleague: &quot;I can't, I'm already using the copy-constructor for something e
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v0</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v0</span> <span class="p">{</span>
 
-<span class="n">instrumented</span><span class="w"> </span><span class="nf">f</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">r</span><span class="p">;</span>
+<span class="n">instrumented</span> <span class="n">f</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">instrumented</span> <span class="n">r</span><span class="p">;</span>
+    <span class="k">return</span> <span class="n">r</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v0</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v0</span>
 </pre></div>
 
      </div>
@@ -15034,7 +15034,7 @@ Colleague: &quot;I can't, I'm already using the copy-constructor for something e
 </div>
 </div>
 </div>
-</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15042,33 +15042,16 @@ Colleague: &quot;I can't, I'm already using the copy-constructor for something e
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v0</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">f</span><span class="p">();</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v0</span><span class="p">;</span>
+
+    <span class="n">instrumented</span> <span class="n">a</span> <span class="o">=</span> <span class="n">f</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>instrumented ctor
-instrumented dtor
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section ><section >
@@ -15094,15 +15077,15 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v0</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v0</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// members</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">members</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v0</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v0</span>
 </pre></div>
 
      </div>
@@ -15131,16 +15114,16 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v1</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v1</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="c1">// members</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="o">//</span> <span class="n">members</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v1</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v1</span>
 </pre></div>
 
      </div>
@@ -15235,27 +15218,27 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v2</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v2</span> <span class="p">{</span>
 
-<span class="c1">// C++17</span>
+<span class="o">//</span> <span class="n">C</span><span class="o">++</span><span class="mi">17</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mi">42</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_a</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">_b</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">underlying</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span><span class="w"> </span><span class="n">_b</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+    <span class="n">auto</span> <span class="n">underlying</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="p">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_a</span><span class="p">,</span> <span class="n">_b</span><span class="p">);</span> <span class="p">}</span>
 
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">underlying</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">underlying</span><span class="p">();</span>
-<span class="w">    </span><span class="p">}</span>
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">underlying</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">underlying</span><span class="p">();</span>
+    <span class="p">}</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">!=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!(</span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>b<span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v2</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v2</span>
 </pre></div>
 
      </div>
@@ -15405,14 +15388,14 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v3</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v3</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_val</span><span class="p">;</span><span class="w"> </span><span class="c1">// local part</span>
-<span class="w">    </span><span class="c1">//...</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_val</span><span class="p">;</span> <span class="o">//</span> <span class="n">local</span> <span class="n">part</span>
+    <span class="o">//...</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v3</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v3</span>
 </pre></div>
 
      </div>
@@ -15519,21 +15502,21 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="c1">// 02-types.hpp</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="mi">02</span><span class="o">-</span><span class="n">types</span><span class="o">.</span><span class="n">hpp</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">v4</span><span class="w"> </span><span class="p">{</span>
+<span class="n">namespace</span> <span class="n">v4</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">implementation</span><span class="p">;</span><span class="w">     </span><span class="c1">// forward declaration</span>
-<span class="w">    </span><span class="cm">/* &lt;some_type&gt; _remote; */</span><span class="w"> </span><span class="c1">// remote part</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-<span class="w">    </span><span class="o">~</span><span class="n">my_type</span><span class="p">();</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="n">struct</span> <span class="n">implementation</span><span class="p">;</span>     <span class="o">//</span> <span class="n">forward</span> <span class="n">declaration</span>
+    <span class="o">/*</span> <span class="o">&lt;</span><span class="n">some_type</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span> <span class="o">*/</span> <span class="o">//</span> <span class="n">remote</span> <span class="n">part</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">my_type</span><span class="p">();</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v4</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v4</span>
 </pre></div>
 
      </div>
@@ -15549,24 +15532,24 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="c1">// 02-types.cpp</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="mi">02</span><span class="o">-</span><span class="n">types</span><span class="o">.</span><span class="n">cpp</span>
 
-<span class="c1">// #include &quot;02-types.hpp&quot; // first include</span>
+<span class="o">//</span> <span class="c1">#include &quot;02-types.hpp&quot; // first include</span>
 
-<span class="c1">// other includes</span>
+<span class="o">//</span> <span class="n">other</span> <span class="n">includes</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">v4</span><span class="w"> </span><span class="p">{</span>
+<span class="n">namespace</span> <span class="n">v4</span> <span class="p">{</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_x</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_y</span><span class="p">;</span>
+<span class="n">struct</span> <span class="n">my_type</span><span class="p">::</span><span class="n">implementation</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_x</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">_y</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="cm">/*</span>
-<span class="cm">    Fill in the rest...</span>
-<span class="cm">*/</span>
+<span class="o">/*</span>
+    <span class="n">Fill</span> <span class="ow">in</span> <span class="n">the</span> <span class="n">rest</span><span class="o">...</span>
+<span class="o">*/</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v4</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v4</span>
 </pre></div>
 
      </div>
@@ -15595,25 +15578,25 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="c1">// 02-types.hpp</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="mi">02</span><span class="o">-</span><span class="n">types</span><span class="o">.</span><span class="n">hpp</span>
+<span class="c1">#include &lt;memory&gt;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">v41</span><span class="w"> </span><span class="p">{</span>
+<span class="n">namespace</span> <span class="n">v41</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">implementation</span><span class="p">;</span><span class="w">              </span><span class="c1">// forward declaration</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">deleter</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="p">};</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span><span class="w"> </span><span class="n">deleter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_remote</span><span class="p">;</span><span class="w"> </span><span class="c1">// remote part</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-<span class="w">    </span><span class="o">~</span><span class="n">my_type</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="n">struct</span> <span class="n">implementation</span><span class="p">;</span>              <span class="o">//</span> <span class="n">forward</span> <span class="n">declaration</span>
+    <span class="n">struct</span> <span class="n">deleter</span> <span class="p">{</span>
+        <span class="n">void</span> <span class="n">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="n">std</span><span class="p">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span> <span class="n">deleter</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span> <span class="o">//</span> <span class="n">remote</span> <span class="n">part</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">my_type</span><span class="p">()</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v4</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v4</span>
 </pre></div>
 
      </div>
@@ -15629,29 +15612,29 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="c1">// 02-types.cpp</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="mi">02</span><span class="o">-</span><span class="n">types</span><span class="o">.</span><span class="n">cpp</span>
 
-<span class="c1">// #include &quot;02-types.hpp&quot; // first include</span>
+<span class="o">//</span> <span class="c1">#include &quot;02-types.hpp&quot; // first include</span>
 
-<span class="c1">// other includes</span>
+<span class="o">//</span> <span class="n">other</span> <span class="n">includes</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">v41</span><span class="w"> </span><span class="p">{</span>
+<span class="n">namespace</span> <span class="n">v41</span> <span class="p">{</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_x</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_y</span><span class="p">;</span>
+<span class="n">struct</span> <span class="n">my_type</span><span class="p">::</span><span class="n">implementation</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_x</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">_y</span><span class="p">;</span>
 <span class="p">};</span>
 
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_remote</span><span class="p">{</span><span class="k">new</span><span class="w"> </span><span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">}}</span><span class="w"> </span><span class="p">{}</span>
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_remote</span><span class="p">{</span><span class="k">new</span><span class="w"> </span><span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}}</span><span class="w"> </span><span class="p">{}</span>
-<span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="o">*</span><span class="n">_remote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="n">my_type</span><span class="p">::</span><span class="n">my_type</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">new</span> <span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">}}</span> <span class="p">{}</span>
+<span class="n">my_type</span><span class="p">::</span><span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">_remote</span><span class="p">}}</span> <span class="p">{}</span>
+<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="p">::</span><span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span><span class="n">_remote</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">_remote</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="n">this</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">my_type</span><span class="o">::</span><span class="n">deleter</span><span class="o">::</span><span class="k">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">void</span> <span class="n">my_type</span><span class="p">::</span><span class="n">deleter</span><span class="p">::</span><span class="n">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="n">const</span> <span class="p">{</span> <span class="n">delete</span> <span class="n">p</span><span class="p">;</span> <span class="p">}</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v41</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v41</span>
 </pre></div>
 
      </div>
@@ -15667,12 +15650,12 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v41</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">my_type</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">};</span>
-<span class="w">    </span><span class="n">my_type</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v41</span><span class="p">;</span>
+
+    <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
+    <span class="n">my_type</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -15713,28 +15696,28 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="c1">// 02-types.hpp</span>
-<span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;memory&gt;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="o">//</span> <span class="mi">02</span><span class="o">-</span><span class="n">types</span><span class="o">.</span><span class="n">hpp</span>
+<span class="c1">#include &lt;memory&gt;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">v42</span><span class="w"> </span><span class="p">{</span>
+<span class="n">namespace</span> <span class="n">v42</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">implementation</span><span class="p">;</span><span class="w"> </span><span class="c1">// forward declaration</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">deleter</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="p">};</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span><span class="w"> </span><span class="n">deleter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_remote</span><span class="p">;</span><span class="w"> </span><span class="c1">// remote part</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-<span class="w">    </span><span class="o">~</span><span class="n">my_type</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="n">struct</span> <span class="n">implementation</span><span class="p">;</span> <span class="o">//</span> <span class="n">forward</span> <span class="n">declaration</span>
+    <span class="n">struct</span> <span class="n">deleter</span> <span class="p">{</span>
+        <span class="n">void</span> <span class="n">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="n">std</span><span class="p">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span> <span class="n">deleter</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span> <span class="o">//</span> <span class="n">remote</span> <span class="n">part</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">my_type</span><span class="p">()</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">!=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!(</span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>b<span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v42</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v42</span>
 </pre></div>
 
      </div>
@@ -15763,31 +15746,31 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="cp">#include</span><span class="w"> </span><span class="cpf">&lt;tuple&gt;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">#include &lt;tuple&gt;</span>
 
-<span class="k">namespace</span><span class="w"> </span><span class="nn">v42</span><span class="w"> </span><span class="p">{</span>
+<span class="n">namespace</span> <span class="n">v42</span> <span class="p">{</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_x</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_y</span><span class="p">;</span>
+<span class="n">struct</span> <span class="n">my_type</span><span class="p">::</span><span class="n">implementation</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_x</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">_y</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">underlying</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span><span class="w"> </span><span class="n">_y</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+    <span class="n">auto</span> <span class="n">underlying</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="p">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_remote</span><span class="p">{</span><span class="k">new</span><span class="w"> </span><span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">}}</span><span class="w"> </span><span class="p">{}</span>
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_remote</span><span class="p">{</span><span class="k">new</span><span class="w"> </span><span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}}</span><span class="w"> </span><span class="p">{}</span>
-<span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="o">*</span><span class="n">_remote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="n">my_type</span><span class="p">::</span><span class="n">my_type</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">new</span> <span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">}}</span> <span class="p">{}</span>
+<span class="n">my_type</span><span class="p">::</span><span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">_remote</span><span class="p">}}</span> <span class="p">{}</span>
+<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="p">::</span><span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">*</span><span class="n">_remote</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">_remote</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="n">this</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">my_type</span><span class="o">::</span><span class="n">deleter</span><span class="o">::</span><span class="k">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">void</span> <span class="n">my_type</span><span class="p">::</span><span class="n">deleter</span><span class="p">::</span><span class="n">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="n">const</span> <span class="p">{</span> <span class="n">delete</span> <span class="n">p</span><span class="p">;</span> <span class="p">}</span>
 
-<span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="o">-&gt;</span><span class="n">underlying</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">_remote</span><span class="o">-&gt;</span><span class="n">underlying</span><span class="p">();</span>
+<span class="nb">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">_remote</span><span class="o">-&gt;</span><span class="n">underlying</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">_remote</span><span class="o">-&gt;</span><span class="n">underlying</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v42</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v42</span>
 </pre></div>
 
      </div>
@@ -15803,16 +15786,16 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v42</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">my_type</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">};</span>
-<span class="w">    </span><span class="n">my_type</span><span class="w"> </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">a</span><span class="p">;</span>
-<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
-<span class="w">    </span><span class="n">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_type</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">};</span>
-<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">!=</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
-<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span>
-<span class="w">    </span><span class="n">assert</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v42</span><span class="p">;</span>
+
+    <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
+    <span class="n">my_type</span> <span class="n">b</span> <span class="o">=</span> <span class="n">a</span><span class="p">;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>
+    <span class="n">b</span> <span class="o">=</span> <span class="n">my_type</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">a</span> <span class="o">!=</span> <span class="n">b</span><span class="p">);</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">b</span><span class="p">;</span>
+    <span class="k">assert</span><span class="p">(</span><span class="n">a</span> <span class="o">==</span> <span class="n">b</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16117,28 +16100,28 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v43</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v43</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">implementation</span><span class="p">;</span><span class="w"> </span><span class="c1">// forward declaration</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">deleter</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="p">};</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span><span class="w"> </span><span class="n">deleter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_remote</span><span class="p">;</span><span class="w"> </span><span class="c1">// remote part</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-<span class="w">    </span><span class="o">~</span><span class="n">my_type</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="n">struct</span> <span class="n">implementation</span><span class="p">;</span> <span class="o">//</span> <span class="n">forward</span> <span class="n">declaration</span>
+    <span class="n">struct</span> <span class="n">deleter</span> <span class="p">{</span>
+        <span class="n">void</span> <span class="n">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="n">std</span><span class="p">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span> <span class="n">deleter</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span> <span class="o">//</span> <span class="n">remote</span> <span class="n">part</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">my_type</span><span class="p">()</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w">   </span><span class="c1">// &lt;--</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"> </span><span class="c1">// &lt;--</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="n">noexcept</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>   <span class="o">//</span> <span class="o">&lt;--</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span> <span class="o">//</span> <span class="o">&lt;--</span>
 
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">!=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!(</span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>b<span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v43</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v43</span>
 </pre></div>
 
      </div>
@@ -16183,31 +16166,31 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v43</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v43</span> <span class="p">{</span>
 
-<span class="k">struct</span><span class="w"> </span><span class="nc">my_type</span><span class="o">::</span><span class="n">implementation</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_x</span><span class="p">;</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">_y</span><span class="p">;</span>
+<span class="n">struct</span> <span class="n">my_type</span><span class="p">::</span><span class="n">implementation</span> <span class="p">{</span>
+    <span class="nb">int</span> <span class="n">_x</span><span class="p">;</span>
+    <span class="nb">int</span> <span class="n">_y</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="n">underlying</span><span class="p">()</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span><span class="w"> </span><span class="n">_y</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+    <span class="n">auto</span> <span class="n">underlying</span><span class="p">()</span> <span class="n">const</span> <span class="p">{</span> <span class="k">return</span> <span class="n">std</span><span class="p">::</span><span class="n">tie</span><span class="p">(</span><span class="n">_x</span><span class="p">,</span> <span class="n">_y</span><span class="p">);</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_remote</span><span class="p">{</span><span class="k">new</span><span class="w"> </span><span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="n">y</span><span class="p">}}</span><span class="w"> </span><span class="p">{}</span>
-<span class="n">my_type</span><span class="o">::</span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_remote</span><span class="p">{</span><span class="k">new</span><span class="w"> </span><span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">}}</span><span class="w"> </span><span class="p">{}</span>
+<span class="n">my_type</span><span class="p">::</span><span class="n">my_type</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">)</span> <span class="p">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">new</span> <span class="n">implementation</span><span class="p">{</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">}}</span> <span class="p">{}</span>
+<span class="n">my_type</span><span class="p">::</span><span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_remote</span><span class="p">{</span><span class="n">new</span> <span class="n">implementation</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">_remote</span><span class="p">}}</span> <span class="p">{}</span>
 
-<span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">my_type</span><span class="o">::</span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="c1">// &lt;--</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="o">!</span><span class="n">_remote</span><span class="p">)</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_type</span><span class="p">{</span><span class="n">a</span><span class="p">};</span>
-<span class="w">    </span><span class="o">*</span><span class="n">_remote</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">;</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="o">*</span><span class="k">this</span><span class="p">;</span>
+<span class="n">my_type</span><span class="o">&amp;</span> <span class="n">my_type</span><span class="p">::</span><span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span> <span class="o">//</span> <span class="o">&lt;--</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span>_remote<span class="o">)</span><span class="w"> </span>*this<span class="w"> </span><span class="o">=</span><span class="w"> </span>my_type<span class="o">{</span>a<span class="o">}</span><span class="p">;</span>
+    <span class="o">*</span><span class="n">_remote</span> <span class="o">=</span> <span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">_remote</span><span class="p">;</span>
+    <span class="k">return</span> <span class="o">*</span><span class="n">this</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="n">my_type</span><span class="o">::</span><span class="n">deleter</span><span class="o">::</span><span class="k">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="w"> </span><span class="n">p</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="n">p</span><span class="p">;</span><span class="w"> </span><span class="p">}</span>
+<span class="n">void</span> <span class="n">my_type</span><span class="p">::</span><span class="n">deleter</span><span class="p">::</span><span class="n">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span> <span class="n">p</span><span class="p">)</span> <span class="n">const</span> <span class="p">{</span> <span class="n">delete</span> <span class="n">p</span><span class="p">;</span> <span class="p">}</span>
 
-<span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="o">-&gt;</span><span class="n">underlying</span><span class="p">()</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">.</span><span class="n">_remote</span><span class="o">-&gt;</span><span class="n">underlying</span><span class="p">();</span>
+<span class="nb">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">a</span><span class="o">.</span><span class="n">_remote</span><span class="o">-&gt;</span><span class="n">underlying</span><span class="p">()</span> <span class="o">==</span> <span class="n">b</span><span class="o">.</span><span class="n">_remote</span><span class="o">-&gt;</span><span class="n">underlying</span><span class="p">();</span>
 <span class="p">}</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v43</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v43</span>
 </pre></div>
 
      </div>
@@ -16223,14 +16206,14 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v43</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">my_type</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">};</span>
-<span class="w">    </span><span class="n">my_type</span><span class="w"> </span><span class="n">b</span><span class="p">{</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span>
-<span class="w">    </span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">my_type</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">};</span>
-<span class="w">    </span><span class="n">assert</span><span class="p">((</span><span class="n">b</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">my_type</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">20</span><span class="p">}));</span>
-<span class="w">    </span><span class="n">assert</span><span class="p">((</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">my_type</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span><span class="w"> </span><span class="mi">30</span><span class="p">}));</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v43</span><span class="p">;</span>
+
+    <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">};</span>
+    <span class="n">my_type</span> <span class="n">b</span><span class="p">{</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)};</span>
+    <span class="n">a</span> <span class="o">=</span> <span class="n">my_type</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">};</span>
+    <span class="k">assert</span><span class="p">((</span><span class="n">b</span> <span class="o">==</span> <span class="n">my_type</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">}));</span>
+    <span class="k">assert</span><span class="p">((</span><span class="n">a</span> <span class="o">==</span> <span class="n">my_type</span><span class="p">{</span><span class="mi">5</span><span class="p">,</span> <span class="mi">30</span><span class="p">}));</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16290,7 +16273,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </div>
 </div>
 </div>
-</div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16298,7 +16281,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="kt">double</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="mf">0.0</span><span class="w"> </span><span class="o">/</span><span class="w"> </span><span class="mf">0.0</span><span class="p">;</span><span class="w"> </span><span class="c1">// explicitly undefined</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">double</span> <span class="n">x</span> <span class="o">=</span> <span class="mf">0.0</span> <span class="o">/</span> <span class="mf">0.0</span><span class="p">;</span> <span class="o">//</span> <span class="n">explicitly</span> <span class="n">undefined</span>
 <span class="n">x</span>
 </pre></div>
 
@@ -16307,25 +16290,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>nan</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div></div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16333,9 +16298,9 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">;</span><span class="w"> </span><span class="c1">// unspecified</span>
-<span class="w">    </span><span class="n">display</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// undefined behavior!</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="nb">int</span> <span class="n">x</span><span class="p">;</span> <span class="o">//</span> <span class="n">unspecified</span>
+    <span class="n">display</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="o">//</span> <span class="n">undefined</span> <span class="n">behavior</span><span class="err">!</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16344,25 +16309,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-
-
-<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
-<pre>64</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16370,8 +16317,8 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">string</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;hello world&quot;</span><span class="p">;</span>
-<span class="n">string</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// unspecified</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">string</span> <span class="n">x</span> <span class="o">=</span> <span class="s2">&quot;hello world&quot;</span><span class="p">;</span>
+<span class="n">string</span> <span class="n">y</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="o">//</span> <span class="n">unspecified</span>
 <span class="n">x</span>
 </pre></div>
 
@@ -16380,25 +16327,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>&#34;&#34;</pre>
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -16406,32 +16335,14 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">x</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">make_unique</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
-<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="kt">int</span><span class="o">&gt;</span><span class="w"> </span><span class="n">y</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span><span class="w"> </span><span class="c1">// safe. x is guaranteed to be == nullptr</span>
-<span class="p">(</span><span class="n">x</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="k">nullptr</span><span class="p">)</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">x</span> <span class="o">=</span> <span class="n">make_unique</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span><span class="p">(</span><span class="mi">42</span><span class="p">);</span>
+<span class="n">unique_ptr</span><span class="o">&lt;</span><span class="nb">int</span><span class="o">&gt;</span> <span class="n">y</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">x</span><span class="p">);</span> <span class="o">//</span> <span class="n">safe</span><span class="o">.</span> <span class="n">x</span> <span class="ow">is</span> <span class="n">guaranteed</span> <span class="n">to</span> <span class="n">be</span> <span class="o">==</span> <span class="n">nullptr</span>
+<span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="n">nullptr</span><span class="p">)</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child jp-OutputArea-executeResult">
-
-
-<div class="jp-RenderedText jp-OutputArea-output jp-OutputArea-executeResult" data-mime-type="text/plain">
-<pre>true</pre>
-</div>
-
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section ><section >
@@ -16533,19 +16444,19 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v5</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v5</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">example</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">_str</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">example</span> <span class="p">{</span>
+    <span class="n">string</span> <span class="n">_str</span><span class="p">;</span>
 
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">example</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_str</span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">)}</span><span class="w"> </span><span class="p">{}</span>
-<span class="w">    </span><span class="c1">// or</span>
-<span class="w">    </span><span class="n">example</span><span class="p">(</span><span class="n">string</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_str</span><span class="p">{</span><span class="n">std</span><span class="o">::</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)}</span><span class="w"> </span><span class="p">{}</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+    <span class="n">example</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_str</span><span class="p">{</span><span class="n">std</span><span class="p">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">)}</span> <span class="p">{}</span>
+    <span class="o">//</span> <span class="ow">or</span>
+    <span class="n">example</span><span class="p">(</span><span class="n">string</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_str</span><span class="p">{</span><span class="n">std</span><span class="p">::</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)}</span> <span class="p">{}</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v5</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v5</span>
 </pre></div>
 
      </div>
@@ -16561,14 +16472,14 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v5</span><span class="p">;</span>
-<span class="w">    </span><span class="c1">// Don&#39;t</span>
-<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">str</span><span class="p">{</span><span class="s">&quot;Hello World!&quot;</span><span class="p">};</span>
-<span class="w">    </span><span class="n">example</span><span class="w"> </span><span class="n">item1</span><span class="p">{</span><span class="n">move</span><span class="p">(</span><span class="n">str</span><span class="p">)};</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="c1">// Do</span>
-<span class="w">    </span><span class="n">example</span><span class="w"> </span><span class="n">item2</span><span class="p">{</span><span class="s">&quot;Hello World!&quot;</span><span class="p">};</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v5</span><span class="p">;</span>
+    <span class="o">//</span> <span class="n">Don</span><span class="s1">&#39;t</span>
+    <span class="n">string</span> <span class="nb">str</span><span class="p">{</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">};</span>
+    <span class="n">example</span> <span class="n">item1</span><span class="p">{</span><span class="n">move</span><span class="p">(</span><span class="nb">str</span><span class="p">)};</span>
+
+    <span class="o">//</span> <span class="n">Do</span>
+    <span class="n">example</span> <span class="n">item2</span><span class="p">{</span><span class="s2">&quot;Hello World!&quot;</span><span class="p">};</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16617,12 +16528,12 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v11</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="p">;</span>
-<span class="w">    </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">predicate</span><span class="p">())</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="p">;</span>
-<span class="w">    </span><span class="k">else</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v11</span><span class="p">;</span>
+
+    <span class="n">string</span> <span class="n">s</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">predicate</span><span class="p">())</span> <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;Hello&quot;</span><span class="p">;</span>
+    <span class="k">else</span> <span class="n">s</span> <span class="o">=</span> <span class="s2">&quot;World&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16639,12 +16550,12 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v11</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">s1</span><span class="p">;</span>
-<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">s2</span><span class="p">;</span>
-<span class="w">    </span><span class="n">tie</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">s2</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_pair</span><span class="p">();</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v11</span><span class="p">;</span>
+
+    <span class="n">string</span> <span class="n">s1</span><span class="p">;</span>
+    <span class="n">string</span> <span class="n">s2</span><span class="p">;</span>
+    <span class="n">tie</span><span class="p">(</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">)</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16674,10 +16585,10 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v11</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">string</span><span class="w"> </span><span class="n">s</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">predicate</span><span class="p">()</span><span class="w"> </span><span class="o">?</span><span class="w"> </span><span class="s">&quot;Hello&quot;</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="s">&quot;World&quot;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v11</span><span class="p">;</span>
+
+    <span class="n">string</span> <span class="n">s</span> <span class="o">=</span> <span class="n">predicate</span><span class="p">()</span> <span class="err">?</span> <span class="s2">&quot;Hello&quot;</span> <span class="p">:</span> <span class="s2">&quot;World&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16694,10 +16605,10 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v11</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">auto</span><span class="w"> </span><span class="p">[</span><span class="n">s1</span><span class="p">,</span><span class="w"> </span><span class="n">s2</span><span class="p">]</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">get_pair</span><span class="p">();</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v11</span><span class="p">;</span>
+
+    <span class="n">auto</span> <span class="p">[</span><span class="n">s1</span><span class="p">,</span> <span class="n">s2</span><span class="p">]</span> <span class="o">=</span> <span class="n">get_pair</span><span class="p">();</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -16806,30 +16717,30 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v44</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v44</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">implementation</span><span class="p">;</span><span class="w"> </span><span class="c1">// forward declaration</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">deleter</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="p">};</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span><span class="w"> </span><span class="n">deleter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_remote</span><span class="p">;</span><span class="w"> </span><span class="c1">// remote part</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="n">my_type</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span><span class="w"> </span><span class="c1">// &lt;--</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="n">struct</span> <span class="n">implementation</span><span class="p">;</span> <span class="o">//</span> <span class="n">forward</span> <span class="n">declaration</span>
+    <span class="n">struct</span> <span class="n">deleter</span> <span class="p">{</span>
+        <span class="n">void</span> <span class="n">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="n">std</span><span class="p">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span> <span class="n">deleter</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span> <span class="o">//</span> <span class="n">remote</span> <span class="n">part</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">constexpr</span> <span class="n">my_type</span><span class="p">()</span> <span class="n">noexcept</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span> <span class="o">//</span> <span class="o">&lt;--</span>
 
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-<span class="w">    </span><span class="o">~</span><span class="n">my_type</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">my_type</span><span class="p">()</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="n">noexcept</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">!=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!(</span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>b<span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v44</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v44</span>
 </pre></div>
 
      </div>
@@ -17073,32 +16984,32 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v45</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v45</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">my_type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">implementation</span><span class="p">;</span><span class="w"> </span><span class="c1">// forward declaration</span>
-<span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">deleter</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="kt">void</span><span class="w"> </span><span class="nf">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span><span class="w"> </span><span class="k">const</span><span class="p">;</span>
-<span class="w">    </span><span class="p">};</span>
-<span class="w">    </span><span class="n">std</span><span class="o">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span><span class="w"> </span><span class="n">deleter</span><span class="o">&gt;</span><span class="w"> </span><span class="n">_remote</span><span class="p">;</span><span class="w"> </span><span class="c1">// remote part</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="k">constexpr</span><span class="w"> </span><span class="n">my_type</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+<span class="k">class</span> <span class="nc">my_type</span> <span class="p">{</span>
+    <span class="n">struct</span> <span class="n">implementation</span><span class="p">;</span> <span class="o">//</span> <span class="n">forward</span> <span class="n">declaration</span>
+    <span class="n">struct</span> <span class="n">deleter</span> <span class="p">{</span>
+        <span class="n">void</span> <span class="n">operator</span><span class="p">()(</span><span class="n">implementation</span><span class="o">*</span><span class="p">)</span> <span class="n">const</span><span class="p">;</span>
+    <span class="p">};</span>
+    <span class="n">std</span><span class="p">::</span><span class="n">unique_ptr</span><span class="o">&lt;</span><span class="n">implementation</span><span class="p">,</span> <span class="n">deleter</span><span class="o">&gt;</span> <span class="n">_remote</span><span class="p">;</span> <span class="o">//</span> <span class="n">remote</span> <span class="n">part</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">constexpr</span> <span class="n">my_type</span><span class="p">()</span> <span class="n">noexcept</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
 
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="kt">int</span><span class="w"> </span><span class="n">x</span><span class="p">,</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="n">y</span><span class="p">);</span>
-<span class="w">    </span><span class="o">~</span><span class="n">my_type</span><span class="p">()</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="nb">int</span> <span class="n">x</span><span class="p">,</span> <span class="nb">int</span> <span class="n">y</span><span class="p">);</span>
+    <span class="o">~</span><span class="n">my_type</span><span class="p">()</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
 
-<span class="w">    </span><span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">noexcept</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
-<span class="w">    </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="n">noexcept</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
+    <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">=</span><span class="p">(</span><span class="n">my_type</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="o">=</span> <span class="n">default</span><span class="p">;</span>
 
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">==</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="kt">bool</span><span class="w"> </span><span class="k">operator</span><span class="o">!=</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="o">!</span><span class="p">(</span><span class="n">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span><span class="n">b</span><span class="p">);</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="k">friend</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">==</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
+    <span class="n">friend</span> <span class="nb">bool</span> <span class="n">operator</span><span class="o">!=</span><span class="p">(</span><span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="o">!(</span><span class="nv">a</span><span class="w"> </span><span class="o">==</span><span class="w"> </span>b<span class="o">)</span><span class="p">;</span><span class="w"> </span><span class="o">}</span>
+
+    <span class="n">friend</span> <span class="n">std</span><span class="p">::</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">ostream</span><span class="o">&amp;</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span><span class="p">);</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v44</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v44</span>
 </pre></div>
 
      </div>
@@ -17114,14 +17025,14 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">v45</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">v45</span> <span class="p">{</span>
 
-<span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="k">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span><span class="w"> </span><span class="n">out</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">my_type</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="k">const</span><span class="w"> </span><span class="k">auto</span><span class="o">&amp;</span><span class="w"> </span><span class="n">self</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="p">.</span><span class="n">_remote</span><span class="p">};</span>
-<span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="n">out</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;{ </span><span class="se">\&quot;</span><span class="s">x</span><span class="se">\&quot;</span><span class="s">: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_x</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;, </span><span class="se">\&quot;</span><span class="s">y</span><span class="se">\&quot;</span><span class="s">: &quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">self</span><span class="p">.</span><span class="n">_y</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot; }&quot;</span><span class="p">;</span>
+<span class="n">ostream</span><span class="o">&amp;</span> <span class="n">operator</span><span class="o">&lt;&lt;</span><span class="p">(</span><span class="n">ostream</span><span class="o">&amp;</span> <span class="n">out</span><span class="p">,</span> <span class="n">const</span> <span class="n">my_type</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">const</span> <span class="n">auto</span><span class="o">&amp;</span> <span class="bp">self</span><span class="p">{</span><span class="o">*</span><span class="n">a</span><span class="o">.</span><span class="n">_remote</span><span class="p">};</span>
+    <span class="k">return</span> <span class="n">out</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;{ </span><span class="se">\&quot;</span><span class="s2">x</span><span class="se">\&quot;</span><span class="s2">: &quot;</span> <span class="o">&lt;&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_x</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;, </span><span class="se">\&quot;</span><span class="s2">y</span><span class="se">\&quot;</span><span class="s2">: &quot;</span> <span class="o">&lt;&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">_y</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot; }&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace v45</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span> <span class="n">v45</span>
 </pre></div>
 
      </div>
@@ -17129,7 +17040,7 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 </div>
 </div>
 
-</div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -17137,33 +17048,17 @@ a = b, a &amp; \rightharpoonup c \implies c = b. &amp;&amp; \text{(move is value
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="p">{</span>
-<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="k">namespace</span><span class="w"> </span><span class="nn">v45</span><span class="p">;</span>
-<span class="w">    </span>
-<span class="w">    </span><span class="n">my_type</span><span class="w"> </span><span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span><span class="w"> </span><span class="mi">42</span><span class="p">};</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="p">{</span>
+    <span class="n">using</span> <span class="n">namespace</span> <span class="n">v45</span><span class="p">;</span>
+
+    <span class="n">my_type</span> <span class="n">a</span><span class="p">{</span><span class="mi">10</span><span class="p">,</span> <span class="mi">42</span><span class="p">};</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="n">a</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>{ &#34;x&#34;: 10, &#34;y&#34;: 42 }
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section ><section >

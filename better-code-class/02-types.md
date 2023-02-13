@@ -1,7 +1,6 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
@@ -138,7 +137,7 @@ instrumented a = f();
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v0;
-    
+
     instrumented a = f();
 }
 ```
@@ -444,7 +443,7 @@ void my_type::deleter::operator()(implementation* p) const { delete p; }
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v41;
-    
+
     my_type a{10, 20};
     my_type b = a;
     a = b;
@@ -519,7 +518,7 @@ bool operator==(const my_type& a, const my_type& b) {
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v42;
-    
+
     my_type a{10, 20};
     my_type b = a;
     assert(a == b);
@@ -567,7 +566,7 @@ The C++20 standard defines the _concept_ std::regular<T> to be copyable, equalit
 
 - _memory safety_
   - A memory safe operation preserves the correspondence of unrelated objects to their respective entities. For example, writing through a deleted pointer is a not a memory safe operation as it may leave an unrelated object ill-formed.
-  
+
 - _thread safety_
  - A thread safe operation may be executed concurrently with other operations on the same object(s) without the possibility of a race condition (data or logical race) resulting an an object which is not full-formed.
 
@@ -721,7 +720,7 @@ bool operator==(const my_type& a, const my_type& b) {
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v43;
-    
+
     my_type a{10, 20};
     my_type b{move(a)};
     a = my_type{5, 30};
@@ -826,7 +825,7 @@ public:
     // Don't
     string str{"Hello World!"};
     example item1{move(str)};
-    
+
     // Do
     example item2{"Hello World!"};
 }
@@ -860,7 +859,7 @@ std::pair<std::string, std::string> get_pair() {
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v11;
-    
+
     string s;
     if (predicate()) s = "Hello";
     else s = "World";
@@ -870,7 +869,7 @@ std::pair<std::string, std::string> get_pair() {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace v11;
-    
+
     string s1;
     string s2;
     tie(s1, s2) = get_pair();
@@ -884,7 +883,7 @@ std::pair<std::string, std::string> get_pair() {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace v11;
-    
+
     string s = predicate() ? "Hello" : "World";
 }
 ```
@@ -892,7 +891,7 @@ std::pair<std::string, std::string> get_pair() {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace v11;
-    
+
     auto [s1, s2] = get_pair();
 }
 ```
@@ -1079,7 +1078,7 @@ public:
 
     friend bool operator==(const my_type&, const my_type&);
     friend bool operator!=(const my_type& a, const my_type& b) { return !(a == b); }
-    
+
     friend std::ostream& operator<<(std::ostream&, const my_type&);
 };
 
@@ -1128,7 +1127,7 @@ ostream& operator<<(ostream& out, const my_type& a) {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace v45;
-    
+
     my_type a{10, 42};
     cout << a << "\n";
 }

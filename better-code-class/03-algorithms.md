@@ -1,7 +1,6 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
@@ -15,16 +14,54 @@ jupyter:
 
 ```c++ slideshow={"slide_type": "skip"}
 #include "../common.hpp"
+
+int a, b = 0;
 ```
 
-<!-- #region slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "skip"} tags=[] -->
 # Algorithms
 
 **Goal: No raw loops**
 <!-- #endregion -->
 
+<!-- #region slideshow={"slide_type": "slide"} -->
+# What's Your Function?
+<!-- #endregion -->
+
 <!-- #region slideshow={"slide_type": "fragment"} -->
-> An _Algorithm_ is a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer.
+> An _Algorithm_ is a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer. _&ndash; New Oxford American Dictionary_
+
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"} tags=[]
+{
+    int r = a < b ? a : b;
+}
+```
+
+<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+- What does this line of code do?
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"} tags=[]
+{
+    // r is minimum of a and b
+    int r = a < b ? a : b;
+}
+```
+
+<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+- a comment helps...
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"} tags=[]
+{
+    int r = min(a, b);
+}
+```
+
+<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+- naming an operation, even a simple operation, lowers cognitive overhead 
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->

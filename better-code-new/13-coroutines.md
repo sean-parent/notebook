@@ -1,7 +1,6 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
@@ -310,7 +309,7 @@ done
         - state machines
     - Lambdas can also be coroutines
     - The hope is that we have some good, basic, library constructs for C++20
-    
+
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->

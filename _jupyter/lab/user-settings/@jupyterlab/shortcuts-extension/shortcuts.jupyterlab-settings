@@ -2,15 +2,6 @@
     "shortcuts": [
         {
             "args": {},
-            "command": "runmenu:restart-and-run-all",
-            "keys": [
-                "R",
-                "R"
-            ],
-            "selector": "[data-jp-kernel-user]:focus"
-        },
-        {
-            "args": {},
             "command": "application:activate-next-tab",
             "keys": [
                 "Ctrl Shift ]"
@@ -764,9 +755,6 @@
             "keys": [
                 "Ctrl Shift -"
             ],
-            "macKeys": [
-                "Ctrl Enter"
-            ],
             "selector": ".jp-Notebook.jp-mod-editMode"
         },
         {
@@ -785,6 +773,9 @@
             "command": "notebook:toggle-cell-line-numbers",
             "keys": [
                 "L"
+            ],
+            "macKeys": [
+                "Ctrl Enter"
             ],
             "selector": ".jp-Notebook:focus"
         },

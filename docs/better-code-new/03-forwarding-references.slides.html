@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 
 
-<title>03-forwarding-references slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
+<title>Notebook slides</title><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.1.10/require.min.js"></script>
 
 <!-- General and theme style sheets -->
 <link rel="stylesheet" href="../reveal.js/dist/reveal.css">
@@ -14811,7 +14811,7 @@ display: block;
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14819,15 +14819,15 @@ display: block;
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">c_2</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_a</span><span class="p">;</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_b</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">c_2</span><span class="p">(</span><span class="n">instrumented</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span><span class="w"> </span><span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">c_2</span> <span class="p">{</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_b</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">c_2</span><span class="p">(</span><span class="n">instrumented</span> <span class="n">a</span><span class="p">,</span> <span class="n">instrumented</span> <span class="n">b</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">instrumented</span><span class="w"> </span><span class="n">v_2</span><span class="p">;</span>
-<span class="n">c_2</span><span class="w"> </span><span class="n">v_3</span><span class="p">{</span><span class="n">v_2</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="p">()};</span>
+<span class="n">instrumented</span> <span class="n">v_2</span><span class="p">;</span>
+<span class="n">c_2</span> <span class="n">v_3</span><span class="p">{</span><span class="n">v_2</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">()};</span>
 </pre></div>
 
      </div>
@@ -14835,29 +14835,7 @@ display: block;
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>instrumented ctor
-instrumented copy-ctor
-instrumented ctor
-instrumented move-ctor
-instrumented move-ctor
-instrumented dtor
-instrumented dtor
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14865,46 +14843,26 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="nn">example_03</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="n">example_03</span> <span class="p">{</span>
 
-<span class="k">class</span><span class="w"> </span><span class="nc">type</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_a</span><span class="p">;</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_b</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">U</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">type</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">U</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_a</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span><span class="w"> </span><span class="n">_b</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<span class="k">class</span> <span class="nc">type</span> <span class="p">{</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_b</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="nc">U</span><span class="o">&gt;</span>
+    <span class="nb">type</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">U</span><span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">U</span><span class="o">&gt;</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
-<span class="w">    </span>
-<span class="n">instrumented</span><span class="w"> </span><span class="n">value</span><span class="p">;</span>
-<span class="n">type</span><span class="w"> </span><span class="nf">instance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="p">());</span>
-<span class="w">    </span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace</span>
+<span class="n">instrumented</span> <span class="n">value</span><span class="p">;</span>
+<span class="nb">type</span> <span class="n">instance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">());</span>
+
+
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>instrumented ctor
-instrumented ctor
-instrumented copy-ctor
-instrumented move-ctor
-instrumented dtor
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section ><section >
@@ -14918,7 +14876,7 @@ instrumented dtor
 </div>
 </div>
 </div>
-</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14926,17 +14884,17 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">c_4</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_a</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="n">instrumented</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">c_4</span> <span class="p">{</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">void</span> <span class="nb">set</span><span class="p">(</span><span class="n">instrumented</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_a</span> <span class="o">=</span> <span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">instrumented</span><span class="w"> </span><span class="n">v_5</span><span class="p">;</span>
-<span class="n">c_4</span><span class="w"> </span><span class="n">v_6</span><span class="p">;</span>
-<span class="n">v_6</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">v_5</span><span class="p">);</span>
+<span class="n">instrumented</span> <span class="n">v_5</span><span class="p">;</span>
+<span class="n">c_4</span> <span class="n">v_6</span><span class="p">;</span>
+<span class="n">v_6</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">v_5</span><span class="p">);</span>
 </pre></div>
 
      </div>
@@ -14944,27 +14902,7 @@ instrumented dtor
 </div>
 </div>
 
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>instrumented ctor
-instrumented ctor
-instrumented copy-ctor
-instrumented move-assign
-instrumented dtor
-</pre>
-</div>
-</div>
-
-</div>
-
-</div>
-
-</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -14972,41 +14910,23 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">c_7</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_a</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="kt">void</span><span class="w"> </span><span class="n">set</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">        </span><span class="n">_a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
-<span class="w">    </span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">c_7</span> <span class="p">{</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+    <span class="n">void</span> <span class="nb">set</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">_a</span> <span class="o">=</span> <span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">);</span>
+    <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">instrumented</span><span class="w"> </span><span class="n">v_11</span><span class="p">;</span>
-<span class="n">c_7</span><span class="w"> </span><span class="n">v_12</span><span class="p">;</span>
-<span class="n">v_12</span><span class="p">.</span><span class="n">set</span><span class="p">(</span><span class="n">v_11</span><span class="p">);</span>
+<span class="n">instrumented</span> <span class="n">v_11</span><span class="p">;</span>
+<span class="n">c_7</span> <span class="n">v_12</span><span class="p">;</span>
+<span class="n">v_12</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">v_11</span><span class="p">);</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>instrumented ctor
-instrumented ctor
-instrumented assign
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section ><section >
@@ -15019,7 +14939,7 @@ instrumented assign
 </div>
 </div>
 </div>
-</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15027,41 +14947,22 @@ instrumented assign
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">c_3</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_a</span><span class="p">;</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_b</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">c_3</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">instrumented</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">instrumented</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">_b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="n">c_3</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">instrumented</span><span class="o">&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span><span class="w"> </span><span class="n">_b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="n">c_3</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">instrumented</span><span class="o">&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="w"> </span><span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
-<span class="w">    </span><span class="n">c_3</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span><span class="w"> </span><span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">c_3</span> <span class="p">{</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+    <span class="n">instrumented</span> <span class="n">_b</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">c_3</span><span class="p">(</span><span class="n">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">_b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">c_3</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">b</span><span class="p">)</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">c_3</span><span class="p">(</span><span class="n">const</span> <span class="n">instrumented</span><span class="o">&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">instrumented</span><span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">a</span><span class="p">),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
+    <span class="n">c_3</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">,</span> <span class="n">instrumented</span><span class="o">&amp;&amp;</span> <span class="n">b</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">a</span><span class="p">)),</span> <span class="n">_b</span><span class="p">(</span><span class="n">move</span><span class="p">(</span><span class="n">b</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">c_3</span><span class="w"> </span><span class="n">v_4</span><span class="p">{</span><span class="n">v_2</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="p">()};</span>
+<span class="n">c_3</span> <span class="n">v_4</span><span class="p">{</span><span class="n">v_2</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">()};</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>instrumented ctor
-instrumented copy-ctor
-instrumented move-ctor
-instrumented dtor
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section ><section >
@@ -15082,9 +14983,9 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">F</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">wrapper_01</span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">void</span> <span class="n">wrapper_01</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">T</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -15116,9 +15017,9 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">F</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">wrapper_02</span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="k">const</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">void</span> <span class="n">wrapper_02</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">const</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -15150,9 +15051,9 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">F</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">wrapper_03</span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;</span><span class="w"> </span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">void</span> <span class="n">wrapper_03</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">T</span><span class="o">&amp;</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">f</span><span class="p">(</span><span class="n">arg</span><span class="p">);</span>
 <span class="p">}</span>
 </pre></div>
 
@@ -15211,20 +15112,20 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span>
-<span class="c1">// auto&amp;&amp; is a forwarding reference, not an rvalue reference</span>
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">F</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Arg</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">wrapper_04</span><span class="p">(</span><span class="n">F</span><span class="w"> </span><span class="n">f</span><span class="p">,</span><span class="w"> </span><span class="n">Arg</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">arg</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">f</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Arg</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">));</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="p">{</span>
+
+<span class="o">//</span> <span class="n">auto</span><span class="o">&amp;&amp;</span> <span class="ow">is</span> <span class="n">a</span> <span class="n">forwarding</span> <span class="n">reference</span><span class="p">,</span> <span class="ow">not</span> <span class="n">an</span> <span class="n">rvalue</span> <span class="n">reference</span>
+<span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">F</span><span class="p">,</span> <span class="k">class</span> <span class="nc">Arg</span><span class="o">&gt;</span>
+<span class="n">void</span> <span class="n">wrapper_04</span><span class="p">(</span><span class="n">F</span> <span class="n">f</span><span class="p">,</span> <span class="n">Arg</span><span class="o">&amp;&amp;</span> <span class="n">arg</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">f</span><span class="p">(</span><span class="n">std</span><span class="p">::</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">Arg</span><span class="o">&gt;</span><span class="p">(</span><span class="n">arg</span><span class="p">));</span>
 <span class="p">};</span>
 
-<span class="kt">void</span><span class="w"> </span><span class="nf">f_01</span><span class="p">(</span><span class="n">instrumented</span><span class="p">){</span><span class="w"> </span><span class="p">};</span><span class="w">         </span><span class="c1">// pass by value</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">f_02</span><span class="p">(</span><span class="k">const</span><span class="w"> </span><span class="n">instrumented</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span><span class="w"> </span><span class="c1">// pass by const lvalue reference</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">f_03</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span><span class="w">       </span><span class="c1">// pass by lvalue reference</span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">f_04</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;&amp;</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">};</span><span class="w">      </span><span class="c1">// pass by rvalue reference</span>
+<span class="n">void</span> <span class="n">f_01</span><span class="p">(</span><span class="n">instrumented</span><span class="p">){</span> <span class="p">};</span>         <span class="o">//</span> <span class="k">pass</span> <span class="n">by</span> <span class="n">value</span>
+<span class="n">void</span> <span class="n">f_02</span><span class="p">(</span><span class="n">const</span> <span class="n">instrumented</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span> <span class="o">//</span> <span class="k">pass</span> <span class="n">by</span> <span class="n">const</span> <span class="n">lvalue</span> <span class="n">reference</span>
+<span class="n">void</span> <span class="n">f_03</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>       <span class="o">//</span> <span class="k">pass</span> <span class="n">by</span> <span class="n">lvalue</span> <span class="n">reference</span>
+<span class="n">void</span> <span class="n">f_04</span><span class="p">(</span><span class="n">instrumented</span><span class="o">&amp;&amp;</span><span class="p">)</span> <span class="p">{</span> <span class="p">};</span>      <span class="o">//</span> <span class="k">pass</span> <span class="n">by</span> <span class="n">rvalue</span> <span class="n">reference</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span>
 </pre></div>
 
      </div>
@@ -15232,7 +15133,7 @@ instrumented dtor
 </div>
 </div>
 
-</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15240,47 +15141,21 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">instrumented</span><span class="w"> </span><span class="n">v_03</span><span class="p">;</span><span class="w"> </span><span class="c1">// lvalue</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">instrumented</span> <span class="n">v_03</span><span class="p">;</span> <span class="o">//</span> <span class="n">lvalue</span>
 
-<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_01</span><span class="p">,</span><span class="w"> </span><span class="n">v_03</span><span class="p">);</span><span class="w">          </span><span class="c1">// call with lvalue - copy</span>
-<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_01</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="p">());</span><span class="w">    </span><span class="c1">// call with rvalue - move</span>
-<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_02</span><span class="p">,</span><span class="w"> </span><span class="n">v_03</span><span class="p">);</span><span class="w">          </span><span class="c1">// call with lvalue</span>
-<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_02</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="p">());</span><span class="w">    </span><span class="c1">// call with rvalue</span>
-<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_03</span><span class="p">,</span><span class="w"> </span><span class="n">v_03</span><span class="p">);</span><span class="w">          </span><span class="c1">// call with lvalue</span>
-<span class="c1">// wrapper_04(f_03, instrumented()); // call with rvalue - error</span>
-<span class="c1">// wrapper_04(f_04, v_03);       // call with lvalue - error</span>
-<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_04</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="p">());</span><span class="w">    </span><span class="c1">// call with rvalue</span>
+<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_01</span><span class="p">,</span> <span class="n">v_03</span><span class="p">);</span>          <span class="o">//</span> <span class="n">call</span> <span class="k">with</span> <span class="n">lvalue</span> <span class="o">-</span> <span class="n">copy</span>
+<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_01</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">());</span>    <span class="o">//</span> <span class="n">call</span> <span class="k">with</span> <span class="n">rvalue</span> <span class="o">-</span> <span class="n">move</span>
+<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_02</span><span class="p">,</span> <span class="n">v_03</span><span class="p">);</span>          <span class="o">//</span> <span class="n">call</span> <span class="k">with</span> <span class="n">lvalue</span>
+<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_02</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">());</span>    <span class="o">//</span> <span class="n">call</span> <span class="k">with</span> <span class="n">rvalue</span>
+<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_03</span><span class="p">,</span> <span class="n">v_03</span><span class="p">);</span>          <span class="o">//</span> <span class="n">call</span> <span class="k">with</span> <span class="n">lvalue</span>
+<span class="o">//</span> <span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_03</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">());</span> <span class="o">//</span> <span class="n">call</span> <span class="k">with</span> <span class="n">rvalue</span> <span class="o">-</span> <span class="n">error</span>
+<span class="o">//</span> <span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_04</span><span class="p">,</span> <span class="n">v_03</span><span class="p">);</span>       <span class="o">//</span> <span class="n">call</span> <span class="k">with</span> <span class="n">lvalue</span> <span class="o">-</span> <span class="n">error</span>
+<span class="n">wrapper_04</span><span class="p">(</span><span class="n">f_04</span><span class="p">,</span> <span class="n">instrumented</span><span class="p">());</span>    <span class="o">//</span> <span class="n">call</span> <span class="k">with</span> <span class="n">rvalue</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>instrumented ctor
-instrumented copy-ctor
-instrumented dtor
-instrumented ctor
-instrumented move-ctor
-instrumented dtor
-instrumented dtor
-instrumented ctor
-instrumented dtor
-instrumented ctor
-instrumented dtor
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section ><section >
@@ -15302,17 +15177,17 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span>
-<span class="kt">void</span><span class="w"> </span><span class="nf">f_0</span><span class="p">(</span><span class="n">string</span><span class="o">&amp;&amp;</span><span class="p">);</span><span class="w"> </span><span class="c1">//rvalue reference</span>
-<span class="w">    </span>
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="k">class</span><span class="w"> </span><span class="nc">c_0</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="n">c_0</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="p">);</span><span class="w"> </span><span class="c1">// rvalue reference</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="p">{</span>
+
+<span class="n">void</span> <span class="n">f_0</span><span class="p">(</span><span class="n">string</span><span class="o">&amp;&amp;</span><span class="p">);</span> <span class="o">//</span><span class="n">rvalue</span> <span class="n">reference</span>
+
+<span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="k">class</span> <span class="nc">c_0</span> <span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">c_0</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="p">);</span> <span class="o">//</span> <span class="n">rvalue</span> <span class="n">reference</span>
 <span class="p">};</span>
-<span class="w">    </span>
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace</span>
+
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span>
 </pre></div>
 
      </div>
@@ -15339,18 +15214,18 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">namespace</span><span class="w"> </span><span class="p">{</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">namespace</span> <span class="p">{</span>
 
-<span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="kt">void</span><span class="w"> </span><span class="n">f_1</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="p">);</span><span class="w"> </span><span class="c1">// forwarding reference</span>
-<span class="w">    </span>
-<span class="k">class</span><span class="w"> </span><span class="nc">c_1</span><span class="w"> </span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">c_1</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="p">);</span><span class="w"> </span><span class="c1">// forwarding reference</span>
+<span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+<span class="n">void</span> <span class="n">f_1</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="p">);</span> <span class="o">//</span> <span class="n">forwarding</span> <span class="n">reference</span>
+
+<span class="k">class</span> <span class="nc">c_1</span> <span class="p">{</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+    <span class="n">c_1</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="p">);</span> <span class="o">//</span> <span class="n">forwarding</span> <span class="n">reference</span>
 <span class="p">};</span>
 
-<span class="p">}</span><span class="w"> </span><span class="c1">// namespace</span>
+<span class="p">}</span> <span class="o">//</span> <span class="n">namespace</span>
 </pre></div>
 
      </div>
@@ -15382,8 +15257,8 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="n">string</span><span class="w"> </span><span class="n">v_0</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s">&quot;Hello World!&quot;</span><span class="p">;</span>
-<span class="k">auto</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">v_1</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">v_0</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="n">string</span> <span class="n">v_0</span> <span class="o">=</span> <span class="s2">&quot;Hello World!&quot;</span><span class="p">;</span>
+<span class="n">auto</span><span class="o">&amp;&amp;</span> <span class="n">v_1</span> <span class="o">=</span> <span class="n">v_0</span><span class="p">;</span>
 </pre></div>
 
      </div>
@@ -15391,7 +15266,7 @@ instrumented dtor
 </div>
 </div>
 
-</div></div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15399,30 +15274,14 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="n">is_lvalue_reference</span><span class="o">&lt;</span><span class="k">decltype</span><span class="p">(</span><span class="n">v_1</span><span class="p">)</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">cout</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="s">&quot;v_1 is an lvalue reference!&quot;</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="n">endl</span><span class="p">;</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">is_lvalue_reference</span><span class="o">&lt;</span><span class="n">decltype</span><span class="p">(</span><span class="n">v_1</span><span class="p">)</span><span class="o">&gt;</span><span class="p">::</span><span class="n">value</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s2">&quot;v_1 is an lvalue reference!&quot;</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
 <span class="p">}</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>v_1 is an lvalue reference!
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section ><section >
@@ -15470,7 +15329,7 @@ instrumented dtor
 </div>
 </div>
 </div>
-</div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div><div class="fragment" ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15478,37 +15337,19 @@ instrumented dtor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">c_5</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_a</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span>
-<span class="w">    </span><span class="n">c_5</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_a</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">c_5</span> <span class="p">{</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="o">&gt;</span>
+    <span class="n">c_5</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">c_5</span><span class="w"> </span><span class="n">v_7</span><span class="p">{</span><span class="n">instrumented</span><span class="p">()};</span>
+<span class="n">c_5</span> <span class="n">v_7</span><span class="p">{</span><span class="n">instrumented</span><span class="p">()};</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>instrumented ctor
-instrumented move-ctor
-instrumented dtor
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></div></section></section><section ><section >
@@ -15551,7 +15392,7 @@ input_line_22:2:6: note: in instantiation of function template specialization 'c
 </div>
 </div>
 </div>
-</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell   ">
+</div></div></section></section><section ><section ><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
@@ -15559,39 +15400,20 @@ input_line_22:2:6: note: in instantiation of function template specialization 'c
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span><span class="k">class</span><span class="w"> </span><span class="nc">c_6</span><span class="w"> </span><span class="p">{</span>
-<span class="w">    </span><span class="n">instrumented</span><span class="w"> </span><span class="n">_a</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-<span class="w">    </span><span class="k">template</span><span class="w"> </span><span class="o">&lt;</span><span class="k">class</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">enable_if_t</span><span class="o">&lt;</span><span class="n">is_convertible</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">instrumented</span><span class="o">&gt;::</span><span class="n">value</span><span class="o">&gt;&gt;</span>
-<span class="w">    </span><span class="n">c_6</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">a</span><span class="p">)</span><span class="w"> </span><span class="o">:</span><span class="w"> </span><span class="n">_a</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">))</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="p">}</span>
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">c_6</span> <span class="p">{</span>
+    <span class="n">instrumented</span> <span class="n">_a</span><span class="p">;</span>
+<span class="n">public</span><span class="p">:</span>
+    <span class="n">template</span> <span class="o">&lt;</span><span class="k">class</span> <span class="nc">T</span><span class="p">,</span> <span class="k">class</span> <span class="err">= </span><span class="nc">enable_if_t</span><span class="o">&lt;</span><span class="n">is_convertible</span><span class="o">&lt;</span><span class="n">T</span><span class="p">,</span> <span class="n">instrumented</span><span class="o">&gt;</span><span class="p">::</span><span class="n">value</span><span class="o">&gt;&gt;</span>
+    <span class="n">c_6</span><span class="p">(</span><span class="n">T</span><span class="o">&amp;&amp;</span> <span class="n">a</span><span class="p">)</span> <span class="p">:</span> <span class="n">_a</span><span class="p">(</span><span class="n">forward</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="p">{</span> <span class="p">}</span>
 <span class="p">};</span>
 
-<span class="n">c_6</span><span class="w"> </span><span class="n">v_9</span><span class="p">{</span><span class="n">instrumented</span><span class="p">()};</span>
-<span class="n">c_6</span><span class="w"> </span><span class="n">v_10</span><span class="p">{</span><span class="n">v_9</span><span class="p">};</span>
+<span class="n">c_6</span> <span class="n">v_9</span><span class="p">{</span><span class="n">instrumented</span><span class="p">()};</span>
+<span class="n">c_6</span> <span class="n">v_10</span><span class="p">{</span><span class="n">v_9</span><span class="p">};</span>
 </pre></div>
 
      </div>
 </div>
 </div>
-</div>
-
-<div class="jp-Cell-outputWrapper">
-<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
-</div>
-
-<div class="jp-OutputArea jp-Cell-outputArea">
-<div class="jp-OutputArea-child">
-<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain">
-<pre>instrumented ctor
-instrumented move-ctor
-instrumented dtor
-instrumented copy-ctor
-</pre>
-</div>
-</div>
-
-</div>
-
 </div>
 
 </div></section></section><section ><section >
@@ -15641,7 +15463,7 @@ instrumented copy-ctor
 
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
      <div class="CodeMirror cm-s-jupyter">
-<div class=" highlight hl-c++"><pre><span></span>
+<div class=" highlight hl-ipython3"><pre><span></span> 
 </pre></div>
 
      </div>
