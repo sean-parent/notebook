@@ -64,7 +64,7 @@ function auto_generate_slides {
     # inotify_monitor is not working in docker
     directory=$1
     fswatch --print0 --event=Updated --monitor=poll_monitor ./$directory/*.md \
-        | xargs -0 -I % bash -c 'md_to_slides "%" "./docs/$0"' $directory
+        | xargs -0 -I % bash -c 'md_to_slides "%" "./docs/$0"' $directory || true
 }
 
 if [[ $SLIDES = YES ]]; then
@@ -91,8 +91,6 @@ if [[ $SLIDES = YES ]]; then
     } &
     BKPIDS+=($!)
 fi
-
-sleep 10s
 
 {
     conda activate notebook

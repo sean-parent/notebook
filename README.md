@@ -33,6 +33,8 @@ cd /mnt/host
 ./tools/start.sh --lab --server --no-token
 ```
 
+\[ _Note: If a browser window is open to JupyterLab when you start the server, it will report errors about the kernel not being available. Close the browser window and open a new one._ \]
+
 - Jupyter Lab is available at http://localhost:8888
 - The slides are available at http://localhost:4000/notebook/
 

@@ -174,3 +174,20 @@ template <std::size_t K, class RandomRange, class F>
 void for_each_k_combination(const RandomRange& a, F f) {
     for_each_k_combination<K>(std::begin(a), std::end(a), std::move(f));
 }
+
+template <class T, class U>
+std::size_t erase(std::vector<T>& c, const U& value) {
+    std::size_t r = size(c);
+    c.erase(std::remove(begin(c), end(c), value), end(c));
+    return r - size(c);
+}
+
+template <class T, class P>
+std::size_t erase_if(std::vector<T>& c, P p) {
+    std::size_t r = size(c);
+    c.erase(std::remove_if(begin(c), end(c), p), end(c));
+    return r - size(c);
+}
+
+template <class T>
+T copy(const T& a) { return T{a}; }
