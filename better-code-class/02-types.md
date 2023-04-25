@@ -557,7 +557,7 @@ The C++20 standard defines the _concept_ std::regular<T> to be copyable, equalit
 - An operation which loses the correspondence is _unsafe_
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "fragment"} -->
+<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
 - There are different categories of safety:
 
 - _memory safety_
