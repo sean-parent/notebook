@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -37,7 +36,7 @@ Lambda are a syntax to construct a _function object_.
 ```c++ slideshow={"slide_type": "fragment"}
 struct add_n_simple {
     int _n;
-    
+
     int invoke(int x) const { return _n + x; }
 };
 ```
@@ -59,7 +58,7 @@ cout << add_s.invoke(10) << "\n";
 ```c++ slideshow={"slide_type": "fragment"}
 struct add_n_function {
     int _n;
-        
+
     int operator()(int x) const { return _n + x; }
 };
 ```
@@ -102,10 +101,10 @@ add_n_function add_f{5};
 
 ```c++ slideshow={"slide_type": "fragment"}
 {
-    
+
 auto add_n_lambda = [_n = 5](int x) -> int { return _n + x; };
 cout << add_n_lambda(10) << "\n";
-    
+
 }
 ```
 
@@ -170,7 +169,7 @@ auto ex2 = [&]{ x *= y; };
 auto ex3 = [x, y]{ return x + y; };
 auto ex4 = [x, &y]{ y += x; };
 auto ex5 = [_x = ex1()]{ return _x; };
-    
+
 cout << ex1() << '\n';
 ex2();
 cout << ex3() << '\n';
@@ -241,7 +240,7 @@ struct add_t {
 ```c++ slideshow={"slide_type": "fragment"}
 struct accumulate_t {
     int _value;
-    
+
     int operator()(int x) {
         _value += x;
         return _value;
@@ -272,7 +271,7 @@ auto accumulate = [_value = 5](int x) mutable {
 
 cout << accumulate(10) << '\n';
 cout << accumulate(3) << '\n';
-    
+
 }
 ```
 
@@ -320,7 +319,7 @@ struct print_all_t {
 ```c++ slideshow={"slide_type": "fragment"}
 struct lambda_member {
     size_t _count = 0;
-    
+
     function<void(const string&)> _lambda = [_n = _count](const auto& x) {
         for(auto n = _n; n != 0; --n) cout << x << '\n';
     };

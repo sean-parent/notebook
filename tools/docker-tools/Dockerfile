@@ -1,5 +1,5 @@
 # Build from the latest ubuntu release
-FROM ubuntu:latest AS base
+FROM --platform=linux/amd64 ubuntu:latest AS base
 
 # Install items requiring root access
 
@@ -12,6 +12,7 @@ RUN apt-get update && apt-get install -y \
     git \
     libreadline-dev \
     libtbb-dev \
+    lsof \
     make \
     npm \
     rbenv \
@@ -25,11 +26,15 @@ RUN apt-get update && apt-get install -y \
 # RUN curl -fsSL https://deb.nodesource.com/setup_15.x | bash -
 # RUN apt-get install -y nodejs
 
+# install node for browser-sync
 RUN npm install -g n
-RUN n latest
+# nodejs v18 fails with:
+#8 0.200 node: /lib/x86_64-linux-gnu/libc.so.6: version `GLIBC_2.28' not found (required by node)
+# so version is temporarily set to 17
+RUN n 16.13.0
 
-RUN npm install -g npm@latest
-RUN npm install -g browser-sync
+RUN npm update -g
+RUN npm install -g browser-sync@2.24.1
 
 # Create a user "app" so everything is not running at root
 RUN useradd -ms /bin/bash app
@@ -61,7 +66,7 @@ RUN (eval "$(rbenv init -)"; gem install bundler)
 
 # Install conda
 RUN mkdir $HOME/.conda
-RUN wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O ./miniconda.sh
+RUN wget https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh -O ./miniconda.sh
 RUN chmod +x ./miniconda.sh
 # https://docs.anaconda.com/anaconda/install/silent-mode/
 RUN bash ./miniconda.sh -b -p ./miniconda3
@@ -86,14 +91,12 @@ RUN (eval "$(rbenv init -)"; \
     rbenv rehash; \
     bundle install)
 
-RUN ~/miniconda3/bin/conda env create
+RUN ~/miniconda3/bin/mamba env create
 
 ENV BASH_ENV ~/.bashrc
 SHELL ["/bin/bash", "-c"]
 
 RUN eval "$(~/miniconda3/bin/conda shell.bash hook)"; conda activate notebook;  \
-  jupyter labextension install --no-build @ijmbarr/jupyterlab_spellchecker; \
-  jupyter labextension install --no-build jupyter-offlinenotebook; \
   jupyter labextension install --no-build jupyterlab-slide-mode-keyboard-shortcuts; \
   jupyter lab build; \
    conda deactivate

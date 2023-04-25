@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -51,7 +50,7 @@ struct merge_layer_flags_t {
     flags.use_content_mask = true;
 
     auto [io, mo, sm, um, vm, cm, sr, dr, fm] = flags;
-    
+
     cout << io << ", " << mo << ", " << sm << ", " << um << ", " << vm << ", " << cm
          << ", " << sr << ", " << dr << ", " << fm << endl;
 }
@@ -283,11 +282,11 @@ operator|(const typename _Expr::value_type& __x, const _Expr& __y)
 namespace {
 merge_layer operator|(merge_layer a, merge_layer b) {
     using underlying = underlying_type_t<merge_layer>;
-    
+
     return static_cast<merge_layer>(static_cast<underlying>(a) |
                                     static_cast<underlying>(b));
 }
-    
+
 template <merge_layer... I>
 constexpr auto extract_bits(merge_layer x) {
     using underlying = underlying_type_t<merge_layer>;
@@ -303,7 +302,7 @@ auto stlab_enable_bitmask_enum(merge_layer) -> std::true_type;
 
 {
     auto flags = merge_layer::use_sheet_mask | merge_layer::use_vector_mask;
-    
+
     auto [x] = extract_bits<merge_layer::use_sheet_mask>(flags);
     cout << x << endl;
 }
@@ -407,7 +406,7 @@ using func_ptr = T (*)(T);
 ```c++ slideshow={"slide_type": "fragment"}
 {
     func_ptr<double> f = [](double x){ return x * x; };
-    
+
     cout << f(10);
 }
 ```
@@ -459,7 +458,7 @@ auto distance(I f, I l) -> difference_t<I>;
 
 ```c++ slideshow={"slide_type": "slide"}
 namespace {
-    
+
 template <class T>
 inline constexpr T max_value = std::numeric_limits<T>::max();
 
@@ -469,7 +468,7 @@ inline constexpr T max_value = std::numeric_limits<T>::max();
 ```c++ slideshow={"slide_type": "fragment"}
 {
     auto x = max_value<int>;
-    
+
     cout << x << endl;
 }
 ```
@@ -494,7 +493,7 @@ inline constexpr T max_value = std::numeric_limits<T>::max();
 // header.hpp
 
 namespace library {
-    
+
 template <class T>
 class my_wizzy_type {
     void member_function();
@@ -516,14 +515,14 @@ extern template class my_wizzy_type<int>;
 
 ```c++ slideshow={"slide_type": "-"}
 namespace library {
-    
+
 template <class T>
 void my_wizzy_type<T>::member_function() {
     //...
 }
 
 template class my_wizzy_type<int>;
-    
+
 } // namespace library
 ```
 

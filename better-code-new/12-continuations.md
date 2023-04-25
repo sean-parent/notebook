@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -45,7 +44,7 @@ using namespace std;
 
 ```c++ run_control={"marked": true} slideshow={"slide_type": "skip"}
 namespace bcc {
-    
+
 class task {
     struct concept;
 
@@ -63,7 +62,7 @@ public:
 
     void operator()(); // Need to implement
 };
-    
+
 } // namespace bcc
 ```
 
@@ -119,7 +118,7 @@ public:
     ~sequential_process();
     void async(task f);
 };
-    
+
 sequential_process::~sequential_process() {
     {
         lock_guard<mutex> lock(_mutex);
@@ -147,7 +146,7 @@ void sequential_process::run_loop() {
         work();
     }
 }
-    
+
 void sequential_process::async(task f) {
     {
         lock_guard<mutex> lock(_mutex);
@@ -155,17 +154,17 @@ void sequential_process::async(task f) {
     }
     _condition.notify_one();
 }
-    
+
 } // namespace bcc
-    
+
 template <class F> // F models R()
 inline auto async_packaged(sequential_process& process, F&& f) {
     using result_t = std::result_of_t<std::decay_t<F>()>;
-    
+
     auto task_future = stlab::package<result_t()>(stlab::immediate_executor, std::forward<F>(f));
-    
+
     process.async(move(task_future.first));
-    
+
     return move(task_future.second);
 }
 
@@ -204,9 +203,9 @@ using namespace bcc;
 ```c++ slideshow={"slide_type": "fragment"}
 {
 auto p = async(default_executor, []{ return 42; });
-    
+
 auto q = p.then([](int x){ cout << x << endl; });
-    
+
 auto r = q.then([]{ cout << "done!" << endl; });
 
 blocking_get(r); // <-- DON'T DO THIS IN REAL CODE!!!
@@ -223,16 +222,16 @@ namespace bcc {
 struct shared_pool {
     unordered_set<string> _pool;
     sequential_process _process;
-    
+
     auto insert(string) -> stlab::future<const string*>;
 };
-    
+
 auto shared_pool::insert(string a) -> stlab::future<const string*> {
     return async_packaged(_process, [this, _a = move(a)]() mutable {
         return &*_pool.insert(move(_a)).first;
     });
 }
-    
+
 }
 ```
 
@@ -249,7 +248,7 @@ class interned_string {
     shared_future<const std::string*> _string;
 public:
     interned_string(string a) : _string(pool().insert(move(a))) {}
-    
+
     auto str() const {
         return *_string.get(); // <---- BLOCKING!!!
     }
@@ -271,12 +270,12 @@ class interned_string {
     stlab::future<const string*> _string; // or std::experimental::shared_future
 public:
     interned_string(string a) : _string(pool().insert(move(a))) {}
-    
+
     auto str() const -> stlab::future<reference_wrapper<const string>> {
         return _string.then([](const string* p) { return cref(*p); });
     }
 };
-    
+
 } // namespace
 ```
 
@@ -287,7 +286,7 @@ interned_string s("Hello World!"s);
 auto done = s.str().then([](const string& s){
     cout << s << '\n';
 });
-    
+
 blocking_get(done);
 }
 ```
@@ -321,7 +320,7 @@ auto p = async(default_executor, []{ return 42; });
 auto q = async(default_executor, []{ return 5; });
 
 auto done = when_all(default_executor, [](int x, int y){ cout << x + y << endl; }, p, q);
-    
+
 blocking_get(done);
 }
 ```

@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -197,7 +196,7 @@ struct point {
     int _height;
 
     constexpr point(int w, int h) : _width(w), _height(h) { }
-    
+
     friend constexpr bool operator==(const point& a, const point& b) {
         return (a._width == b._width) && (a._height == b._height);
     }

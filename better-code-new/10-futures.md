@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -51,7 +50,7 @@ public:
     ~sequential_process();
     void async(task f);
 };
-    
+
 sequential_process::~sequential_process() {
     {
         lock_guard<mutex> lock(_mutex);
@@ -87,7 +86,7 @@ void sequential_process::run_loop() {
         work();
     }
 }
-    
+
 } // namespace bcc
 
 using namespace bcc;
@@ -350,12 +349,12 @@ void sequential_process::async(task f);
 template <class F> // F models R()
 auto async_packaged(sequential_process& process, F&& f) {
     using result_t = std::result_of_t<std::decay_t<F>()>;
-    
+
     packaged_task<result_t()> task{std::forward<F>(f)};
     auto result = task.get_future();
-    
+
     process.async(move(task));
-    
+
     return result;
 }
 ```
@@ -366,7 +365,7 @@ auto async_packaged(sequential_process& process, F&& f) {
 sequential_process process;
 
 auto future = async_packaged(process, []{ return "Hello World!"s; });
-    
+
 cout << future.get() << endl;
 }
 ```

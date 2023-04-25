@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -57,7 +56,7 @@ In C++, runtime polymorphism is typically achieved with _subtyping_ using _inher
 
 ```c++ slideshow={"slide_type": "slide"}
 namespace v3 {
-    
+
 using circle = int;
 
 void draw(const circle& a, ostream& out, size_t position) {
@@ -72,7 +71,7 @@ void draw(const document& a, ostream& out, size_t position) {
         draw(e, out, position + 2);
     out << string(position, ' ') << "}\n";
 }
-    
+
 } // namespace v3
 ```
 
@@ -363,7 +362,7 @@ void draw(const shape& s, ostream& out, size_t position) { // <-- (2)
 
 ```c++ slideshow={"slide_type": "slide"}
 namespace v5 {
-    
+
 class circle {
     int _radius;
 
@@ -380,10 +379,10 @@ public:
 
 ```c++ slideshow={"slide_type": "slide"}
 namespace v5 {
-    
+
 class rectangle {
     int _width, _height;
-    
+
 public:
     explicit rectangle(int width, int height) : _width{width}, _height{height} {}
 
@@ -733,7 +732,7 @@ R task<R(Args...)>::operator()(Args... args) { // <-- (5)
     auto p = make_unique<int>(42);
 
     task<unique_ptr<int>()> payload{[_p = move(p)]() mutable { return move(_p); }};
-        
+
     display(*payload());
     display(payload() == nullptr);
 }

@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -57,7 +56,7 @@ class movable {
 public:
     movable(movable&& x) noexcept : _some_data{x._some_data} // consume x
     { x._some_data = nullptr; } // leave x destructible
-    
+
     //...
 };
 ```
@@ -124,10 +123,10 @@ class example_01 {
 public:
     explicit example_01(int x) : _data(new int(x)) { }
     ~example_01() { delete _data; }
-    
+
     example_01(const example_01&) = delete;
     example_01& operator=(const example_01&) = delete;
-    
+
     example_01(example_01&& x) noexcept : _data(x._data) { x._data = nullptr; }
     example_01& operator=(example_01&& x) noexcept {
         delete _data;
@@ -135,7 +134,7 @@ public:
         x._data = nullptr;
         return *this;
     }
-    
+
     explicit operator int () { return *_data; }
 };
 ```
@@ -146,16 +145,16 @@ class example_02 {
 public:
     explicit example_02(int x) : _data(make_unique<int>(x)) { }
     // implicit dtor
-    
+
     // implicit deleted copy-ctor and copy-assignment
-    
+
     /*
         move-ctor and move-assignment would be provided by default, but declaring
         them ensures they are provided and correct.
     */
     example_02(example_02&&) noexcept = default;
     example_02& operator=(example_02&&) noexcept = default;
-    
+
     explicit operator int () { return *_data; }
 };
 ```
@@ -289,10 +288,10 @@ class example_04 {
 public:
     example_04() : _member(new instrumented()) { }
     ~example_04() { delete _member; }
-    
+
     example_04(const example_04& x) : _member(new instrumented(*x._member)) { }
     example_04(example_04&& x) : _member(x._member) { x._member = nullptr; }
-    
+
     // this assignment handles both move and copy
     example_04& operator=(example_04 x) noexcept {
         delete _member;

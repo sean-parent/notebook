@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -41,16 +40,16 @@ class task {
     // Need implementation here
 public:
     task() = default;
-    
+
     task(const task&) = delete;
     task(task&&) noexcept = default;
-    
+
     task& operator=(const task&) = delete;
     task& operator=(task&&) noexcept = default;
-    
+
     template <class F> // F model void()
     task(F f); // Need to implement
-    
+
     void operator()(); // Need to implement
 };
 
@@ -59,7 +58,7 @@ public:
 
 ```c++ run_control={"marked": true} slideshow={"slide_type": "slide"}
 namespace bcc {
-    
+
 class task {
     struct concept;
 
@@ -77,7 +76,7 @@ public:
 
     void operator()(); // Need to implement
 };
-    
+
 } // namespace bcc
 ```
 
@@ -141,7 +140,7 @@ public:
     ~sequential_process();
     void async(task f);
 };
-    
+
 sequential_process::~sequential_process() {
     {
         lock_guard<mutex> lock(_mutex);
@@ -169,7 +168,7 @@ void sequential_process::run_loop() {
         work();
     }
 }
-    
+
 void sequential_process::async(task f) {
     {
         lock_guard<mutex> lock(_mutex);
@@ -177,19 +176,19 @@ void sequential_process::async(task f) {
     }
     _condition.notify_one();
 }
-    
+
 template <class F> // F models R()
 auto async_packaged(sequential_process& process, F&& f) {
     using result_t = std::result_of_t<std::decay_t<F>()>;
-    
+
     packaged_task<result_t()> task{std::forward<F>(f)};
     auto result = task.get_future();
-    
+
     process.async(move(task));
-    
+
     return result;
 }
-    
+
 } // namespace bcc
 
 using namespace bcc;
@@ -201,7 +200,7 @@ using namespace bcc;
 sequential_process process;
 
 auto future = async_packaged(process, []{ return "Hello World!"s; });
-    
+
 cout << future.get() << endl;
 }
 ```
@@ -210,13 +209,13 @@ cout << future.get() << endl;
 <!-- #region slideshow={"slide_type": "slide"} -->
 - You can only invoke `get()` on a future once
     - subsequent invocations will throw an exception!
-    
+
 ```cpp
 {
 sequential_process process;
 
 auto future = async_packaged(process, []{ return "Hello World!"s; });
-    
+
 cout << future.get() << endl;
 cout << future.get() << endl; // Will throw!
 }
@@ -262,7 +261,7 @@ public:
 struct shared_pool {
     unordered_set<string> _pool;
     sequential_process _process;
-    
+
     auto insert(string a) -> future<const string*> {
         return async_packaged(_process, [this, _a = move(a)]() mutable {
             return &*_pool.insert(move(_a)).first;
@@ -273,7 +272,7 @@ struct shared_pool {
 
 ```c++ run_control={"marked": true} slideshow={"slide_type": "slide"}
 namespace v1 {
-    
+
 class interned_string {
     // struct shared_pool
 
@@ -287,7 +286,7 @@ public:
     interned_string(string a) : _string(pool().insert(move(a))) {}
     const string& str() const { return *_string.get(); }
 };
-    
+
 } // namespace v1
 ```
 

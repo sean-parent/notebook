@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -25,11 +24,11 @@ using namespace std;
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} toc-hr-collapsed=false -->
-# Tuples, Parameter Packs, & Initializer Lists 
+# Tuples, Parameter Packs, & Initializer Lists
 - `tuples`, parameter packs (variadic templates), and initializer lists are closely related
     - IMO, they should be the same thing
     - They each provide a distinct set of capabilities
-    - Learn to use them in conjunction 
+    - Learn to use them in conjunction
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -107,7 +106,7 @@ using namespace std;
 {
     int a;
     string b;
-    
+
     tie(a, b) = tuple{10, "Hello World!"s};
     cout << a << ", " << b << endl;
 }
@@ -120,7 +119,7 @@ using namespace std;
 ```c++ slideshow={"slide_type": "fragment"}
 {
     string a;
-    
+
     tie(ignore, a) = tuple{10, "Hello World!"s};
     cout << a << endl;
 }
@@ -155,7 +154,7 @@ class example1 {
     auto as_tuple() const { return tie(_a, _b, _c); }
 public:
     example1(int a, string b, bool c) : _a(move(a)), _b(move(b)), _c(move(c)) { }
-    
+
     friend inline bool operator==(const example1& x, const example1& y) {
         return x.as_tuple() == y.as_tuple();
     }
@@ -170,7 +169,7 @@ public:
 {
     example1 x(10, "Hello", false);
     example1 y(10, "World", false);
-    
+
     cout << boolalpha;
     cout << "x == x: " << (x == x) << endl;
     cout << "x == y: " << (x == y) << endl;
@@ -336,7 +335,7 @@ size_t arg_count(const Args&... args) {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     tuple x = { "Hello!"s, 3 };
-    
+
     apply([](const string& str, int n){
         while (n-- != 0) cout << str << endl;
     }, x);
@@ -379,7 +378,7 @@ size_t arg_count(const Args&... args) {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     vector v = {0, 10, 20, 30};
-    
+
     for (const auto& e : v) cout << e << endl;
 }
 ```
@@ -394,7 +393,7 @@ size_t arg_count(const Args&... args) {
     - An `initializer_list<>` does not require a template interface
         - Can be used in a function prototype in a header
     - An `initializer_list<>` can be used with a range based for loop
-    
+
 - An `initializer_list` is not a library only feature, it is a language feature exposed through a library interface
 <!-- #endregion -->
 
@@ -479,7 +478,7 @@ constexpr F for_each_element(F f, Tuple&& t) {
 
 ```c++ slideshow={"slide_type": "fragment"}
 namespace {
-    
+
 class example2 {
     int _a;
     string _b;
@@ -488,7 +487,7 @@ class example2 {
     auto as_tuple() const { return tie(_a, _b, _c); }
 public:
     example2(int a, string b, bool c) : _a(move(a)), _b(move(b)), _c(move(c)) { }
-    
+
     friend inline ostream& operator<<(ostream& out, const example2& x) {
         for_each_element([&](const auto& e){
             out << boolalpha << e << endl;
@@ -496,7 +495,7 @@ public:
         return out;
     }
 };
-    
+
 } // namespace
 ```
 
@@ -521,10 +520,10 @@ class task;
 template <class R, class... Args>
 class task<R(Args...)> {
     struct concept;
-    
+
     template <class F>
     struct model;
-    
+
     unique_ptr<concept> _p;
 
 public:
@@ -536,13 +535,13 @@ public:
 
     R operator()(Args... args) { return _p->invoke(forward<Args>(args)...); }
 };
-    
+
 } // namespace
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
 namespace {
-    
+
 template <class R, class... Args>
 struct task<R(Args...)>::concept {
     virtual ~concept() = default;
@@ -558,7 +557,7 @@ struct task<R(Args...)>::model final : concept {
 
     F _f;
 };
-    
+
 } // namespace
 ```
 

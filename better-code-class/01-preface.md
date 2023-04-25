@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -84,7 +83,7 @@ Throughout these slides I use _word_ to mean a machine word, typically 64 bits o
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - To build a transistor, silicon is doped with a material such as Boron and Phosphorus
-    - Silicon + Boron = P, fewer electrons, insulator 
+    - Silicon + Boron = P, fewer electrons, insulator
     - Silicon + Phosphorus = N, has _free_ electrons, conductive
 <!-- #endregion -->
 
@@ -171,8 +170,8 @@ Throughout these slides I use _word_ to mean a machine word, typically 64 bits o
 <!-- #region slideshow={"slide_type": "fragment"} -->
 - Not _pure_ mathematics
     - We are not describing systems on an idealized device that cannot be realized
-    
+
 - Mathematics is a tool to describe what _is_ and a tool to reason about code
-    
+
 - Software is defined on algebraic structures
 <!-- #endregion -->

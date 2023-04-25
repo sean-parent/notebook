@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -54,7 +53,7 @@ class error : derived { };
 input_line_8:6:8: note: 'derived' declared here
  class derived final : base {
        ^       ~~~~~
-Interpreter Error: 
+Interpreter Error:
 ```
 <!-- #endregion -->
 
@@ -156,11 +155,11 @@ class example2 {
     int _a = 42;
     bool _b = false;
     string _c = "Hello World!";
-    
+
 public:
     example2() = default;
     example2(int a) : _a(a) { }
-    
+
     friend inline ostream& operator<<(ostream& out, const example2& x) {
        return out << "(" << x._a << ", " << x._b << ", " << x._c << ")";
     }
@@ -185,11 +184,11 @@ class example3 {
     int _a = 42;
     bool _b = false;
     string _c = "Hello World!";
-    
+
 public:
     example3(int a) : _a(a) { }
     example3(double a) : example3(static_cast<int>(round(a))) { }
-    
+
     friend inline ostream& operator<<(ostream& out, const example3& x) {
        return out << "(" << x._a << ", " << x._b << ", " << x._c << ")";
     }
@@ -211,7 +210,7 @@ public:
 class example4 : public example3 {
 public:
     string _d = "New Member";
-    
+
     using example3::example3;
 };
 ```
@@ -231,7 +230,7 @@ public:
 
 ```c++ slideshow={"slide_type": "fragment"}
 class example5 : public example3 {
-public:    
+public:
     using example3::example3;
     example5(int a) : example3(a + 1) { }
 };
@@ -250,7 +249,7 @@ public:
 
 ```c++ slideshow={"slide_type": "fragment"}
 class example6 : public example3 {
-public:    
+public:
     using example3::example3;
     example6(int a) = delete;
 };
@@ -282,7 +281,7 @@ input_line_26:4:5: note: 'example6' has been explicitly marked deleted here
 
 ```c++ slideshow={"slide_type": "fragment"}
 namespace bcc {
-    
+
 struct example7 {
     static int x; // declaration
 };

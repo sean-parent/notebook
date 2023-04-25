@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -156,7 +155,7 @@ public:
         _q[i % _count].push(forward<F>(f));
     }
 };
-    
+
 template <class F>
 void pool_async(F&& f) {
     static task_system pool;
@@ -311,7 +310,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
         this_thread::sleep_for(1s);
         cout << "Made it!" << endl;
     });
-    
+
     this_thread::sleep_for(2s); // This line is here for my slides
 }
 ```
@@ -328,7 +327,7 @@ ThreadSanitizer report breakpoint hit. Use 'thread info -s' to get extended info
 <!-- #region slideshow={"slide_type": "fragment"} -->
 - To keep the original semantics we could block on destruction of `sequential_process`
 - To do this we again need:
-    - A `_done` flag 
+    - A `_done` flag
     - A `_condition` variable
     - A destructor that signals done
 <!-- #endregion -->
@@ -610,7 +609,7 @@ void sequential_process::implementation::async(task f) {
     if (!running)
         pool_async([_self = shared_from_this()] { _self->resume(); }); // <---
 }
-    
+
 } // namespace bcc4
 ```
 
@@ -789,7 +788,7 @@ void bcc5::sequential_process::implementation::wait() {
 ```c++ slideshow={"slide_type": "skip"}
 // SKIP
 namespace bcc5 {
-    
+
 sequential_process::sequential_process() : _self(make_shared<implementation>()) { }
 
 sequential_process::~sequential_process() { _self->wait(); }

@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -269,10 +268,10 @@ struct test_allocator {
     using value_type = T;
 
     test_allocator() = default;
-    
+
     template <class U>
     constexpr test_allocator(const test_allocator<U>&) noexcept {}
-    
+
     [[nodiscard]] T* allocate(size_t n) {
         if (_allocate == _allocate_limit) throw bad_alloc();
         if (n > (numeric_limits<size_t>::max() / sizeof(T))) throw bad_alloc();
@@ -285,7 +284,7 @@ struct test_allocator {
         ::operator delete(p /*, n */); // gcc doesn't yet support delete with size
         ++_deallocate;
     }
-    
+
     friend bool operator==(const test_allocator&, const test_allocator&) { return true; }
     friend bool operator!=(const test_allocator&, const test_allocator&) { return false; }
 };
@@ -474,7 +473,7 @@ input_line_29:4:33: note: in instantiation of member function 'std::__1::vector<
       move constructor
   unique_ptr(unique_ptr&& __u) noexcept
   ^
-Interpreter Error: 
+Interpreter Error:
 ```
 <!-- #endregion -->
 
@@ -494,7 +493,7 @@ Interpreter Error:
     - There is currently no good way to SFINAE the a copy constructor
         - To "fix" this would require multiple specializations of `vector`
     - This is a defect in the language/library that _should_ be fixed with concepts
-   
+
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "-"} -->
@@ -511,16 +510,16 @@ As of C++11, the only requirement on `T` is that it is _Erasable_ (Destructible)
 ```c++ slideshow={"slide_type": "slide"}
 {
     class useless {
-    public:        
+    public:
         useless() = default;
-        
+
         useless(const useless&) noexcept = delete;
         useless(useless&&) = delete;
-        
+
         useless& operator=(const useless&) = delete;
         useless& operator=(useless&&) noexcept = delete;
     };
-    
+
     vector<useless> a(3); // a few useless things!
 }
 ```
@@ -557,7 +556,7 @@ struct instrumented_2 {
 
 ```c++ slideshow={"slide_type": "slide"}
 {
-    
+
 using instrumented_t = instrumented_2<copy_constructible>;
 
 vector<instrumented_t> x;
@@ -569,7 +568,7 @@ x.push_back(instrumented_t(42));
 <!-- #region slideshow={"slide_type": "slide"} -->
 ```cpp
 {
-    
+
 using instrumented_t = instrumented_2<copy_constructible>;
 
 vector<instrumented_t> a, b;
@@ -605,7 +604,7 @@ input_line_32:6:12: note: in instantiation of function template specialization '
       namespace)::instrumented_2<(anonymous namespace)::operations::copy_constructible> > >' requested here
 cout << (a == b) << endl;
            ^
-Interpreter Error: 
+Interpreter Error:
 ```
 <!-- #endregion -->
 

@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -153,7 +152,7 @@ public:
 
 ```c++ slideshow={"slide_type": "skip"}
 namespace bcc {
-       
+
 sequential_process::~sequential_process() {
     {
         lock_guard<mutex> lock(_mutex);
@@ -181,7 +180,7 @@ void sequential_process::run_loop() {
         work();
     }
 }
-    
+
 void sequential_process::async(task f) {
     {
         lock_guard<mutex> lock(_mutex);
@@ -189,7 +188,7 @@ void sequential_process::async(task f) {
     }
     _condition.notify_one();
 }
-    
+
 } // namespace bcc
 ```
 
@@ -267,13 +266,13 @@ auto async_packaged(sequential_process& process, F&& f) {
 
     return move(task_future.second);
 }
-    
+
 } // namespace
 ```
 
 ```c++ slideshow={"slide_type": "slide"}
 namespace {
-    
+
 struct shared_pool {
     unordered_set<string> _pool;
     sequential_process _process;
@@ -285,7 +284,7 @@ struct shared_pool {
             });
     }
 };
-    
+
 } // namespace
 ```
 
@@ -307,7 +306,7 @@ public:
         return _string.then([](const string* p) { return cref(*p); });
     }
 };
-    
+
 } // namespace
 ```
 

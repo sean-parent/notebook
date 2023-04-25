@@ -1,21 +1,21 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
     name: xcpp17
 ---
 
-```c++ slideshow={"slide_type": "skip"}
+```c++ tags=[] slideshow={"slide_type": "skip"}
 #include <future>
 #include <iostream>
+#include <deque>
 #include <memory>
 #include <string>
 
@@ -24,7 +24,7 @@ using namespace std;
 { cout << boolalpha; }
 ```
 
-```c++ run_control={"marked": true} slideshow={"slide_type": "skip"}
+```c++ tags=[] run_control={"marked": true} slideshow={"slide_type": "skip"}
 namespace bcc {
 
 class task {
@@ -101,19 +101,19 @@ public:
         _condition.notify_one();
     }
 };
-    
+
 template <class F> // F models R()
 auto async_packaged(sequential_process& process, F&& f) {
     using result_t = std::result_of_t<std::decay_t<F>()>;
-    
+
     packaged_task<result_t()> task{std::forward<F>(f)};
     auto result = task.get_future();
-    
+
     process.async(move(task));
-    
+
     return result;
 }
-    
+
 } // namespace bcc
 
 using namespace bcc;
@@ -150,7 +150,7 @@ using namespace bcc;
     auto r = async([_p = move(p)]() mutable { // move object to new context
         *_p += 5;
         return move(_p);
-    }); 
+    });
 
     cout << static_cast<bool>(p) << endl;
     cout << *r.get() << endl;

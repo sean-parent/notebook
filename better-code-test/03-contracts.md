@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -71,7 +70,7 @@ jupyter:
 - `vector::at()` has _weaker_ preconditions
     - If the index is out of range it will throw `std::out_of_range`
     - The boundary between an index within the range and one outside is an inflection point
-    
+
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "slide"}
@@ -211,7 +210,7 @@ Should this work?
         - Note, that a non-mutating call might not be declared `const`
         - i.e. `vector::begin()`
     - or, the end of the objects lifetime
-    
+
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -230,7 +229,7 @@ Should this work?
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - The postconditions of move assignment for `vector` are:
-    - The lhs is equal to the prior value of the rhs 
+    - The lhs is equal to the prior value of the rhs
     - references, pointers, and iterators to elements in the rhs remain valid
         - but refer to elements that are in lhs
     - The state of the rhs is "valid but unspecified"
@@ -339,7 +338,7 @@ But that has performance implications.
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - Unless otherwise specified, the basic guarantee is assumed
-- In the absence of a modification, the _basic_ and _strong_ exception guarantees are the same. 
+- In the absence of a modification, the _basic_ and _strong_ exception guarantees are the same.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->

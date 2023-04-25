@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -20,6 +19,7 @@ jupyter:
 #include <mutex>
 #include <thread>
 #include <condition_variable>
+#include <deque>
 
 using namespace std;
 ```
@@ -101,7 +101,7 @@ using namespace std;
         - A `mutable` data member _requires_ synchronization
             - i.e. a cache
     - The standard library assumes that `const` implies thread safe
-    
+
 <!-- #endregion -->
 
 ```c++ slideshow={"slide_type": "slide"}
@@ -125,7 +125,7 @@ public:
 - _conditionally thread safe_ object instances can be safely used by a single thread per instance
     - This is the default behavior unless otherwise specified
     - _As thread safe as an `int`_
-    
+
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -352,7 +352,7 @@ void sequential_process::async(task f) {
     }
     _condition.notify_one();
 }
-    
+
 } // namespace bcc
 ```
 
@@ -377,7 +377,7 @@ void sequential_process::run_loop() {
         work();
     }
 }
-    
+
 } // namespace bcc
 ```
 
@@ -457,6 +457,6 @@ Comment that it is important for printer to be destructed last.
     - Include a paragraph about the pros/cons of doing so
 - Bonus: identify as many areas for improvement in the sequential process implementation
     - Include prose on the wiki or send a pull request
-    
+
 [https://git.corp.adobe.com/better-code/class/blob/master/09-threads-and-tasks.cpp](https://git.corp.adobe.com/better-code/class/blob/master/09-threads-and-tasks.cpp)
 <!-- #endregion -->

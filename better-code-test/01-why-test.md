@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -423,15 +422,15 @@ void test_copy_and_assignment_2(const T& v) {
         REQUIRE(a == b);          // copies are equal
         b = b;                    // self assignment
         REQUIRE(a == b);          // self assignment is a no-op
-        modify(b);                
+        modify(b);
         REQUIRE(a != b);          // copies are disjoint
-    }                             
-    for (const auto& a : v) {     
-        for (const auto& c : v) { 
+    }
+    for (const auto& a : v) {
+        for (const auto& c : v) {
             decltype(a) b = a;    // make a copy
             b = c;                // copy assignment
             REQUIRE(b == c);      // copies ar equal
-            modify(b);            
+            modify(b);
             REQUIRE(b != c);      // copies are disjoint
         }
     }

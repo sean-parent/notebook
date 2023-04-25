@@ -7,16 +7,13 @@
     // Words to be ignored by the spellchecker
     // Case-sensitive list of words to be ignored
     "ignore": [
-        "deallocation",
-        "polymorphism",
-        "Polymorphism",
-        "dereferenceable",
-        "Postcondition",
-        "_Scalable",
-        "copyable",
-        "`struct",
-        "constructible",
+        "copular",
+        "postconditions",
+        "invocable",
         "JupyterLab",
-        "Jupyter"
+        "Jupyter",
+        "JupyterHub",
+        "Voilà",
+        "Xeus"
     ]
 }

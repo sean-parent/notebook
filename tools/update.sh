@@ -29,5 +29,6 @@ else
 fi
 
 cd -
-
-git submodule update --recursive --remote
+git config --global --add safe.directory /mnt/host
+git config --global --add safe.directory /mnt/host/docs/reveal.js
+git submodule update --recursive

@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -30,7 +29,7 @@ Discovered GP through STL
 
 [Generic Programming](http://stepanovpapers.com/genprog.pdf)
 
-- David Musser and Alexander Stepanov 
+- David Musser and Alexander Stepanov
 - July 1988
 - Is generic programming the same as design by contract?
 

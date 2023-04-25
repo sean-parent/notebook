@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -44,7 +43,7 @@ void f() {
 ```c++ slideshow={"slide_type": "fragment"}
 const int& a = 42;
 auto b = a;
-    
+
 print_type_name<decltype(a)>();
 print_type_name<decltype(b)>();
 ```
@@ -81,7 +80,7 @@ namespace {
 
 instrumented some_function() { return instrumented(); }
 void some_sink(instrumented) { }
-    
+
 } // namespace
 ```
 
@@ -98,7 +97,7 @@ C++11 added trailing return types. This allows a return type which is dependent 
 
 ```c++ slideshow={"slide_type": "fragment"}
 namespace {
-    
+
 int function_a();
 auto function_b() -> int; // same signature as function_a
 
@@ -106,7 +105,7 @@ template <class T, class U>
 auto add(T a, U b) -> decltype(a + b) {
     return a + b;
 }
-    
+
 } // namespace
 ```
 
@@ -133,13 +132,13 @@ cout << r << "\n";
 
 ```c++ slideshow={"slide_type": "fragment"}
 namespace {
-    
+
 vector<int> v = { 0, 1, 2, 3 };
 
 inline decltype(auto) back() {
     return v.back();
 }
-    
+
 } // namespace
 ```
 
@@ -160,7 +159,7 @@ template <class T, T N>
 struct integral_constant {
       static constexpr T value = N;
 };
-    
+
 using true_type = integral_constant<bool, true>;
 
 }
@@ -215,7 +214,7 @@ for(auto [f, l] = equal_range(begin(a), end(a), 5); f != l; ++f) {
 <!-- #region slideshow={"slide_type": "slide"} -->
 - deduction rules are different from other uses of `auto`
     - each element is deduced to `decltype(e)` where is the corresponding member
-    
+
 ```cpp
 int a = 1, b = 2;
 auto [x, y] = tie(a, b);
@@ -325,7 +324,7 @@ auto some_function() {
     return f(g(a + y)); // don't make me figure out this type!
 }
 ```
-    - Nearly every time I've omitted the result, I've regretted it 
+    - Nearly every time I've omitted the result, I've regretted it
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->

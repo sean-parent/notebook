@@ -5,6 +5,6 @@
     // *********************************************
 
     // Disclaimed Status
-    // Whether the user understand that extensions managed through this interface run arbitrary code that may be dangerous
+    // Whether the user agrees the access to external web services and understands extensions may introduce security risks or contain malicious code that runs on his machine.
     "disclaimed": true
 }

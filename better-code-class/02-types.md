@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -35,32 +34,37 @@ jupyter:
 > An _object_ is a representation of an entity as a value in memory.
 
 - An object is a _physical_ entity, and as such, is imbued with a set of properties
-  - size
-  - address
+  - memory footprint
+  - location
+  - lifetime
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- All types have common, _basis_, operations
-  - constructible
-  - destructible
-  - copyable<sup>1</sup>
-  - equality comparable<sup>1</sup>
-
-- <sup>1</sup>Well defined, but may be problematic to implement
+- To understand any type you must consider these fundamental operations, which are components of what we call a _regular_ type.
+  - construction
+  - destruction
+  - copy
+  - equality
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+In addition, for a given type there are other essential operations
+<!-- #endregion -->
+
+<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
 > The _computational basis_ for a type is a finite set of procedures that enable the construction of any other procedure on the type
 
-- A type which implements a _computational basis_ is _computationally complete_
+- A type that implements a _computational basis_ is _computationally complete_
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
 ## Regular
 
 > There is a set of procedures whose inclusion in the computational basis of a type lets us place objects in data structures and use algorithms to _copy objects_ from one data structure to another. We call types having such a basis _regular_ since their use guarantees regularity of behavior and, therefore, interoperability. <br>
-<p style='text-align:right;'><small>&mdash; <em>(Stepanov & McJones 6)</em></small></p>
+<p style='text-align:right;'><small>&mdash; <em>(Stepanov & McJones)</em></small></p>
 <!-- #endregion -->
+
+
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - The copy operation creates a new object, equal to, and logically disjoint from the original
@@ -133,7 +137,7 @@ instrumented a = f();
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v0;
-    
+
     instrumented a = f();
 }
 ```
@@ -439,7 +443,7 @@ void my_type::deleter::operator()(implementation* p) const { delete p; }
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v41;
-    
+
     my_type a{10, 20};
     my_type b = a;
     a = b;
@@ -514,7 +518,7 @@ bool operator==(const my_type& a, const my_type& b) {
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v42;
-    
+
     my_type a{10, 20};
     my_type b = a;
     assert(a == b);
@@ -562,7 +566,7 @@ The C++20 standard defines the _concept_ std::regular<T> to be copyable, equalit
 
 - _memory safety_
   - A memory safe operation preserves the correspondence of unrelated objects to their respective entities. For example, writing through a deleted pointer is a not a memory safe operation as it may leave an unrelated object ill-formed.
-  
+
 - _thread safety_
  - A thread safe operation may be executed concurrently with other operations on the same object(s) without the possibility of a race condition (data or logical race) resulting an an object which is not full-formed.
 
@@ -716,7 +720,7 @@ bool operator==(const my_type& a, const my_type& b) {
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v43;
-    
+
     my_type a{10, 20};
     my_type b{move(a)};
     a = my_type{5, 30};
@@ -821,7 +825,7 @@ public:
     // Don't
     string str{"Hello World!"};
     example item1{move(str)};
-    
+
     // Do
     example item2{"Hello World!"};
 }
@@ -855,7 +859,7 @@ std::pair<std::string, std::string> get_pair() {
 ```c++ slideshow={"slide_type": "slide"}
 {
     using namespace v11;
-    
+
     string s;
     if (predicate()) s = "Hello";
     else s = "World";
@@ -865,7 +869,7 @@ std::pair<std::string, std::string> get_pair() {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace v11;
-    
+
     string s1;
     string s2;
     tie(s1, s2) = get_pair();
@@ -879,7 +883,7 @@ std::pair<std::string, std::string> get_pair() {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace v11;
-    
+
     string s = predicate() ? "Hello" : "World";
 }
 ```
@@ -887,7 +891,7 @@ std::pair<std::string, std::string> get_pair() {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace v11;
-    
+
     auto [s1, s2] = get_pair();
 }
 ```
@@ -1074,7 +1078,7 @@ public:
 
     friend bool operator==(const my_type&, const my_type&);
     friend bool operator!=(const my_type& a, const my_type& b) { return !(a == b); }
-    
+
     friend std::ostream& operator<<(std::ostream&, const my_type&);
 };
 
@@ -1123,7 +1127,7 @@ ostream& operator<<(ostream& out, const my_type& a) {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace v45;
-    
+
     my_type a{10, 42};
     cout << a << "\n";
 }

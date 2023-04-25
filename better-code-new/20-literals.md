@@ -1,12 +1,11 @@
 ---
 jupyter:
   jupytext:
-    formats: ipynb,md
     text_representation:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.11.3
+      jupytext_version: 1.14.4
   kernelspec:
     display_name: C++17
     language: C++17
@@ -15,10 +14,11 @@ jupyter:
 
 ```c++ slideshow={"slide_type": "skip"}
 #include <algorithm>
+#include <cctype>
+#include <iomanip>
 #include <iostream>
 #include <string>
 #include <string_view>
-#include <cctype>
 
 using namespace std;
 ```
@@ -41,7 +41,7 @@ using namespace std;
 
 <!-- #region slideshow={"slide_type": "slide"} -->
 - character literals
-    - `'c'` with `\` [escape sequences](http://en.cppreference.com/w/cpp/language/escape) 
+    - `'c'` with `\` [escape sequences](http://en.cppreference.com/w/cpp/language/escape)
     - `L` prefix for `wchar_t`
     - `'many'` type int, implementation defined
     - Encoding is implementation defined
@@ -111,7 +111,7 @@ cout << u8R"json(
 
 ```c++ slideshow={"slide_type": "fragment"}
 namespace bcc {
-    
+
 struct zstring {
     string_view _path;
     string_view _value;
@@ -191,10 +191,10 @@ namespace bcc {
 ```c++ slideshow={"slide_type": "fragment"}
 {
     using namespace bcc;
-    
+
     3.14159265358979323846264338327950288419716939937510582097494459230781640628620899862803482534211706798214808651328230664709384460955058223172535940812848111745028410270193852110555964462294895493038196_print;
 }
-    
+
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -255,7 +255,7 @@ namespace bcc {
     - There is a severe penalty on iOS in terms of space for code binaries
         - code is encrypted (for copy protection) then compressed
         - data files are simply compressed
-        
+
 > The app binary listed below was 120.4 MB when you submitted it, but will be 166.7 MB once processed for the App Store. This exceeds the cellular network download size limit and would require your app to be downloaded over Wi-Fi:
 
 > App Name: Adobe Photoshop Express
