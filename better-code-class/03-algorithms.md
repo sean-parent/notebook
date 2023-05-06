@@ -5,90 +5,94 @@ jupyter:
       extension: .md
       format_name: markdown
       format_version: '1.3'
-      jupytext_version: 1.14.4
+      jupytext_version: 1.14.5
   kernelspec:
     display_name: C++17
     language: C++17
     name: xcpp17
 ---
 
-```c++ slideshow={"slide_type": "skip"} tags=[]
+```c++ slideshow={"slide_type": "skip"}
 #include "../common.hpp"
 
 int a, b{0};
 ```
 
-<!-- #region slideshow={"slide_type": "skip"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 # Algorithms
 
-**Goal: No raw loops**
+**Rubric: No raw loops**
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "skip"} -->
 # What's Your Function?
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "notes"} tags=[] -->
-Functions are often ignored but our our most useful abstraction for constructing software. We frequently focus on type hierarchies and object networks and ignore the basic function building block. In this talk we're going to explore just a bit about functions. This is a slice of my better code class that I'm preparing.
+<!-- #region slideshow={"slide_type": "notes"} -->
+Functions are often ignored but our our most useful abstraction for constructing software. We frequently focus on type hierarchies and object networks and ignore the basic function building block. In this talk we're going to explore just a bit about functions.
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "skip"} tags=[] -->
+<!-- #region slideshow={"slide_type": "skip"} -->
 > An _Algorithm_ is a process or set of rules to be followed in calculations or other problem-solving operations, especially by a computer. _&ndash; New Oxford American Dictionary_
 
 <!-- #endregion -->
 
-```c++ tags=[] slideshow={"slide_type": "slide"}
+<!-- #region slideshow={"slide_type": "notes"} -->
+Programming is the construction of algorithms. I often here, "I don't use or need algorithms". Or I don't write algorithms. But all coding is the construction of algorithms. Sometimes working on a large project can feel like "plumbing" - just trying to connect components together to make them to something. But that _is_ creating an algorithm.
+<!-- #endregion -->
+
+```c++ slideshow={"slide_type": "slide"}
 {
     int r = a < b ? a : b;
 }
 ```
 
-<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+<!-- #region slideshow={"slide_type": "fragment"} -->
 - What does this line of code do?
 <!-- #endregion -->
 
-```c++ slideshow={"slide_type": "slide"} tags=[]
+```c++ slideshow={"slide_type": "slide"}
 {
     // r is the minimum of a and b
     int r = a < b ? a : b;
 }
 ```
 
-<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+<!-- #region slideshow={"slide_type": "fragment"} -->
 - A comment helps...
 <!-- #endregion -->
 
-```c++ slideshow={"slide_type": "slide"} tags=[]
+```c++ slideshow={"slide_type": "slide"}
 {
     int r = min(a, b);
 }
 ```
 
-<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+<!-- #region slideshow={"slide_type": "fragment"} -->
 - Naming an operation, even a simple operation, lowers cognitive overhead
 <!-- #endregion -->
 
-```c++ slideshow={"slide_type": "slide"} tags=[]
+```c++ slideshow={"slide_type": "slide"}
 /// Returns the minimum of two integers
 int min(int a, int b) {
     return a < b ? a : b;
 }
 ```
 
-<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+<!-- #region slideshow={"slide_type": "fragment"} -->
 - A function allows us to associate a _name_ with _semantics_
 <!-- #endregion -->
 
-```c++ slideshow={"slide_type": "slide"} tags=[]
+```c++ slideshow={"slide_type": "slide"}
 /// Returns the minimum of two integers
 int min(int a, int b);
 ```
 
-<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
-- Functions allow us to build a vocabulary and focus the code does
+<!-- #region slideshow={"slide_type": "fragment"} -->
+- Functions allow us to build a vocabulary and focus what the code does
 <!-- #endregion -->
 
-<!-- #region tags=[] slideshow={"slide_type": "skip"} -->
+<!-- #region slideshow={"slide_type": "skip"} -->
 Myth of limited vocabulary
 You do write class - and worry about names of types.
 John McCall, Law of Exclusivity
@@ -98,11 +102,10 @@ Value of testing is pulling things out.
 How people use regular expressions - instead of parsers.
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ## Naming a Function (Guidelines)
 <!-- #endregion -->
 
-<!-- #region tags=[] -->
 - Operations with the same semantics should have the same name
     - Follow existing conventions
 - Name should describe the postconditions and make the use clear
@@ -110,9 +113,8 @@ How people use regular expressions - instead of parsers.
     - nouns: `capacity`
     - adjectives: `empty` (ambiguous but used by convention)
     - copular constructions: `is_blue`
-<!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 - For higher complexity operations use:
     - verbs: `partition`
         - `a = sort(b)` not `a = sorted(b)`
@@ -123,15 +125,14 @@ How people use regular expressions - instead of parsers.
     - `name` not `get_name`
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "notes"} tags=[] -->
+<!-- #region slideshow={"slide_type": "notes"} -->
 The `set_` prefix is borrowed from Objective-C. It avoids confusion over pairs like `size` and `resize` vs. `capacity` and `reserve`. But for those specific ones, follow convention.
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ## Specifying a Function
 <!-- #endregion -->
 
-<!-- #region tags=[] -->
 - at a minimum, the specification should be a sentence fragment defining the postconditions
 - State any preconditions that are not clear from the types and conventions
 
@@ -139,62 +140,55 @@ The `set_` prefix is borrowed from Objective-C. It avoids confusion over pairs l
 /// Returns the truncated square root of `x`. `x` must be >= 0.
 int sqrti(int x);
 ```
-<!-- #endregion -->
 
-<!-- #region tags=[] slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ## Argument Types
 <!-- #endregion -->
 
-<!-- #region tags=[] -->
 - _let_: by-const-lvalue-reference or by-value for known small types and invocable types
 - _inout_: by-lvalue-reference, prefer sink arguments and result to in-out arguments
 - _sink_: by-rvalue-reference or by-value for known small types and to avoid forwarding references
-<!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+<!-- #region slideshow={"slide_type": "fragment"} -->
 spans, views, iterator pairs, and so on are a way to pass a range of objects as if they were a simple argument. The value_type of the range determines if it is _in_ (`const`), or _inout_ (not `const`) with input ranges (input iterators) used for _sink_.
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "notes"} tags=[] -->
+<!-- #region slideshow={"slide_type": "notes"} -->
 I need more experience with ranges here and specifically borrowed ranges to make a recommendation on sink (consumed ranges) and may make an exception for _set_ ranges.
 <!-- #endregion -->
 
-<!-- #region tags=[] slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ## Implicit Preconditions
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ### Object Lifetimes
 <!-- #endregion -->
 
-<!-- #region tags=[] -->
 - Caller must ensure referenced arguments are valid for duration of the call
-<!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ### Validity
 <!-- #endregion -->
 
-<!-- #region tags=[] -->
 - An invalid object cannot be used as an argument
-<!-- #endregion -->
 
-<!-- #region tags=[] slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ### Law of Exclusivity
 <!-- #endregion -->
 
-```c++ tags=[]
+```c++
 {
     vector a{0, 0, 1, 0, 1, 2, 0, 1, 2, 3};
     erase(a, a[0]);
 }
 ```
 
-<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+<!-- #region slideshow={"slide_type": "fragment"} -->
 - What is in `a` after this code?
 <!-- #endregion -->
 
-```c++ tags=[] slideshow={"slide_type": "slide"}
+```c++ slideshow={"slide_type": "slide"}
 {
     vector a{0, 0, 1, 0, 1, 2, 0, 1, 2, 3};
     erase(a, a[0]);
@@ -202,12 +196,12 @@ I need more experience with ranges here and specifically borrowed ranges to make
 }
 ```
 
-<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+<!-- #region slideshow={"slide_type": "fragment"} -->
 This fails because `a[0]` is passed by a reference aliasing the vector, `a`.
 The standard is inconsistent in how it deals with aliasing with mutations. Unless aliasing is explicitly allowed, avoid it.
 <!-- #endregion -->
 
-```c++ tags=[] slideshow={"slide_type": "slide"}
+```c++ slideshow={"slide_type": "slide"}
 {
     vector a{0, 0, 1, 0, 1, 2, 0, 1, 2, 3};
     erase(a, copy(a[0]));
@@ -215,45 +209,41 @@ The standard is inconsistent in how it deals with aliasing with mutations. Unles
 }
 ```
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 The _Law of Exclusivity_ is borrowed from Swift and the term was coined by John McCall. To modify a variable, exclusive access to that variable is required. C++ does not enforce this rule, it must be manually enforced.
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 The _Law of Exclusivity_ has far greater implications outside the scope of this talk. You might be interested in learning about the [Val language](https://www.val-lang.dev/).
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ### Ranges
 <!-- #endregion -->
 
-<!-- #region tags=[] -->
 - Iterator pairs denote a valid half-open interval
-<!-- #endregion -->
 
-```c++ slideshow={"slide_type": "fragment"} tags=[]
+```c++ slideshow={"slide_type": "fragment"}
 /// Transmogrify the elements in the range [f, l).
 template <class ForwardIterator>
 void transmogrify(ForwardIterator f, ForwardIterator l);
 ```
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ## Implicit Postconditions
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ### Validity of References
 <!-- #endregion -->
 
-<!-- #region tags=[] -->
 Any reference (pointer, iterator, etc.) to an object is assumed to be invalidated if the object is mutated.
-<!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "fragment"} tags=[] -->
+<!-- #region slideshow={"slide_type": "fragment"} -->
 A returned reference must be to one of the arguments to the function (or a part of one of the arguments) and is valid until the argument is modified or its lifetime ends.
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "skip"} tags=[] -->
+<!-- #region slideshow={"slide_type": "skip"} -->
 ## Trivial vs Non-Trivial Algorithms
 
 The term _algorithm_ covers all code. If an algorithm does not require iteration or recursion, it is a _trivial_ algorithm. Otherwise it is a non-trivial algorithm. The standard includes trivial algorithms such as `std::swap()` and `std::exchange()`, but for this section the focus is on non-trivial algorithms.
@@ -287,7 +277,7 @@ The term _algorithm_ covers all code. If an algorithm does not require iteration
     - All empty ranges are not equal
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 - Think of the positions as the lines between the elements
 <!-- #endregion -->
 
@@ -339,7 +329,7 @@ The term _algorithm_ covers all code. If an algorithm does not require iteration
     - `const char*`
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 - `[f, ...)` unbounded (dependent on something else)
     - i.e. range is required to be same or greater length than another range
 <!-- #endregion -->
@@ -349,16 +339,16 @@ The term _algorithm_ covers all code. If an algorithm does not require iteration
     - `[&a, &a + 1)` is a valid range
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} jp-MarkdownHeadingCollapsed=true tags=[] slideshow={"slide_type": "slide"} -->
+<!-- #region slideshow={"slide_type": "slide"} jp-MarkdownHeadingCollapsed=true -->
 ## Common algorithms and their uses
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} jp-MarkdownHeadingCollapsed=true tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} jp-MarkdownHeadingCollapsed=true -->
 - A great resource for finding standard algorithms:
   - https://en.cppreference.com/w/cpp/algorithm
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "skip"} tags=[] -->
+<!-- #region slideshow={"slide_type": "skip"} -->
 ## Non-modifying sequence operations
 
 - `find`
@@ -367,7 +357,7 @@ The term _algorithm_ covers all code. If an algorithm does not require iteration
 - `min` & `max`
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 ## Generic Algorithms
 <!-- #endregion -->
 
@@ -525,7 +515,7 @@ Compare the description for the old [SGI STL LessThanComparable concept](https:/
 | -    | -          | -                                    | -         | -             |
 | Less | `x < y`    | `x` and `y` are in the domain of `<` |           |               |
 
-<!-- #region slideshow={"slide_type": "slide"} tags=[] -->
+<!-- #region slideshow={"slide_type": "slide"} -->
 versus the [C++17 concept](https://eel.is/c++draft/utility.arg.requirements#tab:cpp17.lessthancomparable).
 
 **Table 28: _CppLessThanComparable_ requirements**
@@ -577,9 +567,7 @@ What was part of the definition of concepts in general has been weakened to a re
 ### Axes of Freedom
 <!-- #endregion -->
 
-<!-- #region tags=[] -->
 - Guarantees can be strengthened without breaking existing code
-<!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
 - i.e. `std::basic_string()` only guarantees the value of a moved-from string is valid
@@ -600,7 +588,7 @@ What was part of the definition of concepts in general has been weakened to a re
     - best handled by introducing a new name for the type or operation
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "skip"} tags=[] -->
+<!-- #region slideshow={"slide_type": "skip"} -->
 ## Modifying sequence operations
 
 - `copy`
@@ -610,11 +598,11 @@ What was part of the definition of concepts in general has been weakened to a re
 - `remove` & `unique`
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "skip"} tags=[] -->
+<!-- #region slideshow={"slide_type": "skip"} -->
 - The basic non-modifying and modifying sequence operations are all very common
 <!-- #endregion -->
 
-<!-- #region slideshow={"slide_type": "skip"} tags=[] -->
+<!-- #region slideshow={"slide_type": "skip"} -->
 - The standard only provides a small number of possible, useful, interfaces to these operations
 - Keep a library of useful variants and add to them
 <!-- #endregion -->
@@ -1116,7 +1104,7 @@ void sort_subrange(I f, I l, I sf, I sl) {
 **Exercise:** Create a new `priority_queue` adapter that supports move using the heap operations.
 <!-- #endregion -->
 
-<!-- #region tags=[] slideshow={"slide_type": "notes"} -->
+<!-- #region slideshow={"slide_type": "notes"} -->
 \[
 - discuss (show graph) of O(1), O(log(N)), O(N), O(N log(N)
 \]

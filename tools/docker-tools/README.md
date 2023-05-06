@@ -86,7 +86,7 @@ To build the Docker image, first, update the VERSION variable below (please use 
 #### Linux, WSL 2, MacOS
 
 ```sh
-VERSION="1.0.22"
+VERSION="1.0.23"
 
 # At this time cling only supports x86
 PLATFORM="linux/amd64"
@@ -152,3 +152,4 @@ docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
 - 1.0.18 - updating tools
 - 1.0.20 - fixing issues from JuptyerLab update
 - 1.0.22 - fixing issues from browsersync
+- 1.0.23 - updating tooling
