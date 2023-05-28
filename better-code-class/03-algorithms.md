@@ -89,7 +89,7 @@ int min(int a, int b);
 ```
 
 <!-- #region slideshow={"slide_type": "fragment"} -->
-- Functions allow us to build a vocabulary and focus what the code does
+- Functions allow us to build a vocabulary and focus on what the code does
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "skip"} -->
@@ -179,7 +179,7 @@ I need more experience with ranges here and specifically borrowed ranges to make
 
 ```c++
 {
-    vector a{0, 0, 1, 0, 1, 2, 0, 1, 2, 3};
+    vector a{0, 0, 1, 0, 1 };
     erase(a, a[0]);
 }
 ```
@@ -190,7 +190,7 @@ I need more experience with ranges here and specifically borrowed ranges to make
 
 ```c++ slideshow={"slide_type": "slide"}
 {
-    vector a{0, 0, 1, 0, 1, 2, 0, 1, 2, 3};
+    vector a{0, 0, 1, 0, 1 };
     erase(a, a[0]);
     display(a);
 }
@@ -203,14 +203,14 @@ The standard is inconsistent in how it deals with aliasing with mutations. Unles
 
 ```c++ slideshow={"slide_type": "slide"}
 {
-    vector a{0, 0, 1, 0, 1, 2, 0, 1, 2, 3};
+    vector a{0, 0, 1, 0, 1 };
     erase(a, copy(a[0]));
     display(a);
 }
 ```
 
 <!-- #region slideshow={"slide_type": "slide"} -->
-The _Law of Exclusivity_ is borrowed from Swift and the term was coined by John McCall. To modify a variable, exclusive access to that variable is required. C++ does not enforce this rule, it must be manually enforced.
+The _Law of Exclusivity_ is borrowed from Swift, and the term was coined by John McCall. To modify a variable, exclusive access to that variable is required. C++ does not enforce this rule; it must be manually enforced.
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "slide"} -->
@@ -249,10 +249,40 @@ A returned reference must be to one of the arguments to the function (or a part 
 The term _algorithm_ covers all code. If an algorithm does not require iteration or recursion, it is a _trivial_ algorithm. Otherwise it is a non-trivial algorithm. The standard includes trivial algorithms such as `std::swap()` and `std::exchange()`, but for this section the focus is on non-trivial algorithms.
 <!-- #endregion -->
 
+## Loops and Recursion
+
+```c++
+{
+    /// removes values equal to a in the range [f, l)
+    /// returns the position, b, such that [f, b) contains all the values in [f, l) not equal to a
+    ///   values in the range [b, l) are unspecified
+    auto remove = [](auto f, auto l, const auto& a) {
+        auto b = find(f, l, a);
+        if (b == l) return b;
+        auto p = next(b);
+        // invariant: all values in the range [f, b) do not equal x
+        // decreasing: distance(p, l)
+        while (p != l) {
+            if (*p != a) {
+                *b = std::move(*p);
+                ++b;
+            }
+            ++p;
+        }
+        return b;
+    };
+    
+    vector a{ 0, 0, 1, 0, 1 };
+    a.erase(remove(begin(a), end(a), 0), end(a));
+
+    display(a);
+}
+```
+
 <!-- #region slideshow={"slide_type": "slide"} -->
 ## Sequences
 
-- For a sequence of _n_ elements their are _n + 1_ positions
+- For a sequence of _n_ elements, there are _n + 1_ positions
 <!-- #endregion -->
 
 <!-- #region slideshow={"slide_type": "fragment"} -->

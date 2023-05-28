@@ -6,7 +6,7 @@
 
 If you don't already have Docker installed, [install Docker](https://docs.docker.com/get-docker/).
 
-### Login to GitHub package registry
+## Login to the GitHub package registry
 
 Login to docker with a GitHub token. Generate a token [here](https://github.com/settings/tokens) with read/write/delete permissions for packages.
 
@@ -39,7 +39,7 @@ docker run --platform=$PLATFORM --mount type=bind,source="$(pwd)",target=/mnt/ho
     --publish 4000:3000 --publish 4001:3001 --publish 8888:8888 $VOLUME bash
 ```
 
-This should leave you at a bash prompt that looks like:
+This should leave you at a bash prompt that looks like this:
 
 ```sh
 app@fc7590a63ba3:~$
@@ -86,7 +86,7 @@ To build the Docker image, first, update the VERSION variable below (please use 
 #### Linux, WSL 2, MacOS
 
 ```sh
-VERSION="1.0.23"
+VERSION="1.0.24"
 
 # At this time cling only supports x86
 PLATFORM="linux/amd64"
@@ -143,13 +143,14 @@ docker push docker.pkg.github.com/sean-parent/notebook/notebook-tools:$VERSION
 - 1.0.1 - Rebuilt without external dependencies
 - 1.0.2 - Rebuilding without lock files
 - 1.0.3 - offline notebook extension added
-- 1.0.12 - adding tbb support for parallel algorithms
+- 1.0.12 - adding TBB support for parallel algorithms
 - 1.0.13 - adding keyboard shortcuts for slides
 - 1.0.14 - updating tools
 - 1.0.15 - updating tools
 - 1.0.16 - updating tools
 - 1.0.17 - updating tools
 - 1.0.18 - updating tools
-- 1.0.20 - fixing issues from JuptyerLab update
-- 1.0.22 - fixing issues from browsersync
+- 1.0.20 - fixing issues from the JupyterLab update
+- 1.0.22 - fixing issues from Browsersync
 - 1.0.23 - updating tooling
+- 1.0.24 - updating to JupyterLab 4.0
